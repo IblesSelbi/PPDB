@@ -283,7 +283,7 @@
 
                             <div class="dropdown-divider"></div>
 
-                            <div class="dropright">
+                            <div class="dropright dropdown">
                                 <a class="dropdown-item dropdown-toggle d-flex align-items-center" href="#"
                                     id="submenuEKantin" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -967,6 +967,45 @@
         <!-- Custom JavaScript -->
         <script>
             $(document).ready(function () {
+
+                // Toggle level 1 (Presensi)
+                $('#presensiDropdown').on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $dropdownMenu = $(this).next('.dropdown-menu');
+
+                    // tutup semua submenu level 2 saat toggle level 1
+                    $dropdownMenu.find('.dropdown-menu').hide();
+
+                    // toggle level 1
+                    $dropdownMenu.toggle();
+                });
+
+                // Toggle submenu level 2
+                $('.dropright > .dropdown-toggle').on('click', function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    var $submenu = $(this).next('.dropdown-menu');
+
+                    if ($submenu.is(':visible')) {
+                        $submenu.hide(); // tutup submenu
+                    } else {
+                        // tutup submenu lain di level yang sama
+                        $(this).closest('.dropdown-menu').find('.dropdown-menu').not($submenu).hide();
+                        $submenu.show(); // buka submenu
+                    }
+                });
+
+                $(document).on('click', function (e) {
+                    if (
+                        !$(e.target).closest('.dropdown').length &&
+                        !$(e.target).hasClass('dropdown-toggle')
+                    ) {
+                        $('.dropdown-menu').removeClass('show');
+                    }
+                });
 
                 // Initialize DataTable
                 var table = $('#datatable').DataTable({
