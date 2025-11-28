@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Tambah Potongan Tagihan :: School Payment App</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tom Select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap4.min.css">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">School Payment App</span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem Keuangan
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">
+                            <i class="fas fa-home mr-1"></i>Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                            <span class="badge badge-danger badge-pill ml-1">10+</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                                Pembayaran</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link bg-white text-primary font-weight-bold rounded" href="Tagihan.html">
+                            <i class="fas fa-tags mr-1"></i>Tagihan
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-chart-bar mr-1"></i>Rekap
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-wallet text-warning mr-2"></i>Arus
+                                Kas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                                Laporan</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-database mr-1"></i>Data Master
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                                Petugas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                                Unit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                                Tahun</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-cog mr-1"></i>Lainnya
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="Tagihan.html" class="text-decoration-none">Tagihan</a></li>
+                <li class="breadcrumb-item active">Tambah Potongan</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="font-weight-bold mb-1">Tambah Potongan</h2>
+                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Form untuk menambahkan potongan
+                    tagihan kepada siswa</p>
+            </div>
+            <div>
+                <a href="DetailDaftarTagihan.html" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #667eea;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Form Card -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 font-weight-bold">
+                            <i class="fas fa-percent text-primary mr-2"></i>Form Tambah Potongan
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="form" action="javascript:void(0)">
+
+                            <!-- Pilihan Unit -->
+                            <div class="form-group">
+                                <label class="font-weight-bold">Pilihan Unit <span class="text-danger">*</span></label>
+                                <select name="unit" id="unit" class="form-control">
+                                    <option value="">-- Pilih Unit --</option>
+                                    <option value="SD" selected>SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                                <small id="unit-feedback" class="form-text text-danger" style="display: none;"></small>
+                            </div>
+
+                            <!-- Pilihan Kelas -->
+                            <div id="select-classroom" style="display: none;">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Pilihan Kelas</label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="input-select-classroom">
+                                        <label class="custom-control-label" for="input-select-classroom">Memilih kelas
+                                            tertentu</label>
+                                    </div>
+                                    <small class="form-text text-muted">Aktifkan untuk memilih kelas tertentu yang akan
+                                        mendapatkan potongan</small>
+                                </div>
+
+                                <div id="table-select-classroom" class="mb-3" style="display: none;">
+                                    <button type="button" id="classroom-bulk-action"
+                                        class="btn btn-sm btn-secondary mb-2" style="display: none;">
+                                        <i class="fas fa-tasks mr-1"></i>Aksi Terpilih
+                                    </button>
+
+                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table table-hover table-sm table-bordered mb-0">
+                                            <thead class="bg-light" style="position: sticky; top: 0; z-index: 1;">
+                                                <tr>
+                                                    <th class="text-center align-middle p-2" style="width:35px;">
+                                                        <div class="d-flex justify-content-center align-items-center">
+                                                            <input type="checkbox" id="classroom-checks"
+                                                                class="form-check-input"
+                                                                style="cursor:pointer;margin:0;">
+                                                        </div>
+                                                    </th>
+                                                    <th class="text-center align-middle p-2" style="width:40px;">#</th>
+                                                    <th class="align-middle p-2">Kode Kelas</th>
+                                                    <th class="align-middle p-2">Nama Kelas</th>
+                                                    <th class="align-middle p-2">Tahun Ajaran</th>
+                                                    <th class="text-center align-middle p-2" style="width:100px;">Status
+                                                    </th>
+                                                    <th class="text-center align-middle p-2" style="width:100px;">Jml.
+                                                        Siswa</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="classroom-list">
+                                                <tr>
+                                                    <td colspan="7" class="text-center py-3">
+                                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                                        <p class="mb-0 text-muted mt-2 small">Memuat data kelas...</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilihan Siswa -->
+                            <div id="select-student" style="display: none;">
+                                <div class="form-group">
+                                    <label class="font-weight-bold">Pilihan Siswa</label>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="input-select-student">
+                                        <label class="custom-control-label" for="input-select-student">Memilih siswa
+                                            tertentu</label>
+                                    </div>
+                                    <small class="form-text text-muted">Aktifkan untuk memilih siswa tertentu dari kelas
+                                        yang dipilih</small>
+                                </div>
+
+                                <div id="table-select-student" class="mb-3" style="display: none;">
+                                    <button type="button" id="student-bulk-action" class="btn btn-sm btn-secondary mb-2"
+                                        style="display: none;">
+                                        <i class="fas fa-tasks mr-1"></i>Aksi Terpilih
+                                    </button>
+
+                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
+                                        <table class="table table-hover table-sm table-bordered mb-0">
+                                            <thead class="bg-light" style="position: sticky; top: 0; z-index: 1;">
+                                                <tr>
+                                                    <th class="text-center align-middle p-2" style="width:35px;">
+                                                        <div class="d-flex justify-content-center align-items-center">
+                                                            <input type="checkbox" id="student-checks"
+                                                                class="form-check-input"
+                                                                style="cursor:pointer;margin:0;">
+                                                        </div>
+                                                    </th>
+                                                    <th class="text-center align-middle p-2" style="width:40px;">#</th>
+                                                    <th class="align-middle p-2">Nomor Induk</th>
+                                                    <th class="align-middle p-2">Nama Lengkap</th>
+                                                    <th class="align-middle p-2">Nama Kelas</th>
+                                                    <th class="text-center align-middle p-2" style="width:100px;">Status
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="student-list">
+                                                <tr>
+                                                    <td colspan="6" class="text-center py-3">
+                                                        <i class="fas fa-spinner fa-spin text-primary"></i>
+                                                        <p class="mb-0 text-muted mt-2 small">Memuat data siswa...</p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pilih Kategori Tagihan -->
+                            <div class="form-group">
+                                <label class="font-weight-bold">Pilih Kategori Tagihan <span
+                                        class="text-danger">*</span></label>
+                                <select name="bill_category" id="bill-category" class="form-control">
+                                    <option value="">-- Pilih Kategori --</option>
+                                    <option value="buku-paket">(BUKU-PAKET) Buku Paket -- Rp 250,000</option>
+                                    <option value="seragam-sma">(SERAGAM-SMA) Seragam SMA -- Rp 500,000</option>
+                                    <option value="seragam-smp">(SERAGAM-SMP) Seragam SMP -- Rp 400,000</option>
+                                    <option value="spp-sd">(SPP-SD) SPP SD -- Rp 200,000</option>
+                                    <option value="spp-sma">(SPP-SMA) SPP SMA -- Rp 300,000</option>
+                                    <option value="spp-smp">(SPP-SMP) SPP SMP -- Rp 200,000</option>
+                                </select>
+                                <small id="bill-category-feedback" class="form-text text-danger"
+                                    style="display: none;"></small>
+                            </div>
+
+                            <!-- Tipe dan Nominal Potongan -->
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Tipe Potongan <span
+                                                class="text-danger">*</span></label>
+                                        <select name="discount_type" id="discount-type" class="form-control">
+                                            <option value="">-- Pilih Tipe --</option>
+                                            <option value="Harga">Harga (Rp)</option>
+                                            <option value="Persentase">Persentase (%)</option>
+                                        </select>
+                                        <small id="discount-type-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Nominal Potongan <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="discount_amount" id="discount-amount"
+                                            class="form-control" maxlength="16" placeholder="Masukkan nominal">
+                                        <small id="discount-amount-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Keterangan Tambahan -->
+                            <div class="form-group">
+                                <label class="font-weight-bold">Keterangan Tambahan</label>
+                                <textarea name="discount_note" id="discount-note" class="form-control" rows="3"
+                                    maxlength="64" placeholder="Maksimal 64 karakter (opsional)"
+                                    style="resize: none;"></textarea>
+                                <small class="form-text text-muted">Contoh: Potongan untuk siswa berprestasi</small>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="form-group mb-0">
+                                <button type="submit" id="btn-submit" class="btn btn-outline-primary btn-block py-2">
+
+                                    <span id="btn-icon" class="spinner-border spinner-border-sm mr-2"
+                                        style="display: none;"></span>
+                                    <i id="btn-svg" class="fas fa-check-circle mr-2"></i>
+                                    <span id="btn-text">Proses Tambah Potongan</span>
+
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="col-lg-4">
+                <div class="card bg-light border-0 shadow">
+                    <div class="card-body">
+                        <h5 class="font-weight-bold mb-3">
+                            <i class="fas fa-info-circle text-primary mr-2"></i>Informasi
+                        </h5>
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">Panduan Pengisian:</small>
+                            <ul class="small mb-0 pl-3">
+                                <li>Pilih unit terlebih dahulu</li>
+                                <li>Tentukan kelas dan siswa yang akan mendapatkan potongan</li>
+                                <li>Pilih kategori tagihan yang akan dipotong</li>
+                                <li>Pilih tipe potongan (Harga atau Persentase)</li>
+                                <li>Masukkan nominal potongan</li>
+                                <li>Tambahkan keterangan jika diperlukan</li>
+                            </ul>
+                        </div>
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            <small><strong>Tips:</strong> Gunakan tipe persentase untuk potongan yang bersifat
+                                proporsional terhadap nilai tagihan</small>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Tom Select -->
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function () {
+            // -------------------------
+            // TomSelect (already included in HTML)
+            // -------------------------
+            if (typeof TomSelect !== 'undefined') {
+                new TomSelect('#unit', { placeholder: '-- Pilih Unit --' });
+                new TomSelect('#bill-category', { placeholder: '-- Pilih Kategori --' });
+                new TomSelect('#discount-type', { placeholder: '-- Pilih Tipe --' });
+            }
+
+            // -------------------------
+            // Utilities
+            // -------------------------
+            function numberFormat(v) {
+                if (!v) return '';
+                v = v.toString().replace(/\D/g, '');
+                return v.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            function parseNumber(v) {
+                if (!v) return 0;
+                return parseInt(v.toString().replace(/[^0-9]/g, ''), 10) || 0;
+            }
+
+            // Alert helpers (matches your HTML structure)
+            function showAlert(message, type) {
+                const alert = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertContent.html(message);
+                alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+                if (type === 'success') {
+                    alert.addClass('alert-success');
+                    alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                    alertTitle.text('Berhasil');
+                } else if (type === 'warning') {
+                    alert.addClass('alert-warning');
+                    alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                    alertTitle.text('Peringatan');
+                } else if (type === 'info') {
+                    alert.addClass('alert-info');
+                    alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                    alertTitle.text('Informasi');
+                } else if (type === 'danger') {
+                    alert.addClass('alert-danger');
+                    alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                    alertTitle.text('Error');
+                }
+
+                alert.show().addClass('show');
+
+                setTimeout(function () {
+                    alert.removeClass('show');
+                    setTimeout(function () { alert.hide(); }, 150);
+                }, 3500);
+            }
+
+            function hideAlert() {
+                $('#alert').removeClass('show');
+                setTimeout(function () { $('#alert').hide(); }, 150);
+            }
+            // wire close button if user clicks it (already in HTML but ensure function)
+            $(document).on('click', '#alert .close', hideAlert);
+
+            // -------------------------
+            // Simulated data stores (example)
+            // -------------------------
+            const CLASSROOMS = {
+                'SD': [
+                    { id: 'c1', code: '25/26-1A', name: 'Kelas 1A', year: '2025/2026', status: 'Aktif', students: 25 },
+                    { id: 'c2', code: '25/26-1B', name: 'Kelas 1B', year: '2025/2026', status: 'Aktif', students: 24 },
+                    { id: 'c3', code: '25/26-2A', name: 'Kelas 2A', year: '2025/2026', status: 'Aktif', students: 26 }
+                ],
+                'SMP': [
+                    { id: 'c4', code: '25/26-7A', name: 'Kelas 7A', year: '2025/2026', status: 'Aktif', students: 28 },
+                    { id: 'c5', code: '25/26-7B', name: 'Kelas 7B', year: '2025/2026', status: 'Aktif', students: 27 }
+                ],
+                'SMA': [
+                    { id: 'c6', code: '25/26-10A', name: 'Kelas 10A', year: '2025/2026', status: 'Aktif', students: 30 },
+                    { id: 'c7', code: '25/26-10B', name: 'Kelas 10B', year: '2025/2026', status: 'Aktif', students: 29 }
+                ]
+            };
+
+            // students by classroom id (simulate)
+            const STUDENTS = {
+                'c1': [
+                    { id: 's101', nis: '2526-0001', name: 'Yusuf', class: '1 A', status: 'Aktif' },
+                    { id: 's102', nis: '2526-0002', name: 'Aisyah', class: '1 A', status: 'Aktif' }
+                ],
+                'c2': [
+                    { id: 's103', nis: '2526-0003', name: 'Budi', class: '1 B', status: 'Aktif' }
+                ],
+                'c3': [
+                    { id: 's104', nis: '2526-0004', name: 'Citra', class: '2 A', status: 'Aktif' }
+                ],
+                'c4': [
+                    { id: 's201', nis: '250601001', name: 'Almira Pertiwi', class: '7 A', status: 'Aktif' },
+                    { id: 's202', nis: '250601002', name: 'Fikri', class: '7 A', status: 'Aktif' }
+                ],
+                'c5': [
+                    { id: 's203', nis: '250601010', name: 'Rita', class: '7 B', status: 'Aktif' }
+                ],
+                'c6': [
+                    { id: 's301', nis: '2025001', name: 'Ahmad Septian', class: '10 A', status: 'Aktif' }
+                ],
+                'c7': [
+                    { id: 's302', nis: '2025002', name: 'Siti Rahmawati', class: '10 B', status: 'Aktif' }
+                ]
+            };
+
+            // -------------------------
+            // Classroom rendering & events
+            // -------------------------
+            function renderClassrooms(unit) {
+                const list = CLASSROOMS[unit] || [];
+                const $tbody = $('#classroom-list');
+
+                if (!list.length) {
+                    $tbody.html(`
+                <tr>
+                    <td colspan="7" class="text-center py-3">
+                        <i class="fas fa-ban text-muted"></i>
+                        <p class="mb-0 text-muted mt-2 small">Tidak ada data kelas.</p>
+                    </td>
+                </tr>
+            `);
+                    return;
+                }
+
+                let html = '';
+                list.forEach(function (c, idx) {
+                    html += `
+            <tr>
+                <td class="text-center align-middle">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="checkbox" class="form-check-input classroom-check" value="${c.id}" id="class-${c.id}" style="cursor:pointer;margin:0;">
+                    </div>
+                </td>
+                <td class="text-center align-middle">${idx + 1}</td>
+                <td class="align-middle">${c.code}</td>
+                <td class="align-middle">${c.name}</td>
+                <td class="align-middle">${c.year}</td>
+                <td class="text-center align-middle">${c.status}</td>
+                <td class="text-center align-middle">${c.students}</td>
+            </tr>`;
+                });
+
+                $tbody.html(html);
+                $('#classroom-checks').prop('checked', false);
+                $('#classroom-bulk-action').hide();
+            }
+
+            // getClassroom sim (with loading)
+            function getClassroom(unit) {
+                $('#classroom-list').html(`
+            <tr>
+                <td colspan="7" class="text-center py-3">
+                    <i class="fas fa-spinner fa-spin text-primary"></i>
+                    <p class="mb-0 text-muted mt-2">Memuat data kelas...</p>
+                </td>
+            </tr>
+        `);
+
+                setTimeout(function () {
+                    renderClassrooms(unit);
+                }, 450);
+            }
+
+            // -------------------------
+            // Student rendering & events
+            // -------------------------
+            function renderStudents(classIds) {
+                const $tbody = $('#student-list');
+                let rows = [];
+
+                classIds.forEach(function (cid) {
+                    const students = STUDENTS[cid] || [];
+                    students.forEach(function (s, idx) {
+                        rows.push({ cid, s });
+                    });
+                });
+
+                if (!rows.length) {
+                    $tbody.html(`
+                <tr>
+                    <td colspan="6" class="text-center py-3">
+                        <i class="fas fa-ban text-muted"></i>
+                        <p class="mb-0 text-muted mt-2 small">Tidak ada data siswa untuk kelas terpilih.</p>
+                    </td>
+                </tr>
+            `);
+                    $('#student-checks').prop('checked', false);
+                    $('#student-bulk-action').hide();
+                    return;
+                }
+
+                let html = '';
+                rows.forEach(function (row, idx) {
+                    const s = row.s;
+                    html += `
+            <tr>
+                <td class="text-center align-middle">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <input type="checkbox" class="form-check-input student-check" value="${s.id}" id="student-${s.id}" data-nis="${s.nis}" style="cursor:pointer;margin:0;">
+                    </div>
+                </td>
+                <td class="text-center align-middle">${idx + 1}</td>
+                <td class="align-middle">${s.nis}</td>
+                <td class="align-middle">${s.name}</td>
+                <td class="align-middle">${s.class}</td>
+                <td class="text-center align-middle">${s.status}</td>
+            </tr>
+            `;
+                });
+
+                $tbody.html(html);
+                $('#student-checks').prop('checked', false);
+                $('#student-bulk-action').hide();
+            }
+
+            // getStudent sim (with loading)
+            function getStudent(classIds) {
+                $('#student-list').html(`
+            <tr>
+                <td colspan="6" class="text-center py-3">
+                    <i class="fas fa-spinner fa-spin text-primary"></i>
+                    <p class="mb-0 text-muted mt-2">Memuat data siswa...</p>
+                </td>
+            </tr>
+        `);
+
+                setTimeout(function () {
+                    renderStudents(classIds);
+                }, 450);
+            }
+
+            // -------------------------
+            // Events: unit change
+            // -------------------------
+            $('#unit').on('change', function () {
+                const unit = $(this).val();
+                if (unit) {
+                    $('#select-classroom').show();
+                    if ($('#input-select-classroom').is(':checked')) {
+                        $('#table-select-classroom').show();
+                        getClassroom(unit);
+                    } else {
+                        // hide table until switch enabled
+                        $('#table-select-classroom').hide();
+                        $('#select-student').hide();
+                    }
+                } else {
+                    $('#select-classroom').hide();
+                    $('#table-select-classroom').hide();
+                    $('#select-student').hide();
+                }
+            });
+
+            // toggle classroom switch
+            $('#input-select-classroom').on('change', function () {
+                if ($(this).is(':checked')) {
+                    const unit = $('#unit').val();
+                    if (!unit) {
+                        showAlert('Pilih unit terlebih dahulu.', 'warning');
+                        $(this).prop('checked', false);
+                        return;
+                    }
+                    $('#table-select-classroom').show();
+                    getClassroom(unit);
+                } else {
+                    $('#table-select-classroom').hide();
+                    $('#select-student').hide();
+                }
+            });
+
+            // classroom select all
+            $(document).on('click', '#classroom-checks', function () {
+                const isChecked = $(this).is(':checked');
+                $('.classroom-check').prop('checked', isChecked).trigger('change');
+            });
+
+            // classroom individual change
+            $(document).on('change', '.classroom-check', function () {
+                const total = $('.classroom-check').length;
+                const checked = $('.classroom-check:checked').length;
+                $('#classroom-checks').prop('checked', total === checked);
+                // bulk action visibility
+                if (checked > 0) {
+                    $('#classroom-bulk-action').show();
+                    $('#select-student').show();
+                    if ($('#input-select-student').is(':checked')) {
+                        const sel = getSelectedClassrooms();
+                        if (sel.length) getStudent(sel);
+                    }
+                } else {
+                    $('#classroom-bulk-action').hide();
+                    // hide student table if no classroom selected
+                    if (!$('#input-select-student').is(':checked')) {
+                        $('#select-student').hide();
+                    } else {
+                        // if student switch is enabled but no classroom selected, clear student list
+                        $('#student-list').html(`<tr><td colspan="6" class="text-center py-3"><small class="text-muted">Pilih kelas terlebih dahulu.</small></td></tr>`);
+                        $('#table-select-student').hide();
+                    }
+                }
+            });
+
+            // get selected classroom ids
+            function getSelectedClassrooms() {
+                const ids = [];
+                $('.classroom-check:checked').each(function () {
+                    ids.push($(this).val());
+                });
+                return ids;
+            }
+
+            // student switch
+            $('#input-select-student').on('change', function () {
+                if ($(this).is(':checked')) {
+                    const sel = getSelectedClassrooms();
+                    if (sel.length === 0) {
+                        showAlert('Pilih minimal satu kelas terlebih dahulu untuk memuat siswa.', 'warning');
+                        $(this).prop('checked', false);
+                        return;
+                    }
+                    $('#table-select-student').show();
+                    getStudent(sel);
+                } else {
+                    $('#table-select-student').hide();
+                }
+            });
+
+            // student select all
+            $(document).on('click', '#student-checks', function () {
+                const isChecked = $(this).is(':checked');
+                $('.student-check').prop('checked', isChecked);
+                toggleStudentBulk();
+            });
+
+            // student individual change
+            $(document).on('change', '.student-check', function () {
+                const total = $('.student-check').length;
+                const checked = $('.student-check:checked').length;
+                $('#student-checks').prop('checked', total === checked);
+                toggleStudentBulk();
+            });
+
+            function toggleStudentBulk() {
+                const checked = $('.student-check:checked').length;
+                if (checked > 0) $('#student-bulk-action').show();
+                else $('#student-bulk-action').hide();
+            }
+
+            // classroom bulk action (stub)
+            $('#classroom-bulk-action').on('click', function () {
+                showAlert('Aksi terpilih untuk kelas dijalankan (simulasi).', 'info');
+            });
+
+            // student bulk action (stub)
+            $('#student-bulk-action').on('click', function () {
+                showAlert('Aksi terpilih untuk siswa dijalankan (simulasi).', 'info');
+            });
+
+            // -------------------------
+            // Discount amount formatting (input numeric only)
+            // -------------------------
+            $('#discount-amount').on('input', function (e) {
+                // allow navigation keys
+                const val = $(this).val();
+                const plain = val.replace(/[^0-9]/g, '');
+                $(this).val(numberFormat(plain));
+            });
+
+            // -------------------------
+            // Simple client-side validation + submit
+            // -------------------------
+            function clearValidation() {
+                $('#unit-feedback').hide().text('');
+                $('#bill-category-feedback').hide().text('');
+                $('#discount-type-feedback').hide().text('');
+                $('#discount-amount-feedback').hide().text('');
+            }
+
+            function validateForm() {
+                clearValidation();
+                let ok = true;
+
+                const unit = $('#unit').val();
+                const billCategory = $('#bill-category').val();
+                const discountType = $('#discount-type').val();
+                const discountAmount = parseNumber($('#discount-amount').val());
+
+                if (!unit) {
+                    $('#unit-feedback').show().text('Unit harus dipilih.');
+                    ok = false;
+                }
+                if (!billCategory) {
+                    $('#bill-category-feedback').show().text('Kategori tagihan harus dipilih.');
+                    ok = false;
+                }
+                if (!discountType) {
+                    $('#discount-type-feedback').show().text('Tipe potongan harus dipilih.');
+                    ok = false;
+                }
+                if (!discountAmount || discountAmount <= 0) {
+                    $('#discount-amount-feedback').show().text('Nominal potongan harus diisi dengan angka lebih dari 0.');
+                    ok = false;
+                }
+
+                // if selecting specific classrooms / students, ensure at least one selected
+                if ($('#input-select-classroom').is(':checked') && $('.classroom-check:checked').length === 0) {
+                    showAlert('Pilih minimal satu kelas saat memilih kelas tertentu.', 'warning');
+                    ok = false;
+                }
+                if ($('#input-select-student').is(':checked') && $('.student-check:checked').length === 0) {
+                    showAlert('Pilih minimal satu siswa saat memilih siswa tertentu.', 'warning');
+                    ok = false;
+                }
+
+                return ok;
+            }
+
+            // submit form
+            $('#form').on('submit', function (e) {
+                e.preventDefault();
+
+                if (!validateForm()) return;
+
+                // show spinner & disable
+                $('#btn-icon').show();
+                $('#btn-submit').prop('disabled', true);
+                $('#btn-text').text('Memproses...');
+
+                // gather payload (for simulation / debugging)
+                const payload = {
+                    unit: $('#unit').val(),
+                    classrooms: getSelectedClassrooms(),
+                    students: (function () {
+                        const arr = [];
+                        $('.student-check:checked').each(function () { arr.push($(this).val()); });
+                        return arr;
+                    })(),
+                    bill_category: $('#bill-category').val(),
+                    discount_type: $('#discount-type').val(),
+                    discount_amount: parseNumber($('#discount-amount').val()),
+                    discount_note: $('#discount-note').val()
+                };
+
+                // simulate ajax
+                setTimeout(function () {
+                    // success
+                    $('#btn-icon').hide();
+                    $('#btn-submit').prop('disabled', false);
+                    $('#btn-text').text('Proses Tambah Potongan');
+
+                    // Default behavior after success: show alert and reset form (option B)
+                    showAlert('Potongan berhasil ditambahkan.', 'success');
+
+                    // reset form UI but keep TomSelect placeholders
+                    $('#form')[0].reset();
+                    if (typeof TomSelect !== 'undefined') {
+                        try { TomSelect.prototype; } catch (e) { }
+                        // reset TomSelect instances by setting values to empty
+                        $('#unit')[0].tomselect && $('#unit')[0].tomselect.clear();
+                        $('#bill-category')[0].tomselect && $('#bill-category')[0].tomselect.clear();
+                        $('#discount-type')[0].tomselect && $('#discount-type')[0].tomselect.clear();
+                    }
+                    // hide classroom/student sections & clear lists
+                    $('#select-classroom').hide();
+                    $('#table-select-classroom').hide();
+                    $('#select-student').hide();
+                    $('#table-select-student').hide();
+                    $('#classroom-list').html(`<tr><td colspan="7" class="text-center py-3"><i class="fas fa-spinner fa-spin text-muted"></i><p class="mb-0 text-muted mt-2 small">Memuat data kelas...</p></td></tr>`);
+                    $('#student-list').html(`<tr><td colspan="6" class="text-center py-3"><i class="fas fa-spinner fa-spin text-muted"></i><p class="mb-0 text-muted mt-2 small">Memuat data siswa...</p></td></tr>`);
+                    clearValidation();
+                }, 900);
+            });
+
+            // Initialize small placeholders for lists
+            $('#classroom-list').html(`<tr><td colspan="7" class="text-center py-3"><i class="fas fa-spinner fa-spin text-muted"></i><p class="mb-0 text-muted mt-2 small">Memuat data kelas...</p></td></tr>`);
+            $('#student-list').html(`<tr><td colspan="6" class="text-center py-3"><i class="fas fa-spinner fa-spin text-muted"></i><p class="mb-0 text-muted mt-2 small">Memuat data siswa...</p></td></tr>`);
+
+        });
+    </script>

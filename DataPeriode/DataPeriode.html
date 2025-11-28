@@ -1,0 +1,814 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Data Periode :: School Payment App</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Litepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">PPDB </span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">
+                            <i class="fas fa-home mr-1"></i>Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                            <span class="badge badge-danger badge-pill ml-1">10+</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                                Pembayaran</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-tags mr-1"></i>Tagihan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-chart-bar mr-1"></i>Rekap
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-wallet text-warning mr-2"></i>Arus
+                                Kas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                                Laporan</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-database mr-1"></i>Data Master
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                                Petugas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                                Unit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                                Tahun</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bg-white text-primary font-weight-bold rounded" href="#"
+                            data-toggle="dropdown">
+                            <i class="fas fa-user-plus mr-1"></i>PPDB
+                        </a>
+                        <div class="dropdown-menu shadow-sm border-0">
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataPendaftar/DataPendaftar.html">
+                                <i class="fas fa-users mr-2 text-primary"></i>
+                                Data Pendaftar
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataTagihan/DataTagihan.html">
+                                <i class="fas fa-file-invoice-dollar mr-2 text-primary"></i>
+                                Data Tagihan
+                            </a>
+                            <a class="dropdown-item bg-light d-flex align-items-center"
+                                href="../DataBerkas/Data_Berkas.html">
+                                <i class="fas fa-folder-open mr-2 text-primary"></i>
+                                Data Berkas
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center font-weight-bold" href="../DataPeriode/DataPeriode.html">
+                                <i class="fas fa-calendar-alt mr-2 text-success"></i>
+                                Data Periode
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataInformasi/DataInformasi.html">
+                                <i class="fas fa-info-circle mr-2 text-warning"></i>
+                                Data Informasi
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../AksesPortal/HalamanUtama.html">
+                                <i class="fas fa-user-lock mr-2 text-danger"></i>
+                                Akses Portal
+                            </a>
+                            <div class="dropdown-divider"></div>
+
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="submenuDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cogs mr-2"></i> Pengaturan PPDB
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="submenuDropdown">
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanUmum.html">Pengaturan
+                                        Umum</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBiaya.html">Pengaturan
+                                        Biaya</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanFormulir.html">Pengaturan
+                                        Formulir</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBidang.html">Pengaturan
+                                        Bidang</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBerkas.html">Pengaturan
+                                        Berkas</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanNotifikasi.html">Pengaturan
+                                        Notifikasi</a>
+                                    <a class="dropdown-item"
+                                        href="../Pengaturan/PengaturanKomponen/JalurPendaftaran.html">Pengaturan
+                                        Komponen</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanKontak.html">Pengaturan
+                                        Kontak</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-cog mr-1"></i>Lainnya
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item active">Data Periode</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold mb-1">Daftar Periode</h2>
+            <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Kelola data periode pendaftaran siswa baru
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card mb-3">
+            <div class="card-body py-3">
+                <div class="d-flex flex-wrap align-items-center">
+                    <button class="btn btn-primary px-4 mr-2 mb-2" data-toggle="modal" data-target="#modalAdd">
+                        <i class="fas fa-plus-circle mr-2"></i>Tambah Data
+                    </button>
+                    <a href="HistoryPeriode.html" class="btn btn-outline-danger px-4 mr-2 mb-2">
+                        <i class="fas fa-trash-alt mr-2"></i>Dihapus
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="keyword" id="keyword" class="form-control"
+                                        placeholder="Cari kode, nama periode..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Status</label>
+                                <select name="status" id="status" class="custom-select">
+                                    <option value="">Semua Status</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Non-Aktif</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i>Terapkan Filter
+                                </button>
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i>Reset Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bulk Actions (Hidden by default) -->
+        <div id="bulkActions" class="mb-3" style="display: none;">
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle px-3" type="button" data-toggle="dropdown">
+                    <i class="fas fa-tasks mr-1"></i>Aksi Masal
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash-alt mr-2"></i>Hapus
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-list text-primary mr-2"></i>Daftar Periode Pendaftaran
+                    </h5>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" id="dataTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="align-middle" width="30">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkAll">
+                                        <label class="custom-control-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle" width="50">#</th>
+                                <th class="align-middle">Kode Periode</th>
+                                <th class="align-middle">Nama Periode</th>
+                                <th class="align-middle">Tanggal Periode</th>
+                                <th class="align-middle">Keterangan</th>
+                                <th class="align-middle text-center">Jml. Pendaftar</th>
+                                <th class="align-middle">Status</th>
+                                <th class="align-middle text-center" width="100">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1">
+                                        <label class="custom-control-label" for="check1"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>1</strong></td>
+                                <td class="align-middle"><span
+                                        class="font-weight-bold text-primary py-2">2526-REG</span>
+                                </td>
+                                <td class="align-middle"><strong>Periode Afirmasi</strong></td>
+                                <td class="align-middle">
+                                    <div class="small">
+                                        <i class="far fa-calendar-alt text-primary mr-1"></i>
+                                        01 Juni 2025 - 15 Juni 2025
+                                    </div>
+                                </td>
+                                <td class="align-middle text-muted">Pendaftaran jalur afirmasi untuk siswa berprestasi
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-user-graduate text-info mr-2"></i>25 Siswa
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 border rounded shadow-sm">
+                                        <i class="fas fa-check-circle text-success mr-2"></i>Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modalAdd">
+                                                <i class="fas fa-edit text-warning mr-2"></i>Edit
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item text-danger" href="#" data-toggle="modal"
+                                                data-target="#deleteModal">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2">
+                                        <label class="custom-control-label" for="check2"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>2</strong></td>
+                                <td class="align-middle"><span
+                                        class="font-weight-bold text-primary py-2">2525-ROG</span>
+                                <td class="align-middle"><strong>Gelombang 1</strong></td>
+                                <td class="align-middle">
+                                    <div class="small">
+                                        <i class="far fa-calendar-alt text-primary mr-1"></i>
+                                        16 Juni 2025 - 30 Juni 2025
+                                    </div>
+                                </td>
+                                <td class="align-middle text-muted">Pendaftaran gelombang pertama tahun ajaran 2025/2026
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2  rounded shadow-sm">
+                                        <i class="fas fa-user-graduate text-info mr-2"></i>48 Siswa
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 border rounded shadow-sm">
+                                        <i class="fas fa-times-circle text-danger mr-2"></i>Non-Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="#" data-toggle="modal"
+                                                data-target="#modalAdd">
+                                                <i class="fas fa-edit text-warning mr-2"></i>Edit
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item text-danger" href="#" data-toggle="modal"
+                                                data-target="#deleteModal">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Tambah/Edit -->
+    <div class="modal fade" id="modalAdd" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width:570px;">
+            <div class="modal-content border-0 shadow-lg rounded-lg">
+
+                <!-- Header -->
+                <div class="modal-header bg-white border-0 text-center d-block pb-0">
+                    <div class="mx-auto mb-2"
+                        style="width:48px;height:48px;border-radius:14px;background:#eaf2ff;display:flex;align-items:center;justify-content:center;">
+                        <i class="fas fa-info text-primary fa-lg"></i>
+                    </div>
+                    <h5 class="font-weight-bold text-dark mb-3">Tambah Periode Pendaftaran</h5>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body px-4 pb-3" style="max-height:54vh;overflow-y:auto;">
+                    <form id="form-period">
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-semibold text-dark">Kode Periode <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" id="period-code" class="form-control border" placeholder="1112-ROG"
+                                style="height:44px;">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-semibold text-dark">Nama Periode <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" id="period-name" class="form-control border"
+                                placeholder="Contoh: Periode Afirmasi" style="height:44px;">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-semibold text-dark">Tanggal Pendaftaran <span
+                                    class="text-danger">*</span></label>
+                            <div class="d-flex">
+                                <input type="text" id="period-start" class="form-control border mr-2"
+                                    placeholder="Mulai" style="height:44px;">
+                                <input type="text" id="period-end" class="form-control border" placeholder="Selesai"
+                                    style="height:44px;">
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-semibold text-dark">Deskripsi</label>
+                            <textarea id="period-description" class="form-control border" rows="3"
+                                placeholder="Keterangan periode pendaftaran"></textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="font-weight-semibold text-dark d-block mb-2">Status</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="period-status" checked>
+                                <label class="custom-control-label text-dark" for="period-status">Aktif</label>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="modal-footer border-0 pt-0 pb-4 px-4 d-flex justify-content-between">
+                    <div class="w-100 d-flex flex-column flex-sm-row justify-content-between">
+                        <button type="button"
+                            class="btn btn-outline-secondary font-weight-semibold py-2 w-100 mr-sm-2 mb-2 mb-sm-0"
+                            data-dismiss="modal">
+                            Batalkan
+                        </button>
+                        <button type="button" id="btn-submit"
+                            class="btn btn-primary font-weight-semibold py-2 w-100 ml-sm-2">
+                            <i class="fas fa-check-circle mr-1"></i>Simpan Data
+                        </button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Penghapusan</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p class="mb-2">Apakah yakin akan menghapus data yang dipilih?</p>
+                    <p class="text-muted mb-0 small">Data periode pendaftaran akan dipindahkan ke daftar data dihapus
+                        terlebih dahulu sebelum dapat anda hapus secara permanen.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt mr-1"></i>Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Litepicker -->
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
+
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function () {
+                $('.dropdown-menu .show').removeClass('show');
+            });
+
+            return false;
+        });
+
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data yang tersedia",
+                    "infoFiltered": "(difilter dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]]
+            });
+
+            // Check All Checkbox
+            $('#checkAll').on('click', function () {
+                var isChecked = $(this).is(':checked');
+                $('.row-check').prop('checked', isChecked);
+                toggleBulkActions();
+            });
+
+            // Individual Checkbox
+            $('.row-check').on('change', function () {
+                var allChecked = $('.row-check:checked').length === $('.row-check').length;
+                $('#checkAll').prop('checked', allChecked);
+                toggleBulkActions();
+            });
+
+            // Toggle Bulk Actions
+            function toggleBulkActions() {
+                if ($('.row-check:checked').length > 0) {
+                    $('#bulkActions').show();
+                } else {
+                    $('#bulkActions').hide();
+                }
+            }
+
+            // Filter Collapse Icon
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+
+            $('#filterCollapse').on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // Apply Filter Button
+            $('#btn-apply-filter').on('click', function () {
+                table.search($('#keyword').val()).draw();
+                showAlert('Filter berhasil diterapkan', 'success');
+            });
+
+            // Reset Filter Button
+            $('#btn-reset-filter').on('click', function () {
+                $('#filter-form')[0].reset();
+                table.search('').draw();
+                showAlert('Filter berhasil direset', 'info');
+            });
+
+            // Initialize Litepicker for start date
+            if (document.getElementById('period-start')) {
+                new Litepicker({
+                    element: document.getElementById('period-start'),
+                    format: 'YYYY-MM-DD',
+                    autoApply: true,
+                    singleMode: true
+                });
+            }
+
+            // Initialize Litepicker for end date
+            if (document.getElementById('period-end')) {
+                new Litepicker({
+                    element: document.getElementById('period-end'),
+                    format: 'YYYY-MM-DD',
+                    autoApply: true,
+                    singleMode: true
+                });
+            }
+
+            // Form Submit
+            $('#btn-submit').on('click', function () {
+                var periodCode = $('#period-code').val();
+                var periodName = $('#period-name').val();
+                var periodStart = $('#period-start').val();
+                var periodEnd = $('#period-end').val();
+                var isValid = true;
+
+                // Reset validation
+                $('#period-code, #period-name, #period-start, #period-end').removeClass('border-danger');
+                $('#period-code-feedback, #period-name-feedback, #period-start-feedback, #period-end-feedback').hide();
+
+                // Validate period code
+                if (periodCode === '') {
+                    $('#period-code').addClass('border-danger');
+                    $('#period-code-feedback').text('Kode periode wajib diisi').show();
+                    isValid = false;
+                }
+
+                // Validate period name
+                if (periodName === '') {
+                    $('#period-name').addClass('border-danger');
+                    $('#period-name-feedback').text('Nama periode wajib diisi').show();
+                    isValid = false;
+                }
+
+                // Validate start date
+                if (periodStart === '') {
+                    $('#period-start').addClass('border-danger');
+                    $('#period-start-feedback').text('Tanggal mulai wajib diisi').show();
+                    isValid = false;
+                }
+
+                // Validate end date
+                if (periodEnd === '') {
+                    $('#period-end').addClass('border-danger');
+                    $('#period-end-feedback').text('Tanggal selesai wajib diisi').show();
+                    isValid = false;
+                }
+
+                if (isValid) {
+                    $('#modalAdd').modal('hide');
+                    showAlert('Data periode berhasil disimpan', 'success');
+
+                    // Reset form
+                    $('#form-period')[0].reset();
+                }
+            });
+
+            // Delete Submit
+            $('#btn-delete-submit').on('click', function () {
+                $('#deleteModal').modal('hide');
+                showAlert('Data berhasil dihapus', 'success');
+            });
+
+            // Convert period code to uppercase
+            $('#period-code').on('input', function () {
+                this.value = this.value.toUpperCase().replace(/\s/g, '');
+            });
+        });
+
+        // Show Alert Function
+        function showAlert(message, type) {
+            const alert = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            alertContent.html(message);
+
+            // Remove all alert classes
+            alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+            if (type === 'success') {
+                alert.addClass('alert-success');
+                alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                alertTitle.text('Berhasil');
+            } else if (type === 'warning') {
+                alert.addClass('alert-warning');
+                alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                alertTitle.text('Peringatan');
+            } else if (type === 'info') {
+                alert.addClass('alert-info');
+                alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                alertTitle.text('Informasi');
+            } else if (type === 'danger') {
+                alert.addClass('alert-danger');
+                alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                alertTitle.text('Error');
+            }
+
+            alert.show().addClass('show');
+
+            setTimeout(function () {
+                alert.removeClass('show');
+                setTimeout(function () {
+                    alert.hide();
+                }, 150);
+            }, 4000);
+        }
+
+        // Hide Alert Function
+        function hideAlert() {
+            $('#alert').removeClass('show');
+            setTimeout(function () {
+                $('#alert').hide();
+            }, 150);
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Data Tagihan :: School Payment App</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Litepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/litepicker/dist/css/litepicker.css">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">PPDB </span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">
+                            <i class="fas fa-home mr-1"></i>Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                            <span class="badge badge-danger badge-pill ml-1">10+</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                                Pembayaran</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-tags mr-1"></i>Tagihan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-chart-bar mr-1"></i>Rekap
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-wallet text-warning mr-2"></i>Arus
+                                Kas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                                Laporan</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-database mr-1"></i>Data Master
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                                Petugas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                                Unit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                                Tahun</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bg-white text-primary font-weight-bold rounded"
+                            href="DataPendaftar.html" data-toggle="dropdown">
+                            <i class="fas fa-user-plus mr-1"></i>PPDB
+                        </a>
+                        <div class="dropdown-menu shadow-sm border-0">
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataPendaftar/DataPendaftar.html">
+                                <i class="fas fa-users mr-2 text-primary"></i>
+                                Data Pendaftar
+                            </a>
+                            <a class="dropdown-item bg-light font-weight-bold d-flex align-items-center"
+                                href="DataTagihan.html">
+                                <i class="fas fa-file-invoice-dollar mr-2 text-primary"></i>
+                                Data Tagihan
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataBerkas/Data_Berkas.html">
+                                <i class="fas fa-folder-open mr-2 text-info"></i>
+                                Data Berkas
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataPeriode/DataPeriode.html">
+                                <i class="fas fa-calendar-alt mr-2 text-success"></i>
+                                Data Periode
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataInformasi/DataInformasi.html">
+                                <i class="fas fa-info-circle mr-2 text-warning"></i>
+                                Data Informasi
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="fas fa-user-lock mr-2 text-danger"></i>
+                                Akses Portal
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                <i class="fas fa-cogs mr-2 text-secondary"></i>
+                                Pengaturan PPDB
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-cog mr-1"></i>Lainnya
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item active">Data Tagihan</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold mb-1">Tagihan PPDB</h2>
+            <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Kelola data tagihan pendaftar siswa baru
+                tahun ajaran 2025/2026</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #667eea;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-primary">9</h3>
+                                <small class="text-muted">Jumlah Tagihan</small>
+                            </div>
+                            <div class="rounded-circle bg-primary p-3">
+                                <i class="fas fa-tags fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #3192ca;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-info">98</h3>
+                                <small class="text-muted">Nominal Tagihan</small>
+                            </div>
+                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center"
+                                style="width: 48px; height: 48px;">
+                                <i class="fas fa-receipt fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #28a745;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-success">Rp 480,000</h3>
+                                <small class="text-muted">Sudah Dibayar</small>
+                            </div>
+                            <div class="rounded-circle bg-success p-3">
+                                <i class="fas fa-check-circle fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #dd5515;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-danger">Rp 780,000</h3>
+                                <small class="text-muted">Belum Dibayar</small>
+                            </div>
+                            <div class="rounded-circle bg-danger p-3">
+                                <i class="fas fa-exclamation-circle fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="keyword" id="keyword" class="form-control"
+                                        placeholder="Cari nama, nomor..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Tahun Ajaran</label>
+                                <select name="class_year" id="class-year" class="custom-select">
+                                    <option value="">Semua Tahun</option>
+                                    <option value="2026/2027">2026/2027</option>
+                                    <option value="2025/2026" selected>2025/2026</option>
+                                    <option value="2024/2025">2024/2025</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Unit Sekolah</label>
+                                <select name="unit" id="filter-unit" class="custom-select">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Tanggal</label>
+                                <input type="text" name="date_period" id="date-period" class="form-control"
+                                    placeholder="yyyy-mm-dd - yyyy-mm-dd">
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Jenis Tagihan</label>
+                                <select name="status" id="status" class="custom-select">
+                                    <option value="">Semua Jenis</option>
+                                    <option value="PPDB-NR">Biaya Pendaftaran</option>
+                                    <option value="PPDB-RR">Biaya Daftar Ulang</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i>Terapkan Filter
+                                </button>
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i>Reset Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-list text-primary mr-2"></i>Daftar Tagihan
+                    </h5>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" id="dataTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="align-middle" width="50">#</th>
+                                <th class="align-middle">Nama Unit</th>
+                                <th class="align-middle">No. Pendaftaran</th>
+                                <th class="align-middle">Nama Lengkap</th>
+                                <th class="align-middle">Deskripsi Tagihan</th>
+                                <th class="align-middle text-right">Jml. Tagihan</th>
+                                <th class="align-middle text-right">Jml. Dibayar</th>
+                                <th class="align-middle text-right">Jml. Tunggakan</th>
+                                <th class="align-middle">Status</th>
+                                <th class="align-middle text-center" width="100">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle"><strong>1</strong></td>
+                                <td class="align-middle"><span
+                                        class="badge badge-primary badge-pill px-3 py-2">SMA</span></td>
+                                <td class="align-middle text-muted">2526-0001</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">SP</div>
+                                        <div>
+                                            <strong>Septian</strong>
+                                            <small class="d-block text-muted">081234567890</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">Biaya Pendaftaran PPDB 2025/2026</td>
+                                <td class="align-middle text-right font-weight-bold">Rp 150.000</td>
+                                <td class="align-middle text-right text-success">Rp 150.000</td>
+                                <td class="align-middle text-right text-danger">Rp 0</td>
+                                <td class="align-middle"><span class="badge badge-success px-3 py-1">Lunas</span></td>
+                                <td class="align-middle text-center">
+                                    <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                                        <i class="fas fa-eye mr-1"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><strong>5</strong></td>
+                                <td class="align-middle"><span class="badge badge-info badge-pill px-3 py-2">SMP</span>
+                                </td>
+                                <td class="align-middle text-muted">2526-0005</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-warning text-white rounded-circle d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 2.5rem; height: 2.5rem; font-size: 0.875rem;">EP</div>
+                                        <div><strong>Eko Prasetyo</strong></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">Biaya Pendaftaran PPDB 2025/2026</td>
+                                <td class="align-middle text-right font-weight-bold">Rp 140.000</td>
+                                <td class="align-middle text-right text-success">Rp 70.000</td>
+                                <td class="align-middle text-right text-danger">Rp 70.000</td>
+                                <td class="align-middle"><span class="badge badge-warning px-3 py-1">Belum Lunas</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                                        <i class="fas fa-eye mr-1"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><strong>6</strong></td>
+                                <td class="align-middle"><span
+                                        class="badge badge-success badge-pill px-3 py-2">SD</span></td>
+                                <td class="align-middle text-muted">2526-0006</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 2.5rem; height: 2.5rem; font-size: 0.875rem;">FH</div>
+                                        <div><strong>Fitri Handayani</strong></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">Biaya Pendaftaran PPDB 2025/2026</td>
+                                <td class="align-middle text-right font-weight-bold">Rp 120.000</td>
+                                <td class="align-middle text-right text-success">Rp 120.000</td>
+                                <td class="align-middle text-right text-danger">Rp 0</td>
+                                <td class="align-middle"><span class="badge badge-success px-3 py-1">Lunas</span></td>
+                                <td class="align-middle text-center">
+                                    <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                                        <i class="fas fa-eye mr-1"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><strong>7</strong></td>
+                                <td class="align-middle"><span
+                                        class="badge badge-primary badge-pill px-3 py-2">SMA</span></td>
+                                <td class="align-middle text-muted">2526-0007</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-info text-white rounded-circle d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 2.5rem; height: 2.5rem; font-size: 0.875rem;">GP</div>
+                                        <div><strong>Galih Pratama</strong></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">Biaya Daftar Ulang PPDB 2025/2026</td>
+                                <td class="align-middle text-right font-weight-bold">Rp 250.000</td>
+                                <td class="align-middle text-right text-success">Rp 50.000</td>
+                                <td class="align-middle text-right text-danger">Rp 200.000</td>
+                                <td class="align-middle"><span class="badge badge-warning px-3 py-1">Belum Lunas</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                                        <i class="fas fa-eye mr-1"></i> Detail
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle"><strong>8</strong></td>
+                                <td class="align-middle"><span class="badge badge-info badge-pill px-3 py-2">SMP</span>
+                                </td>
+                                <td class="align-middle text-muted">2526-0008</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 2.5rem; height: 2.5rem; font-size: 0.875rem;">HP</div>
+                                        <div><strong>Hana Pertiwi</strong></div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">Biaya Pendaftaran PPDB 2025/2026</td>
+                                <td class="align-middle text-right font-weight-bold">Rp 140.000</td>
+                                <td class="align-middle text-right text-success">Rp 0</td>
+                                <td class="align-middle text-right text-danger">Rp 140.000</td>
+                                <td class="align-middle"><span class="badge badge-danger px-3 py-1">Belum Dibayar</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                                        <i class="fas fa-eye mr-1"></i> Detail </a>
+
+                </div>
+                </td>
+                </tr>
+                <tr>
+                    <td class="align-middle"><strong>9</strong></td>
+                    <td class="align-middle"><span class="badge badge-success badge-pill px-3 py-2">SD</span></td>
+                    <td class="align-middle text-muted">2526-0009</td>
+                    <td class="align-middle">
+                        <div class="d-flex align-items-center">
+                            <div class="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                style="width: 2.5rem; height: 2.5rem; font-size: 0.875rem;">IG</div>
+                            <div><strong>Indra Gunawan</strong></div>
+                        </div>
+                    </td>
+                    <td class="align-middle">Biaya Pendaftaran PPDB 2025/2026</td>
+                    <td class="align-middle text-right font-weight-bold">Rp 120.000</td>
+                    <td class="align-middle text-right text-success">Rp 40.000</td>
+                    <td class="align-middle text-right text-danger">Rp 80.000</td>
+                    <td class="align-middle"><span class="badge badge-warning px-3 py-1">Belum Lunas</span>
+                    </td>
+                    <td class="align-middle text-center">
+                        <a href="Detail_Tagihan.html" class="btn btn-sm btn-outline-info border-1">
+                            <i class="fas fa-eye mr-1"></i> Detail </a>
+
+            </div>
+            </td>
+            </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Litepicker -->
+    <script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "lengthMenu": "Tampilkan _MENU_ data per halaman",
+                    "zeroRecords": "Data tidak ditemukan",
+                    "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    "infoEmpty": "Tidak ada data yang tersedia",
+                    "infoFiltered": "(difilter dari _MAX_ total data)",
+                    "search": "Cari:",
+                    "paginate": {
+                        "first": "Pertama",
+                        "last": "Terakhir",
+                        "next": "Selanjutnya",
+                        "previous": "Sebelumnya"
+                    }
+                },
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]]
+            });
+
+            // Filter Collapse Icon
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+
+            $('#filterCollapse').on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // Apply Filter Button
+            $('#btn-apply-filter').on('click', function () {
+                table.search($('#keyword').val()).draw();
+                showAlert('Filter berhasil diterapkan', 'success');
+            });
+
+            // Reset Filter Button
+            $('#btn-reset-filter').on('click', function () {
+                $('#filter-form')[0].reset();
+                table.search('').draw();
+                showAlert('Filter berhasil direset', 'info');
+            });
+
+            // Initialize Litepicker for date range
+            if (document.getElementById('date-period')) {
+                new Litepicker({
+                    element: document.getElementById('date-period'),
+                    singleMode: false,
+                    format: 'YYYY-MM-DD',
+                    delimiter: ' - ',
+                    autoApply: true,
+                    tooltipText: {
+                        one: 'hari',
+                        other: 'hari'
+                    },
+                    tooltipNumber: (totalDays) => {
+                        return totalDays;
+                    }
+                });
+            }
+        });
+
+        // Show Alert Function
+        function showAlert(message, type) {
+            const alert = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            alertContent.html(message);
+
+            // Remove all alert classes
+            alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+            if (type === 'success') {
+                alert.addClass('alert-success');
+                alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                alertTitle.text('Berhasil');
+            } else if (type === 'warning') {
+                alert.addClass('alert-warning');
+                alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                alertTitle.text('Peringatan');
+            } else if (type === 'info') {
+                alert.addClass('alert-info');
+                alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                alertTitle.text('Informasi');
+            } else if (type === 'danger') {
+                alert.addClass('alert-danger');
+                alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                alertTitle.text('Error');
+            }
+
+            alert.show().addClass('show');
+
+            setTimeout(function () {
+                alert.removeClass('show');
+                setTimeout(function () {
+                    alert.hide();
+                }, 150);
+            }, 4000);
+        }
+
+        // Hide Alert Function
+        function hideAlert() {
+            $('#alert').removeClass('show');
+            setTimeout(function () {
+                $('#alert').hide();
+            }, 150);
+        }
+    </script>
+
+</body>
+
+</html>

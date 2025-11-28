@@ -1,0 +1,870 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Tambah Setoran :: School Payment App</title>
+    <meta name="csrf-token" content="4N9WNJyqh0GbludPFgDR98Sg6KR6bV6NK4lTgFM2" />
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tom Select CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap4.min.css">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">PPDB </span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">
+                            <i class="fas fa-home mr-1"></i>Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                            <span class="badge badge-danger badge-pill ml-1">10+</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../Pembayaran/ProsesPembayaran.html"><i
+                                    class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                                Pembayaran</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"><i class="fas fa-tags mr-1"></i>Tagihan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-chart-bar mr-1"></i>Rekap
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-wallet text-warning mr-2"></i>Arus
+                                Kas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                                Laporan</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-database mr-1"></i>Data Master
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                                Petugas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                                Unit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                                Tahun</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link bg-white text-primary font-weight-bold rounded" href="#"><i
+                                class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-user-plus mr-1"></i>PPDB
+                        </a>
+                        <div class="dropdown-menu shadow-sm border-0 ">
+                            <a class="dropdown-item d-flex align-items-center font-weight-bold "
+                                href="../DataPendaftar/DataPendaftar.html">
+                                <i class="fas fa-users mr-2 text-primary"></i>
+                                Data Pendaftar
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataTagihan/DataTagihan.html">
+                                <i class="fas fa-file-invoice-dollar mr-2 text-primary"></i>
+                                Data Tagihan
+                            </a>
+                            <a class="dropdown-item bg-light d-flex align-items-center"
+                                href="../DataBerkas/Data_Berkas.html">
+                                <i class="fas fa-folder-open mr-2 text-primary"></i>
+                                Data Berkas
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataPeriode/DataPeriode.html">
+                                <i class="fas fa-calendar-alt mr-2 text-success"></i>
+                                Data Periode
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataInformasi/DataInformasi.html">
+                                <i class="fas fa-info-circle mr-2 text-warning"></i>
+                                Data Informasi
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../AksesPortal/HalamanUtama.html">
+                                <i class="fas fa-user-lock mr-2 text-danger"></i>
+                                Akses Portal
+                            </a>
+                            <div class="dropdown-divider"></div>
+
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="submenuDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cogs mr-2"></i> Pengaturan PPDB
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="submenuDropdown">
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanUmum.html">Pengaturan
+                                        Umum</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBiaya.html">Pengaturan
+                                        Biaya</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanFormulir.html">Pengaturan
+                                        Formulir</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBidang.html">Pengaturan
+                                        Bidang</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBerkas.html">Pengaturan
+                                        Berkas</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanNotifikasi.html">Pengaturan
+                                        Notifikasi</a>
+                                    <a class="dropdown-item"
+                                        href="../Pengaturan/PengaturanKomponen/JalurPendaftaran.html">Pengaturan
+                                        Komponen</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanKontak.html">Pengaturan
+                                        Kontak</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-cog mr-1"></i>Lainnya
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pembayaran</a></li>
+                <li class="breadcrumb-item active">Tambah Setoran</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h2 class="font-weight-bold mb-1">Tambah Setoran</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Tambah Setoran
+                        siswa</p>
+                </div>
+                <div>
+                    <a href="Tabungan.html" class="btn btn-outline-primary">
+                        <i class="fas fa-arrow-left mr-1"></i>Kembali
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #667eea;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Student Selection Card -->
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0 font-weight-bold">
+                    <i class="fa fa-users mr-2 text-primary"></i>Pilih Siswa
+                </h5>
+            </div>
+
+            <div class="card-body">
+
+                <!-- Filter Kelas -->
+                <div class="form-group mb-4">
+                    <label class="font-weight-bold">Pilih Kelas</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-primary text-white border-0">
+                                <i class="fa fa-school"></i>
+                            </span>
+                        </div>
+                        <select name="classroom" id="select-classroom" class="form-control">
+                            <option value="">Pilih Kelas...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Pilih Siswa -->
+                <div class="form-group mb-2">
+                    <label class="font-weight-bold">Pilih Siswa</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-info text-white border-0">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <select name="student" id="select-student" class="form-control">
+                            <option value="">Cari atau pilih siswa...</option>
+                        </select>
+                    </div>
+                    <small class="text-muted">Silakan pilih siswa untuk melihat informasi detail.</small>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- Main Content Row -->
+        <form id="form" action="javascript:void(0)">
+            <div class="row">
+                <!-- Student Info Card -->
+                <div class="col-12 col-md-4 col-lg-3 mb-4">
+                    <div class="card shadow" style="border-radius: 12px;">
+                        <div class="card-body text-center">
+                            <div class="mb-3">
+                                <img id="student-photo"
+                                    src="https://demo.schoolpay.co.id/media/images/student/photo.png"
+                                    class="rounded-circle border"
+                                    style="width: 100px; height: 100px; object-fit: cover;" alt="Student Photo">
+                            </div>
+
+                            <div id="student-status" class="mb-3">&nbsp;</div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Nama Lengkap</small>
+                                <strong id="student-name">-</strong>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Nomor Induk</small>
+                                <strong id="student-number" class="text-primary">-</strong>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Unit Pendidikan</small>
+                                <span id="student-unit">-</span>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Kelas Sekarang</small>
+                                <span id="class-name">-</span>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Tahun Ajaran</small>
+                                <span id="class-year">-</span>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Jenis Kelamin</small>
+                                <span id="student-gender">-</span>
+                            </div>
+
+                            <div class="border-bottom pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Tempat & Tanggal Lahir</small>
+                                <span class="student-pob"></span><span id="student-dob">-</span>
+                            </div>
+
+                            <div class="pb-3 mb-3">
+                                <small class="text-muted d-block mb-1">Nomor Telepon</small>
+                                <span id="student-phone">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bill Details Card -->
+                <div class="col-12 col-md-8 col-lg-9 mb-4">
+                    <div class="card shadow-lg border-0" style="border-radius: 12px; overflow: hidden;">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0 font-weight-bold">
+                                <i class="fas fa-file-invoice-dollar text-primary mr-2"></i>Detail Transaksi Tabungan
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="card h-100 pt-3">
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-12">
+
+                                            <!-- SALDO AWAL -->
+                                            <div class="table-responsive mb-4">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th class="bg-light" width="30%">Jumlah Saldo Awal</th>
+                                                            <td>
+                                                                <h3 class="mb-0 text-primary font-weight-bold">
+                                                                    Rp <span id="display-balance">0</span>
+                                                                </h3>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <!-- DATA INPUT -->
+                                            <div class="table-responsive mb-4">
+                                                <table class="table table-bordered">
+                                                    <tbody>
+
+                                                        <!-- Nama Penyetor -->
+                                                        <tr>
+                                                            <th class="bg-light">Nama Penyetor</th>
+                                                            <td>
+                                                                <input type="text" name="pay_name" id="pay-name"
+                                                                    class="form-control">
+                                                                <small id="pay-name-feedback" class="text-danger"
+                                                                    style="display:none;">Nama penyetor
+                                                                    diperlukan</small>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!-- Jumlah Setoran -->
+                                                        <tr>
+                                                            <th class="bg-light">Jumlah Setoran</th>
+                                                            <td>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">Rp</span>
+                                                                    <input type="text" name="pay_amount" id="pay-amount"
+                                                                        class="form-control" placeholder="0">
+                                                                </div>
+                                                                <small class="text-muted">Min. Setoran Tabungan: Rp
+                                                                    10,000</small>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!-- Metode Pembayaran -->
+                                                        <tr>
+                                                            <th class="bg-light">Metode Pembayaran</th>
+                                                            <td>
+                                                                <div class="row">
+                                                                    <div class="col-6">
+                                                                        <select name="pay_method" id="pay-method"
+                                                                            class="form-control">
+                                                                            <option value="TN">Tunai</option>
+                                                                            <option value="NT">Non-Tunai</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <input type="text" name="pay_channel"
+                                                                            id="pay-channel" class="form-control"
+                                                                            placeholder="Channel Pembayaran" disabled>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!-- Keterangan -->
+                                                        <tr>
+                                                            <th class="bg-light">Keterangan Tambahan</th>
+                                                            <td>
+                                                                <textarea name="pay_note" class="form-control" rows="3"
+                                                                    placeholder="Opsional..."></textarea>
+                                                            </td>
+                                                        </tr>
+
+                                                        <!-- Total -->
+                                                        <tr>
+                                                            <th class="bg-light">Jumlah Pembayaran</th>
+                                                            <td>
+                                                                <h3 class="mb-0 text-primary font-weight-bold">
+                                                                    Rp <span id="display-amount-total">0</span>
+                                                                </h3>
+                                                                <input type="hidden" name="amount_total"
+                                                                    id="amount-total" value="0">
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <!-- BUTTON -->
+                                            <div class="row mt-4">
+                                                <div class="col-md-6">
+                                                    <button type="submit" id="btn-submit"
+                                                        class="btn btn-outline-primary py-2 font-weight-semibold"
+                                                        style="width:100%; display:block;" disabled>
+                                                        <i id="btn-svg" class="fas fa-check-circle mr-2"></i>
+                                                        <span id="btn-icon"
+                                                            class="spinner-border spinner-border-sm mr-2"
+                                                            style="display:none;"></span>
+                                                        <span id="btn-text">Proses Transaksi</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <a href="#" id="btn-detail" class="btn btn-info btn-block"
+                                                        style="display:none;" target="_blank">
+                                                        <i class="fas fa-info-circle mr-1"></i>Lihat Detail Transaksi
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+    <!-- Print Dialog Modal -->
+    <div class="modal fade" id="print-dialog" data-backdrop="static" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                    <h4 class="font-weight-bold">Transaksi Sukses</h4>
+                    <p class="text-muted mb-2">Proses pembayaran tagihan telah berhasil</p>
+                    <p class="text-muted mb-4">Silahkan klik tombol cetak nota dibawah untuk mencetak bukti pembayaran
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
+                    <a href="#" id="print-dialog-button" class="btn btn-primary" target="_blank">
+                        <i class="fas fa-print mr-1"></i>Cetak Nota
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Dialog Modal -->
+    <div class="modal fade" id="alert-dialog" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-info-circle fa-4x text-info mb-3"></i>
+                    <h4 class="font-weight-bold">Transaksi Tagihan Bebas</h4>
+                    <p id="alert-dialog-msg" class="text-muted mb-4"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Kembali</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Tom Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+
+    <!-- Custom JS -->
+    <script>
+        const path = 'https://demo.schoolpay.co.id/media/images';
+
+        const studentData = [
+            { value: 'eU5QbmZycnZvYUVOTExGdUpybmNDdz09', text: 'No. 1 -- 0102030405 -- Abudullah Umar' },
+            { value: 'ZCtDQ0JKazM3RXVnVDU0SVZSTlUvdz09', text: 'No. 2 -- 23071600040 -- Adinata Winarno' },
+            { value: 'd1lra3p2blpYaVRiL1lsM3JFQ0lLQT09', text: 'No. 3 -- 23071600028 -- Aditya Firmansyah' },
+            { value: 'TlNSMzloVXN2aDlTOGgvVFRlbllCZz09', text: 'No. 4 -- 1001010 -- ahamd' },
+            { value: 'OFBYejB6VWQ5T1dBU0dwWm5VOGZsQT09', text: 'No. 5 -- 250601001 -- Almira Pertiwi' }
+        ];
+
+        // Initialize Tom Select
+        let selectClassroom = new TomSelect('#select-classroom', {
+            placeholder: 'Filter Kelas',
+            maxOptions: 100,
+            options: [
+                { value: 'Rm5UZVhqVWV0eVdVWXBnQmNzOGpDdz09', text: '2025/2026 -- 1 A', class: 'SD' },
+                { value: 'Q3hFRTVjb1Bqczhpd3pzWHptS0lhZz09', text: '2025/2026 -- 1 B', class: 'SD' },
+                { value: 'TFhKSUhpWnBEdlBoSkFHNzZYUjIxUT09', text: '2025/2026 -- 7 A', class: 'SMP' },
+                { value: 'VmJ4bThLL0F3SzJnK0xpVldsTnRKdz09', text: '2025/2026 -- 7 B', class: 'SMP' }
+            ],
+            optgroups: [
+                { value: 'SD', label: 'SD' },
+                { value: 'SMP', label: 'SMP' }
+            ],
+            optgroupField: 'class'
+        });
+
+        let selectStudent = new TomSelect('#select-student', {
+            placeholder: 'Pencarian Siswa',
+            maxOptions: 250,
+            options: studentData
+        });
+
+        let billName1 = new TomSelect('#bill-name-1');
+        let billName2 = new TomSelect('#bill-name-2');
+
+        // Change classroom handler
+        $('body').on('change', '#select-classroom', function () {
+            let id = $(this).val();
+
+            if (id) {
+                // Simulate AJAX to get students by classroom
+                $('#select-student').empty().append('<option value=""></option>');
+                selectStudent.clear();
+                selectStudent.clearOptions();
+                selectStudent.sync();
+                resetViewData();
+
+                showAlert('Filter kelas berhasil diterapkan', 'info');
+            } else {
+                $('#select-student').empty().append('<option value=""></option>');
+                selectStudent.clear();
+                selectStudent.clearOptions();
+                selectStudent.addOption(studentData);
+                selectStudent.sync();
+                resetViewData();
+            }
+        });
+
+        // Change student handler
+        $('body').on('change', '#select-student', function () {
+            let id = $('#select-student').val();
+
+            if (id) {
+                // Simulate student data load
+                $('#student-photo').attr('src', path + '/student/photo.png');
+                $('#student-name').text('SEPTIAN');
+                $('#student-number').text('2526-0001');
+                $('#student-gender').text('Laki-Laki');
+                $('#student-pob').text('Jakarta, ');
+                $('#student-dob').text('01 Januari 2000');
+                $('#student-phone').text('6289670051825');
+                $('#student-status').html('<span class="badge badge-success badge-pill px-3 py-2">AKTIF</span>');
+                $('#student-unit').text('SMA');
+                $('#class-name').text('10 A');
+                $('#class-year').text('2025/2026');
+
+                $('.bill-name').trigger('change');
+                $('#btn-submit').prop('disabled', false);
+
+                showAlert('Data siswa berhasil dimuat', 'success');
+            }
+        });
+
+        // Bill name change handler
+        $('.bill-name').change(function () {
+            let id = $(this).data('id');
+            let category = $(this).val();
+
+            if (category != '') {
+                // Simulate getting bill amount
+                let amounts = {
+                    'NUVTWDVNNVVCZW01ZU0waDJHMzhFWWpqZzMxc1ZRUFNodTB2WmY1S2J3az0=': 250000,
+                    'TFlmZEE0TjBLZDVTSGwyajJXakFpbU5jSkFWMy80UkhaQzhWWENnZWtmUT0=': 500000,
+                    'L0kraU55YmZkNFBiVjlrSWY2TkdJVmFGR01KRERaQTVhUFFMc1VDR0VUOD0=': 400000,
+                    'a3ExZkVJa0o4YXlxWE8vYWVJNDJ3cWg1TFcvNEtsRllPL0NFeVdLeWJTdz0=': 200000,
+                    'Nm9lU09qUWtIMnVhNHArRkNHQmNLWEVwcVZxb1BzL2RHSFpUN1hyUXBUdz0=': 300000,
+                    'TXhQUVY5N1haQmw2V1I4UTZiOUtLekRJcy91eWJMV3hWL2I3RzJKTCs1QT0=': 200000
+                };
+
+                let amount = amounts[category] || 0;
+                $('#bill-amount-' + id).val(numberFormat(amount)).data('amount', amount);
+
+                // Show discount hint randomly
+                if (Math.random() > 0.5) {
+                    $('#discount-' + id).show();
+                } else {
+                    $('#discount-' + id).hide();
+                }
+
+                calculateAmount();
+            }
+        });
+
+        // Bill name empty handler
+        $('.bill-name').on('change', function () {
+            let value = $(this).val();
+
+            if (value == '') {
+                let id = $(this).data('id');
+                $('#bill-amount-' + id).val(0);
+            }
+
+            calculateAmount();
+        });
+
+        // Bill amount keydown handler
+        $('.bill-amount').on({
+            keydown: function (e) {
+                if (e.which == 32) {
+                    return false;
+                }
+            },
+            change: function () {
+                this.value = this.value.replace(/\s/g, '');
+                calculateAmount();
+            }
+        });
+
+        // Bill amount keyup handler
+        $('.bill-amount').keyup(function (e) {
+            if (e.which >= 37 && e.which <= 40) {
+                e.preventDefault();
+            }
+
+            $(this).val(function (i, v) {
+                let value = v.replace(/[^\d]/g, '');
+                return value;
+            });
+
+            $(this).val(function (i, v) {
+                let value = v.replace(/,/g, '');
+                return numberFormat(value);
+            });
+        });
+
+        // Submit button handler
+        $('body').on('click', '#btn-submit', function (e) {
+            e.preventDefault();
+
+            if (!$('#select-student').val()) {
+                $('#alert-dialog-msg').text('Silahkan memilih siswa terlebih dahulu untuk dapat memproses transaksi');
+                $('#alert-dialog').modal('show');
+                return;
+            }
+
+            if (!$('#bill-month').val() || !$('#bill-year').val()) {
+                $('#bill-period-feedback').show();
+                return;
+            } else {
+                $('#bill-period-feedback').hide();
+            }
+
+            if (!$('#bill-name-1').val()) {
+                $('#bill-name-1-feedback').show();
+                return;
+            } else {
+                $('#bill-name-1-feedback').hide();
+            }
+
+            handleSubmitButton();
+
+            // Simulate AJAX request
+            setTimeout(function () {
+                handleSubmitButton();
+                $('#print-dialog-button').attr('href', '#');
+                $('#print-dialog').modal('show');
+
+                // Reset form
+                $('#form').trigger('reset');
+                resetViewData();
+                $('#discount-1, #discount-2').hide();
+                selectClassroom.clear();
+                selectStudent.clear();
+                billName1.clear();
+                billName2.clear();
+                $('#display-amount-total').text('0');
+                $('#amount-total').val('0');
+                $('#btn-submit').prop('disabled', true);
+            }, 1500);
+        });
+
+        // Payment method change handler
+        $('body').on('change', '#pay-method', function () {
+            if ($(this).val() == 'NT') {
+                $('#pay-channel').prop('disabled', false).val('').focus();
+            } else {
+                $('#pay-channel').prop('disabled', true).val('');
+            }
+        });
+
+        // Reset view data function
+        function resetViewData() {
+            $('#student-photo').attr('src', path + '/student/photo.png');
+            $('#student-name').text('-');
+            $('#student-number').text('-');
+            $('#student-gender').text('-');
+            $('#student-pob').text('-');
+            $('#student-dob').text('-');
+            $('#student-status').html('&nbsp;');
+            $('#student-unit').text('-');
+            $('#class-name').text('-');
+            $('#class-year').text('-');
+            $('#student-phone').text('-');
+        }
+
+        // Handle submit button function
+        function handleSubmitButton() {
+            if (!$('#btn-submit').is(':disabled')) {
+                $('#btn-submit').prop('disabled', true);
+                $('#btn-text').text('Memproses Pembayaran');
+                $('#btn-svg').hide();
+                $('#btn-icon').show();
+            } else {
+                $('#btn-submit').prop('disabled', false);
+                $('#btn-text').text('Proses Pembayaran');
+                $('#btn-svg').show();
+                $('#btn-icon').hide();
+            }
+        }
+
+        // Number format function
+        function numberFormat(value) {
+            let parts = value.toString().split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            return parts.join('.');
+        }
+
+        // Calculate amount function
+        function calculateAmount() {
+            let amountTotal = 0;
+
+            for (let i = 1; i <= 2; i++) {
+                if ($('#bill-amount-' + i).val()) {
+                    let value = $('#bill-amount-' + i).val();
+                    amountTotal += parseInt(value.replace(/,/g, ''));
+                }
+            }
+
+            $('#amount-total').val(amountTotal);
+            $('#display-amount-total').text(numberFormat(amountTotal));
+        }
+
+        // Show Alert Function
+        function showAlert(message, type) {
+            const alert = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            alertContent.html(message);
+
+            // Remove all alert classes
+            alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+            if (type === 'success') {
+                alert.addClass('alert-success');
+                alert.css('border-left-color', '#28a745');
+                alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                alertTitle.text('Berhasil');
+            } else if (type === 'warning') {
+                alert.addClass('alert-warning');
+                alert.css('border-left-color', '#ffc107');
+                alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                alertTitle.text('Peringatan');
+            } else if (type === 'info') {
+                alert.addClass('alert-info');
+                alert.css('border-left-color', '#17a2b8');
+                alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                alertTitle.text('Informasi');
+            } else if (type === 'danger') {
+                alert.addClass('alert-danger');
+                alert.css('border-left-color', '#dc3545');
+                alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                alertTitle.text('Error');
+            }
+
+            alert.show().addClass('show');
+
+            // Auto hide after 5 seconds
+            setTimeout(function () {
+                hideAlert();
+            }, 5000);
+        }
+
+        // Hide Alert Function
+        function hideAlert() {
+            const alert = $('#alert');
+            alert.removeClass('show');
+            setTimeout(function () {
+                alert.hide();
+            }, 150);
+        }
+    </script>
+
+</body>
+
+</html>

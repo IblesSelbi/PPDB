@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Verifikasi Pendaftar :: PPDB</title>
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <a class="navbar-brand d-flex align-items-center font-weight-bold" href="index.html">
+            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2 shadow-sm"
+                style="width: 45px; height: 45px;">
+                <i class="fas fa-graduation-cap text-primary fa-lg"></i>
+            </div>
+            <div>
+                <span class="d-block">PPDB</span>
+                <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                    Sekolah</small>
+            </div>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#topbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="topbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-white font-weight-medium" href="#">
+                        <i class="fas fa-home mr-1"></i>Beranda
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-medium" href="#" data-toggle="dropdown">
+                        <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                        <span class="badge badge-danger badge-pill ml-1">10+</span>
+                    </a>
+                    <div class="dropdown-menu shadow-sm border-0">
+                        <a class="dropdown-item" href="#"><i class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                            Pembayaran</a>
+                        <a class="dropdown-item" href="#"><i
+                                class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white font-weight-medium" href="#"><i
+                            class="fas fa-tags mr-1"></i>Tagihan</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-medium" href="#" data-toggle="dropdown">
+                        <i class="fas fa-chart-bar mr-1"></i>Rekap
+                    </a>
+                    <div class="dropdown-menu shadow-sm border-0">
+                        <a class="dropdown-item" href="#"><i
+                                class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-wallet text-warning mr-2"></i>Arus
+                            Kas</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                            Laporan</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-medium" href="#" data-toggle="dropdown">
+                        <i class="fas fa-database mr-1"></i>Data Master
+                    </a>
+                    <div class="dropdown-menu shadow-sm border-0">
+                        <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                            Petugas</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                            Unit</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                            Tahun</a>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white font-weight-medium" href="#"><i
+                            class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle bg-white text-primary font-weight-bold rounded"
+                        href="DataPendaftar.html" data-toggle="dropdown">
+                        <i class="fas fa-user-plus mr-1"></i>PPDB
+                    </a>
+                    <div class="dropdown-menu shadow-sm border-0">
+                        <a class="dropdown-item bg-light font-weight-bold d-flex align-items-center"
+                            href="DataPendaftar/DataPendaftar.html">
+                            <i class="fas fa-users mr-2 text-primary"></i>
+                            Data Pendaftar
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="../DataTagihan/DataTagihan.html">
+                            <i class="fas fa-file-invoice-dollar mr-2 text-primary"></i>
+                            Data Tagihan
+                        </a>
+
+                        <a class="dropdown-item d-flex align-items-center" href="../DataBerkas/Data_Berkas.html">
+                            <i class="fas fa-folder-open mr-2 text-info"></i>
+                            Data Berkas
+                        </a>
+
+                        <a class="dropdown-item d-flex align-items-center" href="../DataPeriode/DataPeriode.html">
+                            <i class="fas fa-calendar-alt mr-2 text-success"></i>
+                            Data Periode
+                        </a>
+
+                        <a class="dropdown-item d-flex align-items-center" href="../DataInformasi/DataInformasi.html">
+                            <i class="fas fa-info-circle mr-2 text-warning"></i>
+                            Data Informasi
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="fas fa-user-lock mr-2 text-danger"></i>
+                            Akses Portal
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="fas fa-cogs mr-2 text-secondary"></i>
+                            Pengaturan PPDB
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white font-weight-medium" href="#" data-toggle="dropdown">
+                        <i class="fas fa-cog mr-1"></i>Lainnya
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
+                        <a class="dropdown-item" href="#"><i class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                        <div class="bg-white rounded-circle d-flex align-items-center justify-content-center shadow-sm"
+                            style="width: 38px; height: 38px;">
+                            <i class="fas fa-user text-primary"></i>
+                        </div>
+                        <span class="ml-2 d-none d-lg-inline text-white font-weight-medium">Admin Operator</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow border-0">
+                        <div class="px-3 py-2 border-bottom bg-light">
+                            <small class="text-muted d-block">Logged in as</small>
+                            <strong class="text-dark">Admin Operator</strong>
+                            <small class="text-muted d-block">NIP 20250601001</small>
+                        </div>
+                        <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                            Akun</a>
+                        <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                            Akun</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+
+        <!-- HEADER -->
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="DataPendaftar.html" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="DataPendaftar.html" class="text-decoration-none">Data Pendaftar</a>
+                </li>
+                <li class="breadcrumb-item active">Verifikasi</li>
+            </ol>
+        </nav>
+
+        <div class="bg-white shadow-sm rounded p-4 mb-4 border-left border-success">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mb-3 mb-md-0">
+                    <h2 class="font-weight-bold text-success mb-2">Verifikasi Data Pendaftar</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1 text-info"></i>Gunakan halaman ini
+                        untuk memverifikasi data calon siswa baru tahun ajaran 2025/2026.</p>
+                </div>
+                <a href="DataPendaftar.html" class="btn btn-outline-primary font-weight-bold">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- FILTER -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0 font-weight-bold text-primary"><i class="fas fa-filter mr-2 text-success"></i>Filter
+                    Data</h5>
+                <button class="btn btn-link text-dark" data-toggle="collapse" data-target="#filterCollapse">
+                    <i class="fas fa-chevron-down" id="filterIcon"></i>
+                </button>
+            </div>
+            <div id="filterCollapse" class="collapse show">
+                <div class="card-body bg-light">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Unit Pendidikan</label>
+                            <select class="custom-select" id="filterUnit">
+                                <option value="">Semua</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Jenis Pendaftaran</label>
+                            <select class="custom-select" id="filterJenis">
+                                <option value="">Semua</option>
+                                <option value="Daftar Baru">Daftar Baru</option>
+                                <option value="Pindahan">Pindahan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Periode Pendaftaran</label>
+                            <select class="custom-select">
+                                <option>Semua</option>
+                                <option>Reguler</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Jalur Pendaftaran</label>
+                            <select class="custom-select">
+                                <option>Semua</option>
+                                <option value="AFARMASI">
+                                    AFIRMASI
+                                </option>
+                                <option value="BEASISWA AKADEMIK">
+                                    BEASISWA AKADEMIK
+                                </option>
+                                <option value="BEASISWA TAHFIDZ">
+                                    BEASISWA TAHFIDZ
+                                </option>
+                                <option value="PERPINDAHAN ORANG TUA">
+                                    PERPINDAHAN ORANG TUA
+                                </option>
+                                <option value="PRESTASI">
+                                    PRESTASI
+                                </option>
+                                <option value="REGULER">
+                                    REGULER
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Status Pendaftaran</label>
+                            <select class="custom-select" id="filterStatus">
+                                <option value="">Semua</option>
+                                <option value="Lulus Seleksi">Lulus Seleksi</option>
+                                <option value="Menunggu Verifikasi">Menunggu Verifikasi</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label class="small font-weight-bold">Status Verifikasi</label>
+                            <select class="custom-select" id="filterVerifikasi">
+                                <option value="">Semua</option>
+                                <option value="belum">Belum Diverifikasi</option>
+                                <option value="sudah">Sudah Diverifikasi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-success px-4 mr-2" id="btnTerapkanFilter">
+                        <i class="fas fa-search mr-2"></i>Terapkan Filter
+                    </button>
+                    <button class="btn btn-outline-secondary px-4" id="btnResetFilter">
+                        <i class="fas fa-redo mr-2"></i>Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABEL -->
+        <div class="card border-0 shadow-sm mb-4">
+            <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                <h5 class="font-weight-bold mb-0"><i class="fas fa-list text-success mr-2"></i>Daftar Pendaftar</h5>
+                <span class="badge badge-info badge-pill" id="totalData">Total: 0 data</span>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center align-middle" style="width: 50px;">
+                                <input type="checkbox" id="checkAll" class="form-check-input m-0">
+                            </th>
+                            <th style="width: 50px;">#</th>
+                            <th>Unit Pendidikan</th>
+                            <th>No. Pendaftaran</th>
+                            <th>Nama Lengkap</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Status Pendaftaran</th>
+                            <th>Kelengkapan Data</th>
+                            <th>Status Verifikasi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data akan diisi oleh JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FORM BAWAH -->
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="font-weight-bold text-primary mb-3">
+                    <i class="fas fa-check-circle text-success mr-2"></i>Proses Verifikasi
+                </h5>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label class="font-weight-bold">Perbarui Status Pendaftaran</label>
+                        <select class="custom-select" id="statusPendaftaran">
+                            <option value="">-- Pilih Status --</option>
+                            <optgroup label="Hasil Seleksi">
+                                <option value="5">Lulus Seleksi</option>
+                                <option value="6">Tidak Lulus Seleksi</option>
+                            </optgroup>
+                            <optgroup label="Hasil Keputusan">
+                                <option value="7">Diterima</option>
+                                <option value="8">Tidak Diterima</option>
+                                <option value="9">Cadangan</option>
+                            </optgroup>
+                            <optgroup label="Tahapan Berikutnya">
+                                <option value="10">Daftar Ulang</option>
+                                <option value="11">Telah Daftar Ulang</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="font-weight-bold">Tempatkan Kelas Sementara</label>
+                        <select class="custom-select" id="pilihKelas">
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="7A">Kelas 7A</option>
+                            <option value="7B">Kelas 7B</option>
+                        </select>
+                        <small class="text-muted">Menampilkan daftar kelas dengan status PPDB aktif</small>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center" id="checkboxBillContainer">
+                        <div class="form-check mt-4" style="display: none;" id="checkboxBillWrapper">
+                            <input class="form-check-input" type="checkbox" id="registrar-bill">
+                            <label class="form-check-label" for="registrar-bill">
+                                Terbitkan tagihan biaya daftar ulang?
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Biaya Daftar Ulang (Hidden by default) -->
+                <div id="registrar-cost-detail" style="display: none;">
+                    <hr class="my-4">
+                    <h5 class="font-weight-bold text-primary mb-3">
+                        <i class="fas fa-money-bill-wave text-success mr-2"></i>Biaya Daftar Ulang
+                    </h5>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="font-weight-bold">Nama Item Tagihan</label>
+                            <input type="text" class="form-control" id="namaTagihan" value="Biaya Daftar Ulang PPDB"
+                                maxlength="64">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="font-weight-bold">Nominal Tagihan</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text">Rp</span></div>
+                                <input type="text" class="form-control" id="nominalTagihan" value="0" maxlength="11">
+                            </div>
+                            <div class="form-check mt-2">
+                                <input type="checkbox" class="form-check-input" id="auto-cost">
+                                <label class="form-check-label" for="auto-cost">
+                                    Tetapkan biaya otomatis sesuai unit pendidikan
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="font-weight-bold">Status Pembayaran</label>
+                            <select class="custom-select" id="statusPembayaran">
+                                <option value="Menunggu Pembayaran">Menunggu Pembayaran</option>
+                                <option value="Lunas">Lunas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Form tambahan untuk Lunas -->
+                    <div class="row" id="formLunas" style="display: none;">
+                        <div class="col-md-4 mb-3">
+                            <label class="font-weight-bold">Metode Pembayaran</label>
+                            <select class="custom-select" id="metodePembayaran">
+                                <option value="Tunai">Tunai</option>
+                                <option value="Non-Tunai">Non-Tunai</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3" id="channelPembayaran" style="display: none;">
+                            <label class="font-weight-bold">Channel Pembayaran</label>
+                            <input type="text" class="form-control" id="channelInput"
+                                placeholder="Contoh: BCA, Mandiri">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="font-weight-bold">Keterangan Pembayaran</label>
+                            <input type="text" class="form-control" id="keteranganPembayaran" placeholder="Opsional">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-3" role="alert" id="infoAlert" style="display: none;">
+                    <i class="fas fa-info-circle mr-2"></i>
+                    <span id="infoText"></span>
+                </div>
+
+                <button class="btn btn-success px-5 mt-3" id="btnProsesVerifikasi">
+                    <i class="fas fa-check-circle mr-2"></i>Proses Verifikasi
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal Loading -->
+    <div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="mb-0 text-muted">Sedang memproses data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Data dummy untuk simulasi
+        const dataRegistrants = [
+            { id: 1, unit: 'SMP', noPendaftaran: '2526-0010', nama: 'FAHMI', jenisKelamin: 'Laki-laki', jenis: 'Daftar Baru', status: 'Menunggu Verifikasi', kelengkapan: '100%', verifikasi: 'belum' },
+            { id: 2, unit: 'SMP', noPendaftaran: '2526-0009', nama: 'SANTRI BARU', jenisKelamin: 'Perempuan', jenis: 'Daftar Baru', status: 'Menunggu Verifikasi', kelengkapan: '47%', verifikasi: 'belum' },
+            { id: 3, unit: 'SD', noPendaftaran: '2526-0008', nama: 'YUSUF', jenisKelamin: 'Laki-laki', jenis: 'Daftar Baru', status: 'Lulus Seleksi', kelengkapan: '100%', verifikasi: 'sudah' }
+        ];
+
+        let filteredData = [...dataRegistrants];
+
+        // Render tabel
+        function renderTable(data) {
+            const tbody = document.getElementById('tableBody');
+            const totalData = document.getElementById('totalData');
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" class="text-center text-muted py-4">Tidak ada data yang sesuai dengan filter</td></tr>';
+                totalData.textContent = 'Total: 0 data';
+                return;
+            }
+
+            tbody.innerHTML = data.map((item, index) => `
+                <tr>
+                    <td class="text-center align-middle">
+                        <input type="checkbox" class="form-check-input row-check m-0" data-id="${item.id}">
+                    </td>
+                    <td class="align-middle">${index + 1}</td>
+                    <td class="align-middle"><span class="badge badge-info">${item.unit}</span></td>
+                    <td class="align-middle"><strong>${item.noPendaftaran}</strong></td>
+                    <td class="align-middle">${item.nama}</td>
+                    <td class="align-middle">${item.jenisKelamin}</td>
+                    <td class="align-middle">
+                        <span class="badge ${getStatusBadge(item.status)}">${item.status}</span>
+                    </td>
+                    <td class="align-middle">
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar ${getProgressColor(item.kelengkapan)}" 
+                                style="width: ${item.kelengkapan}" 
+                                role="progressbar">
+                                ${item.kelengkapan}
+                            </div>
+                        </div>
+                    </td>
+                    <td class="align-middle">
+                        <span class="badge ${item.verifikasi === 'sudah' ? 'badge-success' : 'badge-secondary'}">
+                            <i class="fas ${item.verifikasi === 'sudah' ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            ${item.verifikasi === 'sudah' ? 'Sudah Diverifikasi' : 'Belum Diverifikasi'}
+                        </span>
+                    </td>
+                    <td class="align-middle">
+                        <button class="btn btn-sm btn-outline-primary" onclick="window.location.href='DetailPendaftaran.html'">
+                            <i class="fas fa-info-circle"></i> Detail
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+
+
+            totalData.textContent = `Total: ${data.length} data`;
+        }
+
+        function getStatusBadge(status) {
+            const badges = {
+                'Menunggu Verifikasi': 'badge-info',
+                'Lulus Seleksi': 'badge-success',
+                'Tidak Lulus Seleksi': 'badge-danger'
+            };
+            return badges[status] || 'badge-secondary';
+        }
+
+        function getProgressColor(percentage) {
+            const value = parseInt(percentage);
+            if (value >= 80) return 'bg-success';
+            if (value >= 50) return 'bg-info';
+            if (value >= 30) return 'bg-warning';
+            return 'bg-danger';
+        }
+
+        // Check all checkbox
+        document.getElementById('checkAll').addEventListener('change', function () {
+            const checkboxes = document.querySelectorAll('.row-check');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+            updateInfoAlert();
+        });
+
+        // Update info alert saat checkbox berubah
+        document.addEventListener('change', function (e) {
+            if (e.target.classList.contains('row-check')) {
+                updateInfoAlert();
+            }
+        });
+
+        function updateInfoAlert() {
+            const checked = document.querySelectorAll('.row-check:checked').length;
+            const infoAlert = document.getElementById('infoAlert');
+            const infoText = document.getElementById('infoText');
+
+            if (checked > 0) {
+                infoAlert.style.display = 'block';
+                infoText.textContent = `${checked} data terpilih untuk diverifikasi`;
+            } else {
+                infoAlert.style.display = 'none';
+            }
+        }
+
+        // Filter functionality
+        document.getElementById('btnTerapkanFilter').addEventListener('click', function () {
+            const unit = document.getElementById('filterUnit').value;
+            const jenis = document.getElementById('filterJenis').value;
+            const status = document.getElementById('filterStatus').value;
+            const verifikasi = document.getElementById('filterVerifikasi').value;
+
+            filteredData = dataRegistrants.filter(item => {
+                return (!unit || item.unit === unit) &&
+                    (!jenis || item.jenis === jenis) &&
+                    (!status || item.status === status) &&
+                    (!verifikasi || item.verifikasi === verifikasi);
+            });
+
+            renderTable(filteredData);
+            document.getElementById('checkAll').checked = false;
+            updateInfoAlert();
+        });
+
+        // Reset filter
+        document.getElementById('btnResetFilter').addEventListener('click', function () {
+            document.getElementById('filterUnit').value = '';
+            document.getElementById('filterJenis').value = '';
+            document.getElementById('filterStatus').value = '';
+            document.getElementById('filterVerifikasi').value = '';
+            filteredData = [...dataRegistrants];
+            renderTable(filteredData);
+            document.getElementById('checkAll').checked = false;
+            updateInfoAlert();
+        });
+
+        // Status pendaftaran change - show/hide checkbox tagihan
+        document.getElementById('statusPendaftaran').addEventListener('change', function () {
+            const checkboxWrapper = document.getElementById('checkboxBillWrapper');
+            if (this.value === '10' || this.value === '11') {
+                checkboxWrapper.style.display = 'block';
+            } else {
+                checkboxWrapper.style.display = 'none';
+                document.getElementById('registrar-bill').checked = false;
+                document.getElementById('registrar-cost-detail').style.display = 'none';
+            }
+        });
+
+        // Checkbox tagihan - show/hide form biaya
+        document.getElementById('registrar-bill').addEventListener('change', function () {
+            const costDetail = document.getElementById('registrar-cost-detail');
+            costDetail.style.display = this.checked ? 'block' : 'none';
+        });
+
+        // Auto cost checkbox
+        document.getElementById('auto-cost').addEventListener('change', function () {
+            const nominalInput = document.getElementById('nominalTagihan');
+            if (this.checked) {
+                nominalInput.value = '500000';
+                nominalInput.readOnly = true;
+            } else {
+                nominalInput.readOnly = false;
+            }
+        });
+
+        // Format nominal tagihan
+        document.getElementById('nominalTagihan').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^\d]/g, '');
+        });
+
+        // Status pembayaran change
+        document.getElementById('statusPembayaran').addEventListener('change', function () {
+            const formLunas = document.getElementById('formLunas');
+            formLunas.style.display = this.value === 'Lunas' ? 'flex' : 'none';
+        });
+
+        // Metode pembayaran change
+        document.getElementById('metodePembayaran').addEventListener('change', function () {
+            const channelDiv = document.getElementById('channelPembayaran');
+            channelDiv.style.display = this.value === 'Non-Tunai' ? 'block' : 'none';
+        });
+
+        // Proses verifikasi
+        document.getElementById('btnProsesVerifikasi').addEventListener('click', function () {
+            const selected = document.querySelectorAll('.row-check:checked');
+
+            if (selected.length === 0) {
+                alert('⚠️ Pilih minimal satu data untuk diverifikasi!');
+                return;
+            }
+
+            const statusPendaftaran = document.getElementById('statusPendaftaran').value;
+            if (!statusPendaftaran) {
+                alert('⚠️ Pilih status pendaftaran terlebih dahulu!');
+                return;
+            }
+
+            // Show loading modal
+            $('#loadingModal').modal('show');
+
+            // Simulasi proses
+            setTimeout(() => {
+                $('#loadingModal').modal('hide');
+
+                // Update status verifikasi untuk data terpilih
+                selected.forEach(checkbox => {
+                    const id = parseInt(checkbox.dataset.id);
+                    const dataIndex = dataRegistrants.findIndex(item => item.id === id);
+                    if (dataIndex !== -1) {
+                        dataRegistrants[dataIndex].verifikasi = 'sudah';
+                    }
+                });
+
+                // Refresh tabel
+                filteredData = dataRegistrants.filter(item => {
+                    const unit = document.getElementById('filterUnit').value;
+                    const jenis = document.getElementById('filterJenis').value;
+                    const status = document.getElementById('filterStatus').value;
+                    const verifikasi = document.getElementById('filterVerifikasi').value;
+
+                    return (!unit || item.unit === unit) &&
+                        (!jenis || item.jenis === jenis) &&
+                        (!status || item.status === status) &&
+                        (!verifikasi || item.verifikasi === verifikasi);
+                });
+
+                renderTable(filteredData);
+                document.getElementById('checkAll').checked = false;
+                updateInfoAlert();
+
+                // Success alert
+                const successDiv = document.createElement('div');
+                successDiv.className = 'alert alert-success alert-dismissible fade show';
+                successDiv.innerHTML = `
+                    <strong><i class="fas fa-check-circle mr-2"></i>Berhasil!</strong> 
+                    ${selected.length} data berhasil diverifikasi.
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                `;
+                document.querySelector('.container-fluid').insertBefore(successDiv, document.querySelector('.container-fluid').firstChild);
+
+                // Auto dismiss after 5 seconds
+                setTimeout(() => successDiv.remove(), 5000);
+
+                // Reset form
+                document.getElementById('statusPendaftaran').value = '';
+                document.getElementById('pilihKelas').value = '';
+                document.getElementById('checkboxBillWrapper').style.display = 'none';
+                document.getElementById('registrar-cost-detail').style.display = 'none';
+            }, 2000);
+        });
+
+        // Toggle filter collapse icon
+        $('#filterCollapse').on('shown.bs.collapse', function () {
+            document.getElementById('filterIcon').className = 'fas fa-chevron-up';
+        }).on('hidden.bs.collapse', function () {
+            document.getElementById('filterIcon').className = 'fas fa-chevron-down';
+        });
+
+        // Detail data function
+        function detailData(id) {
+            const item = dataRegistrants.find(d => d.id === id);
+            alert(`Detail Data:\n\nNama: ${item.nama}\nNo. Pendaftaran: ${item.noPendaftaran}\nUnit: ${item.unit}\nStatus: ${item.status}\nKelengkapan: ${item.kelengkapan}`);
+        }
+
+        // Initial render
+        renderTable(filteredData);
+    </script>
+
+</body>
+
+</html>

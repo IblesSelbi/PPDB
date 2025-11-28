@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Pengaturan Umum Absensi :: School Payment App</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light" style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">PPDB </span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../Beranda/Beranda.html">
+                            <i class="fas fa-home mr-1"></i>Beranda
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-dollar-sign mr-1"></i>Pembayaran
+                            <span class="badge badge-danger badge-pill ml-1">10+</span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../Pembayaran/ProsesPembayaran.html"><i
+                                    class="fas fa-arrow-right text-primary mr-2"></i>Proses
+                                Pembayaran</a>
+                            <a class="dropdown-item" href="VerifikasiPembayaran.html"><i
+                                    class="fas fa-check-circle text-success mr-2"></i>Verifikasi Pembayaran</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../Tagihan/Tagihan.html"><i
+                                class="fas fa-tags mr-1"></i>Tagihan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-chart-bar mr-1"></i>Rekap
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="../DataRekap/Transaksi.html"><i
+                                    class="fas fa-exchange-alt text-info mr-2"></i>Transaksi</a>
+                            <a class="dropdown-item" href="Aruskas.html"><i
+                                    class="fas fa-wallet text-warning mr-2"></i>Arus
+                                Kas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-print text-secondary mr-2"></i>Cetak
+                                Laporan</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-database mr-1"></i>Data Master
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#"><i class="fas fa-users text-primary mr-2"></i>Data
+                                Petugas</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-building text-info mr-2"></i>Data
+                                Unit</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-calendar text-warning mr-2"></i>Data
+                                Tahun</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle nav-link bg-white text-primary font-weight-bold rounded" href="#"
+                            id="presensiDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-clipboard-check mr-2"></i> Presensi
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="presensiDropdown">
+                            <!-- Level 2: Absensi Saya -->
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="absensiSayaDropdown">
+                                    <i class="fas fa-user-check mr-2"></i> Absensi Saya
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="absensiSayaDropdown">
+                                    <a class="dropdown-item" href="../Absensi/RekamMandiri.html">
+                                        <i class="fas fa-pen mr-2"></i> Rekam Mandiri
+                                    </a>
+                                    <a class="dropdown-item" href="../Absensi/RiwayatAbsensi.html">
+                                        <i class="fas fa-history mr-2"></i> Riwayat Absensi
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Level 2: Rekap Absensi -->
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="rekapDropdown">
+                                    <i class="fas fa-list-alt mr-2"></i> Rekap Absensi
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="rekapDropdown">
+                                    <a class="dropdown-item" href="../Absensi/AbsensiPetugas.html">
+                                        <i class="fas fa-user-tie mr-2"></i> Absensi Petugas
+                                    </a>
+                                    <a class="dropdown-item" href="../Absensi/AbsensiSiswa.html">
+                                        <i class="fas fa-user-graduate mr-2"></i> Absensi Siswa
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Level 2: Pengaturan Absensi -->
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="pengaturanDropdown">
+                                    <i class="fas fa-cog mr-2"></i> Pengaturan Absensi
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="pengaturanDropdown">
+                                    <a class="dropdown-item" href="../Absensi/PengaturanUmum.html">
+                                        <i class="fas fa-sliders-h mr-2"></i> Pengaturan Umum
+                                    </a>
+                                    <a class="dropdown-item" href="../Absensi/PengaturanMapel.html">
+                                        <i class="fas fa-book mr-2"></i> Pengaturan Mapel
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <div class="dropdown-menu">
+
+                        <!-- Absensi Saya -->
+                        <div class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Absensi Saya</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="RekamMandiri.html">Rekam Mandiri</a>
+                                <a class="dropdown-item" href="RiwayatAbsensi.html">Riwayat Absensi</a>
+                            </div>
+                        </div>
+
+                        <!-- Rekap Absensi -->
+                        <div class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Rekap Absensi</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="AbsensiPetugas.html">Absensi Petugas</a>
+                                <a class="dropdown-item" href="AbsensiSiswa.html">Absensi Siswa</a>
+                            </div>
+                        </div>
+
+                        <!-- Pengaturan Absensi -->
+                        <div class="dropdown-submenu">
+                            <a class="dropdown-item dropdown-toggle" href="#">Pengaturan Absensi</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="PengaturanUmum.html">Pengaturan Umum</a>
+                                <a class="dropdown-item" href="PengaturanMapel.html">Pengaturan Mapel</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../Tabungan/Tabungan.html"><i
+                                class="fas fa-piggy-bank mr-1"></i>Tabungan</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-user-plus mr-1"></i>PPDB
+                        </a>
+                        <div class="dropdown-menu shadow-sm border-0 ">
+                            <a class="dropdown-item d-flex align-items-center font-weight-bold "
+                                href="../DataPendaftar/DataPendaftar.html">
+                                <i class="fas fa-users mr-2 text-primary"></i>
+                                Data Pendaftar
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataTagihan/DataTagihan.html">
+                                <i class="fas fa-file-invoice-dollar mr-2 text-primary"></i>
+                                Data Tagihan
+                            </a>
+                            <a class="dropdown-item bg-light d-flex align-items-center"
+                                href="../DataBerkas/Data_Berkas.html">
+                                <i class="fas fa-folder-open mr-2 text-primary"></i>
+                                Data Berkas
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../DataPeriode/DataPeriode.html">
+                                <i class="fas fa-calendar-alt mr-2 text-success"></i>
+                                Data Periode
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center"
+                                href="../DataInformasi/DataInformasi.html">
+                                <i class="fas fa-info-circle mr-2 text-warning"></i>
+                                Data Informasi
+                            </a>
+                            <a class="dropdown-item d-flex align-items-center" href="../AksesPortal/HalamanUtama.html">
+                                <i class="fas fa-user-lock mr-2 text-danger"></i>
+                                Akses Portal
+                            </a>
+                            <div class="dropdown-divider"></div>
+
+                            <div class="dropright">
+                                <a class="dropdown-item dropdown-toggle" href="#" id="submenuDropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-cogs mr-2"></i> Pengaturan PPDB
+                                </a>
+
+                                <div class="dropdown-menu" aria-labelledby="submenuDropdown">
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanUmum.html">Pengaturan
+                                        Umum</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBiaya.html">Pengaturan
+                                        Biaya</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanFormulir.html">Pengaturan
+                                        Formulir</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBidang.html">Pengaturan
+                                        Bidang</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanBerkas.html">Pengaturan
+                                        Berkas</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanNotifikasi.html">Pengaturan
+                                        Notifikasi</a>
+                                    <a class="dropdown-item"
+                                        href="../Pengaturan/PengaturanKomponen/JalurPendaftaran.html">Pengaturan
+                                        Komponen</a>
+                                    <a class="dropdown-item" href="../Pengaturan/PengaturanKontak.html">Pengaturan
+                                        Kontak</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                            <i class="fas fa-cog mr-1"></i>Lainnya
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-tools text-primary mr-2"></i>Pengaturan</a>
+                            <a class="dropdown-item" href="#"><i
+                                    class="fas fa-wrench text-warning mr-2"></i>Peralatan</a>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Presensi</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Absensi</a></li>
+                <li class="breadcrumb-item active">Pengaturan Umum</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold mb-1">Pengaturan Absensi</h2>
+            <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Konfigurasi pengaturan umum absensi
+                petugas dan siswa</p>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-start">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0 rounded shadow-sm">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 text-secondary">
+                            <i class="fas fa-cogs text-primary mr-2"></i>Pengaturan Umum
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 pb-4 py-4 shadow">
+                                <form id="form" action="javascript:void(0)" enctype="multipart/form-data">
+
+                                    <!-- Rekam Mandiri Absensi Petugas -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-user-tie text-primary mr-2"></i>Rekam Mandiri Absensi
+                                            Petugas
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="attendance_operator_record" name="attendance_operator_record"
+                                                checked>
+                                            <label class="custom-control-label"
+                                                for="attendance_operator_record">Aktif</label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Memungkinkan petugas merekam absensi
+                                            secara mandiri
+                                        </small>
+                                    </div>
+
+                                    <!-- Jadwal Hari Masuk Petugas -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-calendar-alt text-success mr-2"></i>Jadwal Hari Masuk
+                                            Petugas
+                                        </label>
+                                        <div class="d-flex flex-wrap">
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Mon"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Senin</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Tue"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Selasa</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Wed"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Rabu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Thu"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Kamis</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Fri"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Jumat</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Sat"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Sabtu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Sun"
+                                                    class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Minggu</span>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Pilih hari kerja untuk petugas
+                                        </small>
+                                    </div>
+
+                                    <!-- Jadwal Hari Masuk Siswa -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-user-graduate text-warning mr-2"></i>Jadwal Hari Masuk
+                                            Siswa
+                                        </label>
+                                        <div class="d-flex flex-wrap">
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Mon"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Senin</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Tue"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Selasa</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Wed"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Rabu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Thu"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Kamis</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Fri"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Jumat</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Sat"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Sabtu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Sun"
+                                                    class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Minggu</span>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Pilih hari belajar untuk siswa
+                                        </small>
+                                    </div>
+
+                                    <!-- Konfirmasi Kata Sandi -->
+                                    <div class="mb-4">
+                                        <label class="form-label font-weight-bold">
+                                            <i class="fas fa-key text-danger mr-2"></i>Konfirmasi Kata Sandi
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="password" name="password" id="password" class="form-control"
+                                            maxlength="16" placeholder="Masukkan kata sandi untuk konfirmasi"
+                                            autocomplete="off" required>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Diperlukan untuk menyimpan perubahan
+                                        </small>
+                                        <p id="password-feedback" class="mt-2 mb-0" style="display: none"></p>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="mt-4">
+                                        <button type="submit" id="btn-submit"
+                                            class="btn btn-outline-primary btn btn-block">
+                                            <i id="btn-svg" class="fas fa-check-circle mr-2"></i>
+                                            <span id="btn-icon"
+                                                class="spinner-border spinner-border-sm mr-2 d-none"></span>
+                                            <span id="btn-text =">Simpan Pengaturan</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Info Panel -->
+                            <div class="col-sm-12 col-md-6 mt-4 mt-md-0">
+                                <div class="card bg-light border-0  shadow">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-lightbulb text-warning mr-2"></i>Informasi Pengaturan
+                                        </h5>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-primary mr-2"
+                                                    style="font-size: 0.5rem;"></i>Rekam Mandiri
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Fitur ini memungkinkan petugas untuk mencatat kehadiran mereka secara
+                                                mandiri melalui sistem tanpa memerlukan admin.
+                                            </p>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-success mr-2"
+                                                    style="font-size: 0.5rem;"></i>Jadwal Hari Masuk
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Tentukan hari-hari aktif untuk petugas dan siswa. Pengaturan ini akan
+                                                mempengaruhi sistem absensi dan laporan kehadiran.
+                                            </p>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-danger mr-2"
+                                                    style="font-size: 0.5rem;"></i>Keamanan
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Untuk keamanan, setiap perubahan pengaturan memerlukan konfirmasi kata
+                                                sandi dari akun Anda.
+                                            </p>
+                                        </div>
+
+                                        <div class="alert alert-info mb-0" role="alert">
+                                            <h6 class="alert-heading mb-2">
+                                                <i class="fas fa-exclamation-circle mr-1"></i>Catatan Penting
+                                            </h6>
+                                            <ul class="mb-0 pl-3">
+                                                <li>Pastikan minimal ada 1 hari yang dipilih</li>
+                                                <li>Perubahan akan berlaku segera setelah disimpan</li>
+                                                <li>Hubungi administrator jika mengalami kendala</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-3 bg-white border-top">
+        <div class="container-fluid">
+            <div class="row text-center align-items-center">
+                <div class="col-12">
+                    <p class="text-muted mb-0">Powered By School Payment App</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Toggle level 1 (Presensi)
+        $('#presensiDropdown').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $dropdownMenu = $(this).next('.dropdown-menu');
+
+            // tutup semua submenu level 2 saat toggle level 1
+            $dropdownMenu.find('.dropdown-menu').hide();
+
+            // toggle level 1
+            $dropdownMenu.toggle();
+        });
+
+        // Toggle submenu level 2
+        $('.dropright > .dropdown-toggle').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $submenu = $(this).next('.dropdown-menu');
+
+            if ($submenu.is(':visible')) {
+                $submenu.hide(); // tutup submenu
+            } else {
+                // tutup submenu lain di level yang sama
+                $(this).closest('.dropdown-menu').find('.dropdown-menu').not($submenu).hide();
+                $submenu.show(); // buka submenu
+            }
+        });
+
+        $(document).on('click', function (e) {
+            if (
+                !$(e.target).closest('.dropdown').length &&
+                !$(e.target).hasClass('dropdown-toggle')
+            ) {
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        // Initialize checkbox states on load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set initial active state for checked checkboxes
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (checkbox) {
+                if (checkbox.parentElement.classList.contains('btn')) {
+                    checkbox.parentElement.classList.add('active', 'btn-primary', 'text-white');
+                    checkbox.parentElement.classList.remove('btn-outline-secondary');
+                }
+            });
+        });
+
+        // Hide alert function
+        function hideAlert() {
+            document.getElementById('alert').style.display = 'none';
+            document.getElementById('alert').classList.remove('show');
+        }
+
+        // Show alert function
+        function showAlert(type, title, content) {
+            const alert = document.getElementById('alert');
+            const alertIcon = document.getElementById('alert-icon');
+            const alertTitle = document.getElementById('alert-title');
+            const alertContent = document.getElementById('alert-content');
+
+            // Reset classes
+            alert.className = 'alert alert-dismissible fade show';
+
+            // Set type-specific classes and icons
+            if (type === 'success') {
+                alert.classList.add('alert-success');
+                alertIcon.className = 'fas fa-check-circle fa-2x text-success';
+            } else if (type === 'warning') {
+                alert.classList.add('alert-warning');
+                alertIcon.className = 'fas fa-exclamation-triangle fa-2x text-warning';
+            } else if (type === 'danger') {
+                alert.classList.add('alert-danger');
+                alertIcon.className = 'fas fa-times-circle fa-2x text-danger';
+            } else {
+                alert.classList.add('alert-info');
+                alertIcon.className = 'fas fa-info-circle fa-2x text-info';
+            }
+
+            alertTitle.textContent = title;
+            alertContent.textContent = content;
+            alert.style.display = 'block';
+        }
+
+        // Form submit handler
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const btnSubmit = document.getElementById('btn-submit');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const btnSvg = document.getElementById('btn-svg');
+
+            // Validate password
+            if (!password) {
+                showAlert('danger', 'Error', 'Kata sandi harus diisi untuk konfirmasi');
+                return;
+            }
+
+            // Show loading state
+            btnSubmit.disabled = true;
+            btnText.textContent = 'Menyimpan...';
+            btnIcon.classList.remove('d-none');
+            btnSvg.classList.add('d-none');
+
+            // Simulate AJAX request
+            setTimeout(function () {
+                // Reset button state
+                btnSubmit.disabled = false;
+                btnText.textContent = 'Simpan Pengaturan';
+                btnIcon.classList.add('d-none');
+                btnSvg.classList.remove('d-none');
+
+                // Show success message
+                showAlert('success', 'Berhasil', 'Pengaturan absensi berhasil disimpan');
+
+                // Clear password field
+                document.getElementById('password').value = '';
+
+                // Scroll to alert
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        });
+    </script>
+
+</body>
+
+</html>
