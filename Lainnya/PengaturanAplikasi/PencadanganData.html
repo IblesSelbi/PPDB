@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengaturan Umum Aplikasi :: School Payment App</title>
+    <title>Pencadangan Data :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -14,9 +14,6 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Croppie CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
 
     <style>
         body {
@@ -414,7 +411,7 @@
             <ol class="breadcrumb bg-white rounded shadow-sm">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Lainnya</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Aplikasi</a></li>
-                <li class="breadcrumb-item active">Pengaturan Umum</li>
+                <li class="breadcrumb-item active">Pencadangan Data</li>
             </ol>
         </nav>
     </div>
@@ -424,9 +421,9 @@
         <div class="row mb-4 ml-2">
             <div class="col">
                 <h2 class="font-weight-bold mb-1">
-                    <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                    <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
                 </h2>
-                <p class="text-muted mb-0">Kelola pengaturan umum aplikasi</p>
+                <p class="text-muted mb-0">Kelola pengaturan pencadangan data aplikasi</p>
             </div>
         </div>
     </div>
@@ -459,8 +456,8 @@
                             <div class="p-4 shadow">
                                 <h6 class="font-weight-bold text-muted mb-3 text-uppercase small">Menu Pengaturan</h6>
                                 <div class="list-group list-group-flush">
-                                    <a href="PengaturanUmum.html"
-                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
+                                    <a href="PengaturanUmumLainnya.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
                                         <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
                                     </a>
 
@@ -500,7 +497,7 @@
                                     </a>
 
                                     <a href="PencadanganData.html"
-                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
                                         <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
                                     </a>
 
@@ -525,34 +522,35 @@
                                             <i class="fas fa-bars mr-2"></i>Menu Pengaturan
                                         </button>
                                         <div class="dropdown-menu w-100 shadow" aria-labelledby="mobileMenuDropdown">
-                                            <a class="dropdown-item active font-weight-bold" href="#">
+                                            <a class="dropdown-item" href="PengaturanUmumLainnya.html">
                                                 <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanTampilan.html">
                                                 <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanSistem.html">
                                                 <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanFitur.html">
                                                 <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanPembayaran.html">
                                                 <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanServerAPI.html">
                                                 <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanNotifikasi.html">
                                                 <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanLisensi.html">
                                                 <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item active font-weight-bold"
+                                                href="PencadanganData.html">
                                                 <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="ModePemeliharaan.html">
                                                 <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
                                             </a>
                                         </div>
@@ -561,7 +559,7 @@
 
                                 <!-- Form Header -->
                                 <div class="border-bottom pb-3 mb-4">
-                                    <h4 class="font-weight-bold mb-1">Form Pengaturan Umum</h4>
+                                    <h4 class="font-weight-bold mb-1">Form Pencadangan Data</h4>
                                     <p class="text-muted mb-0 small">
                                         Isi formulir di bawah ini dengan data yang benar dan lengkap
                                     </p>
@@ -569,171 +567,164 @@
 
                                 <form id="form-settings">
 
-                                    <!-- Nama Profil -->
+                                    <!-- Pencadangan Otomatis -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-tag text-primary mr-1"></i>
-                                            Nama Profil
-                                            <span class="text-danger">*</span>
+                                            <i class="fas fa-toggle-on text-primary mr-1"></i>
+                                            Pencadangan Otomatis
                                         </label>
-                                        <input type="text" name="identity_name" id="identity-name" class="form-control"
-                                            value="School Payment App" autocomplete="off">
-                                        <small id="identity-name-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="backup_auto" id="backup-auto"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="backup-auto">
+                                                Aktif
+                                            </label>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Aktifkan untuk menjalankan pencadangan secara otomatis
+                                        </small>
                                     </div>
 
-                                    <!-- Jenis Profil -->
+                                    <!-- Jadwal Pencadangan -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-building text-primary mr-1"></i>
-                                            Jenis Profil
-                                            <span class="text-danger">*</span>
+                                            <i class="fas fa-calendar-alt text-primary mr-1"></i>
+                                            Jadwal Pencadangan
                                         </label>
-                                        <select name="identity_type" id="identity-type" class="custom-select">
-                                            <option value="Sekolah" selected>Sekolah</option>
-                                            <option value="Pondok Pesantren">Pondok Pesantren</option>
-                                            <option value="Lembaga Kursus">Lembaga Kursus</option>
-                                            <option value="Universitas">Universitas</option>
-                                            <option value="Lainnya">Lainnya</option>
+                                        <select name="backup_schedule" id="backup-schedule" class="custom-select">
+                                            <option value="">Pilih Jadwal</option>
+                                            <option value="dailly" selected>Pencadangan Harian</option>
+                                            <option value="monthly">Pencadangan Bulanan</option>
                                         </select>
-                                        <small id="identity-type-feedback" class="form-text text-danger"
+                                        <small id="backup-schedule-feedback" class="form-text text-danger"
                                             style="display: none;"></small>
                                     </div>
 
-                                    <!-- Logo -->
-                                    <div class="form-group mb-4">
+                                    <!-- Jadwal Pencadangan Harian -->
+                                    <div id="backup-schedule-day" class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-image text-primary mr-1"></i>
-                                            Logo
+                                            <i class="fas fa-calendar-week text-primary mr-1"></i>
+                                            Jadwal Pencadangan Harian
                                         </label>
-                                        <input type="hidden" name="identity_logo" id="identity-logo">
-                                        <div class="mb-2">
-                                            <img src="https://demo.schoolpay.co.id/media/images/logo-school-payment-app-13804.png"
-                                                id="preview-image"
-                                                style="width: 150px; height: 150px; padding: 4px; border: 1px solid #eee"
-                                                draggable="false">
-                                        </div>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <button type="button" id="btn-remove-image"
-                                                    class="btn btn-danger btn-sm" data-remove="true">
-                                                    <i class="fas fa-trash mr-1"></i>Hapus
-                                                </button>
+
+                                        <div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Mon"
+                                                    id="day-mon" class="d-none" checked>
+
+                                                <label for="day-mon"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Senin
+                                                </label>
                                             </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="load-photo"
-                                                    accept=".png, .jpg, .jpeg, .webp">
-                                                <label class="custom-file-label" for="load-photo">Pilih file...</label>
+
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Tue"
+                                                    id="day-tue" class="d-none" checked>
+                                                <label for="day-tue"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Selasa
+                                                </label>
                                             </div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Wed"
+                                                    id="day-wed" class="d-none" checked>
+                                                <label for="day-wed"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Rabu
+                                                </label>
+                                            </div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Thu"
+                                                    id="day-thu" class="d-none" checked>
+                                                <label for="day-thu"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Kamis
+                                                </label>
+                                            </div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Fri"
+                                                    id="day-fri" class="d-none" checked>
+                                                <label for="day-fri"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Jumat
+                                                </label>
+                                            </div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Sat"
+                                                    id="day-sat" class="d-none" checked>
+                                                <label for="day-sat"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Sabtu
+                                                </label>
+                                            </div>
+
+                                            <div class="d-inline-block">
+                                                <input type="checkbox" name="backup_schedule_days[]" value="Sun"
+                                                    id="day-sun" class="d-none" checked>
+                                                <label for="day-sun"
+                                                    class="btn btn-outline-primary rounded-pill px-3 py-1 mr-2 mb-2 active">
+                                                    Minggu
+                                                </label>
+                                            </div>
+
                                         </div>
+
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Pilih hari untuk melakukan pencadangan otomatis
+                                        </small>
                                     </div>
 
-                                    <!-- Alamat -->
+
+                                    <!-- Waktu Pencadangan -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-map-marker-alt text-primary mr-1"></i>
-                                            Alamat
+                                            <i class="fas fa-clock text-primary mr-1"></i>
+                                            Waktu Pencadangan
                                         </label>
-                                        <input type="text" name="identity_address" id="identity-address"
-                                            class="form-control" value="Kota Bandung, Jawa Barat, Indonesia"
-                                            autocomplete="off">
-                                        <small id="identity-address-feedback" class="form-text text-danger"
+                                        <input type="time" name="backup_schedule_time" id="backup-schedule-time"
+                                            class="form-control" value="22:00" autocomplete="off">
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Tentukan waktu untuk menjalankan pencadangan otomatis
+                                        </small>
+                                        <small id="backup-schedule-time-feedback" class="form-text text-danger"
                                             style="display: none;"></small>
                                     </div>
 
-                                    <!-- Nomor Telepon -->
+                                    <!-- Maksimal Pencadangan Tersimpan -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-phone text-primary mr-1"></i>
-                                            Nomor Telepon
+                                            <i class="fas fa-database text-primary mr-1"></i>
+                                            Maksimal Pencadangan Tersimpan
                                         </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fas fa-phone"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_phone" id="identity-phone"
-                                                class="form-control" value="085157991825" autocomplete="off">
-                                        </div>
-                                        <small id="identity-phone-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- Alamat Email -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fas fa-envelope text-primary mr-1"></i>
-                                            Alamat Email
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fas fa-envelope"></i>
-                                                </span>
-                                            </div>
-                                            <input type="email" name="identity_email" id="identity-email"
-                                                class="form-control" value="info@aplikasi-spa.com" autocomplete="off">
-                                        </div>
-                                        <small id="identity-email-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- URL Facebook -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-facebook text-primary mr-1"></i>
-                                            URL Sosial Media Facebook
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-facebook"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_facebook" id="identity-facebook"
-                                                class="form-control" value="" autocomplete="off">
-                                        </div>
-                                        <small id="identity-facebook-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- URL Instagram -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-instagram text-primary mr-1"></i>
-                                            URL Sosial Media Instagram
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-instagram"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_instagram" id="identity-instagram"
-                                                class="form-control" value="https://www.instagram.com/schoolpay.id/"
-                                                autocomplete="off">
-                                        </div>
-                                        <small id="identity-instagram-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- URL YouTube -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-youtube text-primary mr-1"></i>
-                                            URL Saluran YouTube
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-youtube"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_youtube" id="identity-youtube"
-                                                class="form-control" value="" autocomplete="off">
-                                        </div>
-                                        <small id="identity-youtube-feedback" class="form-text text-danger"
+                                        <select name="backup_schedule_keep" id="backup-schedule-keep"
+                                            class="custom-select">
+                                            <option value="">Pilih Jumlah</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3" selected>3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Jumlah file backup yang akan disimpan, file lama akan dihapus otomatis
+                                        </small>
+                                        <small id="backup-schedule-keep-feedback" class="form-text text-danger"
                                             style="display: none;"></small>
                                     </div>
 
@@ -797,23 +788,19 @@
         </div>
     </div>
 
-    <!-- Croppie Modal -->
-    <div id="croppie-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Alert Dialog Modal -->
+    <div id="alert-dialog" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-body text-center pb-0">
-                    <div id="load-image-preview"></div>
+                <div class="modal-body text-center pt-4 pb-2 px-3">
+                    <i class="fas fa-info-circle text-info" style="font-size: 45px;"></i>
+                    <h3 id="alert-dialog-title" class="mt-2"></h3>
+                    <p id="alert-dialog-msg" class="text-muted mb-3"></p>
                 </div>
                 <div class="modal-footer">
-                    <div class="d-grid gap-2 col-4 mx-auto">
-                        <button type="button" id="btn-image-abort" class="btn btn-secondary w-100" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                    </div>
-                    <div class="d-grid gap-2 col-4 mx-auto">
-                        <button type="button" id="btn-image-crop" class="btn btn-primary w-100">
-                            Pilih
+                    <div class="w-100">
+                        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+                            Mengerti
                         </button>
                     </div>
                 </div>
@@ -836,7 +823,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 
     <script>
         // Dropdown menu handler
@@ -855,16 +841,28 @@
             return false;
         });
 
-        $(document).ready(function () {
+        // Dropdown menu handler
+        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
+            if (!$(this).next().hasClass('show')) {
+                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+            }
 
-            // Default image source
-            const defaultSrc = 'https://demo.schoolpay.co.id/media/images/logo.png';
+            var $subMenu = $(this).next('.dropdown-menu');
+            $subMenu.toggleClass('show');
+
+            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function () {
+                $('.dropdown-menu .show').removeClass('show');
+            });
+
+            return false;
+        });
+
+        $(document).ready(function () {
 
             // Configuration
             const myConfig = {
-                url: 'https://demo.schoolpay.co.id/spa/admin/settings/general/save',
+                url: 'https://demo.schoolpay.co.id/spa/admin/settings/backup/save',
                 field: {
-                    'identity-name': 'Nama Profil',
                     'password': 'Konfirmasi kata sandi'
                 },
                 emptyPassword: true,
@@ -946,87 +944,30 @@
                 }
             }
 
-            // Croppie instance
-            let croppie;
-
-            // Load photo handler
-            $('#load-photo').on('change', function (e) {
-                $('#croppie-modal').modal('show');
-
-                let preview = document.getElementById('load-image-preview');
-
-                let boundaryWidth = $('.modal-body').width(),
-                    boundaryHeight = boundaryWidth,
-                    viewportWidth = boundaryWidth - (boundaryWidth / 100 * 25),
-                    viewportHeight = boundaryHeight - (boundaryHeight / 100 * 25);
-
-                croppie = new Croppie(preview, {
-                    viewport: {
-                        width: viewportWidth,
-                        height: viewportHeight
-                    },
-                    boundary: {
-                        height: boundaryHeight
-                    },
-                    enableOrientation: true,
-                });
-
-                getImage(e.target, croppie);
-            });
-
-            // Crop image button
-            $('#btn-image-crop').click(function (e) {
-                croppie.result({
-                    type: 'base64',
-                    size: 'viewport',
-                }).then(function (result) {
-                    $('#identity-logo').val(result);
-                    $('#preview-image').attr('src', result);
-                    $('#btn-remove-image').show();
-                    $('#croppie-modal').modal('hide');
-                    $('#load-image-preview').empty();
-                });
-
-                $('#load-photo').val('');
-                croppie.destroy();
-            });
-
-            // Abort image button
-            $('#btn-image-abort').click(function () {
-                $('#load-photo').val('');
-                croppie.destroy();
-            });
-
-            // Remove image button
-            $('#btn-remove-image').click(function () {
-                if ($('#btn-remove-image').data('remove')) {
-                    $('#btn-remove-image').hide();
-                    $('#identity-logo').val('reset');
-                    $('#preview-image').attr('src', defaultSrc);
-                    $('#btn-remove-image').data('remove', false);
+            // Backup auto toggle handler
+            $('#backup-auto').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#alert-dialog-title').text('Pencadangan Data Otomatis');
+                    $('#alert-dialog-msg').html('Sebelum mengaktifkan fitur pencadangan data aplikasi secara otomatis harap pastikan bahwa telah mengatur <i>Cron Job</i> aplikasi dengan benar.');
+                    $('#alert-dialog').modal('show');
+                    $('#backup-schedule, .backup-schedule-day, #backup-schedule-time, #backup-schedule-keep').prop('disabled', false);
                 } else {
-                    $('#btn-remove-image').hide();
-                    $('#identity-logo').val('');
-                    $('#preview-image').attr('src', defaultSrc);
+                    $('#backup-schedule, .backup-schedule-day, #backup-schedule-time, #backup-schedule-keep').prop('disabled', true);
+                    $('#backup-schedule').val('');
+                    $('#backup-schedule-day').hide();
                 }
             });
 
-            // Get image function
-            function getImage(input, croppieInstance) {
-                if (input.files && input.files[0]) {
-                    const reader = new FileReader();
+            // Backup schedule change handler
+            $('#backup-schedule').on('change', function () {
+                let val = $(this).val();
 
-                    reader.onload = function (e) {
-                        croppieInstance.bind({
-                            url: e.target.result,
-                        }).then(function () {
-                            console.log('Croppie bind complete');
-                        });
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
+                if (val == 'dailly') {
+                    $('#backup-schedule-day').show();
+                } else {
+                    $('#backup-schedule-day').hide();
                 }
-            }
+            });
 
             // Form submit handler
             $('#form-settings').on('submit', function (e) {
@@ -1038,7 +979,7 @@
                 $('.is-invalid').removeClass('is-invalid border-danger');
                 $('.text-danger').hide();
 
-                // Validate all required fields
+                // Validate password
                 $.each(myConfig.field, function (fieldId, fieldName) {
                     errors.push(validateForm(fieldId, fieldName));
                 });
@@ -1054,17 +995,18 @@
 
                 // Prepare form data
                 const formData = {
-                    identity_name: $('#identity-name').val(),
-                    identity_type: $('#identity-type').val(),
-                    identity_logo: $('#identity-logo').val(),
-                    identity_address: $('#identity-address').val(),
-                    identity_phone: $('#identity-phone').val(),
-                    identity_email: $('#identity-email').val(),
-                    identity_facebook: $('#identity-facebook').val(),
-                    identity_instagram: $('#identity-instagram').val(),
-                    identity_youtube: $('#identity-youtube').val(),
+                    backup_auto: $('#backup-auto').is(':checked') ? 1 : 0,
+                    backup_schedule: $('#backup-schedule').val(),
+                    backup_schedule_days: [],
+                    backup_schedule_time: $('#backup-schedule-time').val(),
+                    backup_schedule_keep: $('#backup-schedule-keep').val(),
                     password: $('#password').val()
                 };
+
+                // Get selected days
+                $('.backup-schedule-day:checked').each(function () {
+                    formData.backup_schedule_days.push($(this).val());
+                });
 
                 // Send AJAX request
                 $.ajax({
@@ -1108,14 +1050,32 @@
                 }
             });
 
-            $('#identity-name').on('input', function () {
-                if ($(this).val()) {
-                    $(this).removeClass('is-invalid border-danger');
-                    $('#identity-name-feedback').hide();
-                }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            document.querySelectorAll("label[for]").forEach(function (label) {
+                label.addEventListener("click", function (e) {
+
+                    const id = label.getAttribute("for");
+                    const input = document.getElementById(id);
+
+                    input.checked = !input.checked;
+
+                    if (input.checked) {
+                        label.classList.add("active");
+                        label.classList.remove("btn-outline-primary");
+                        label.classList.add("btn-primary");
+                    } else {
+                        label.classList.remove("active");
+                        label.classList.remove("btn-primary");
+                        label.classList.add("btn-outline-primary");
+                    }
+                });
             });
 
         });
+
     </script>
 
 </body>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengaturan Umum Aplikasi :: School Payment App</title>
+    <title>Pengaturan Pembayaran :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -14,9 +14,6 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Croppie CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
 
     <style>
         body {
@@ -414,7 +411,7 @@
             <ol class="breadcrumb bg-white rounded shadow-sm">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Lainnya</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Aplikasi</a></li>
-                <li class="breadcrumb-item active">Pengaturan Umum</li>
+                <li class="breadcrumb-item active">Pengaturan Pembayaran</li>
             </ol>
         </nav>
     </div>
@@ -424,9 +421,9 @@
         <div class="row mb-4 ml-2">
             <div class="col">
                 <h2 class="font-weight-bold mb-1">
-                    <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                    <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
                 </h2>
-                <p class="text-muted mb-0">Kelola pengaturan umum aplikasi</p>
+                <p class="text-muted mb-0">Kelola pengaturan pembayaran aplikasi</p>
             </div>
         </div>
     </div>
@@ -459,8 +456,8 @@
                             <div class="p-4 shadow">
                                 <h6 class="font-weight-bold text-muted mb-3 text-uppercase small">Menu Pengaturan</h6>
                                 <div class="list-group list-group-flush">
-                                    <a href="PengaturanUmum.html"
-                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
+                                    <a href="PengaturanUmumLainnya.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
                                         <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
                                     </a>
 
@@ -471,7 +468,7 @@
 
                                     <a href="PengaturanSistem.html"
                                         class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
-                                        <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                        <i class="fas fa-server text-danger mr-2"></i>Pengaturan Sistem
                                     </a>
 
                                     <a href="PengaturanFitur.html"
@@ -480,7 +477,7 @@
                                     </a>
 
                                     <a href="PengaturanPembayaran.html"
-                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
                                         <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
                                     </a>
 
@@ -519,40 +516,41 @@
                                 <!-- Mobile Menu Dropdown (Only visible on mobile) -->
                                 <div class="d-md-none mb-4">
                                     <div class="dropdown">
-                                        <button class="btn btn-primary btn-block shadow-sm dropdown-toggle"
+                                        <button class="btn btn-success btn-block shadow-sm dropdown-toggle"
                                             type="button" id="mobileMenuDropdown" data-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-bars mr-2"></i>Menu Pengaturan
                                         </button>
                                         <div class="dropdown-menu w-100 shadow" aria-labelledby="mobileMenuDropdown">
-                                            <a class="dropdown-item active font-weight-bold" href="#">
+                                            <a class="dropdown-item" href="PengaturanUmumLainnya.html">
                                                 <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanTampilan.html">
                                                 <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
                                             </a>
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                            <a class="dropdown-item" href="PengaturanSistem.html">
+                                                <i class="fas fa-server text-danger mr-2"></i>Pengaturan Sistem
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanFitur.html">
                                                 <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item active font-weight-bold"
+                                                href="PengaturanPembayaran.html">
                                                 <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanServerAPI.html">
                                                 <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanNotifikasi.html">
                                                 <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PengaturanLisensi.html">
                                                 <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="PencadanganData.html">
                                                 <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="ModePemeliharaan.html">
                                                 <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
                                             </a>
                                         </div>
@@ -561,7 +559,7 @@
 
                                 <!-- Form Header -->
                                 <div class="border-bottom pb-3 mb-4">
-                                    <h4 class="font-weight-bold mb-1">Form Pengaturan Umum</h4>
+                                    <h4 class="font-weight-bold mb-1">Form Pengaturan Pembayaran</h4>
                                     <p class="text-muted mb-0 small">
                                         Isi formulir di bawah ini dengan data yang benar dan lengkap
                                     </p>
@@ -569,176 +567,361 @@
 
                                 <form id="form-settings">
 
-                                    <!-- Nama Profil -->
+                                    <!-- Mode Pembayaran Mandiri -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-tag text-primary mr-1"></i>
-                                            Nama Profil
-                                            <span class="text-danger">*</span>
+                                            <i class="fas fa-user-check text-success mr-1"></i>
+                                            Mode Pembayaran Mandiri
                                         </label>
-                                        <input type="text" name="identity_name" id="identity-name" class="form-control"
-                                            value="School Payment App" autocomplete="off">
-                                        <small id="identity-name-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="allow-self-payment"
+                                                name="allow_self_payment" checked>
+                                            <label class="custom-control-label" for="allow-self-payment">
+                                                Aktif
+                                            </label>
+                                        </div>
                                     </div>
 
-                                    <!-- Jenis Profil -->
+                                    <!-- Konfirmasi Pembayaran Otomatis -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-building text-primary mr-1"></i>
-                                            Jenis Profil
-                                            <span class="text-danger">*</span>
+                                            <i class="fas fa-check-circle text-success mr-1"></i>
+                                            Konfirmasi Pembayaran Otomatis
                                         </label>
-                                        <select name="identity_type" id="identity-type" class="custom-select">
-                                            <option value="Sekolah" selected>Sekolah</option>
-                                            <option value="Pondok Pesantren">Pondok Pesantren</option>
-                                            <option value="Lembaga Kursus">Lembaga Kursus</option>
-                                            <option value="Universitas">Universitas</option>
-                                            <option value="Lainnya">Lainnya</option>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="allow-payment-gateway" name="allow_payment_gateway" checked>
+                                            <label class="custom-control-label" for="allow-payment-gateway">
+                                                Aktif
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Layanan Pembayaran -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-credit-card text-primary mr-1"></i>
+                                            Layanan Pembayaran
+                                        </label>
+                                        <select name="payment_gateway_provider" id="payment-gateway-provider"
+                                            class="custom-select input-payment">
+                                            <option value="">-- Pilih Layanan --</option>
+                                            <optgroup label="Gerbang Pembayaran">
+                                                <option value="midtrans" selected>Midtrans</option>
+                                                <option value="tripay">Tripay</option>
+                                                <option value="flip-business">Flip for Business</option>
+                                            </optgroup>
+                                            <optgroup label="Layanan Lainnya">
+                                                <option value="moota">Moota.co</option>
+                                            </optgroup>
                                         </select>
-                                        <small id="identity-type-feedback" class="form-text text-danger"
+                                        <small id="payment-gateway-provider-feedback" class="form-text text-danger"
                                             style="display: none;"></small>
                                     </div>
 
-                                    <!-- Logo -->
-                                    <div class="form-group mb-4">
+                                    <!-- Mode Layanan Pembayaran -->
+                                    <div class="form-group mb-4" id="select-payment-gateway-environment"
+                                        style="display: none;">
                                         <label class="font-weight-bold">
-                                            <i class="fas fa-image text-primary mr-1"></i>
-                                            Logo
+                                            <i class="fas fa-cogs text-warning mr-1"></i>
+                                            Mode Layanan Pembayaran
                                         </label>
-                                        <input type="hidden" name="identity_logo" id="identity-logo">
-                                        <div class="mb-2">
-                                            <img src="https://demo.schoolpay.co.id/media/images/logo-school-payment-app-13804.png"
-                                                id="preview-image"
-                                                style="width: 150px; height: 150px; padding: 4px; border: 1px solid #eee"
-                                                draggable="false">
-                                        </div>
-                                        <div class="input-group mb-2">
-                                            <div class="input-group-prepend">
-                                                <button type="button" id="btn-remove-image"
-                                                    class="btn btn-danger btn-sm" data-remove="true">
-                                                    <i class="fas fa-trash mr-1"></i>Hapus
-                                                </button>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="load-photo"
-                                                    accept=".png, .jpg, .jpeg, .webp">
-                                                <label class="custom-file-label" for="load-photo">Pilih file...</label>
-                                            </div>
-                                        </div>
+                                        <select name="payment_gateway_environment" id="payment-gateway-environment"
+                                            class="custom-select input-payment">
+                                            <option value="production">Live (Production)</option>
+                                            <option value="sandbox" selected>Development (Sandbox)</option>
+                                        </select>
                                     </div>
 
-                                    <!-- Alamat -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fas fa-map-marker-alt text-primary mr-1"></i>
-                                            Alamat
-                                        </label>
-                                        <input type="text" name="identity_address" id="identity-address"
-                                            class="form-control" value="Kota Bandung, Jawa Barat, Indonesia"
-                                            autocomplete="off">
-                                        <small id="identity-address-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- Nomor Telepon -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fas fa-phone text-primary mr-1"></i>
-                                            Nomor Telepon
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fas fa-phone"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_phone" id="identity-phone"
-                                                class="form-control" value="085157991825" autocomplete="off">
-                                        </div>
-                                        <small id="identity-phone-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- Alamat Email -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fas fa-envelope text-primary mr-1"></i>
-                                            Alamat Email
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fas fa-envelope"></i>
-                                                </span>
-                                            </div>
-                                            <input type="email" name="identity_email" id="identity-email"
-                                                class="form-control" value="info@aplikasi-spa.com" autocomplete="off">
-                                        </div>
-                                        <small id="identity-email-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- URL Facebook -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-facebook text-primary mr-1"></i>
-                                            URL Sosial Media Facebook
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-facebook"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_facebook" id="identity-facebook"
-                                                class="form-control" value="" autocomplete="off">
-                                        </div>
-                                        <small id="identity-facebook-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
-                                    </div>
-
-                                    <!-- URL Instagram -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-instagram text-primary mr-1"></i>
-                                            URL Sosial Media Instagram
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-instagram"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_instagram" id="identity-instagram"
-                                                class="form-control" value="https://www.instagram.com/schoolpay.id/"
+                                    <!-- MIDTRANS FIELDS -->
+                                    <div class="midtrans" style="display: none;">
+                                        <!-- Merchant ID -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-id-card text-info mr-1"></i>
+                                                Merchant ID
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="midtrans_merchant_id" id="midtrans-merchant-id"
+                                                class="form-control input-payment" value="G577219437"
                                                 autocomplete="off">
+                                            <small id="midtrans-merchant-id-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
                                         </div>
-                                        <small id="identity-instagram-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
+
+                                        <!-- Client Key -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-key text-warning mr-1"></i>
+                                                Client Key
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="midtrans_client_key" id="midtrans-client-key"
+                                                class="form-control input-payment"
+                                                value="SB-Mid-client-nTB5GjwsVtDIcCrB" autocomplete="off">
+                                            <small id="midtrans-client-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Server Key -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-server text-danger mr-1"></i>
+                                                Server Key
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="midtrans_server_key" id="midtrans-server-key"
+                                                class="form-control input-payment"
+                                                value="SB-Mid-server-gYGkfVvFHAUtL0d4x1N-j33v" autocomplete="off">
+                                            <small id="midtrans-server-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
                                     </div>
 
-                                    <!-- URL YouTube -->
-                                    <div class="form-group mb-4">
-                                        <label class="font-weight-bold">
-                                            <i class="fab fa-youtube text-primary mr-1"></i>
-                                            URL Saluran YouTube
-                                        </label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text bg-light">
-                                                    <i class="fab fa-youtube"></i>
-                                                </span>
-                                            </div>
-                                            <input type="text" name="identity_youtube" id="identity-youtube"
-                                                class="form-control" value="" autocomplete="off">
+                                    <!-- TRIPAY FIELDS -->
+                                    <div class="tripay" style="display: none;">
+                                        <!-- Merchant Code -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-barcode text-info mr-1"></i>
+                                                Merchant Code
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="tripay_merchant_code" id="tripay-merchant-code"
+                                                class="form-control input-payment" value="" autocomplete="off">
+                                            <small id="tripay-merchant-code-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
                                         </div>
-                                        <small id="identity-youtube-feedback" class="form-text text-danger"
-                                            style="display: none;"></small>
+
+                                        <!-- API Key -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-key text-warning mr-1"></i>
+                                                API Key
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="tripay_api_key" id="tripay-api-key"
+                                                class="form-control input-payment" value="" autocomplete="off">
+                                            <small id="tripay-api-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Private Key -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-lock text-danger mr-1"></i>
+                                                Private Key
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="tripay_private_key" id="tripay-private-key"
+                                                class="form-control input-payment" value="" autocomplete="off">
+                                            <small id="tripay-private-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Batas Waktu Pembayaran -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-clock text-primary mr-1"></i>
+                                                Batas Waktu Pembayaran
+                                            </label>
+                                            <select name="tripay_expired_time" id="tripay-expired-time"
+                                                class="custom-select input-payment">
+                                                <option value="">-- Pilih Waktu --</option>
+                                                <option value="0.25">15 Menit</option>
+                                                <option value="0.5">30 Menit</option>
+                                                <option value="1">1 Jam</option>
+                                                <option value="2">2 Jam</option>
+                                                <option value="3">3 Jam</option>
+                                                <option value="12">12 Jam</option>
+                                                <option value="24">24 Jam</option>
+                                                <option value="48">48 Jam</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Metode Pembayaran -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-list text-success mr-1"></i>
+                                                Metode Pembayaran
+                                            </label>
+                                            <input type="text" name="tripay_allow_channels" id="tripay-allow-channels"
+                                                class="form-control input-payment" value="" autocomplete="off">
+                                            <small class="form-text text-muted">
+                                                <i class="fas fa-info-circle mr-1"></i>
+                                                Masukan daftar channel pembayaran yang diizinkan lalu pisahkan dengan
+                                                tanda koma (contoh: BNIVA, BRIVA, BSIVA, ALFAMART, INDOMARET) atau bisa
+                                                kosongkan untuk membiarkan semua channel pembayaran diizinkan.
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <!-- FLIP BUSINESS FIELDS -->
+                                    <div class="flip-business" style="display: none;">
+                                        <!-- API Secret Key -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-key text-warning mr-1"></i>
+                                                API Secret Key
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="flip_api_key" id="flip-api-key"
+                                                class="form-control input-payment"
+                                                value="JDJ5JDEzJEo3a2x4dmQyakdjZW1YbXpxREp0RWVlOEpDaVdWbkkwRWpxRnFZY2hCM0FkQm11ZUNINEh5"
+                                                autocomplete="off">
+                                            <small id="flip-api-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Validation Token -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-shield-alt text-success mr-1"></i>
+                                                Validation Token
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="flip_validation_key" id="flip-validation-key"
+                                                class="form-control input-payment"
+                                                value="$2y$13$l9ip.BzQFX8xwgC0TtLD1OPWEiSJr2rwC/tXfEfnXIHjBRdzawPpa"
+                                                autocomplete="off">
+                                            <small id="flip-validation-key-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Aksi Payment Link -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-link text-primary mr-1"></i>
+                                                Aksi Payment Link
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select name="flip_payment_link_step" id="flip-payment-link-step"
+                                                class="custom-select input-payment">
+                                                <option value="">-- Pilih Aksi --</option>
+                                                <option value="step-1">Input Data Pembayar</option>
+                                                <option value="step-2" selected>Pilih Metode Pembayaran</option>
+                                                <option value="step-3">Konfirmasi Pembayaran</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Metode Pembayaran Dipilih -->
+                                        <div class="form-group mb-4" id="select-flip-payment-channel"
+                                            style="display: none;">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-credit-card text-info mr-1"></i>
+                                                Metode Pembayaran Dipilih
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <select name="flip_payment_channel" id="flip-payment-channel"
+                                                class="custom-select input-payment">
+                                                <option value="">-- Pilih Metode --</option>
+                                                <optgroup label="Virtual Account">
+                                                    <option value="va-bni">BNI</option>
+                                                    <option value="va-bri">BRI</option>
+                                                    <option value="va-bca">BCA</option>
+                                                    <option value="va-mandiri">Mandiri</option>
+                                                    <option value="va-cimb">CIMB Niaga</option>
+                                                    <option value="va-tabungan_pensiunan_nasional">BTPN/Jenius/BTPN
+                                                        Wow!</option>
+                                                    <option value="va-dbs">DBS Indonesia</option>
+                                                    <option value="va-permata">Permata</option>
+                                                    <option value="va-muamalat">Muamalat</option>
+                                                    <option value="va-danamon">Danamon</option>
+                                                    <option value="va-bsm">BSI (Bank Syariah Indonesia)</option>
+                                                </optgroup>
+                                                <optgroup label="E-Wallet">
+                                                    <option value="wl-ovo">OVO</option>
+                                                    <option value="wl-qris">QRIS</option>
+                                                    <option value="wl-shopeepay_app">ShopeePay</option>
+                                                    <option value="wl-linkaja">LinkAja</option>
+                                                    <option value="wl-linkaja_app">LinkAja App</option>
+                                                    <option value="wl-dana">Dana</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+
+                                        <!-- Batas Waktu Pembayaran -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-clock text-primary mr-1"></i>
+                                                Batas Waktu Pembayaran
+                                            </label>
+                                            <select name="flip_expired_time" id="flip-expired-time"
+                                                class="custom-select input-payment">
+                                                <option value="">-- Pilih Waktu --</option>
+                                                <option value="0.25" selected>15 Menit</option>
+                                                <option value="0.5">30 Menit</option>
+                                                <option value="1">1 Jam</option>
+                                                <option value="2">2 Jam</option>
+                                                <option value="3">3 Jam</option>
+                                                <option value="12">12 Jam</option>
+                                                <option value="24">24 Jam</option>
+                                                <option value="48">48 Jam</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- MOOTA FIELDS -->
+                                    <div class="moota" style="display: none;">
+                                        <!-- Secret Token -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-key text-warning mr-1"></i>
+                                                Secret Token
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="moota_secret_token" id="moota-secret-token"
+                                                class="form-control input-payment" value="SmjtOsN0" autocomplete="off">
+                                            <small id="moota-secret-token-feedback" class="form-text text-danger"
+                                                style="display: none;"></small>
+                                        </div>
+
+                                        <!-- Terima Transaksi Mutasi Debit -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-exchange-alt text-danger mr-1"></i>
+                                                Terima Transaksi Mutasi Debit
+                                            </label>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input input-payment"
+                                                    id="moota-mutation-debit" name="moota_mutation_debit">
+                                                <label class="custom-control-label" for="moota-mutation-debit">
+                                                    Aktif
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Proses Mutasi Debit ke Arus Kas Pengeluaran -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-money-bill-wave text-warning mr-1"></i>
+                                                Proses Mutasi Debit ke Arus Kas Pengeluaran
+                                            </label>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input input-payment"
+                                                    id="moota-cashflow-db" name="moota_mutation_debit_cashflow">
+                                                <label class="custom-control-label" for="moota-cashflow-db">
+                                                    Aktif
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Whitelist IP -->
+                                        <div class="form-group mb-4">
+                                            <label class="font-weight-bold">
+                                                <i class="fas fa-network-wired text-info mr-1"></i>
+                                                Whitelist IP
+                                            </label>
+                                            <input type="text" name="moota_whitelist_ip" id="moota-whitelist-ip"
+                                                class="form-control input-payment" value="" autocomplete="off">
+                                            <small class="form-text text-muted">
+                                                <i class="fas fa-info-circle mr-1"></i>
+                                                Pisahkan alamat IP dengan tanda koma
+                                            </small>
+                                        </div>
                                     </div>
 
                                     <hr class="my-4">
-
                                     <!-- Konfirmasi Kata Sandi -->
                                     <div class="form-group mb-4">
                                         <label class="font-weight-bold">
@@ -786,37 +969,12 @@
                                             </small>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- Croppie Modal -->
-    <div id="croppie-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body text-center pb-0">
-                    <div id="load-image-preview"></div>
-                </div>
-                <div class="modal-footer">
-                    <div class="d-grid gap-2 col-4 mx-auto">
-                        <button type="button" id="btn-image-abort" class="btn btn-secondary w-100" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                    </div>
-                    <div class="d-grid gap-2 col-4 mx-auto">
-                        <button type="button" id="btn-image-crop" class="btn btn-primary w-100">
-                            Pilih
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -836,7 +994,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 
     <script>
         // Dropdown menu handler
@@ -855,269 +1012,208 @@
             return false;
         });
 
-        $(document).ready(function () {
+        (function ($) {
+            "use strict";
 
-            // Default image source
-            const defaultSrc = 'https://demo.schoolpay.co.id/media/images/logo.png';
+            // ---------- Alert ----------
+            function showAlert(type, title, message) {
+                var $box = $("#alert-box");
+                var $icon = $("#alert-icon");
+                var $title = $("#alert-title");
+                var $content = $("#alert-content");
 
-            // Configuration
-            const myConfig = {
-                url: 'https://demo.schoolpay.co.id/spa/admin/settings/general/save',
-                field: {
-                    'identity-name': 'Nama Profil',
-                    'password': 'Konfirmasi kata sandi'
-                },
-                emptyPassword: true,
-                loadingText: ['Simpan', 'Menyimpan']
-            };
+                $box.removeClass("alert-success alert-info alert-warning alert-danger show fade");
+                if (type === "success") $box.addClass("alert-success");
+                if (type === "info") $box.addClass("alert-info");
+                if (type === "warning") $box.addClass("alert-warning");
+                if (type === "danger") $box.addClass("alert-danger");
 
-            // Show alert function
-            function showAlert(message, type = 'success') {
-                const alertBox = $('#alert-box');
-                const alertIcon = $('#alert-icon');
-                const alertTitle = $('#alert-title');
-                const alertContent = $('#alert-content');
+                var iconClass = "fas fa-info-circle";
+                if (type === "success") iconClass = "fas fa-check-circle";
+                if (type === "warning") iconClass = "fas fa-exclamation-triangle";
+                if (type === "danger") iconClass = "fas fa-times-circle";
+                $icon.attr("class", iconClass + " fa-2x mr-3");
 
-                alertBox.removeClass('alert-success alert-warning alert-danger alert-info');
+                $title.text(title || "");
+                $content.html(message || "");
 
-                if (type === 'success') {
-                    alertBox.addClass('alert-success show');
-                    alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success mr-3');
-                    alertTitle.text('Berhasil!');
-                } else if (type === 'warning') {
-                    alertBox.addClass('alert-warning show');
-                    alertIcon.removeClass().addClass('fas fa-exclamation-triangle fa-2x text-warning mr-3');
-                    alertTitle.text('Perhatian!');
-                } else if (type === 'danger') {
-                    alertBox.addClass('alert-danger show');
-                    alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger mr-3');
-                    alertTitle.text('Error!');
-                }
+                $box.show();
+                setTimeout(function () { $box.addClass("show fade"); }, 10);
 
-                alertContent.text(message);
-                alertBox.show();
-
-                // Scroll to top
-                $('html, body').animate({ scrollTop: 0 }, 300);
-
-                // Auto hide after 5 seconds
-                setTimeout(function () {
-                    alertBox.removeClass('show').fadeOut();
-                }, 5000);
+                clearTimeout($box.data("autohideTimer"));
+                var t = setTimeout(function () { hideAlert(); }, 8000);
+                $box.data("autohideTimer", t);
             }
 
-            // Hide alert function
-            window.hideAlert = function () {
-                $('#alert-box').removeClass('show').fadeOut();
-            };
+            function hideAlert() {
+                var $box = $("#alert-box");
+                $box.removeClass("show");
+                setTimeout(function () { $box.hide(); }, 200);
+            }
 
-            // Validate form function
-            function validateForm(fieldId, fieldName) {
-                const field = $('#' + fieldId);
+            // ---------- UI provider ----------
+            function updatePaymentGatewayUI() {
+                var provider = $("#payment-gateway-provider").val();
 
-                if (!field.val() || field.val() === '') {
-                    field.addClass('is-invalid border-danger');
-                    $('#' + fieldId + '-feedback').show().text(fieldName + ' wajib diisi');
-                    return false;
-                } else {
-                    field.removeClass('is-invalid border-danger');
-                    $('#' + fieldId + '-feedback').hide();
-                    return true;
+                $("#select-payment-gateway-environment").hide();
+                $(".midtrans, .tripay, .flip-business, .moota").hide();
+                $(".form-text.text-danger").hide();
+
+                if (provider === "midtrans") {
+                    $("#select-payment-gateway-environment").show();
+                    $(".midtrans").show();
+                } else if (provider === "tripay") {
+                    $("#select-payment-gateway-environment").show();
+                    $(".tripay").show();
+                } else if (provider === "flip-business") {
+                    $("#select-payment-gateway-environment").show();
+                    $(".flip-business").show();
+                    toggleFlipChannelSelect();
+                } else if (provider === "moota") {
+                    $(".moota").show();
                 }
             }
 
-            // Toggle button loading state
-            function toggleButtonLoading(isLoading) {
-                const btn = $('#btn-submit');
-                const icon = $('#btn-icon');
-                const svg = $('#btn-svg');
-                const text = $('#btn-text');
-
-                if (isLoading) {
-                    btn.prop('disabled', true);
-                    icon.removeClass('d-none');
-                    svg.addClass('d-none');
-                    text.text(myConfig.loadingText[1].toUpperCase() + '...');
+            // ---------- Flip step ----------
+            function toggleFlipChannelSelect() {
+                var step = $("#flip-payment-link-step").val();
+                if (step === "step-2") {
+                    $("#select-flip-payment-channel").show();
                 } else {
-                    btn.prop('disabled', false);
-                    icon.addClass('d-none');
-                    svg.removeClass('d-none');
-                    text.text(myConfig.loadingText[0].toUpperCase() + ' PENGATURAN');
+                    $("#select-flip-payment-channel").hide();
                 }
             }
 
-            // Croppie instance
-            let croppie;
+            // ---------- Validation ----------
+            function validateForm() {
+                var errors = [];
 
-            // Load photo handler
-            $('#load-photo').on('change', function (e) {
-                $('#croppie-modal').modal('show');
+                var password = $("#password").val() || "";
+                if (!password.trim()) {
+                    $("#password-feedback").text("Kata sandi wajib diisi.").show();
+                    errors.push("password");
+                } else $("#password-feedback").hide();
 
-                let preview = document.getElementById('load-image-preview');
+                var provider = $("#payment-gateway-provider").val();
+                if (!provider) {
+                    $("#payment-gateway-provider-feedback").text("Pilih provider pembayaran.").show();
+                    errors.push("provider");
+                } else $("#payment-gateway-provider-feedback").hide();
 
-                let boundaryWidth = $('.modal-body').width(),
-                    boundaryHeight = boundaryWidth,
-                    viewportWidth = boundaryWidth - (boundaryWidth / 100 * 25),
-                    viewportHeight = boundaryHeight - (boundaryHeight / 100 * 25);
-
-                croppie = new Croppie(preview, {
-                    viewport: {
-                        width: viewportWidth,
-                        height: viewportHeight
-                    },
-                    boundary: {
-                        height: boundaryHeight
-                    },
-                    enableOrientation: true,
-                });
-
-                getImage(e.target, croppie);
-            });
-
-            // Crop image button
-            $('#btn-image-crop').click(function (e) {
-                croppie.result({
-                    type: 'base64',
-                    size: 'viewport',
-                }).then(function (result) {
-                    $('#identity-logo').val(result);
-                    $('#preview-image').attr('src', result);
-                    $('#btn-remove-image').show();
-                    $('#croppie-modal').modal('hide');
-                    $('#load-image-preview').empty();
-                });
-
-                $('#load-photo').val('');
-                croppie.destroy();
-            });
-
-            // Abort image button
-            $('#btn-image-abort').click(function () {
-                $('#load-photo').val('');
-                croppie.destroy();
-            });
-
-            // Remove image button
-            $('#btn-remove-image').click(function () {
-                if ($('#btn-remove-image').data('remove')) {
-                    $('#btn-remove-image').hide();
-                    $('#identity-logo').val('reset');
-                    $('#preview-image').attr('src', defaultSrc);
-                    $('#btn-remove-image').data('remove', false);
-                } else {
-                    $('#btn-remove-image').hide();
-                    $('#identity-logo').val('');
-                    $('#preview-image').attr('src', defaultSrc);
+                if (provider === "midtrans") {
+                    if (!$("#midtrans-merchant-id").val().trim()) {
+                        $("#midtrans-merchant-id-feedback").show();
+                        errors.push("midtrans-merchant-id");
+                    }
+                    if (!$("#midtrans-client-key").val().trim()) {
+                        $("#midtrans-client-key-feedback").show();
+                        errors.push("midtrans-client-key");
+                    }
+                    if (!$("#midtrans-server-key").val().trim()) {
+                        $("#midtrans-server-key-feedback").show();
+                        errors.push("midtrans-server-key");
+                    }
                 }
-            });
 
-            // Get image function
-            function getImage(input, croppieInstance) {
-                if (input.files && input.files[0]) {
-                    const reader = new FileReader();
+                if (provider === "tripay") {
+                    if (!$("#tripay-merchant-code").val().trim()) {
+                        $("#tripay-merchant-code-feedback").show();
+                        errors.push("tripay-merchant-code");
+                    }
+                    if (!$("#tripay-api-key").val().trim()) {
+                        $("#tripay-api-key-feedback").show();
+                        errors.push("tripay-api-key");
+                    }
+                    if (!$("#tripay-private-key").val().trim()) {
+                        $("#tripay-private-key-feedback").show();
+                        errors.push("tripay-private-key");
+                    }
+                }
 
-                    reader.onload = function (e) {
-                        croppieInstance.bind({
-                            url: e.target.result,
-                        }).then(function () {
-                            console.log('Croppie bind complete');
-                        });
+                if (provider === "flip-business") {
+                    if (!$("#flip-api-key").val().trim()) {
+                        $("#flip-api-key-feedback").show();
+                        errors.push("flip-api-key");
+                    }
+                    if (!$("#flip-validation-key").val().trim()) {
+                        $("#flip-validation-key-feedback").show();
+                        errors.push("flip-validation-key");
                     }
 
-                    reader.readAsDataURL(input.files[0]);
+                    if ($("#flip-payment-link-step").val() === "step-2" && !$("#flip-payment-channel").val()) {
+                        if (!$("#flip-channel-feedback").length) {
+                            $("#select-flip-payment-channel .form-group-label")
+                                .after('<small id="flip-channel-feedback" class="form-text text-danger mt-1">Pilih channel pembayaran.</small>');
+                        }
+                        $("#flip-channel-feedback").show();
+                        errors.push("flip-payment-channel");
+                    } else {
+                        $("#flip-channel-feedback").hide();
+                    }
                 }
+
+                if (provider === "moota") {
+                    if (!$("#moota-secret-token").val().trim()) {
+                        $("#moota-secret-token-feedback").show();
+                        errors.push("moota-secret-token");
+                    }
+                }
+
+                return { ok: errors.length === 0, errors: errors };
             }
 
-            // Form submit handler
-            $('#form-settings').on('submit', function (e) {
+            // ---------- Submit ----------
+            function handleSubmit(e) {
                 e.preventDefault();
 
-                let errors = [];
+                var $btn = $("#btn-submit");
+                var $btnIcon = $("#btn-icon");
+                var $btnSvg = $("#btn-svg");
 
-                // Reset all feedback
-                $('.is-invalid').removeClass('is-invalid border-danger');
-                $('.text-danger').hide();
+                if ($btn.data("submitting")) return;
+                $btn.data("submitting", true);
 
-                // Validate all required fields
-                $.each(myConfig.field, function (fieldId, fieldName) {
-                    errors.push(validateForm(fieldId, fieldName));
-                });
+                $btn.prop("disabled", true);
+                $btnSvg.addClass("d-none");
+                $btnIcon.removeClass("d-none");
 
-                // Check if there are errors
-                if ($.inArray(false, errors) !== -1) {
-                    showAlert('Mohon lengkapi form yang diperlukan', 'warning');
-                    return false;
+                var v = validateForm();
+                if (!v.ok) {
+                    showAlert("danger", "Validasi Gagal", "Periksa kembali input yang masih kosong / salah.");
+                    $btn.data("submitting", false);
+                    $btn.prop("disabled", false);
+                    $btnIcon.addClass("d-none");
+                    $btnSvg.removeClass("d-none");
+                    return;
                 }
 
-                // Show loading state
-                toggleButtonLoading(true);
+                showAlert("success", "Berhasil", "Pengaturan pembayaran berhasil disimpan.");
 
-                // Prepare form data
-                const formData = {
-                    identity_name: $('#identity-name').val(),
-                    identity_type: $('#identity-type').val(),
-                    identity_logo: $('#identity-logo').val(),
-                    identity_address: $('#identity-address').val(),
-                    identity_phone: $('#identity-phone').val(),
-                    identity_email: $('#identity-email').val(),
-                    identity_facebook: $('#identity-facebook').val(),
-                    identity_instagram: $('#identity-instagram').val(),
-                    identity_youtube: $('#identity-youtube').val(),
-                    password: $('#password').val()
-                };
+                setTimeout(function () {
+                    $btn.data("submitting", false);
+                    $btn.prop("disabled", false);
+                    $btnIcon.addClass("d-none");
+                    $btnSvg.removeClass("d-none");
+                    $("#password").val("");
+                }, 500);
+            }
 
-                // Send AJAX request
-                $.ajax({
-                    url: myConfig.url,
-                    type: 'POST',
-                    data: formData,
-                    dataType: 'json',
-                    success: function (response) {
-                        toggleButtonLoading(false);
+            // ---------- Init ----------
+            $(function () {
+                updatePaymentGatewayUI();
+                toggleFlipChannelSelect();
 
-                        if (response.status === 'success') {
-                            showAlert(response.message || 'Pengaturan berhasil disimpan', 'success');
-                            $('#password').val(''); // Clear password field
-                        } else {
-                            showAlert(response.message || 'Terjadi kesalahan saat menyimpan', 'danger');
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        toggleButtonLoading(false);
+                $("#payment-gateway-provider").on("change", updatePaymentGatewayUI);
+                $("#flip-payment-link-step").on("change", toggleFlipChannelSelect);
 
-                        let errorMessage = 'Terjadi kesalahan pada server';
+                $("#alert-box .close").on("click", hideAlert);
 
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                        } else if (xhr.status === 401) {
-                            errorMessage = 'Kata sandi salah atau sesi telah berakhir';
-                        } else if (xhr.status === 422) {
-                            errorMessage = 'Data yang dimasukkan tidak valid';
-                        }
+                $("#form-settings").on("submit", handleSubmit);
 
-                        showAlert(errorMessage, 'danger');
-                    }
+                $(".input-payment, #password").on("input", function () {
+                    $(this).closest(".form-group").find(".form-text.text-danger").hide();
                 });
             });
 
-            // Clear validation on input
-            $('#password').on('input', function () {
-                if ($(this).val()) {
-                    $(this).removeClass('is-invalid border-danger');
-                    $('#password-feedback').hide();
-                }
-            });
-
-            $('#identity-name').on('input', function () {
-                if ($(this).val()) {
-                    $(this).removeClass('is-invalid border-danger');
-                    $('#identity-name-feedback').hide();
-                }
-            });
-
-        });
+        })(jQuery);
     </script>
-
-</body>
-
-</html>
