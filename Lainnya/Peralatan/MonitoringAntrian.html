@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title> Pengingat Tagihan :: School Payment App</title>
+    <title>Monitoring Antrean :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -402,8 +402,6 @@
             </div>
         </div>
     </nav>
-    
-
     <!-- MAIN CONTENT -->
     <div class="container-fluid py-4">
 
@@ -412,21 +410,15 @@
             <ol class="breadcrumb bg-white px-3 mb-2">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Lainnya</a></li>
-                <li class="breadcrumb-item active"> Pengingat Tagihan</li>
+                <li class="breadcrumb-item active">Monitoring Antrean</li>
             </ol>
         </nav>
 
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="font-weight-bold mb-1">Daftar Pengingat Tagihan</h2>
-                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Kelola dan pantau Pengingat Tagihan
-                </p>
-            </div>
-            <div>
-                <a href="TambahPengingatTagihan.html" class="btn btn-primary px-3 mr-2">
-                    <i class="fas fa-plus mr-2"></i>Tambah
-                </a>
+                <h2 class="font-weight-bold mb-1">Daftar Antrean</h2>
+                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Kelola dan pantau antrean sistem</p>
             </div>
         </div>
 
@@ -438,7 +430,7 @@
                     <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
                 </div>
                 <div class="flex-grow-1">
-                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Pengingat Tagihan</h6>
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Notifikasi</h6>
                     <div id="alert-content" class="mb-0"></div>
                 </div>
             </div>
@@ -466,7 +458,7 @@
                     <form id="filter-form" action="javascript:void(0)">
                         <div class="row">
 
-                            <!-- Kata Kunci (pakai struktur baru, tapi design lama) -->
+                            <!-- Kata Kunci -->
                             <div class="col-lg-3 col-md-6 mb-3">
                                 <label class="font-weight-bold small mb-2">Kata Kunci</label>
                                 <div class="input-group">
@@ -480,9 +472,9 @@
                                 </div>
                             </div>
 
-                            <!-- Status (struktur baru, style lama) -->
+                            <!-- Status Antrean -->
                             <div class="col-lg-2 col-md-6 mb-3">
-                                <label class="font-weight-bold small mb-2">Status</label>
+                                <label class="font-weight-bold small mb-2">Status Antrean</label>
                                 <select name="status" id="status" class="form-control">
                                     <option value="">Semua Status</option>
                                     <option value="1">Aktif</option>
@@ -490,7 +482,18 @@
                                 </select>
                             </div>
 
-                            <!-- Tombol (struktur baru, style tetap lama) -->
+                            <!-- Status Proses -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Status Proses</label>
+                                <select name="process-status" id="process-status" class="form-control">
+                                    <option value="">Semua Status</option>
+                                    <option value="Sukses">Sukses</option>
+                                    <option value="Gagal">Gagal</option>
+                                    <option value="Belum Diproses">Belum Diproses</option>
+                                </select>
+                            </div>
+
+                            <!-- Tombol -->
                             <div class="col-12 mt-2">
                                 <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
                                     <i class="fas fa-search mr-2"></i> Terapkan Filter
@@ -507,13 +510,12 @@
             </div>
         </div>
 
-
         <!-- Data Table Card -->
         <div class="card shadow-sm border">
             <div class="card-header bg-white py-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0 font-weight-bold">
-                        <i class="fas fa-list text-primary mr-2"></i>Daftar Pengingat Tagihan
+                        <i class="fas fa-list text-primary mr-2"></i>Daftar Antrean
                     </h5>
 
                     <!-- Bulk Actions -->
@@ -523,6 +525,12 @@
                             <i class="fas fa-tasks mr-1"></i>Aksi Masal
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#" id="change-status">
+                                <i class="fas fa-exchange-alt mr-2 text-info"></i>Ubah Status
+                            </a>
+                            <a class="dropdown-item" href="#" id="queue-process">
+                                <i class="fas fa-play-circle mr-2 text-success"></i>Proses Antrean
+                            </a>
                             <a class="dropdown-item text-danger" href="#" id="bulk-delete">
                                 <i class="fas fa-trash-alt mr-2"></i>Hapus
                             </a>
@@ -543,52 +551,50 @@
                                     </div>
                                 </th>
                                 <th width="50" class="align-middle text-center">#</th>
-                                <th class="align-middle">Nama Unit</th>
-                                <th class="align-middle">Nama Pengingat</th>
-                                <th class="align-middle">Aksi Dilakukan</th>
-                                <th class="align-middle">Ulangi Pengingat</th>
-                                <th class="align-middle">Channel Notifikasi</th>
-                                <th class="align-middle">Jumlah Dijalankan</th>
-                                <th class="align-middle text-center">Status</th>
+                                <th class="align-middle">Waktu Antrean</th>
+                                <th class="align-middle">Nama Antrean</th>
+                                <th class="align-middle text-center">Status Antrean</th>
+                                <th class="align-middle text-center">Status Proses</th>
+                                <th class="align-middle">Waktu Proses</th>
+                                <th class="align-middle">Diproses Oleh</th>
                                 <th width="70" class="align-middle text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ROW 1 -->
+                            <!-- Sample Data Row 1 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check7"
-                                            data-id="7">
-                                        <label class="custom-control-label" for="check7"></label>
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
+                                            data-id="1">
+                                        <label class="custom-control-label" for="check1"></label>
                                     </div>
                                 </td>
-
                                 <td class="align-middle text-center">1</td>
-                                <td class="align-middle"><span
-                                        class="badge badge-primary badge-pill px-3 py-2">SMP</span>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>15/01/2025
+                                    <span class="mx-2">|</span>
+                                    <i class="far fa-clock mr-1"></i>09:30 WIB
                                 </td>
-                                <td class="align-middle">Penagihan SPP Unit MTS</td>
-                                <td class="align-middle">Kirim Pemberitahuan</td>
-                                <td class="align-middle">Setiap Bulan</td>
-                                <td class="align-middle">
-                                    <span class="badge px-3 py-2 mr-1"
-                                        style="background:#e9f7efe0; color:#0b7a34; border-radius:25px; font-weight:600; font-size:13px;">
-                                        <i class="fab fa-whatsapp mr-1"></i> WhatsApp
-                                    </span>
-                                    <span class="badge px-3 py-2"
-                                        style="background:#fdecec; color:#c62828; border-radius:25px; font-weight:600; font-size:13px;">
-                                        <i class="fas fa-envelope mr-1"></i> Email
-                                    </span>
-                                </td>
-                                <td class="align-middle">1</td>
+                                <td class="align-middle">Kirim Notifikasi Pembayaran</td>
                                 <td class="align-middle text-center">
                                     <span class="badge px-3 py-2"
                                         style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
                                         <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
                                 </td>
-
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-double mr-1"></i>Sukses
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>15/01/2025
+                                    <span class="mx-2">|</span>
+                                    <i class="far fa-clock mr-1"></i>09:30 WIB
+                                </td>
+                                <td class="align-middle">Admin Operator</td>
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm btn-light dropdown-toggle" type="button"
@@ -596,13 +602,16 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info" href="DetailPengingatTagihan.html">
+                                            <a class="dropdown-item text-info" href="DetailMonitoringAntrian.html">
                                                 <i class="fas fa-eye mr-2"></i>Detail
                                             </a>
-                                            <a class="dropdown-item text-warning" href="EditPengingatTagihan.html">
-                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            <a class="dropdown-item text-info change-status" href="#" data-id="1">
+                                                <i class="fas fa-exchange-alt mr-2"></i>Ubah Status
                                             </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="7">
+                                            <a class="dropdown-item text-success queue-process" href="#" data-id="1">
+                                                <i class="fas fa-play-circle mr-2"></i>Proses
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="1">
                                                 <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
@@ -610,36 +619,36 @@
                                 </td>
                             </tr>
 
-                            <!-- ROW 2 -->
+                            <!-- Sample Data Row 2 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check8"
-                                            data-id="8">
-                                        <label class="custom-control-label" for="check8"></label>
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
+                                            data-id="2">
+                                        <label class="custom-control-label" for="check2"></label>
                                     </div>
                                 </td>
-
                                 <td class="align-middle text-center">2</td>
-                                <td class="align-middle"><span
-                                        class="badge badge-primary badge-pill px-3 py-2">SMP</span>
-                                <td class="align-middle">Penagihan MA TES</td>
-                                <td class="align-middle">Kirim Pemberitahuan</td>
-                                <td class="align-middle">Setiap Bulan</td>
-                                <td class="align-middle">
-                                    <span class="badge px-3 py-2 mr-1"
-                                        style="background:#e9f7efe0; color:#0b7a34; border-radius:25px; font-weight:600; font-size:13px;">
-                                        <i class="fab fa-whatsapp mr-1"></i> WhatsApp
-                                    </span>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>15/01/2025
+                                    <span class="mx-2">|</span>
+                                    <i class="far fa-clock mr-1"></i>09:30 WIB
                                 </td>
-                                <td class="align-middle">1</td>
+                                <td class="align-middle">Generate Laporan Bulanan</td>
                                 <td class="align-middle text-center">
                                     <span class="badge px-3 py-2"
                                         style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
                                         <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
                                 </td>
-
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#fff3e0; color:#e65100; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-clock mr-1"></i>Belum Diproses
+                                    </span>
+                                </td>
+                                <td class="align-middle">-</td>
+                                <td class="align-middle">-</td>
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm btn-light dropdown-toggle" type="button"
@@ -647,13 +656,16 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info" href="DetailPengingatTagihan.html">
+                                            <a class="dropdown-item text-info" href="DetailMonitoringAntrian.html">
                                                 <i class="fas fa-eye mr-2"></i>Detail
                                             </a>
-                                            <a class="dropdown-item text-warning" href="EditPengingatTagihan.html">
-                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            <a class="dropdown-item text-info change-status" href="#" data-id="2">
+                                                <i class="fas fa-exchange-alt mr-2"></i>Ubah Status
                                             </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="7">
+                                            <a class="dropdown-item text-success queue-process" href="#" data-id="2">
+                                                <i class="fas fa-play-circle mr-2"></i>Proses
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="2">
                                                 <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
@@ -661,35 +673,40 @@
                                 </td>
                             </tr>
 
-                            <!-- ROW 3 -->
+                            <!-- Sample Data Row 3 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check6"
-                                            data-id="6">
-                                        <label class="custom-control-label" for="check6"></label>
+                                        <input type="checkbox" class="custom-control-input row-check" id="check3"
+                                            data-id="3">
+                                        <label class="custom-control-label" for="check3"></label>
                                     </div>
                                 </td>
-
                                 <td class="align-middle text-center">3</td>
-                                <td class="align-middle"><span class="badge badge-info badge-pill px-3 py-2">SMA</span>
-                                <td class="align-middle">Penagihan SPP Unit MA</td>
-                                <td class="align-middle">Kirim Pemberitahuan</td>
-                                <td class="align-middle">Setiap Bulan</td>
-                                <td class="align-middle">
-                                    <span class="badge px-3 py-2"
-                                        style="background:#fdecec; color:#c62828; border-radius:25px; font-weight:600; font-size:13px;">
-                                        <i class="fas fa-envelope mr-1"></i> Email
-                                    </span>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>15/01/2025
+                                    <span class="mx-2">|</span>
+                                    <i class="far fa-clock mr-1"></i>09:30 WIB
                                 </td>
-                                <td class="align-middle">1</td>
+                                <td class="align-middle">Backup Database Otomatis</td>
                                 <td class="align-middle text-center">
                                     <span class="badge px-3 py-2"
-                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
-                                        <i class="fas fa-check-circle mr-1"></i>Aktif
+                                        style="background:#ffebee; color:#c62828; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-times-circle mr-1"></i>Non-Aktif
                                     </span>
                                 </td>
-
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#ffebee; color:#c62828; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-exclamation-triangle mr-1"></i>Gagal
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>15/01/2025
+                                    <span class="mx-2">|</span>
+                                    <i class="far fa-clock mr-1"></i>09:30 WIB
+                                </td>
+                                <td class="align-middle">System</td>
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm btn-light dropdown-toggle" type="button"
@@ -697,13 +714,16 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                             <a class="dropdown-item text-info" href="DetailPengingatTagihan.html">
+                                            <a class="dropdown-item text-info" href="DetailMonitoringAntrian.html">
                                                 <i class="fas fa-eye mr-2"></i>Detail
                                             </a>
-                                            <a class="dropdown-item text-warning" href="EditPengingatTagihan.html">
-                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            <a class="dropdown-item text-info change-status" href="#" data-id="3">
+                                                <i class="fas fa-exchange-alt mr-2"></i>Ubah Status
                                             </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="7">
+                                            <a class="dropdown-item text-success queue-process" href="#" data-id="3">
+                                                <i class="fas fa-play-circle mr-2"></i>Proses
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="3">
                                                 <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
@@ -712,6 +732,85 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Change Status -->
+        <div class="modal fade" id="status-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-exchange-alt text-info mr-2"></i>Ubah Status Antrean
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="font-weight-bold">Status Antrean <span class="text-danger">*</span></label>
+                            <select id="queue-status" class="form-control">
+                                <option value="">Pilih Status</option>
+                                <option value="Aktif">Aktif</option>
+                                <option value="Non-Aktif">Non-Aktif</option>
+                            </select>
+                            <small id="queue-status-feedback" class="text-danger" style="display: none;">Status antrean
+                                diperlukan</small>
+                        </div>
+                        <div class="form-group mb-0">
+                            <label class="font-weight-bold">Status Proses</label>
+                            <select id="process-status-modal" class="form-control">
+                                <option value="">Pilih Status</option>
+                                <option value="Sukses">Sukses</option>
+                                <option value="Gagal">Gagal</option>
+                                <option value="Belum Diproses">Belum Diproses</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn-status-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
+                        <button type="button" id="btn-status-submit" class="btn btn-primary">
+                            <i id="btn-status-svg" class="fas fa-check-circle mr-1"></i>
+                            <span id="btn-status-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            Konfirmasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Process Queue -->
+        <div class="modal fade" id="process-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-play-circle text-success mr-2"></i>Proses Daftar Antrean
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <i class="fas fa-question-circle fa-3x text-info mb-3"></i>
+                        <p class="mb-2">Apakah yakin akan memproses antrean yang dipilih?</p>
+                        <p class="text-muted mb-0">Pastikan status antrean yang dipilih adalah aktif dan status proses
+                            belum diproses.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn-process-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
+                        <button type="button" id="btn-process-submit" class="btn btn-success">
+                            <i id="btn-process-svg" class="fas fa-check-circle mr-1"></i>
+                            <span id="btn-process-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            Konfirmasi
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -740,26 +839,6 @@
                                 style="display: none;"></span>
                             Konfirmasi
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Zoom Image -->
-        <div class="modal fade" id="zoom-dialog" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Preview Gambar</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center p-0">
-                        <img id="image-zoom-preview" class="img-fluid" style="max-height: 80vh;">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -817,29 +896,64 @@
                 pageLength: 10,
                 autoWidth: false,
                 ordering: true,
+                order: [[2, 'desc']], // Sort by Waktu Antrean descending
                 columnDefs: [
-                    { targets: "no-sort", orderable: false }
-                ]
+                    { targets: [0, 8], orderable: false } // Checkbox dan Aksi tidak bisa di-sort
+                ],
+                language: {
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    zeroRecords: "Data tidak ditemukan",
+                    info: "Menampilkan halaman _PAGE_ dari _PAGES_",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    search: "Cari:",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    }
+                }
             });
-
-
 
             // ============================================================
             // SHOW / HIDE ALERT
             // ============================================================
             function showAlert(type, title, content) {
                 const alert = $("#alert");
-                let color = "text-primary";
+                let iconClass = "fas fa-info-circle fa-2x";
+                let colorClass = "text-primary";
 
-                if (type === "success") color = "text-success";
-                if (type === "danger") color = "text-danger";
-                if (type === "warning") color = "text-warning";
+                if (type === "success") {
+                    iconClass = "fas fa-check-circle fa-2x";
+                    colorClass = "text-success";
+                    alert.removeClass("alert-warning alert-danger alert-info")
+                        .addClass("alert-success");
+                } else if (type === "danger") {
+                    iconClass = "fas fa-times-circle fa-2x";
+                    colorClass = "text-danger";
+                    alert.removeClass("alert-warning alert-success alert-info")
+                        .addClass("alert-danger");
+                } else if (type === "warning") {
+                    iconClass = "fas fa-exclamation-triangle fa-2x";
+                    colorClass = "text-warning";
+                    alert.removeClass("alert-success alert-danger alert-info")
+                        .addClass("alert-warning");
+                } else {
+                    alert.removeClass("alert-warning alert-danger alert-success")
+                        .addClass("alert-info");
+                }
 
-                $("#alert-icon").attr("class", `fas fa-info-circle fa-2x ${color}`);
+                $("#alert-icon").attr("class", `${iconClass} ${colorClass}`);
                 $("#alert-title").text(title);
                 $("#alert-content").text(content);
 
                 alert.show().addClass("show");
+
+                // Auto hide after 5 seconds
+                setTimeout(() => {
+                    hideAlert();
+                }, 5000);
             }
 
             window.hideAlert = function () {
@@ -851,149 +965,424 @@
             // FILTER DATA
             // ============================================================
             $("#btn-apply-filter").on("click", function () {
+                applyFilter();
+            });
+
+            // Enter key pada input keyword
+            $("#keyword").on("keypress", function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    applyFilter();
+                }
+            });
+
+            function applyFilter() {
                 let keyword = $("#keyword").val().toLowerCase();
                 let status = $("#status").val();
+                let processStatus = $("#process-status").val();
 
                 table.rows().every(function () {
                     const row = this.node();
-                    const title = $(row).find("td:nth-child(3)").text().toLowerCase();
-                    const stat = $(row).find("td:nth-child(6)").text().trim();
+                    const namaAntrean = $(row).find("td:nth-child(4)").text().toLowerCase();
+                    const statusAntrean = $(row).find("td:nth-child(5)").text().trim();
+                    const statusProses = $(row).find("td:nth-child(6)").text().trim();
 
                     let show = true;
 
-                    if (keyword && !title.includes(keyword)) show = false;
-                    if (status !== "" && !stat.includes(status === "1" ? "Aktif" : "Non")) show = false;
+                    // Filter by keyword
+                    if (keyword && !namaAntrean.includes(keyword)) {
+                        show = false;
+                    }
+
+                    // Filter by status antrean
+                    if (status !== "") {
+                        if (status === "1" && !statusAntrean.includes("Aktif")) {
+                            show = false;
+                        } else if (status === "0" && !statusAntrean.includes("Non-Aktif")) {
+                            show = false;
+                        }
+                    }
+
+                    // Filter by status proses
+                    if (processStatus !== "" && !statusProses.includes(processStatus)) {
+                        show = false;
+                    }
 
                     $(row).toggle(show);
                 });
-            });
+
+                showAlert("info", "Filter Diterapkan", "Filter data berhasil diterapkan.");
+            }
 
             // RESET FILTER
             $("#btn-reset-filter").on("click", function () {
-                $("#keyword").val("");
-                $("#status").val("");
+                $("#filter-form")[0].reset();
                 table.rows().every(function () {
                     $(this.node()).show();
                 });
+                showAlert("info", "Filter Direset", "Semua filter telah direset.");
+            });
+
+            // Toggle filter icon
+            $("#filterCollapse").on("show.bs.collapse", function () {
+                $("#filterIcon").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }).on("hide.bs.collapse", function () {
+                $("#filterIcon").removeClass("fa-chevron-up").addClass("fa-chevron-down");
             });
 
             // ============================================================
-            // CHECK ALL
+            // CHECK ALL / UNCHECK ALL
             // ============================================================
             $("#checks").on("change", function () {
-                $(".row-check").prop("checked", this.checked);
-                toggleBulkDelete();
+                const isChecked = this.checked;
+                $(".row-check:visible").prop("checked", isChecked);
+                toggleBulkActions();
             });
 
-            $(".row-check").on("change", function () {
-                toggleBulkDelete();
+            $(document).on("change", ".row-check", function () {
+                const totalVisible = $(".row-check:visible").length;
+                const totalChecked = $(".row-check:visible:checked").length;
+                $("#checks").prop("checked", totalVisible === totalChecked && totalVisible > 0);
+                toggleBulkActions();
             });
 
-            function toggleBulkDelete() {
-                const checked = $(".row-check:checked").length;
-                if (checked > 0) $(".bulk-delete").show();
-                else $(".bulk-delete").hide();
+            function toggleBulkActions() {
+                const checkedCount = $(".row-check:checked").length;
+                if (checkedCount > 0) {
+                    $(".bulk-delete").show();
+                } else {
+                    $(".bulk-delete").hide();
+                }
             }
 
             // ============================================================
-            // IMAGE ZOOM
+            // CHANGE STATUS - SINGLE
             // ============================================================
-            $(".img-zoom").on("click", function () {
-                const src = $(this).attr("src");
-                $("#image-zoom-preview").attr("src", src);
-                $("#zoom-dialog").modal("show");
+            let selectedIds = [];
+
+            $(document).on("click", ".change-status", function (e) {
+                e.preventDefault();
+                selectedIds = [$(this).data("id")];
+                openStatusDialog();
+            });
+
+            // CHANGE STATUS - BULK
+            $("#change-status").on("click", function (e) {
+                e.preventDefault();
+                if ($(".row-check:checked").length > 0) {
+                    selectedIds = [];
+                    $(".row-check:checked").each(function () {
+                        selectedIds.push($(this).data("id"));
+                    });
+                    openStatusDialog();
+                } else {
+                    showAlert("warning", "Peringatan", "Silakan pilih minimal satu data terlebih dahulu.");
+                }
+            });
+
+            function openStatusDialog() {
+                $("#queue-status").val("");
+                $("#process-status-modal").val("");
+                $("#queue-status-feedback").hide();
+                $("#queue-status").removeClass("is-invalid");
+                $("#status-dialog").modal("show");
+            }
+
+            // SUBMIT CHANGE STATUS
+            $("#btn-status-submit").on("click", function () {
+                const queueStatus = $("#queue-status").val();
+                const processStatus = $("#process-status-modal").val();
+
+                // Validation
+                if (!queueStatus) {
+                    $("#queue-status").addClass("is-invalid");
+                    $("#queue-status-feedback").show();
+                    return;
+                } else {
+                    $("#queue-status").removeClass("is-invalid");
+                    $("#queue-status-feedback").hide();
+                }
+
+                // Show loading
+                $("#btn-status-icon").show();
+                $("#btn-status-svg").hide();
+                $(this).prop("disabled", true);
+
+                // Simulate API call
+                setTimeout(() => {
+                    // Update UI (in real app, this would be done after successful API response)
+                    selectedIds.forEach(id => {
+                        const row = $(`.row-check[data-id="${id}"]`).closest("tr");
+
+                        // Update status antrean
+                        const statusCell = row.find("td:nth-child(5)");
+                        if (queueStatus === "Aktif") {
+                            statusCell.html(`
+                            <span class="badge px-3 py-2" style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                <i class="fas fa-check-circle mr-1"></i>Aktif
+                            </span>
+                        `);
+                        } else {
+                            statusCell.html(`
+                            <span class="badge px-3 py-2" style="background:#ffebee; color:#c62828; border-radius:25px; font-weight:550; font-size:13px;">
+                                <i class="fas fa-times-circle mr-1"></i>Non-Aktif
+                            </span>
+                        `);
+                        }
+
+                        // Update status proses if selected
+                        if (processStatus) {
+                            const processCell = row.find("td:nth-child(6)");
+                            if (processStatus === "Sukses") {
+                                processCell.html(`
+                                <span class="badge px-3 py-2" style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                    <i class="fas fa-check-double mr-1"></i>Sukses
+                                </span>
+                            `);
+                            } else if (processStatus === "Gagal") {
+                                processCell.html(`
+                                <span class="badge px-3 py-2" style="background:#ffebee; color:#c62828; border-radius:25px; font-weight:550; font-size:13px;">
+                                    <i class="fas fa-exclamation-triangle mr-1"></i>Gagal
+                                </span>
+                            `);
+                            } else {
+                                processCell.html(`
+                                <span class="badge px-3 py-2" style="background:#fff3e0; color:#e65100; border-radius:25px; font-weight:550; font-size:13px;">
+                                    <i class="fas fa-clock mr-1"></i>Belum Diproses
+                                </span>
+                            `);
+                            }
+                        }
+                    });
+
+                    // Reset button state
+                    $("#btn-status-icon").hide();
+                    $("#btn-status-svg").show();
+                    $("#btn-status-submit").prop("disabled", false);
+
+                    // Close modal
+                    $("#status-dialog").modal("hide");
+
+                    // Uncheck all
+                    $("#checks").prop("checked", false);
+                    $(".row-check").prop("checked", false);
+                    toggleBulkActions();
+
+                    // Show success message
+                    const count = selectedIds.length;
+                    showAlert("success", "Berhasil Diperbarui",
+                        `Status ${count} antrean berhasil diperbarui.`);
+
+                    selectedIds = [];
+                }, 1000);
+            });
+
+            $("#btn-status-abort").on("click", function () {
+                selectedIds = [];
             });
 
             // ============================================================
-            // DELETE SINGLE
+            // PROCESS QUEUE - SINGLE
             // ============================================================
-            let selectedDeleteId = null;
+            $(document).on("click", ".queue-process", function (e) {
+                e.preventDefault();
+                selectedIds = [$(this).data("id")];
+                $("#process-dialog").modal("show");
+            });
 
-            $(".delete").on("click", function () {
-                selectedDeleteId = $(this).data("id");
+            // PROCESS QUEUE - BULK
+            $("#queue-process").on("click", function (e) {
+                e.preventDefault();
+                if ($(".row-check:checked").length > 0) {
+                    selectedIds = [];
+                    $(".row-check:checked").each(function () {
+                        selectedIds.push($(this).data("id"));
+                    });
+                    $("#process-dialog").modal("show");
+                } else {
+                    showAlert("warning", "Peringatan", "Silakan pilih minimal satu data terlebih dahulu.");
+                }
+            });
+
+            // SUBMIT PROCESS QUEUE
+            $("#btn-process-submit").on("click", function () {
+                // Show loading
+                $("#btn-process-icon").show();
+                $("#btn-process-svg").hide();
+                $(this).prop("disabled", true);
+
+                // Simulate API call
+                setTimeout(() => {
+                    // Update UI
+                    selectedIds.forEach(id => {
+                        const row = $(`.row-check[data-id="${id}"]`).closest("tr");
+
+                        // Update status proses to Sukses
+                        const processCell = row.find("td:nth-child(6)");
+                        processCell.html(`
+                        <span class="badge px-3 py-2" style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                            <i class="fas fa-check-double mr-1"></i>Sukses
+                        </span>
+                    `);
+
+                        // Update waktu proses
+                        const now = new Date();
+                        const dateStr = now.getFullYear() + '-' +
+                            String(now.getMonth() + 1).padStart(2, '0') + '-' +
+                            String(now.getDate()).padStart(2, '0') + ' ' +
+                            String(now.getHours()).padStart(2, '0') + ':' +
+                            String(now.getMinutes()).padStart(2, '0') + ':' +
+                            String(now.getSeconds()).padStart(2, '0');
+                        row.find("td:nth-child(7)").text(dateStr);
+
+                        // Update diproses oleh
+                        row.find("td:nth-child(8)").text("Admin Operator");
+                    });
+
+                    // Reset button state
+                    $("#btn-process-icon").hide();
+                    $("#btn-process-svg").show();
+                    $("#btn-process-submit").prop("disabled", false);
+
+                    // Close modal
+                    $("#process-dialog").modal("hide");
+
+                    // Uncheck all
+                    $("#checks").prop("checked", false);
+                    $(".row-check").prop("checked", false);
+                    toggleBulkActions();
+
+                    // Show success message
+                    const count = selectedIds.length;
+                    showAlert("success", "Berhasil Diproses",
+                        `${count} antrean berhasil diproses.`);
+
+                    selectedIds = [];
+                }, 1500);
+            });
+
+            $("#btn-process-abort").on("click", function () {
+                selectedIds = [];
+            });
+
+            // ============================================================
+            // DELETE - SINGLE
+            // ============================================================
+            let deleteIds = [];
+
+            $(document).on("click", ".delete", function (e) {
+                e.preventDefault();
+                deleteIds = [$(this).data("id")];
                 $("#delete-dialog").modal("show");
             });
 
+            // DELETE - BULK
+            $("#bulk-delete").on("click", function (e) {
+                e.preventDefault();
+                if ($(".row-check:checked").length > 0) {
+                    deleteIds = [];
+                    $(".row-check:checked").each(function () {
+                        deleteIds.push($(this).data("id"));
+                    });
+                    $("#delete-dialog").modal("show");
+                } else {
+                    showAlert("warning", "Peringatan", "Silakan pilih minimal satu data terlebih dahulu.");
+                }
+            });
+
+            // SUBMIT DELETE
             $("#btn-delete-submit").on("click", function () {
+                // Show loading
                 $("#btn-delete-icon").show();
                 $("#btn-delete-svg").hide();
                 $(this).prop("disabled", true);
 
+                // Simulate API call
                 setTimeout(() => {
-                    $("#delete-dialog").modal("hide");
+                    // Remove rows from table
+                    deleteIds.forEach(id => {
+                        const row = $(`.row-check[data-id="${id}"]`).closest("tr");
+                        table.row(row).remove().draw();
+                    });
 
-                    showAlert("success", "Berhasil Dihapus", "Data berhasil dihapus.");
-
+                    // Reset button state
                     $("#btn-delete-icon").hide();
                     $("#btn-delete-svg").show();
                     $("#btn-delete-submit").prop("disabled", false);
 
-                }, 1200);
-            });
+                    // Close modal
+                    $("#delete-dialog").modal("hide");
 
-            // ============================================================
-            // BULK DELETE
-            // ============================================================
-            $("#bulk-delete").on("click", function () {
-                $("#delete-dialog").modal("show");
-            });
+                    // Uncheck all
+                    $("#checks").prop("checked", false);
+                    toggleBulkActions();
 
-            // ============================================================
-            // SUBMIT ADD/EDIT FORM
-            // ============================================================
-            $("#form").on("submit", function (e) {
-                e.preventDefault();
+                    // Show success message
+                    const count = deleteIds.length;
+                    showAlert("success", "Berhasil Dihapus",
+                        `${count} data antrean berhasil dihapus.`);
 
-                let title = $("#info-title").val().trim();
-                let content = $("#info-content").val().trim();
-
-                // VALIDASI
-                let valid = true;
-
-                if (title.length < 3) {
-                    $("#info-title").addClass("is-invalid");
-                    $("#info-title-feedback").text("Judul minimal 3 karakter.");
-                    valid = false;
-                } else {
-                    $("#info-title").removeClass("is-invalid");
-                }
-
-                if (content.length < 5) {
-                    $("#info-content").addClass("is-invalid");
-                    $("#info-content-feedback").text("Konten minimal 5 karakter.");
-                    valid = false;
-                } else {
-                    $("#info-content").removeClass("is-invalid");
-                }
-
-                if (!valid) return;
-
-                // LOADING TOGGLE
-                $("#btn-submit").prop("disabled", true);
-                $("#btn-submit-icon").show();
-                $("#btn-submit-svg").hide();
-
-                setTimeout(() => {
-                    $("#btn-submit").prop("disabled", false);
-                    $("#btn-submit-icon").hide();
-                    $("#btn-submit-svg").show();
-
-                    $("#add-dialog").modal("hide");
-
-                    showAlert(
-                        "success",
-                        "Berhasil Disimpan",
-                        $("#form-type").val() === "add"
-                            ? "Pengingat Tagihan baru berhasil ditambahkan."
-                            : "Perubahan data berhasil disimpan."
-                    );
+                    deleteIds = [];
                 }, 1000);
             });
 
+            $("#btn-delete-abort").on("click", function () {
+                deleteIds = [];
+            });
+
+            // ============================================================
+            // MODAL EVENT HANDLERS
+            // ============================================================
+            // Reset form when modal is closed
+            $("#status-dialog").on("hidden.bs.modal", function () {
+                $("#queue-status").val("");
+                $("#process-status-modal").val("");
+                $("#queue-status-feedback").hide();
+                $("#queue-status").removeClass("is-invalid");
+            });
+
+            $("#process-dialog, #delete-dialog").on("hidden.bs.modal", function () {
+                selectedIds = [];
+                deleteIds = [];
+            });
+
+            // ============================================================
+            // UTILITY FUNCTIONS
+            // ============================================================
+            // Format date for display
+            function formatDate(date) {
+                const d = new Date(date);
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const day = String(d.getDate()).padStart(2, '0');
+                const hours = String(d.getHours()).padStart(2, '0');
+                const minutes = String(d.getMinutes()).padStart(2, '0');
+                const seconds = String(d.getSeconds()).padStart(2, '0');
+                return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+            }
+
+            // ============================================================
+            // KEYBOARD SHORTCUTS
+            // ============================================================
+            $(document).on("keydown", function (e) {
+                // ESC to close modals
+                if (e.key === "Escape") {
+                    $(".modal").modal("hide");
+                }
+            });
+
+            // ============================================================
+            // INITIAL SETUP
+            // ============================================================
+            // Hide bulk actions on load
+            toggleBulkActions();
+
+            // Show welcome message
+            console.log("✓ Monitoring Antrean loaded successfully");
+            console.log("✓ DataTable initialized");
+            console.log("✓ Event handlers attached");
         });
     </script>
-
-
 
 </body>
 
