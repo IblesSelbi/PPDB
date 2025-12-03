@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Daftar Kelas Dihapus :: School Payment App</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-theme@0.1.0-beta.10/dist/select2-bootstrap.min.css" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap" style="color: #3d5ce6;"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">PPDB </span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Solusi Sistem PPDB
+                        Sekolah</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="topbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <!-- Nav items kosong sesuai permintaan -->
+                </ul>
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown">
+                            <div class="bg-white rounded-circle d-flex align-items-center justify-content-center"
+                                style="width: 35px; height: 35px;">
+                                <i class="fas fa-user" style="color: #3d5ce6;"></i>
+                            </div>
+                            <span class="ml-2 d-none d-lg-inline text-white">Admin Operator</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <div class="px-3 py-2 border-bottom">
+                                <small class="text-muted d-block">Logged in as</small>
+                                <strong>Admin Operator</strong>
+                                <small class="text-muted d-block">NIP 20250601001</small>
+                            </div>
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle text-primary mr-2"></i>Profil
+                                Akun</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-key text-warning mr-2"></i>Kata Sandi</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#"><i class="fas fa-sign-out-alt mr-2"></i>Keluar
+                                Akun</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Master</a></li>
+                <li class="breadcrumb-item"><a href="DataKelas.html" class="text-decoration-none">Daftar Kelas</a></li>
+                <li class="breadcrumb-item active">Data Dihapus</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="font-weight-bold mb-1">Data Kelas Dihapus</h2>
+                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data kelas yang telah dihapus</p>
+            </div>
+            <div>
+                <a href="DataKelas.html" class="btn btn-outline-primary px-3 mr-2">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #216fcb;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form" action="javascript:void(0)">
+                        <div class="row">
+
+                            <!-- Kata Kunci -->
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="keyword" id="keyword" class="form-control"
+                                        placeholder="Cari kode kelas, nama kelas..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <!-- Pilih Unit -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Unit</label>
+                                <select name="unit" id="filter-unit" class="form-control">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <!-- Pilih Kelas -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Kelas</label>
+                                <select name="class_name" id="class-name" class="form-control">
+                                    <option value="">Semua Kelas</option>
+                                    <option value="1 A">1 A</option>
+                                    <option value="1 B">1 B</option>
+                                    <option value="7 A">7 A</option>
+                                    <option value="7 B">7 B</option>
+                                    <option value="10 A">10 A</option>
+                                    <option value="10 B">10 B</option>
+                                </select>
+                            </div>
+
+                            <!-- Tahun Ajaran -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Tahun Ajaran</label>
+                                <select name="class_year" id="class-year" class="form-control">
+                                    <option value="">Semua Tahun</option>
+                                    <option value="2024/2025">2024/2025</option>
+                                    <option value="2025/2026">2025/2026</option>
+                                    <option value="2026/2027">2026/2027</option>
+                                </select>
+                            </div>
+
+                            <!-- Tombol -->
+                            <div class="col-12 mt-2">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i> Terapkan Filter
+                                </button>
+
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i> Reset Filter
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card shadow-sm border">
+            <div class="card-header bg-white py-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-trash-restore text-primary mr-2"></i>Data Kelas Dihapus
+                    </h5>
+
+                    <!-- Bulk Actions -->
+                    <div class="dropdown bulk-delete" style="display: none;">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3" type="button"
+                            data-toggle="dropdown">
+                            <i class="fas fa-tasks mr-1"></i>Aksi Masal
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item text-info" href="#" id="bulk-restore">
+                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                            </a>
+                            <a class="dropdown-item text-danger" href="#" id="bulk-delete">
+                                <i class="fas fa-trash-alt mr-2"></i>Hapus Permanen
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered mb-0" id="datatable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th width="40" class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checks">
+                                        <label class="custom-control-label" for="checks"></label>
+                                    </div>
+                                </th>
+                                <th width="30" class="align-middle text-center">#</th>
+                                <th class="align-middle">Nama Unit</th>
+                                <th class="align-middle">Kode Kelas</th>
+                                <th class="align-middle">Nama Kelas</th>
+                                <th class="align-middle text-center">Tahun Ajaran</th>
+                                <th class="align-middle text-center">Siswa Aktif</th>
+                                <th class="align-middle text-center">Siswa Lulus</th>
+                                <th class="align-middle text-center">Siswa Keluar</th>
+                                <th class="align-middle text-center">Status</th>
+                                <th class="align-middle text-center">Waktu Dihapus</th>
+                                <th width="70" class="align-middle text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data sample - akan diganti dengan data dari server -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
+                                            data-id="1">
+                                        <label class="custom-control-label" for="check1"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><strong>1</strong></td>
+                                <td class="align-middle"><span class="badge badge-danger badge-pill px-3 py-2">SD</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-primary">2A</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Kelas 2 A</div>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#f0f0f0; color:#555; border-radius:6px; font-weight:600;">2023/2024</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f3ff; color:#1d5fbf; border-radius:6px; font-weight:600;">
+                                        25 Siswa
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2">0 Siswa</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2">0 Siswa</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#fff1f1; color:#c92a2a; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-times-circle mr-1"></i>Non-Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <small class="text-muted">
+                                        <i class="far fa-clock mr-1"></i>12 Des 2024, 14:30
+                                    </small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-info restore" href="#" data-id="1"
+                                                data-class-unit="SD" data-class-year="2023/2024" data-class-code="2A"
+                                                data-class-name="Kelas 2 A">
+                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            </a>
+                                            <a class="dropdown-item text-danger delete-permanent" href="#" data-id="1">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus Permanen
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
+                                            data-id="2">
+                                        <label class="custom-control-label" for="check2"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><strong>2</strong></td>
+                                <td class="align-middle"><span
+                                        class="badge badge-primary badge-pill px-3 py-2">SMP</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-primary">8C</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Kelas 8 C</div>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#f0f0f0; color:#555; border-radius:6px; font-weight:600;">2023/2024</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f3ff; color:#1d5fbf; border-radius:6px; font-weight:600;">
+                                        20 Siswa
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2">0 Siswa</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2">0 Siswa</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#fff1f1; color:#c92a2a; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-times-circle mr-1"></i>Non-Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <small class="text-muted">
+                                        <i class="far fa-clock mr-1"></i>12 Des 2024, 14:30
+                                    </small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-info restore" href="#" data-id="2"
+                                                data-class-unit="SMP" data-class-year="2023/2024" data-class-code="8C"
+                                                data-class-name="Kelas 8 C">
+                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            </a>
+                                            <a class="dropdown-item text-danger delete-permanent" href="#" data-id="2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus Permanen
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Restore -->
+        <div class="modal fade" id="restore-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Konfirmasi Pulihkan Data</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center py-4">
+                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
+                        <h5 class="mb-3">Pulihkan Data Kelas?</h5>
+                        <p class="text-muted mb-0">Apakah yakin akan memulihkan data kelas yang dipilih?</p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" id="btn-restore-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
+                        <button type="button" id="btn-restore-submit" class="btn btn-info">
+                            <i id="btn-restore-svg" class="fas fa-check-circle mr-1"></i>
+                            <span id="btn-restore-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            <span id="btn-restore-text">Ya, Pulihkan</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete Permanent -->
+        <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Konfirmasi Hapus Permanen</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center py-4">
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                        <h5 class="mb-3">Hapus Data Kelas Secara Permanen?</h5>
+                        <p class="text-muted mb-2">Apakah yakin akan menghapus data kelas yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.</p>
+                        <div class="alert alert-warning mt-3">
+                            <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
+                            <p class="mb-0 small mt-2">Seluruh data yang mereferensikan ke data kelas dipilih seperti data siswa, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai kelas.</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" id="btn-delete-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
+                        <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                            <i id="btn-delete-svg" class="fas fa-check-circle mr-1"></i>
+                            <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            <span id="btn-delete-text">Ya, Hapus Permanen</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white py-3 mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- JavaScript akan ditambahkan berikutnya -->
+    <script>
+        // JavaScript code akan ditambahkan di sini
+        console.log('DihapusKelas.html loaded');
+    </script>
+
+</body>
+
+</html>
