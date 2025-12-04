@@ -4,22 +4,26 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Daftar Unit Pendidikan Dihapus :: School Payment App</title>
+    <title>Sinkron Akun Siswa :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-
-    <!-- DataTables Bootstrap 4 -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+    </style>
 </head>
 
-<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+<body>
 
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark"
@@ -89,7 +93,7 @@
                         </a>
                         <div class="dropdown-menu">
 
-                             <a class="dropdown-item" href="DataPetugas.html">
+                            <a class="dropdown-item" href="DataPetugas.html">
                                 <i class="fas fa-users text-primary mr-2"></i>Data Petugas
                             </a>
 
@@ -442,22 +446,21 @@
             <ol class="breadcrumb bg-white px-3 mb-2">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Master</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Unit</a></li>
-                <li class="breadcrumb-item active">Data Dihapus</li>
+                <li class="breadcrumb-item"><a href="DataAkun.html" class="text-decoration-none">Data Akun</a></li>
+                <li class="breadcrumb-item active">Sinkron Akun</li>
             </ol>
         </nav>
 
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="font-weight-bold mb-1">Data Dihapus</h2>
-                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data unit pendidikan yang dihapus</p>
+                <h2 class="font-weight-bold mb-1">Sinkron Akun Siswa</h2>
+                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Sinkronisasi akun siswa secara
+                    otomatis berdasarkan data kelas</p>
             </div>
-            <div>
-                <a href="DataUnit.html" class="btn btn-primary px-3">
-                    <i class="fas fa-arrow-left mr-2"></i>Kembali
-                </a>
-            </div>
+            <a href="DataAkun.html" class="btn btn-outline-primary px-3">
+                <i class="fas fa-arrow-left mr-2"></i>Kembali
+            </a>
         </div>
 
         <!-- Alert -->
@@ -477,326 +480,331 @@
             </button>
         </div>
 
-        <!-- Filter Card -->
-        <div class="card mb-4">
-            <div class="card-header bg-white py-3">
-                <button
-                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
-                    type="button" data-toggle="collapse" data-target="#filterCollapse">
-                    <div>
-                        <i class="fas fa-filter text-primary mr-2"></i>
-                        <strong>Filter Data</strong>
-                    </div>
-                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
-                </button>
-            </div>
+        <!-- Main Card -->
+        <div class="card mb-4 shadow-sm border-0" style="border-radius: 12px;">
+            <div class="card-body p-4">
+                <div class="row">
+                    <!-- Form Section -->
+                    <div class="col-md-8">
+                        <form id="form" action="javascript:void(0)">
 
-            <div id="filterCollapse" class="collapse">
-                <div class="card-body bg-light">
-                    <form id="filter-form" action="javascript:void(0)">
-                        <div class="row">
+                            <!-- Pilih Kelas -->
+                            <div class="mb-4">
+                                <label class="form-label font-weight-bold">
+                                    <i class="fas fa-school text-primary mr-1"></i>Pilih Kelas
+                                </label>
+                                <select name="classroom" id="classroom" class="custom-select border-primary">
+                                    <option value="">-- Pilih Kelas --</option>
+                                    <option value="ALL">SEMUA KELAS</option>
+                                </select>
+                                <small class="form-text text-muted">Pilih kelas untuk menampilkan daftar siswa</small>
+                                <small id="classroom-feedback" class="text-danger font-weight-medium"
+                                    style="display: none;"></small>
+                            </div>
 
-                            <!-- Kata Kunci -->
-                            <div class="col-lg-6 col-md-6 mb-3">
-                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-white">
-                                            <i class="fas fa-search text-muted"></i>
-                                        </span>
+                            <!-- Student Selection Table -->
+                            <div id="select-student" class="mb-4" style="display: none;">
+                                <label class="form-label font-weight-bold">
+                                    <i class="fas fa-users text-primary mr-1"></i>Pilih Siswa
+                                </label>
+
+                                <!-- Table Header (Fixed) -->
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-hover table-bordered mb-0">
+                                        <thead class="bg-light" style="border-bottom: 2px solid #e3e6f0;">
+                                            <tr>
+                                                <th class="text-center align-middle" style="width: 50px;">
+                                                    <input type="checkbox" id="checks" class="form-check-input"
+                                                        style="cursor: pointer;">
+                                                </th>
+                                                <th class="align-middle" style="width: 50px;">#</th>
+                                                <th class="align-middle">Nomor Induk</th>
+                                                <th class="align-middle">Nama Lengkap</th>
+                                                <th class="text-center align-middle" style="width: 100px;">Status</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+
+                                <!-- Table Body (Scrollable) -->
+                                <div class="border"
+                                    style="max-height: 400px; overflow-y: auto; border-radius: 0 0 8px 8px;">
+                                    <table class="table table-sm table-hover mb-0">
+                                        <tbody id="student-list">
+                                            <tr>
+                                                <td colspan="5" class="text-center text-muted py-4">
+                                                    <i class="fas fa-users fa-2x mb-2 d-block"
+                                                        style="opacity: 0.3;"></i>
+                                                    <p class="mb-0">Pilih kelas untuk menampilkan daftar siswa</p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <small class="form-text text-muted mt-2">
+                                    <i class="fas fa-info-circle mr-1"></i>Centang siswa yang akan disinkronkan akunnya
+                                </small>
+                            </div>
+
+                            <!-- Account Name Settings -->
+                            <div class="card mb-4 border-0" style="background: #f8f9fa;">
+                                <div class="card-body">
+                                    <h6 class="font-weight-bold mb-3">
+                                        <i class="fas fa-user-cog text-primary mr-2"></i>Pengaturan Nama Akun
+                                    </h6>
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="user_number" id="user-number"
+                                            class="custom-control-input">
+                                        <label class="custom-control-label" for="user-number">
+                                            Jadikan nomor induk siswa sebagai nama akun (username)
+                                        </label>
                                     </div>
-                                    <input type="text" name="keyword" id="keyword" class="form-control"
-                                        placeholder="Cari kode unit, nama unit..." maxlength="64">
+                                    <small class="form-text text-muted ml-4">
+                                        Jika dicentang, nomor induk siswa akan digunakan sebagai username untuk login
+                                    </small>
                                 </div>
                             </div>
 
-                            <!-- Tombol -->
-                            <div class="col-12 mt-2">
-                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
-                                    <i class="fas fa-search mr-2"></i> Terapkan Filter
-                                </button>
+                            <!-- Password Settings -->
+                            <div class="card mb-4 border-0" style="background: #f8f9fa;">
+                                <div class="card-body">
+                                    <h6 class="font-weight-bold mb-3">
+                                        <i class="fas fa-key text-primary mr-2"></i>Pengaturan Kata Sandi
+                                    </h6>
 
-                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
-                                    <i class="fas fa-redo mr-2"></i> Reset Filter
-                                </button>
+                                    <!-- Password Input -->
+                                    <div class="form-group">
+                                        <label class="font-weight-medium">Kata Sandi Default</label>
+                                        <div class="input-group">
+                                            <input type="text" name="pass_set" id="pass-set" class="form-control"
+                                                placeholder="Masukkan password default" value="L4IAiSetq">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    id="generate-password">
+                                                    <i class="fas fa-sync-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            Password ini akan digunakan untuk semua akun yang disinkronkan
+                                        </small>
+                                    </div>
+
+                                    <!-- Use Birthdate as Password -->
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" name="pass_date" id="pass-date"
+                                            class="custom-control-input">
+                                        <label class="custom-control-label" for="pass-date">
+                                            Jadikan tanggal lahir siswa sebagai kata sandi akun
+                                        </label>
+                                    </div>
+                                    <small class="form-text text-muted ml-4">
+                                        Format: ddmmyyyy (contoh: 15012010 untuk tanggal 15 Januari 2010)
+                                    </small>
+                                </div>
                             </div>
 
+                            <!-- Submit Button -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" id="btn-submit"
+                                        class="btn btn-primary btn-block font-weight-bold shadow-sm">
+                                        <i id="btn-icon" class="fas fa-sync mr-2"></i>
+                                        <span id="btn-spinner" class="spinner-border spinner-border-sm mr-2"
+                                            style="display: none;"></span>
+                                        <span id="btn-text">Proses Sinkronisasi</span>
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="reset" class="btn btn-outline-secondary btn-block font-weight-bold">
+                                        <i class="fas fa-redo mr-2"></i>Reset Form
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <!-- Info Section -->
+                    <div class="col-md-4">
+                        <div class="alert alert-info border-0 mb-3" style="background: #e3f2fd; border-radius: 10px;">
+                            <h6 class="font-weight-bold text-primary mb-2">
+                                <i class="fas fa-info-circle mr-1"></i>Informasi Sinkronisasi
+                            </h6>
+                            <ul class="mb-0 pl-3" style="font-size: 0.9rem;">
+                                <li class="mb-2">Pilih kelas atau semua kelas untuk sinkronisasi</li>
+                                <li class="mb-2">Centang siswa yang akan dibuatkan akun</li>
+                                <li class="mb-2">Atur nama akun dan kata sandi</li>
+                                <li class="mb-2">Proses sinkronisasi akan membuat akun otomatis</li>
+                            </ul>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
-        <!-- Data Table Card -->
-        <div class="card shadow-sm border">
-            <div class="card-header bg-white py-3 border-bottom">
-                <div class="d-flex justify-content-between align-items-center flex-wrap">
-                    <h5 class="mb-0 font-weight-bold">
-                        <i class="fas fa-trash-restore text-danger mr-2"></i>Data Unit Pendidikan Dihapus
-                    </h5>
-
-                    <!-- Bulk Actions -->
-                    <div class="dropdown bulk-delete" style="display: none;">
-                        <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3" type="button"
-                            data-toggle="dropdown">
-                            <i class="fas fa-tasks mr-1"></i>Aksi Masal
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-info" href="#" id="bulk-restore">
-                                <i class="fas fa-undo mr-2"></i>Pulihkan
-                            </a>
-                            <a class="dropdown-item text-danger" href="#" id="bulk-delete">
-                                <i class="fas fa-times mr-2"></i>Hapus Permanen
-                            </a>
+                        <div class="alert alert-warning border-0" style="background: #fff3cd; border-radius: 10px;">
+                            <h6 class="font-weight-bold text-warning mb-2">
+                                <i class="fas fa-exclamation-triangle mr-1"></i>Perhatian
+                            </h6>
+                            <ul class="mb-0 pl-3" style="font-size: 0.9rem;">
+                                <li class="mb-2">Pastikan data siswa sudah benar</li>
+                                <li class="mb-2">Akun yang sudah ada tidak akan dibuat ulang</li>
+                                <li class="mb-2">Simpan data nama akun dan password dengan aman</li>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-hover table-bordered mb-0" id="datatable">
-                        <thead class="thead-light">
-                            <tr>
-                                <th width="40" class="align-middle text-center">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="checks">
-                                        <label class="custom-control-label" for="checks"></label>
-                                    </div>
-                                </th>
-                                <th width="30" class="align-middle text-center">#</th>
-                                <th class="align-middle text-center">No. Urut</th>
-                                <th class="align-middle">Kode Unit</th>
-                                <th class="align-middle">Nama Unit</th>
-                                <th class="align-middle">Keterangan</th>
-                                <th class="align-middle text-center">Jml. Kelas</th>
-                                <th class="align-middle text-center">Jml. Siswa</th>
-                                <th class="align-middle text-center">Status</th>
-                                <th class="align-middle text-center">Waktu Dihapus</th>
-                                <th width="70" class="align-middle text-center">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- ROW 1 -->
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
-                                            data-id="1">
-                                        <label class="custom-control-label" for="check1"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center"><strong>1</strong></td>
-                                <td class="align-middle text-center">
-                                   <span class="badge px-3 py-2">
-                                        5
-                                    </span>
-                                </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">TK</span></td>
-                                <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Taman Kanak-Kanak</div>
-                                </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan tingkat TK
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        3 Kelas
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        45 Siswa
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>12 Des 2024, 14:30
-                                    </small>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
-                                            data-toggle="dropdown">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="1">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
-                                            </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="1">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <!-- ROW 2 -->
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
-                                            data-id="2">
-                                        <label class="custom-control-label" for="check2"></label>
-                                    </div>
-                                </td>
-                                <td class="align-middle text-center"><strong>2</strong></td>
-                                <td class="align-middle text-center">
-                                     <span class="badge px-3 py-2">
-                                        10
-                                    </span>
-                                </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">KB</span></td>
-                                <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Kelompok Bermain</div>
-                                </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan kelompok bermain
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        2 Kelas
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        30 Siswa
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                   <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>10 Des 2024, 09:15
-                                    </small>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <div class="btn-group">
-                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
-                                            data-toggle="dropdown">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="2">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
-                                            </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="2">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
-                                            </a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Restore -->
-        <div class="modal fade" id="restore-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Pulihkan Data</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center py-4">
-                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
-                        <h5 class="mb-3">Pulihkan Data Unit?</h5>
-                        <p class="text-muted mb-0">
-                            Apakah yakin akan memulihkan data unit yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.
-                        </p>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" id="btn-restore-abort" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                        <button type="button" id="btn-restore-submit" class="btn btn-info">
-                            <i id="btn-restore-svg" class="fas fa-undo mr-1"></i>
-                            <span id="btn-restore-icon" class="spinner-border spinner-border-sm mr-2"
-                                style="display: none;"></span>
-                            Konfirmasi
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Delete Permanent -->
-        <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Hapus Permanen</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center py-4">
-                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                        <h5 class="mb-3">Hapus Data Secara Permanen?</h5>
-                        <p class="text-muted mb-2">
-                            Apakah yakin akan menghapus data unit yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.
-                        </p>
-                        <div class="alert alert-warning text-left mt-3" role="alert">
-                            <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
-                            <p class="mb-0 mt-2 small">
-                                Seluruh data yang mereferensikan ke data unit seperti data kelas, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai unit.
-                            </p>
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body text-center">
+                                <i class="fas fa-sync-alt fa-3x text-primary mb-3"></i>
+                                <h6 class="font-weight-bold">Sinkronisasi Cepat</h6>
+                                <p class="text-muted small mb-0">Buat akun untuk banyak siswa sekaligus dengan
+                                    pengaturan yang sama</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                        <button type="button" id="btn-delete-submit" class="btn btn-danger">
-                            <i id="btn-delete-svg" class="fas fa-times mr-1"></i>
-                            <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
-                                style="display: none;"></span>
-                            Hapus Permanen
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer class="bg-white py-3 mt-5">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
 
     </div>
 
-    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <!-- Loading Modal -->
+    <div class="modal fade" id="load-dialog" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <p class="text-muted mb-0">Sedang memuat data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirm-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title font-weight-bold">Konfirmasi Sinkronisasi</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-question-circle fa-4x text-warning mb-3"></i>
+                    <h5 class="font-weight-bold mb-2">Proses Sinkronisasi Akun</h5>
+                    <p class="text-muted mb-0">
+                        Apakah Anda yakin akan memproses sinkronisasi akun siswa?
+                        Proses ini akan membuat akun baru untuk siswa yang belum memiliki akun.
+                    </p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Batalkan
+                    </button>
+                    <button type="button" id="btn-confirm" class="btn btn-primary">
+                        <i class="fas fa-check mr-1"></i>Ya, Proses
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="success-dialog" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                    <h4 class="font-weight-bold mb-2">Sinkronisasi Berhasil</h4>
+                    <p class="text-muted mb-0">Akun siswa berhasil disinkronkan ke sistem</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+                        <i class="fas fa-check mr-1"></i>OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- DataTables -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
+    <!-- Custom JavaScript -->
     <script>
-        // JavaScript will be added in next iteration
-        console.log('DihapusUnit.html loaded successfully');
+        // JavaScript akan ditambahkan pada tahap berikutnya
+        console.log('SinkronAkun.html loaded successfully');
+
+        // Preview: Toggle password field based on checkbox
+        $('#pass-date').on('change', function () {
+            if ($(this).is(':checked')) {
+                $('#pass-set').prop('disabled', true).addClass('bg-light');
+            } else {
+                $('#pass-set').prop('disabled', false).removeClass('bg-light');
+            }
+        });
+
+        // Preview: Check/Uncheck all students
+        $('#checks').on('change', function () {
+            $('.check').prop('checked', $(this).is(':checked'));
+        });
+
+        // Preview: Generate random password
+        $('#generate-password').on('click', function () {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let password = '';
+            for (let i = 0; i < 9; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            $('#pass-set').val(password);
+        });
+
+        // Preview: Show select-student when classroom is selected
+        $('#classroom').on('change', function () {
+            if ($(this).val() !== '') {
+                $('#select-student').slideDown();
+            } else {
+                $('#select-student').slideUp();
+            }
+        });
+
+        // Alert functions
+        function showAlert(message, type) {
+            const alertTypes = {
+                'success': { icon: 'fa-check-circle', color: 'text-success', bg: 'alert-success' },
+                'warning': { icon: 'fa-exclamation-triangle', color: 'text-warning', bg: 'alert-warning' },
+                'danger': { icon: 'fa-times-circle', color: 'text-danger', bg: 'alert-danger' },
+                'info': { icon: 'fa-info-circle', color: 'text-info', bg: 'alert-info' }
+            };
+
+            const alertType = alertTypes[type] || alertTypes['info'];
+
+            $('#alert').removeClass('alert-success alert-warning alert-danger alert-info')
+                .addClass(alertType.bg + ' show')
+                .css('display', 'block');
+            $('#alert-icon').removeClass().addClass('fas ' + alertType.icon + ' fa-2x ' + alertType.color);
+            $('#alert-title').text(type.charAt(0).toUpperCase() + type.slice(1));
+            $('#alert-content').html(message);
+        }
+
+        function hideAlert() {
+            $('#alert').removeClass('show').fadeOut();
+        }
     </script>
 
 </body>

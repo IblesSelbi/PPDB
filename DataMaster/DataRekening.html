@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Daftar Unit Pendidikan Dihapus :: School Payment App</title>
+    <title>Daftar Rekening Pembayaran :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -89,7 +89,7 @@
                         </a>
                         <div class="dropdown-menu">
 
-                             <a class="dropdown-item" href="DataPetugas.html">
+                            <a class="dropdown-item" href="DataPetugas.html">
                                 <i class="fas fa-users text-primary mr-2"></i>Data Petugas
                             </a>
 
@@ -442,20 +442,21 @@
             <ol class="breadcrumb bg-white px-3 mb-2">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Master</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Unit</a></li>
-                <li class="breadcrumb-item active">Data Dihapus</li>
+                <li class="breadcrumb-item active">Daftar Rekening</li>
             </ol>
         </nav>
 
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="font-weight-bold mb-1">Data Dihapus</h2>
-                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data unit pendidikan yang dihapus</p>
+                <h2 class="font-weight-bold mb-1">Daftar Rekening</h2>
+                <p class="text-muted mb-0"><i class="fas fa-university mr-1"></i>Kelola data rekening pembayaran</p>
             </div>
             <div>
-                <a href="DataUnit.html" class="btn btn-primary px-3">
-                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                <a href="TambahRekening.html">
+                    <button type="button" id="btn-add" class="btn btn-primary px-3 mr-1">
+                        <i class="fas fa-plus mr-2"></i>Tambah
+                    </button>
                 </a>
             </div>
         </div>
@@ -497,7 +498,7 @@
                         <div class="row">
 
                             <!-- Kata Kunci -->
-                            <div class="col-lg-6 col-md-6 mb-3">
+                            <div class="col-lg-2 col-md-6 mb-3">
                                 <label class="font-weight-bold small mb-2">Kata Kunci</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -506,8 +507,43 @@
                                         </span>
                                     </div>
                                     <input type="text" name="keyword" id="keyword" class="form-control"
-                                        placeholder="Cari kode unit, nama unit..." maxlength="64">
+                                        placeholder="Cari nama, nomor rekening..." maxlength="64">
                                 </div>
+                            </div>
+
+                            <!-- Pilih Unit -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Unit</label>
+                                <select name="unit" id="filter-unit" class="form-control">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                    <option value="ALL">SEMUA</option>
+                                </select>
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="">Semua Status</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Non-Aktif</option>
+                                </select>
+                            </div>
+
+                            <!-- Peruntukan Rekening -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Peruntukan Rekening</label>
+                                <select name="category" id="category" class="form-control">
+                                    <option value="">Semua Peruntukan</option>
+                                    <option value="ALL">Semua Pembayaran</option>
+                                    <option value="PB">Pembayaran Tagihan</option>
+                                    <option value="PS">Pembayaran Tabungan</option>
+                                    <option value="PA">Pembayaran PPDB</option>
+                                    <option value="PD">Pembayaran Donasi</option>
+                                </select>
                             </div>
 
                             <!-- Tombol -->
@@ -532,7 +568,7 @@
             <div class="card-header bg-white py-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0 font-weight-bold">
-                        <i class="fas fa-trash-restore text-danger mr-2"></i>Data Unit Pendidikan Dihapus
+                        <i class="fas fa-list text-primary mr-2"></i>Data Rekening Pembayaran
                     </h5>
 
                     <!-- Bulk Actions -->
@@ -542,11 +578,8 @@
                             <i class="fas fa-tasks mr-1"></i>Aksi Masal
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-info" href="#" id="bulk-restore">
-                                <i class="fas fa-undo mr-2"></i>Pulihkan
-                            </a>
                             <a class="dropdown-item text-danger" href="#" id="bulk-delete">
-                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                             </a>
                         </div>
                     </div>
@@ -564,20 +597,20 @@
                                         <label class="custom-control-label" for="checks"></label>
                                     </div>
                                 </th>
-                                <th width="30" class="align-middle text-center">#</th>
-                                <th class="align-middle text-center">No. Urut</th>
-                                <th class="align-middle">Kode Unit</th>
-                                <th class="align-middle">Nama Unit</th>
-                                <th class="align-middle">Keterangan</th>
-                                <th class="align-middle text-center">Jml. Kelas</th>
-                                <th class="align-middle text-center">Jml. Siswa</th>
+                                <th width="60" class="align-middle text-center">#</th>
+                                <th class="align-middle text-center">Pilihan Unit</th>
+                                <th class="align-middle">Nama Rekening</th>
+                                <th class="align-middle">Nama Pemilik</th>
+                                <th class="align-middle">Nomor Rekening</th>
+                                <th class="align-middle">Kode Rekening</th>
+                                <th class="align-middle">Peruntukan</th>
+                                <th class="align-middle text-center">Logo Bank</th>
                                 <th class="align-middle text-center">Status</th>
-                                <th class="align-middle text-center">Waktu Dihapus</th>
                                 <th width="70" class="align-middle text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- ROW 1 -->
+                            <!-- Sample Data Row 1 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
@@ -587,37 +620,37 @@
                                     </div>
                                 </td>
                                 <td class="align-middle text-center"><strong>1</strong></td>
-                                <td class="align-middle text-center">
-                                   <span class="badge px-3 py-2">
-                                        5
-                                    </span>
+                                <td class="align-middle text-center"><span
+                                        class="badge badge-secondary badge-pill px-3 py-2">SEMUA</span>
                                 </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">TK</span></td>
                                 <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Taman Kanak-Kanak</div>
+                                    <div class="font-weight-bold text-primary">Bank Mandiri</div>
+                                    <small class="text-muted">Rekening Utama</small>
                                 </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan tingkat TK
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Yayasan Pendidikan Mandiri</div>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        3 Kelas
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-dark">1234567890123</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-light px-3 py-2">MANDIRI</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-money-bill-wave mr-1"></i>Semua Pembayaran
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        45 Siswa
-                                    </span>
+                                    <img src="https://via.placeholder.com/60x30?text=MANDIRI" alt="Logo Bank"
+                                        class="img-thumbnail img-zoom" style="cursor: pointer; max-width: 60px;">
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>12 Des 2024, 14:30
-                                    </small>
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
@@ -626,18 +659,19 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="1">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            <a class="dropdown-item text-warning edit" href="EditRekening.html"
+                                                data-id="1">
+                                                <i class="fas fa-edit mr-2"></i>Edit
                                             </a>
                                             <a class="dropdown-item text-danger delete" href="#" data-id="1">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
 
-                            <!-- ROW 2 -->
+                            <!-- Sample Data Row 2 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
@@ -648,36 +682,36 @@
                                 </td>
                                 <td class="align-middle text-center"><strong>2</strong></td>
                                 <td class="align-middle text-center">
-                                     <span class="badge px-3 py-2">
-                                        10
-                                    </span>
+                                    <span class="badge badge-secondary badge-pill px-3 py-2">SEMUA</span>
                                 </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">KB</span></td>
                                 <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Kelompok Bermain</div>
+                                    <div class="font-weight-bold text-primary">Bank BCA</div>
+                                    <small class="text-muted">Rekening Operasional</small>
                                 </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan kelompok bermain
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Yayasan Pendidikan Mandiri</div>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        2 Kelas
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-dark">9876543210987</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-light px-3 py-2">BCA</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-money-bill-wave mr-1"></i>Semua Pembayaran
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        30 Siswa
-                                    </span>
+                                    <img src="https://via.placeholder.com/60x30?text=BCA" alt="Logo Bank"
+                                        class="img-thumbnail img-zoom" style="cursor: pointer; max-width: 60px;">
                                 </td>
                                 <td class="align-middle text-center">
-                                   <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>10 Des 2024, 09:15
-                                    </small>
                                 </td>
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
@@ -686,11 +720,191 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="2">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            <a class="dropdown-item text-warning edit" href="#" data-id="2">
+                                                <i class="fas fa-edit mr-2"></i>Edit
                                             </a>
                                             <a class="dropdown-item text-danger delete" href="#" data-id="2">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Sample Data Row 3 -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check3"
+                                            data-id="3">
+                                        <label class="custom-control-label" for="check3"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><strong>3</strong></td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-secondary badge-pill px-3 py-2">SEMUA</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold text-primary">Bank BRI</div>
+                                    <small class="text-muted">Rekening Tabungan Siswa</small>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Yayasan Pendidikan Mandiri</div>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-dark">5554443332221</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-light px-3 py-2">BRI</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-money-bill-wave mr-1"></i>Semua Pembayaran
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <img src="https://via.placeholder.com/60x30?text=BRI" alt="Logo Bank"
+                                        class="img-thumbnail img-zoom" style="cursor: pointer; max-width: 60px;">
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-warning edit" href="#" data-id="3">
+                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="3">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Sample Data Row 4 -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check4"
+                                            data-id="4">
+                                        <label class="custom-control-label" for="check4"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><strong>4</strong></td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-secondary badge-pill px-3 py-2">SEMUA</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold text-primary">Bank BNI</div>
+                                    <small class="text-muted">Rekening PPDB</small>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Yayasan Pendidikan Mandiri</div>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-dark">7778889990001</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-light px-3 py-2">BNI</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e8f5e9; color:#2e7d32; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-money-bill-wave mr-1"></i>Semua Pembayaran
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <img src="https://via.placeholder.com/60x30?text=BNI" alt="Logo Bank"
+                                        class="img-thumbnail img-zoom" style="cursor: pointer; max-width: 60px;">
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-warning edit" href="#" data-id="4">
+                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="4">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Sample Data Row 5 -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check5"
+                                            data-id="5">
+                                        <label class="custom-control-label" for="check5"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle text-center"><strong>5</strong></td>
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-secondary badge-pill px-3 py-2">SEMUA</span>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold text-primary">Bank Syariah Indonesia</div>
+                                    <small class="text-muted">Rekening Donasi</small>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="font-weight-bold">Yayasan Pendidikan Mandiri</div>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="font-weight-bold text-dark">3332221110009</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-light px-3 py-2">BSI</span>
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e0f2f1; color:#00695c; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-hand-holding-heart mr-1"></i>Pembayaran Donasi
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <img src="https://via.placeholder.com/60x30?text=BSI" alt="Logo Bank"
+                                        class="img-thumbnail img-zoom" style="cursor: pointer; max-width: 60px;">
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px; font-weight:550; font-size:13px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
+                                    </span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-warning edit" href="#" data-id="4">
+                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger delete" href="#" data-id="4">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
                                     </div>
@@ -702,30 +916,185 @@
             </div>
         </div>
 
-        <!-- Modal Restore -->
-        <div class="modal fade" id="restore-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+        <!-- Modal Add/Edit Rekening -->
+        <div class="modal fade" id="modal-add" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <form id="form" action="javascript:void(0)" enctype="multipart/form-data">
+                        <input type="hidden" name="form_type" id="form-type" value="">
+                        <input type="hidden" name="bank_id" id="bank-id" value="">
+
+                        <div class="modal-header border-0">
+                            <h5 class="modal-title" id="modal-title">Tambah Rekening Pembayaran
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="text-center mb-4">
+                                <i class="fas fa-university fa-3x text-info"></i>
+                            </div>
+
+                            <div class="row">
+                                <!-- Pilihan Unit -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Pilihan Unit <span
+                                                class="text-danger">*</span></label>
+                                        <select name="bank_unit" id="bank-unit" class="form-control">
+                                            <option value="">Pilih Unit</option>
+                                            <option value="SD">SD</option>
+                                            <option value="SMP">SMP</option>
+                                            <option value="SMA">SMA</option>
+                                            <option value="ALL">SEMUA</option>
+                                        </select>
+                                        <small id="bank-unit-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Nama Rekening -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Nama Rekening <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="bank_name" id="bank-name" class="form-control"
+                                            maxlength="64" autocomplete="off" placeholder="Contoh: Bank Mandiri">
+                                        <small id="bank-name-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Nama Pemilik -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Nama Pemilik <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="bank_owner" id="bank-owner" class="form-control"
+                                            maxlength="64" autocomplete="off"
+                                            placeholder="Contoh: Yayasan Pendidikan Mandiri">
+                                        <small id="bank-owner-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Nomor Rekening -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Nomor Rekening <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="bank_number" id="bank-number" class="form-control"
+                                            maxlength="20" autocomplete="off" placeholder="Contoh: 1234567890123">
+                                        <small id="bank-number-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Kode Rekening -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Kode Rekening <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" name="bank_code" id="bank-code"
+                                            class="form-control text-uppercase" maxlength="16" autocomplete="off"
+                                            placeholder="Contoh: MANDIRI">
+                                        <small id="bank-code-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Peruntukan -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Peruntukan Rekening
+                                            <span class="text-danger">*</span></label>
+                                        <select name="bank_category" id="bank-category" class="form-control">
+                                            <option value="">Pilih Peruntukan</option>
+                                            <option value="ALL">Semua Pembayaran</option>
+                                            <option value="PB">Pembayaran Tagihan</option>
+                                            <option value="PS">Pembayaran Tabungan</option>
+                                            <option value="PA">Pembayaran PPDB</option>
+                                            <option value="PD">Pembayaran Donasi</option>
+                                        </select>
+                                        <small id="bank-category-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                </div>
+
+                                <!-- Logo Bank -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Logo Bank</label>
+                                        <div class="custom-file">
+                                            <input type="file" name="bank_logo" id="bank-logo" class="custom-file-input"
+                                                accept="image/*">
+                                            <label class="custom-file-label" for="bank-logo">Pilih
+                                                file gambar...</label>
+                                        </div>
+                                        <small class="form-text text-muted">Format: JPG, PNG,
+                                            GIF. Max: 2MB</small>
+                                        <small id="bank-logo-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+                                    <!-- Preview Logo -->
+                                    <div id="logo-preview" class="mt-2" style="display: none;">
+                                        <img id="logo-preview-img" class="img-thumbnail" style="max-width: 150px;">
+                                    </div>
+                                </div>
+
+                                <!-- Status -->
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold d-block">Status</label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="bank_status" id="bank-status"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="bank-status">Aktif</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                            <button type="submit" id="btn-submit" class="btn btn-primary">
+                                <i id="btn-svg" class="fas fa-check-circle mr-1"></i>
+                                <span id="btn-icon" class="spinner-border spinner-border-sm mr-2"
+                                    style="display: none;"></span>
+                                <span id="btn-text">Simpan Data</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete -->
+        <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Pulihkan Data</h5>
+                        <h5 class="modal-title">Konfirmasi Penghapusan</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span>&times;</span>
                         </button>
                     </div>
                     <div class="modal-body text-center py-4">
-                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
-                        <h5 class="mb-3">Pulihkan Data Unit?</h5>
-                        <p class="text-muted mb-0">
-                            Apakah yakin akan memulihkan data unit yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.
-                        </p>
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                        <h5 class="mb-3">Hapus Data Rekening?</h5>
+                        <p class="text-muted mb-0">Apakah yakin akan menghapus data yang
+                            dipilih? Data yang telah
+                            dihapus tidak dapat dikembalikan.</p>
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="button" id="btn-restore-abort" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                        <button type="button" id="btn-restore-submit" class="btn btn-info">
-                            <i id="btn-restore-svg" class="fas fa-undo mr-1"></i>
-                            <span id="btn-restore-icon" class="spinner-border spinner-border-sm mr-2"
+                        <button type="button" id="btn-delete-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
+                        <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                            <i id="btn-delete-svg" class="fas fa-check-circle mr-1"></i>
+                            <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
                                 style="display: none;"></span>
                             Konfirmasi
                         </button>
@@ -734,39 +1103,21 @@
             </div>
         </div>
 
-        <!-- Modal Delete Permanent -->
-        <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
+        <!-- Modal Zoom Image -->
+        <div class="modal fade" id="zoom-dialog" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Hapus Permanen</h5>
+                        <h5 class="modal-title">Preview Logo Bank</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span>&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body text-center py-4">
-                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                        <h5 class="mb-3">Hapus Data Secara Permanen?</h5>
-                        <p class="text-muted mb-2">
-                            Apakah yakin akan menghapus data unit yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.
-                        </p>
-                        <div class="alert alert-warning text-left mt-3" role="alert">
-                            <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
-                            <p class="mb-0 mt-2 small">
-                                Seluruh data yang mereferensikan ke data unit seperti data kelas, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai unit.
-                            </p>
-                        </div>
+                    <div class="modal-body text-center p-0">
+                        <img id="image-zoom-preview" class="img-fluid" style="max-height: 80vh;">
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                        <button type="button" id="btn-delete-submit" class="btn btn-danger">
-                            <i id="btn-delete-svg" class="fas fa-times mr-1"></i>
-                            <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
-                                style="display: none;"></span>
-                            Hapus Permanen
-                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                     </div>
                 </div>
             </div>
@@ -777,7 +1128,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p class="mb-0 text-muted">Powered By School Payment App &copy; 2022-2025</p>
+                        <p class="mb-0 text-muted">Powered By School Payment App &copy;
+                            2022-2025</p>
                     </div>
                 </div>
             </div>
@@ -795,10 +1147,6 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
-        // JavaScript will be added in next iteration
-        console.log('DihapusUnit.html loaded successfully');
+        // JavaScript functionality will be added here
+        // This includes: DataTables initialization, form handling, CRUD operations, etc.
     </script>
-
-</body>
-
-</html>

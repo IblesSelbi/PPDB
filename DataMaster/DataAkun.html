@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Daftar Unit Pendidikan Dihapus :: School Payment App</title>
+    <title>Daftar Akun :: School Payment App</title>
 
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -14,6 +14,11 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/select2-bootstrap-theme@0.1.0-beta.10/dist/select2-bootstrap.min.css" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -89,7 +94,7 @@
                         </a>
                         <div class="dropdown-menu">
 
-                             <a class="dropdown-item" href="DataPetugas.html">
+                            <a class="dropdown-item" href="DataPetugas.html">
                                 <i class="fas fa-users text-primary mr-2"></i>Data Petugas
                             </a>
 
@@ -442,20 +447,27 @@
             <ol class="breadcrumb bg-white px-3 mb-2">
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
                 <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Master</a></li>
-                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Unit</a></li>
-                <li class="breadcrumb-item active">Data Dihapus</li>
+                <li class="breadcrumb-item active">Daftar Akun</li>
             </ol>
         </nav>
 
         <!-- Page Header -->
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="font-weight-bold mb-1">Data Dihapus</h2>
-                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data unit pendidikan yang dihapus</p>
+                <h2 class="font-weight-bold mb-1">Daftar Akun</h2>
+                <p class="text-muted mb-0"><i class="fas fa-user-graduate mr-1"></i>Kelola data Akun</p>
             </div>
             <div>
-                <a href="DataUnit.html" class="btn btn-primary px-3">
-                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                <a href="TambahAkun.html">
+                    <button type="button" id="btn-add" class="btn btn-primary px-3 mr-1">
+                        <i class="fas fa-plus mr-2"></i>Tambah
+                    </button>
+                </a>
+                <button type="button" id="btn-export" class="btn btn-primary px-3 mr-1">
+                    <i class="fas fa-file-export mr-2"></i>Ekspor
+                </button>
+                <a href="SinkronAkun.html" class="btn btn-primary px-3 mr-1">
+                    <i class="fas fas fa-sync-alt mr-2"></i>Sinkron
                 </a>
             </div>
         </div>
@@ -475,6 +487,70 @@
             <button type="button" class="close" onclick="hideAlert()">
                 <span>&times;</span>
             </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #667eea;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-primary">156</h3>
+                                <small class="text-muted">Total Akun</small>
+                            </div>
+                            <div class="rounded-circle bg-primary p-3">
+                                <i class="fas fa-users fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #28a745;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-success">98</h3>
+                                <small class="text-muted">Akun Aktif</small>
+                            </div>
+                            <div class="rounded-circle bg-success p-3">
+                                <i class="fas fa-check-circle fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #17a2b8;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-info">42</h3>
+                                <small class="text-muted">Akun Lulus</small>
+                            </div>
+                            <div class="rounded-circle bg-info p-3">
+                                <i class="fas fa-clock fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #e31919;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <h3 class="font-weight-bold mb-0 text-danger">16</h3>
+                                <small class="text-muted">Akun Keluar</small>
+                            </div>
+                            <div class="rounded-circle bg-danger p-3">
+                                <i class="fas fa-user-check fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Filter Card -->
@@ -497,7 +573,7 @@
                         <div class="row">
 
                             <!-- Kata Kunci -->
-                            <div class="col-lg-6 col-md-6 mb-3">
+                            <div class="col-lg-2 col-md-6 mb-3">
                                 <label class="font-weight-bold small mb-2">Kata Kunci</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -506,8 +582,65 @@
                                         </span>
                                     </div>
                                     <input type="text" name="keyword" id="keyword" class="form-control"
-                                        placeholder="Cari kode unit, nama unit..." maxlength="64">
+                                        placeholder="Cari NIS, nama Akun..." maxlength="64">
                                 </div>
+                            </div>
+
+                            <!-- Pilih Unit -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Unit</label>
+                                <select name="unit" id="filter-unit" class="form-control">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <!-- Pilih Kelas -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Kelas</label>
+                                <select name="class_name" id="class-name" class="form-control">
+                                    <option value="">Semua Kelas</option>
+                                    <option value="1 A">1 A</option>
+                                    <option value="1 B">1 B</option>
+                                    <option value="7 A">7 A</option>
+                                    <option value="7 B">7 B</option>
+                                    <option value="10 A">10 A</option>
+                                    <option value="10 B">10 B</option>
+                                </select>
+                            </div>
+
+                            <!-- Tahun Ajaran -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Tahun Ajaran</label>
+                                <select name="class_year" id="class-year" class="form-control">
+                                    <option value="">Semua Tahun</option>
+                                    <option value="2024/2025">2024/2025</option>
+                                    <option value="2025/2026">2025/2026</option>
+                                    <option value="2026/2027">2026/2027</option>
+                                </select>
+                            </div>
+
+                            <!-- Jenis Kelamin -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Jenis Kelamin</label>
+                                <select name="gender" id="gender" class="form-control">
+                                    <option value="">Semua</option>
+                                    <option value="L">Laki-laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+
+                            <!-- Status Akun -->
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Status Akun</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="all">Semua Status</option>
+                                    <option value="A">Aktif</option>
+                                    <option value="L">Lulus</option>
+                                    <option value="K">Keluar</option>
+                                </select>
                             </div>
 
                             <!-- Tombol -->
@@ -532,7 +665,7 @@
             <div class="card-header bg-white py-3 border-bottom">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <h5 class="mb-0 font-weight-bold">
-                        <i class="fas fa-trash-restore text-danger mr-2"></i>Data Unit Pendidikan Dihapus
+                        <i class="fas fa-list text-primary mr-2"></i>Data Akun
                     </h5>
 
                     <!-- Bulk Actions -->
@@ -542,11 +675,8 @@
                             <i class="fas fa-tasks mr-1"></i>Aksi Masal
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item text-info" href="#" id="bulk-restore">
-                                <i class="fas fa-undo mr-2"></i>Pulihkan
-                            </a>
                             <a class="dropdown-item text-danger" href="#" id="bulk-delete">
-                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                             </a>
                         </div>
                     </div>
@@ -564,61 +694,63 @@
                                         <label class="custom-control-label" for="checks"></label>
                                     </div>
                                 </th>
-                                <th width="30" class="align-middle text-center">#</th>
-                                <th class="align-middle text-center">No. Urut</th>
-                                <th class="align-middle">Kode Unit</th>
+
+                                <th width="50" class="align-middle text-center">#</th>
                                 <th class="align-middle">Nama Unit</th>
-                                <th class="align-middle">Keterangan</th>
-                                <th class="align-middle text-center">Jml. Kelas</th>
-                                <th class="align-middle text-center">Jml. Siswa</th>
+                                <th class="align-middle">Nama Akun</th>
+                                <th class="align-middle">Nomor Induk</th>
+                                <th class="align-middle">Nama Lengkap</th>
+                                <th class="align-middle text-center">Kelas Sekarang</th>
+                                <th class="align-middle text-center">Tahun Ajaran</th>
+                                <th class="align-middle">Nomor Telepon</th>
                                 <th class="align-middle text-center">Status</th>
-                                <th class="align-middle text-center">Waktu Dihapus</th>
                                 <th width="70" class="align-middle text-center">Aksi</th>
                             </tr>
                         </thead>
+
                         <tbody>
+
                             <!-- ROW 1 -->
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
-                                            data-id="1">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1">
                                         <label class="custom-control-label" for="check1"></label>
                                     </div>
                                 </td>
+
                                 <td class="align-middle text-center"><strong>1</strong></td>
-                                <td class="align-middle text-center">
-                                   <span class="badge px-3 py-2">
-                                        5
-                                    </span>
-                                </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">TK</span></td>
+
                                 <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Taman Kanak-Kanak</div>
+                                    <span class="badge badge-primary badge-pill px-3 py-2">SMP</span>
                                 </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan tingkat TK
-                                </td>
+
+                                <td class="align-middle font-weight-bold text-primary">34195299</td>
+
+                                <td class="align-middle font-weight-bold">250601001</td>
+
+                                <td class="align-middle font-weight-bold text-muted">Almira Pertiwi</td>
+
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        3 Kelas
+                                    <span class="badge badge-light px-3 py-2">7 A</span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#f0f0f0; color:#555; border-radius:6px;">
+                                        2025/2026
                                     </span>
                                 </td>
+
+                                <td class="align-middle text-center">-</td>
+
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        45 Siswa
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
                                 </td>
-                                <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>12 Des 2024, 14:30
-                                    </small>
-                                </td>
+
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm btn-light dropdown-toggle" type="button"
@@ -626,59 +758,61 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="1">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            <a class="dropdown-item text-info" href="DetailAkun.html">
+                                                <i class="fas fa-eye mr-2"></i>Detail
                                             </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="1">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                            <a class="dropdown-item text-warning" href="EditAkun.html">
+                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger" href="#">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
 
-                            <!-- ROW 2 -->
+
                             <tr>
                                 <td class="align-middle text-center">
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
-                                            data-id="2">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2">
                                         <label class="custom-control-label" for="check2"></label>
                                     </div>
                                 </td>
+
                                 <td class="align-middle text-center"><strong>2</strong></td>
-                                <td class="align-middle text-center">
-                                     <span class="badge px-3 py-2">
-                                        10
-                                    </span>
-                                </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">KB</span></td>
+
                                 <td class="align-middle">
-                                    <div class="font-weight-bold text-muted">Kelompok Bermain</div>
+                                    <span class="badge badge-primary badge-pill px-3 py-2">SMP</span>
                                 </td>
-                                <td class="align-middle text-muted">
-                                    Unit pendidikan kelompok bermain
-                                </td>
+
+                                <td class="align-middle font-weight-bold text-primary">5699494884</td>
+
+                                <td class="align-middle font-weight-bold">5699494884</td>
+
+                                <td class="align-middle font-weight-bold text-muted">Eurolendra</td>
+
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        2 Kelas
+                                    <span class="badge badge-light px-3 py-2">7 A</span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#f0f0f0; color:#555; border-radius:6px;">
+                                        2025/2026
                                     </span>
                                 </td>
+
+                                <td class="align-middle">6281287577746</td>
+
                                 <td class="align-middle text-center">
-                                    <span class="badge badge-light px-3 py-2 shadow-sm">
-                                        30 Siswa
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
                                     </span>
                                 </td>
-                                <td class="align-middle text-center">
-                                   <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
-                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <small class="text-muted">
-                                        <i class="far fa-clock mr-1"></i>10 Des 2024, 09:15
-                                    </small>
-                                </td>
+
                                 <td class="align-middle text-center">
                                     <div class="btn-group">
                                         <button class="btn btn-sm btn-light dropdown-toggle" type="button"
@@ -686,11 +820,75 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item text-info restore" href="#" data-id="2">
-                                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                                            <a class="dropdown-item text-info" href="DetailAkun.html">
+                                                <i class="fas fa-eye mr-2"></i>Detail
                                             </a>
-                                            <a class="dropdown-item text-danger delete" href="#" data-id="2">
-                                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                                            <a class="dropdown-item text-warning" href="EditAkun.html">
+                                                <i class="fas fa-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger" href="#">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check3">
+                                        <label class="custom-control-label" for="check3"></label>
+                                    </div>
+                                </td>
+
+                                <td class="align-middle text-center"><strong>3</strong></td>
+
+                                <td class="align-middle">
+                                    <span class="badge badge-primary badge-pill px-3 py-2">SMP</span>
+                                </td>
+
+                                <td class="align-middle font-weight-bold text-primary">33679940</td>
+
+                                <td class="align-middle font-weight-bold">23071600022</td>
+
+                                <td class="align-middle font-weight-bold text-muted">Fanda</td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2">7 A</span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#f0f0f0; color:#555; border-radius:6px;">
+                                        2025/2026
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge px-3 py-2"
+                                        style="background:#e6f6e7; color:#2a7237; border-radius:25px;">
+                                        <i class="fas fa-check-circle mr-1"></i>Aktif
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-info" href="DetailAkun.html">
+                                                <i class="fas fa-eye mr-2"></i>Detail
+                                            </a>
+                                            <a class="dropdown-item text-warning" href="EditAkun.html">
+                                                <i class="fas a-edit mr-2"></i>Edit
+                                            </a>
+                                            <a class="dropdown-item text-danger" href="#">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
                                             </a>
                                         </div>
                                     </div>
@@ -702,70 +900,31 @@
             </div>
         </div>
 
-        <!-- Modal Restore -->
-        <div class="modal fade" id="restore-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Pulihkan Data</h5>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body text-center py-4">
-                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
-                        <h5 class="mb-3">Pulihkan Data Unit?</h5>
-                        <p class="text-muted mb-0">
-                            Apakah yakin akan memulihkan data unit yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.
-                        </p>
-                    </div>
-                    <div class="modal-footer border-0">
-                        <button type="button" id="btn-restore-abort" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
-                        <button type="button" id="btn-restore-submit" class="btn btn-info">
-                            <i id="btn-restore-svg" class="fas fa-undo mr-1"></i>
-                            <span id="btn-restore-icon" class="spinner-border spinner-border-sm mr-2"
-                                style="display: none;"></span>
-                            Konfirmasi
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Delete Permanent -->
+        <!-- Modal Delete -->
         <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header border-0">
-                        <h5 class="modal-title">Konfirmasi Hapus Permanen</h5>
+                        <h5 class="modal-title">Konfirmasi Penghapusan</h5>
                         <button type="button" class="close" data-dismiss="modal">
                             <span>&times;</span>
                         </button>
                     </div>
                     <div class="modal-body text-center py-4">
                         <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
-                        <h5 class="mb-3">Hapus Data Secara Permanen?</h5>
-                        <p class="text-muted mb-2">
-                            Apakah yakin akan menghapus data unit yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.
-                        </p>
-                        <div class="alert alert-warning text-left mt-3" role="alert">
-                            <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
-                            <p class="mb-0 mt-2 small">
-                                Seluruh data yang mereferensikan ke data unit seperti data kelas, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai unit.
-                            </p>
-                        </div>
+                        <h5 class="mb-3">Hapus Data Akun?</h5>
+                        <p class="text-muted mb-2">Apakah yakin akan menghapus data yang dipilih?</p>
+                        <p class="text-muted mb-0">Data Akun akan dipindahkan ke daftar data dihapus terlebih dahulu
+                            sebelum dapat anda hapus secara permanen.</p>
                     </div>
                     <div class="modal-footer border-0">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Batalkan
-                        </button>
+                        <button type="button" id="btn-delete-abort" class="btn btn-secondary"
+                            data-dismiss="modal">Batalkan</button>
                         <button type="button" id="btn-delete-submit" class="btn btn-danger">
-                            <i id="btn-delete-svg" class="fas fa-times mr-1"></i>
+                            <i id="btn-delete-svg" class="fas fa-check-circle mr-1"></i>
                             <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
                                 style="display: none;"></span>
-                            Hapus Permanen
+                            <span id="btn-delete-text">Ya, Hapus</span>
                         </button>
                     </div>
                 </div>
@@ -793,12 +952,3 @@
     <!-- DataTables -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
-
-    <script>
-        // JavaScript will be added in next iteration
-        console.log('DihapusUnit.html loaded successfully');
-    </script>
-
-</body>
-
-</html>
