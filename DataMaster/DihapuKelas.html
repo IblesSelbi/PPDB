@@ -96,7 +96,8 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="font-weight-bold mb-1">Data Kelas Dihapus</h2>
-                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data kelas yang telah dihapus</p>
+                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data kelas yang telah dihapus
+                </p>
             </div>
             <div>
                 <a href="DataKelas.html" class="btn btn-outline-primary px-3 mr-2">
@@ -436,10 +437,13 @@
                     <div class="modal-body text-center py-4">
                         <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
                         <h5 class="mb-3">Hapus Data Kelas Secara Permanen?</h5>
-                        <p class="text-muted mb-2">Apakah yakin akan menghapus data kelas yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.</p>
+                        <p class="text-muted mb-2">Apakah yakin akan menghapus data kelas yang dipilih secara permanen?
+                            Data yang telah dihapus tidak dapat dikembalikan.</p>
                         <div class="alert alert-warning mt-3">
                             <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
-                            <p class="mb-0 small mt-2">Seluruh data yang mereferensikan ke data kelas dipilih seperti data siswa, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai kelas.</p>
+                            <p class="mb-0 small mt-2">Seluruh data yang mereferensikan ke data kelas dipilih seperti
+                                data siswa, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak
+                                memiliki nilai kelas.</p>
                         </div>
                     </div>
                     <div class="modal-footer border-0">
@@ -483,8 +487,389 @@
 
     <!-- JavaScript akan ditambahkan berikutnya -->
     <script>
-        // JavaScript code akan ditambahkan di sini
-        console.log('DihapusKelas.html loaded');
+        $(document).ready(function () {
+            // ===========================
+            // INITIALIZE DATATABLES
+            // ===========================
+            const table = $('#datatable').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json',
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari data...",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    zeroRecords: "Tidak ada data yang cocok",
+                    emptyTable: "Tidak ada data kelas yang dihapus"
+                },
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                order: [[10, 'desc']], // Sort by waktu dihapus
+                columnDefs: [
+                    { orderable: false, targets: [0, 11] }, // Checkbox dan action tidak bisa di-sort
+                    { className: 'text-center', targets: [0, 1, 5, 6, 7, 8, 9, 10, 11] }
+                ],
+                drawCallback: function () {
+                    // Update row numbers
+                    const api = this.api();
+                    api.column(1, { page: 'current' }).nodes().each(function (cell, i) {
+                        const pageInfo = api.page.info();
+                        $(cell).html('<strong>' + (pageInfo.start + i + 1) + '</strong>');
+                    });
+
+                    // Reset checkbox
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }
+            });
+
+            // ===========================
+            // INITIALIZE SELECT2
+            // ===========================
+            $('#filter-unit, #class-name, #class-year').select2({
+                theme: 'bootstrap',
+                width: '100%',
+                placeholder: function () {
+                    return $(this).find('option:first').text();
+                },
+                allowClear: true
+            });
+
+            // ===========================
+            // FILTER COLLAPSE ICON TOGGLE
+            // ===========================
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            }).on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // ===========================
+            // CHECKBOX FUNCTIONALITY
+            // ===========================
+            // Check all checkbox
+            $('#checks').on('change', function () {
+                const isChecked = $(this).prop('checked');
+                $('.row-check').prop('checked', isChecked);
+                updateBulkActions();
+            });
+
+            // Individual checkbox
+            $(document).on('change', '.row-check', function () {
+                const totalCheckbox = $('.row-check').length;
+                const checkedCheckbox = $('.row-check:checked').length;
+                $('#checks').prop('checked', totalCheckbox === checkedCheckbox);
+                updateBulkActions();
+            });
+
+            // Update bulk actions visibility
+            function updateBulkActions() {
+                const checkedCount = $('.row-check:checked').length;
+                if (checkedCount > 0) {
+                    $('.bulk-delete').fadeIn(200);
+                } else {
+                    $('.bulk-delete').fadeOut(200);
+                }
+            }
+
+            // ===========================
+            // FILTER FUNCTIONALITY
+            // ===========================
+            $('#btn-apply-filter').on('click', function () {
+                applyFilter();
+            });
+
+            $('#btn-reset-filter').on('click', function () {
+                resetFilter();
+            });
+
+            // Enter key to apply filter
+            $('#filter-form input').on('keypress', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    applyFilter();
+                }
+            });
+
+            function applyFilter() {
+                const keyword = $('#keyword').val().toLowerCase();
+                const unit = $('#filter-unit').val();
+                const className = $('#class-name').val();
+                const classYear = $('#class-year').val();
+
+                $.fn.dataTable.ext.search.push(function (settings, data) {
+                    const rowUnit = data[2]; // Unit column
+                    const rowCode = data[3].toLowerCase(); // Kode kelas
+                    const rowName = data[4].toLowerCase(); // Nama kelas
+                    const rowYear = data[5]; // Tahun ajaran
+
+                    // Keyword filter
+                    if (keyword && !rowCode.includes(keyword) && !rowName.includes(keyword)) {
+                        return false;
+                    }
+
+                    // Unit filter
+                    if (unit && !rowUnit.includes(unit)) {
+                        return false;
+                    }
+
+                    // Class name filter
+                    if (className && !rowName.includes(className.toLowerCase())) {
+                        return false;
+                    }
+
+                    // Year filter
+                    if (classYear && !rowYear.includes(classYear)) {
+                        return false;
+                    }
+
+                    return true;
+                });
+
+                table.draw();
+                $.fn.dataTable.ext.search.pop();
+
+                showAlert('success', 'Filter Diterapkan', 'Filter berhasil diterapkan pada data kelas');
+                $('#filterCollapse').collapse('hide');
+            }
+
+            function resetFilter() {
+                $('#filter-form')[0].reset();
+                $('#filter-unit, #class-name, #class-year').val('').trigger('change');
+                table.search('').draw();
+                showAlert('info', 'Filter Direset', 'Semua filter telah direset');
+            }
+
+            // ===========================
+            // RESTORE FUNCTIONALITY
+            // ===========================
+            let restoreIds = [];
+
+            // Single restore
+            $(document).on('click', '.restore', function (e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                const classUnit = $(this).data('class-unit');
+                const classYear = $(this).data('class-year');
+                const classCode = $(this).data('class-code');
+                const className = $(this).data('class-name');
+
+                restoreIds = [id];
+
+                $('#restore-dialog .modal-body p').html(
+                    `Apakah yakin akan memulihkan data kelas <strong>${classUnit} - ${className} (${classCode})</strong> tahun ajaran <strong>${classYear}</strong>?`
+                );
+
+                $('#restore-dialog').modal('show');
+            });
+
+            // Bulk restore
+            $('#bulk-restore').on('click', function (e) {
+                e.preventDefault();
+                restoreIds = [];
+                $('.row-check:checked').each(function () {
+                    restoreIds.push($(this).data('id'));
+                });
+
+                if (restoreIds.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dipulihkan');
+                    return;
+                }
+
+                $('#restore-dialog .modal-body p').html(
+                    `Apakah yakin akan memulihkan <strong>${restoreIds.length} data kelas</strong> yang dipilih?`
+                );
+
+                $('#restore-dialog').modal('show');
+            });
+
+            // Submit restore
+            $('#btn-restore-submit').on('click', function () {
+                $(this).prop('disabled', true);
+                $('#btn-restore-svg').hide();
+                $('#btn-restore-icon').show();
+                $('#btn-restore-text').text('Memulihkan...');
+                $('#btn-restore-abort').prop('disabled', true);
+
+                // Simulasi AJAX request
+                setTimeout(function () {
+                    // Remove rows from table
+                    restoreIds.forEach(function (id) {
+                        table.row($(`input[data-id="${id}"]`).closest('tr')).remove();
+                    });
+                    table.draw();
+
+                    // Reset modal
+                    $('#btn-restore-submit').prop('disabled', false);
+                    $('#btn-restore-svg').show();
+                    $('#btn-restore-icon').hide();
+                    $('#btn-restore-text').text('Ya, Pulihkan');
+                    $('#btn-restore-abort').prop('disabled', false);
+                    $('#restore-dialog').modal('hide');
+
+                    // Show success message
+                    const message = restoreIds.length === 1
+                        ? 'Data kelas berhasil dipulihkan'
+                        : `${restoreIds.length} data kelas berhasil dipulihkan`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    // Reset selection
+                    restoreIds = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // DELETE PERMANENT FUNCTIONALITY
+            // ===========================
+            let deleteIds = [];
+
+            // Single delete
+            $(document).on('click', '.delete-permanent', function (e) {
+                e.preventDefault();
+                const id = $(this).data('id');
+                deleteIds = [id];
+                $('#delete-dialog').modal('show');
+            });
+
+            // Bulk delete
+            $('#bulk-delete').on('click', function (e) {
+                e.preventDefault();
+                deleteIds = [];
+                $('.row-check:checked').each(function () {
+                    deleteIds.push($(this).data('id'));
+                });
+
+                if (deleteIds.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dihapus');
+                    return;
+                }
+
+                $('#delete-dialog .modal-body h5').html(
+                    `Hapus <strong>${deleteIds.length} Data Kelas</strong> Secara Permanen?`
+                );
+
+                $('#delete-dialog').modal('show');
+            });
+
+            // Submit delete permanent
+            $('#btn-delete-submit').on('click', function () {
+                $(this).prop('disabled', true);
+                $('#btn-delete-svg').hide();
+                $('#btn-delete-icon').show();
+                $('#btn-delete-text').text('Menghapus...');
+                $('#btn-delete-abort').prop('disabled', true);
+
+                // Simulasi AJAX request
+                setTimeout(function () {
+                    // Remove rows from table
+                    deleteIds.forEach(function (id) {
+                        table.row($(`input[data-id="${id}"]`).closest('tr')).remove();
+                    });
+                    table.draw();
+
+                    // Reset modal
+                    $('#btn-delete-submit').prop('disabled', false);
+                    $('#btn-delete-svg').show();
+                    $('#btn-delete-icon').hide();
+                    $('#btn-delete-text').text('Ya, Hapus Permanen');
+                    $('#btn-delete-abort').prop('disabled', false);
+                    $('#delete-dialog').modal('hide');
+
+                    // Show success message
+                    const message = deleteIds.length === 1
+                        ? 'Data kelas berhasil dihapus secara permanen'
+                        : `${deleteIds.length} data kelas berhasil dihapus secara permanen`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    // Reset selection
+                    deleteIds = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                // Reset classes
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                // Set icon and style based on type
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+                let borderColor = '#216fcb';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        borderColor = '#28a745';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        borderColor = '#dc3545';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        borderColor = '#ffc107';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        borderColor = '#17a2b8';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertDiv.css('border-left-color', borderColor);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                // Show alert with fade in
+                alertDiv.fadeIn(300).addClass('show');
+
+                // Auto hide after 5 seconds
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            // Make hideAlert global
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // INITIALIZATION MESSAGE
+            // ===========================
+            console.log('DihapusKelas.js initialized successfully');
+
+            // Show welcome message
+            setTimeout(function () {
+                const rowCount = table.rows().count();
+                if (rowCount > 0) {
+                    showAlert('info', 'Data Kelas Dihapus', `Menampilkan ${rowCount} data kelas yang telah dihapus`);
+                }
+            }, 500);
+        });         
     </script>
 
 </body>

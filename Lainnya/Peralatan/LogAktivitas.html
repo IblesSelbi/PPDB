@@ -598,7 +598,7 @@
                                     <br>
                                     <small class="text-muted"><i class="far fa-clock mr-1"></i>13:15:20</small>
                                 </td>
-                               <td class="align-middle">
+                                <td class="align-middle">
                                     <div class="font-weight-bold">Admin Operator</div>
                                     <small class="text-muted">NIP 20250601001</small>
                                 </td>
@@ -817,22 +817,169 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
-        // Dropdown menu handler
-        $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+        $(document).ready(function () {
+
+            function hideAlert() {
+                $('#alert').removeClass('show').addClass('fade').hide();
             }
 
-            var $subMenu = $(this).next('.dropdown-menu');
-            $subMenu.toggleClass('show');
+            function showAlert(title, content, type) {
+                var iconClass = 'fa-info-circle text-primary';
+                var borderColor = '#216fcb';
 
-            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function () {
-                $('.dropdown-menu .show').removeClass('show');
+                switch (type) {
+                    case 'success': iconClass = 'fa-check-circle text-success'; borderColor = '#1d7a3d'; break;
+                    case 'warning': iconClass = 'fa-exclamation-triangle text-warning'; borderColor = '#b77400'; break;
+                    case 'danger': iconClass = 'fa-times-circle text-danger'; borderColor = '#c82333'; break;
+                }
+
+                $('#alert-icon').attr('class', 'fas ' + iconClass + ' fa-2x');
+                $('#alert-title').text(title || 'Informasi');
+                $('#alert-content').html(content || '');
+                $('#alert').css('border-left', '4px solid ' + borderColor);
+                $('#alert').show().removeClass('fade').addClass('show');
+
+                clearTimeout(window._alertTimeout);
+                window._alertTimeout = setTimeout(function () {
+                    hideAlert();
+                }, 6000);
+            }
+
+            window.hideAlert = hideAlert;
+            window.showAlert = showAlert;
+
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+            $('#filterCollapse').on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
             });
 
-            return false;
+            $('.dropdown-menu a.dropdown-toggle').on('click', function () {
+                var $el = $(this);
+                var $parentMenu = $el.closest('.dropdown-menu');
+
+                if (!$el.next().hasClass('show')) {
+                    $parentMenu.find('.show').removeClass('show');
+                }
+
+                var $subMenu = $el.next('.dropdown-menu');
+                $subMenu.toggleClass('show');
+
+                $el.parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function () {
+                    $parentMenu.find('.show').removeClass('show');
+                });
+
+                return false;
+            });
+
+            $('.dropstart-js > a.dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                var $p = $(this).parent();
+                $p.find('.dropdown-menu').first().toggleClass('show');
+                $(this).find('.submenu-arrow').toggleClass('rotated');
+            });
+
+            var table = $('#datatable').DataTable({
+                paging: true,
+                searching: true,
+                lengthChange: true,
+                pageLength: 10,
+                autoWidth: false,
+                ordering: true,
+                order: [[1, 'desc']],
+                columnDefs: [
+                    { orderable: false, targets: [0, 6] }
+                ]
+            });
+
+            table.on('order.dt search.dt draw.dt page.dt', function () {
+                table.column(0, {
+                    search: 'applied',
+                    order: 'applied',
+                    page: 'current'
+                }).nodes().each(function (cell, i) {
+                    var info = table.page.info();
+                    var number = info.start + i + 1;
+                    $(cell).html(number);
+                });
+            }).draw();
+
+
+            function extractDateFromCell(text) {
+                if (!text) return null;
+                var m = text.match(/\d{4}-\d{2}-\d{2}/);
+                return m ? m[0] : null;
+            }
+
+            function dateToEpoch(str) {
+                if (!str) return null;
+                var p = str.split('-');
+                if (p.length !== 3) return null;
+                var d = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
+                return d.getTime();
+            }
+
+
+            $.fn.dataTable.ext.search.push(function (settings, data) {
+                if (settings.nTable.id !== 'datatable') return true;
+
+                var keyword = $('#keyword').val().trim().toLowerCase();
+                var module = $('#log-module').val();
+                var datePeriod = $('#date-period').val().trim();
+
+                var waktuCell = data[1] || '';
+                var namaCell = data[2] || '';
+                var akunCell = data[3] || '';
+                var keteranganCell = data[5] || '';
+
+                if (keyword) {
+                    var hay = (namaCell + ' ' + akunCell + ' ' + keteranganCell).toLowerCase();
+                    if (hay.indexOf(keyword) === -1) return false;
+                }
+
+                if (module) {
+                    var hay2 = (namaCell + ' ' + akunCell + ' ' + keteranganCell).toLowerCase();
+                    if (hay2.indexOf(module.toLowerCase()) === -1) return false;
+                }
+
+                if (datePeriod) {
+                    var parts = datePeriod.split('-').map(s => s.trim());
+                    if (parts.length >= 2) {
+                        var start = dateToEpoch(parts[0]);
+                        var end = dateToEpoch(parts[parts.length - 1]);
+                        var rowDate = extractDateFromCell(waktuCell);
+                        var rowEpoch = dateToEpoch(rowDate);
+
+                        if (rowEpoch < start || rowEpoch > end + 86399999) return false;
+                    }
+                }
+
+                return true;
+            });
+
+            $('#btn-apply-filter').on('click', function () {
+                table.draw();
+                showAlert('Filter diterapkan', 'Filter berhasil diterapkan.', 'info');
+            });
+
+            $('#btn-reset-filter').on('click', function () {
+                $('#filter-form')[0].reset();
+                $('#keyword').val('');
+                $('#date-period').val('');
+                $('#log-module').val('');
+                table.draw();
+
+                showAlert('Filter direset', 'Semua filter dikembalikan.', 'success');
+            });
+
+            $('#filterCollapse').on('shown.bs.collapse', function () {
+                $('#keyword').focus();
+            });
+
         });
     </script>
+
 
 </body>
 

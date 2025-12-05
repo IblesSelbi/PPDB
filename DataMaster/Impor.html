@@ -651,8 +651,429 @@
 
     <!-- Custom JavaScript akan ditambahkan -->
     <script>
-        // JavaScript code akan ditambahkan di sini
-        console.log('ImporUnit.html loaded');
+        $(document).ready(function () {
+            let importData = [];
+
+            // ===========================
+            // DOWNLOAD TEMPLATE
+            // ===========================
+            $('#btn-download').on('click', function () {
+                showAlert('info', 'Mengunduh Template', 'Template Excel sedang diunduh...');
+
+                // Simulate download
+                setTimeout(function () {
+                    // In real application, this would trigger actual file download
+                    const link = document.createElement('a');
+                    link.href = '#'; // Replace with actual template URL
+                    link.download = 'template_impor_unit.xlsx';
+                    // link.click();
+
+                    showAlert('success', 'Berhasil', 'Template Excel berhasil diunduh');
+                }, 500);
+            });
+
+            // ===========================
+            // FILE INPUT CHANGE
+            // ===========================
+            $('#import-file').on('change', function (e) {
+                const file = e.target.files[0];
+
+                if (file) {
+                    const fileName = file.name;
+                    const fileExt = fileName.split('.').pop().toLowerCase();
+
+                    // Validate file extension
+                    if (fileExt !== 'xls' && fileExt !== 'xlsx') {
+                        $('#import-file-feedback').text('Format file harus .xls atau .xlsx').show();
+                        $(this).val('');
+                        $('.custom-file-label').text('Pilih file...');
+                        return;
+                    }
+
+                    // Validate file size (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        $('#import-file-feedback').text('Ukuran file maksimal 5MB').show();
+                        $(this).val('');
+                        $('.custom-file-label').text('Pilih file...');
+                        return;
+                    }
+
+                    $('#import-file-feedback').hide();
+                    $('.custom-file-label').text(fileName);
+                }
+            });
+
+            // ===========================
+            // FORM SUBMIT (UPLOAD)
+            // ===========================
+            $('#form').on('submit', function (e) {
+                e.preventDefault();
+
+                const file = $('#import-file')[0].files[0];
+
+                if (!file) {
+                    $('#import-file-feedback').text('Silakan pilih file terlebih dahulu').show();
+                    return;
+                }
+
+                uploadFile(file);
+            });
+
+            function uploadFile(file) {
+                const btn = $('#btn-submit');
+                const btnText = $('#btn-text');
+                const btnIcon = $('#btn-icon');
+                const btnSpinner = $('#btn-spinner');
+
+                btn.prop('disabled', true);
+                btnText.text('Mengunggah...');
+                btnIcon.hide();
+                btnSpinner.show();
+
+                // Simulate file upload and processing
+                setTimeout(function () {
+                    // Simulate reading Excel data
+                    importData = generateSampleData();
+
+                    btn.prop('disabled', false);
+                    btnText.text('Unggah');
+                    btnIcon.show();
+                    btnSpinner.hide();
+
+                    displayPreview(importData);
+                    $('#btn-import-store').prop('disabled', false);
+
+                    showAlert('success', 'Berhasil', `File berhasil diunggah. Ditemukan ${importData.length} baris data untuk diimpor`);
+                }, 2000);
+            }
+
+            // ===========================
+            // GENERATE SAMPLE DATA
+            // ===========================
+            function generateSampleData() {
+                return [
+                    {
+                        code: 'SD',
+                        name: 'Sekolah Dasar',
+                        order: 1,
+                        description: 'Unit pendidikan tingkat SD',
+                        status: 'Aktif',
+                        ppdb_status: 'Buka'
+                    },
+                    {
+                        code: 'SMP',
+                        name: 'Sekolah Menengah Pertama',
+                        order: 2,
+                        description: 'Unit pendidikan tingkat SMP',
+                        status: 'Aktif',
+                        ppdb_status: 'Buka'
+                    },
+                    {
+                        code: 'SMA',
+                        name: 'Sekolah Menengah Atas',
+                        order: 3,
+                        description: 'Unit pendidikan tingkat SMA',
+                        status: 'Aktif',
+                        ppdb_status: 'Tutup'
+                    },
+                    {
+                        code: 'TK',
+                        name: 'Taman Kanak-Kanak',
+                        order: 0,
+                        description: 'Unit pendidikan tingkat TK',
+                        status: 'Aktif',
+                        ppdb_status: 'Buka'
+                    }
+                ];
+            }
+
+            // ===========================
+            // DISPLAY PREVIEW
+            // ===========================
+            function displayPreview(data) {
+                const tbody = $('#import-preview');
+                tbody.empty();
+
+                if (data.length === 0) {
+                    tbody.html(`
+                <tr>
+                    <td colspan="8" class="text-center text-muted py-5">
+                        <i class="fas fa-file-excel fa-3x mb-3 d-block" style="opacity: 0.3;"></i>
+                        <p class="mb-0">Belum ada data untuk ditampilkan. Silakan upload file Excel terlebih dahulu.</p>
+                    </td>
+                </tr>
+            `);
+                    return;
+                }
+
+                data.forEach(function (item, index) {
+                    const statusBadge = item.status === 'Aktif'
+                        ? '<span class="badge badge-success">Aktif</span>'
+                        : '<span class="badge badge-danger">Non-Aktif</span>';
+
+                    const ppdbBadge = item.ppdb_status === 'Buka'
+                        ? '<span class="badge badge-primary">Buka</span>'
+                        : '<span class="badge badge-secondary">Tutup</span>';
+
+                    const row = `
+                <tr data-index="${index}">
+                    <td class="text-center align-middle">${index + 1}</td>
+                    <td class="align-middle">${item.code}</td>
+                    <td class="align-middle">${item.name}</td>
+                    <td class="align-middle text-center">${item.order}</td>
+                    <td class="align-middle">${item.description}</td>
+                    <td class="text-center align-middle">${statusBadge}</td>
+                    <td class="text-center align-middle">${ppdbBadge}</td>
+                    <td class="text-center align-middle">
+                        <div class="btn-group btn-group-sm">
+                            <button class="btn btn-success btn-sm btn-import-row" data-index="${index}">
+                                <i class="fas fa-check mr-1"></i>Impor
+                            </button>
+                            <button class="btn btn-danger btn-sm btn-skip-row" data-index="${index}">
+                                <i class="fas fa-times mr-1"></i>Lewati
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+
+                    tbody.append(row);
+                });
+            }
+
+            // ===========================
+            // IMPORT SINGLE ROW
+            // ===========================
+            $(document).on('click', '.btn-import-row', function () {
+                const index = $(this).data('index');
+                const row = $(this).closest('tr');
+
+                $(this).prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Mengimpor...');
+
+                setTimeout(function () {
+                    row.fadeOut(300, function () {
+                        $(this).remove();
+
+                        // Update remaining data count
+                        const remaining = $('#import-preview tr').length;
+                        if (remaining === 0) {
+                            $('#import-preview').html(`
+                        <tr>
+                            <td colspan="8" class="text-center text-muted py-4">
+                                <i class="fas fa-check-circle fa-3x mb-3 d-block text-success"></i>
+                                <p class="mb-0">Semua data berhasil diimpor atau dilewati</p>
+                            </td>
+                        </tr>
+                    `);
+                            $('#btn-import-store').prop('disabled', true);
+                        }
+
+                        showAlert('success', 'Berhasil', 'Data berhasil diimpor ke sistem');
+                    });
+                }, 1000);
+            });
+
+            // ===========================
+            // SKIP SINGLE ROW
+            // ===========================
+            $(document).on('click', '.btn-skip-row', function () {
+                const index = $(this).data('index');
+                const row = $(this).closest('tr');
+
+                row.fadeOut(300, function () {
+                    $(this).remove();
+
+                    // Update remaining data count
+                    const remaining = $('#import-preview tr').length;
+                    if (remaining === 0) {
+                        $('#import-preview').html(`
+                    <tr>
+                        <td colspan="8" class="text-center text-muted py-4">
+                            <i class="fas fa-check-circle fa-3x mb-3 d-block text-success"></i>
+                            <p class="mb-0">Semua data berhasil diimpor atau dilewati</p>
+                        </td>
+                    </tr>
+                `);
+                        $('#btn-import-store').prop('disabled', true);
+                    }
+
+                    showAlert('info', 'Data Dilewati', 'Data berhasil dilewati dan tidak akan diimpor');
+                });
+            });
+
+            // ===========================
+            // IMPORT ALL DATA
+            // ===========================
+            $('#btn-import-store').on('click', function () {
+                const remaining = $('#import-preview tr').not(':has(td[colspan])').length;
+
+                if (remaining === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang tersisa untuk diimpor');
+                    return;
+                }
+
+                $('#import-dialog').modal('show');
+            });
+
+            $('#btn-import-submit').on('click', function () {
+                const btn = $(this);
+                const btnSvg = $('#btn-import-svg');
+                const btnSpinner = $('#btn-import-icon');
+
+                btn.prop('disabled', true);
+                $('#btn-import-abort').prop('disabled', true);
+                btnSvg.hide();
+                btnSpinner.show();
+                btn.contents().filter(function () {
+                    return this.nodeType === 3;
+                }).last().replaceWith(' Memproses...');
+
+                setTimeout(function () {
+                    // Clear all preview data
+                    $('#import-preview').html(`
+                <tr>
+                    <td colspan="8" class="text-center text-muted py-4">
+                        <i class="fas fa-check-circle fa-3x mb-3 d-block text-success"></i>
+                        <p class="mb-0">Semua data berhasil diimpor ke sistem</p>
+                    </td>
+                </tr>
+            `);
+
+                    $('#btn-import-store').prop('disabled', true);
+
+                    // Reset form
+                    $('#import-file').val('');
+                    $('.custom-file-label').text('Pilih file...');
+                    importData = [];
+
+                    // Reset modal
+                    btn.prop('disabled', false);
+                    $('#btn-import-abort').prop('disabled', false);
+                    btnSvg.show();
+                    btnSpinner.hide();
+                    btn.contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).last().replaceWith(' Konfirmasi');
+
+                    $('#import-dialog').modal('hide');
+                    $('#success-dialog').modal('show');
+                }, 2000);
+            });
+
+            // ===========================
+            // SUCCESS DIALOG CLOSE
+            // ===========================
+            $('#success-dialog').on('hidden.bs.modal', function () {
+                window.location.href = 'DataUnit.html';
+            });
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+                let borderColor = '#216fcb';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        borderColor = '#28a745';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        borderColor = '#dc3545';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        borderColor = '#ffc107';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        borderColor = '#17a2b8';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertDiv.css('border-left-color', borderColor);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                alertDiv.fadeIn(300).addClass('show');
+
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+                submenu.toggleClass('show');
+
+                const submenuWidth = submenu.outerWidth();
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // PREVENT MODAL CLOSE ON PROCESSING
+            // ===========================
+            $('#import-dialog').on('hide.bs.modal', function (e) {
+                if ($('#btn-import-icon').is(':visible')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            console.log('Impor.js initialized successfully');
+        });
     </script>
 
 </body>

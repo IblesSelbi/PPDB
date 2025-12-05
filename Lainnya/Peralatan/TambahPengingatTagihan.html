@@ -400,7 +400,7 @@
         </div>
     </nav>
 
-    
+
     <!-- MAIN CONTENT -->
     <div class="container-fluid py-4">
 
@@ -874,7 +874,213 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- Custom JavaScript akan ditambahkan kemudian -->
+    <script>
+        $(document).ready(function () {
+
+            /* ============================================================
+               1. ALERT SYSTEM
+            ============================================================ */
+            function hideAlert() {
+                $('#alert').removeClass('show').addClass('fade').hide();
+            }
+
+            function showAlert(title, message, type = 'info') {
+
+                let icon = 'fa-info-circle text-primary';
+                let border = '#3d5ce6';
+
+                if (type === 'success') {
+                    icon = 'fa-check-circle text-success';
+                    border = '#28a745';
+                } else if (type === 'warning') {
+                    icon = 'fa-exclamation-triangle text-warning';
+                    border = '#ffc107';
+                } else if (type === 'danger') {
+                    icon = 'fa-times-circle text-danger';
+                    border = '#dc3545';
+                }
+
+                $('#alert-icon').attr('class', `fas ${icon} fa-2x`);
+                $('#alert-title').text(title);
+                $('#alert-content').html(message);
+                $('#alert').css('border-left', `4px solid ${border}`);
+                $('#alert').show().removeClass('fade').addClass('show');
+
+                setTimeout(function () { hideAlert(); }, 7000);
+            }
+
+            window.hideAlert = hideAlert;
+
+
+            /* ============================================================
+               2. SHOW/HIDE CLASSROOM LIST BY UNIT
+            ============================================================ */
+            $("#unit").on("change", function () {
+                let unit = $(this).val();
+
+                $("#classroom-section").hide();
+
+                if (unit !== "") {
+                    $("#classroom-section").slideDown(200);
+                    loadClassroom(unit);
+                }
+            });
+
+            function loadClassroom(unit) {
+                // Dummy data (nanti bisa diganti API)
+                let list = `
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input classroom-check" id="c1">
+                        <label class="custom-control-label" for="c1"></label>
+                    </div>
+                </td>
+                <td>1</td>
+                <td>${unit}</td>
+                <td>${unit}-01</td>
+                <td>Kelas 1</td>
+                <td>2025</td>
+                <td>35</td>
+                <td><span class="badge badge-success">Aktif</span></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input classroom-check" id="c2">
+                        <label class="custom-control-label" for="c2"></label>
+                    </div>
+                </td>
+                <td>2</td>
+                <td>${unit}</td>
+                <td>${unit}-02</td>
+                <td>Kelas 2</td>
+                <td>2025</td>
+                <td>32</td>
+                <td><span class="badge badge-success">Aktif</span></td>
+            </tr>
+        `;
+
+                $("#classroom-list").html(list);
+            }
+
+
+            /* ============================================================
+               3. SHOW/HIDE SELECT CLASSROOM TABLE
+            ============================================================ */
+            $("#select-classroom").on("change", function () {
+                if ($(this).prop("checked")) {
+                    $("#classroom-table").slideDown(200);
+                } else {
+                    $("#classroom-table").slideUp(200);
+                }
+            });
+
+            // Select all kelas
+            $("#classroom-checks").on("change", function () {
+                $(".classroom-check").prop("checked", $(this).prop("checked"));
+            });
+
+
+            /* ============================================================
+               4. SHOW BILLING ITEMS WHEN ACTION = PROSES / INVOICE
+            ============================================================ */
+            $("#billing-action").on("change", function () {
+                let val = $(this).val();
+
+                if (val === "Kirim Pemberitahuan") {
+                    $("#bill-items-section").slideUp(200);
+                    $("#input-billing-end").slideUp(200);
+                } else {
+                    $("#bill-items-section").slideDown(200);
+                    $("#input-billing-end").slideDown(200);
+                }
+
+                // Show modal info
+                if (val !== "") {
+                    $("#action-modal-title").text(val);
+                    $("#action-modal-msg").text("Pastikan data item tagihan dan jadwal sudah benar.");
+                    $("#actionModal").modal("show");
+                }
+            });
+
+
+            /* ============================================================
+               5. SHOW/HIDE MESSAGE SECTION IF CHANNEL SELECTED
+            ============================================================ */
+            $(".billing-channels").on("change", function () {
+                let anyChecked = $(".billing-channels:checked").length > 0;
+                if (anyChecked) {
+                    $("#message-section").slideDown(200);
+                } else {
+                    $("#message-section").slideUp(200);
+                }
+            });
+
+
+            /* ============================================================
+               6. VALIDATION
+            ============================================================ */
+            function invalid(id, msg) {
+                $(`#${id}-feedback`).text(msg).show();
+                return false;
+            }
+
+            function clearInvalid() {
+                $("small.form-text.text-danger").hide();
+            }
+
+
+            /* ============================================================
+               7. HANDLE SUBMIT FORM
+            ============================================================ */
+            $("#form-reminder").on("submit", function (e) {
+                e.preventDefault();
+                clearInvalid();
+
+                let name = $("#billing-name").val().trim();
+                let unit = $("#unit").val();
+                let action = $("#billing-action").val();
+                let type = $("#billing-type").val();
+                let startDate = $("#billing-start-date").val();
+                let startTime = $("#billing-start-time").val();
+                let channels = $(".billing-channels:checked").length;
+
+                if (name === "") return invalid("billing-name", "Nama pengingat wajib diisi.");
+                if (unit === "") return invalid("unit", "Pilih unit terlebih dahulu.");
+                if (action === "") return invalid("billing-action", "Aksi wajib dipilih.");
+                if (type === "") return invalid("billing-type", "Jenis pengulangan wajib dipilih.");
+                if (startDate === "") return invalid("billing-start-date", "Tanggal mulai wajib diisi.");
+                if (startTime === "") return invalid("billing-start-date", "Waktu mulai wajib diisi.");
+                if (channels === 0) return invalid("channels", "Pilih minimal 1 channel notifikasi.");
+
+                // All good → Simulate success
+                $("#btn-text").text("Menyimpan...");
+                $("#btn-icon").attr("class", "fas fa-spinner fa-spin mr-2");
+
+                setTimeout(function () {
+                    $("#btn-text").text("Simpan Data");
+                    $("#btn-icon").attr("class", "fas fa-check-circle mr-2");
+
+                    showAlert(
+                        "Berhasil Disimpan!",
+                        "Pengingat tagihan berhasil ditambahkan dan akan dijalankan sesuai jadwal.",
+                        "success"
+                    );
+
+                    // reset form
+                    $("#form-reminder")[0].reset();
+                    $("#classroom-section").hide();
+                    $("#classroom-table").hide();
+                    $("#bill-items-section").hide();
+                    $("#message-section").hide();
+
+                }, 1200);
+            });
+
+        });
+    </script>
+
 
 </body>
 

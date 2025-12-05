@@ -798,7 +798,220 @@ _Anda menerima pesan otomatis ini karena nomor anda terdaftar pada sistem pembay
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- JavaScript akan ditambahkan di sini -->
+    <script>
+        /**
+         * detail-antrean.js
+         * Interaksi JS untuk halaman Detail Antrean (Bootstrap 4 + jQuery)
+         * Pastikan file ini dimuat setelah jQuery & Bootstrap JS.
+         */
+
+        /* -------------------------
+           Utility: Alert kecil di page
+           ------------------------- */
+        function showAlert(type, title, message, autoHide = true, duration = 4000) {
+            const $alert = $('#alert');
+            const $icon = $('#alert-icon');
+            const $title = $('#alert-title');
+            const $content = $('#alert-content');
+
+            // reset classes & icon
+            $alert.removeClass('alert-success alert-danger alert-info alert-warning show');
+            $icon.removeClass('text-primary text-success text-danger text-warning');
+
+            if (type === 'success') {
+                $alert.addClass('alert-success');
+                $icon.addClass('fas fa-check-circle text-success');
+            } else if (type === 'danger') {
+                $alert.addClass('alert-danger');
+                $icon.addClass('fas fa-exclamation-circle text-danger');
+            } else if (type === 'warning') {
+                $alert.addClass('alert-warning');
+                $icon.addClass('fas fa-exclamation-triangle text-warning');
+            } else {
+                $alert.addClass('alert-info');
+                $icon.addClass('fas fa-info-circle text-primary');
+            }
+
+            $title.text(title);
+            $content.html(message);
+
+            $alert.show().addClass('show');
+
+            if (autoHide) {
+                setTimeout(hideAlert, duration);
+            }
+        }
+        function hideAlert() {
+            $('#alert').removeClass('show').hide();
+        }
+
+        /* -------------------------
+           Loading utils for buttons
+           ------------------------- */
+        function setBtnLoading($btn, loading = true) {
+            const $spinner = $btn.find('.spinner-border');
+            const $svgIcon = $btn.find('i.fas').first();
+
+            if (loading) {
+                $svgIcon.hide();
+                $spinner.show();
+                $btn.prop('disabled', true);
+            } else {
+                $svgIcon.show();
+                $spinner.hide();
+                $btn.prop('disabled', false);
+            }
+        }
+
+        /* -------------------------
+           Event handlers
+           ------------------------- */
+        $(document).ready(function () {
+
+            // -- Open "Ubah Status" modal --
+            $(document).on('click', '.change-status', function () {
+                const id = $(this).data('id');
+                // (bisa dipakai untuk fetch data via AJAX jika perlu)
+                $('#queue-status').val(''); // reset
+                $('#process-status-modal').val('');
+                $('#queue-status-feedback').hide();
+                $('#status-dialog').modal('show');
+            });
+
+            // -- Confirm status submit --
+            $('#btn-status-submit').on('click', function () {
+                const $btn = $(this);
+                const newStatus = $('#queue-status').val();
+                const newProcessStatus = $('#process-status-modal').val();
+
+                if (!newStatus) {
+                    $('#queue-status-feedback').show();
+                    return;
+                } else {
+                    $('#queue-status-feedback').hide();
+                }
+
+                setBtnLoading($btn, true);
+
+                // Simulasi AJAX -> ganti dengan AJAX nyata ke backend jika tersedia
+                setTimeout(function () {
+                    setBtnLoading($btn, false);
+                    $('#status-dialog').modal('hide');
+
+                    // Update tampilan status pada halaman (badge di kiri)
+                    const $statusBadges = $('span.badge').filter(function () {
+                        // cari badge yang berisi ikon check-circle atau clock (sederhana)
+                        return $(this).text().trim().toLowerCase().includes('aktif') ||
+                            $(this).text().trim().toLowerCase().includes('belum diproses') ||
+                            $(this).text().trim().toLowerCase().includes('sukses') ||
+                            $(this).text().trim().toLowerCase().includes('gagal');
+                    });
+
+                    // Update specific places (ID Antrean & Status Proses di halaman)
+                    // Lebih deterministik: update cell yang spesifik di tabel
+                    // Update Status Antrean (kiri card & table)
+                    $('.card-body .border-bottom').each(function () {
+                        // nothing - keep safe. We'll update by selecting cells
+                    });
+
+                    // Update the left "Status Antrean" badge
+                    const $leftStatusBadge = $('.col-12.col-md-4').find('span.badge').first();
+                    if (newStatus.toLowerCase() === 'aktif') {
+                        $leftStatusBadge.css({ 'background': '#e6f6e7', 'color': '#2a7237' }).html('<i class="fas fa-check-circle mr-1"></i>Aktif');
+                    } else {
+                        $leftStatusBadge.css({ 'background': '#f5f5f7', 'color': '#6c757d' }).html('<i class="fas fa-times-circle mr-1"></i>Non-Aktif');
+                    }
+
+                    // Update "Status Proses" in the details table and card
+                    const $processBadge = $('td').find('span.badge').filter(function () {
+                        return $(this).text().trim().toLowerCase().includes('belum diproses') ||
+                            $(this).text().trim().toLowerCase().includes('sukses') ||
+                            $(this).text().trim().toLowerCase().includes('gagal');
+                    }).first();
+
+                    if (newProcessStatus) {
+                        if (newProcessStatus.toLowerCase() === 'sukses') {
+                            $processBadge.css({ 'background': '#e6f6e7', 'color': '#2a7237' }).html('<i class="fas fa-check-circle mr-1"></i>Sukses');
+                        } else if (newProcessStatus.toLowerCase() === 'gagal') {
+                            $processBadge.css({ 'background': '#fdecea', 'color': '#b71c1c' }).html('<i class="fas fa-times-circle mr-1"></i>Gagal');
+                        } else {
+                            $processBadge.css({ 'background': '#fff3e0', 'color': '#e65100' }).html('<i class="fas fa-clock mr-1"></i>Belum Diproses');
+                        }
+                    }
+
+                    showAlert('success', 'Berhasil', 'Status antrean berhasil diperbarui.');
+                }, 900);
+            });
+
+            // -- Open "Proses Antrean" modal --
+            $(document).on('click', '.queue-process', function () {
+                $('#process-dialog').modal('show');
+            });
+
+            // -- Confirm process submit --
+            $('#btn-process-submit').on('click', function () {
+                const $btn = $(this);
+                setBtnLoading($btn, true);
+
+                // Simulasi proses (AJAX)
+                setTimeout(function () {
+                    setBtnLoading($btn, false);
+                    $('#process-dialog').modal('hide');
+
+                    // Update proses status -> Sukses & isi waktu proses
+                    const $processBadge = $('table').find('span.badge').filter(function () {
+                        return $(this).text().trim().toLowerCase().includes('belum diproses') ||
+                            $(this).text().trim().toLowerCase().includes('sukses') ||
+                            $(this).text().trim().toLowerCase().includes('gagal');
+                    }).first();
+
+                    $processBadge.css({ 'background': '#e6f6e7', 'color': '#2a7237' }).html('<i class="fas fa-check-circle mr-1"></i>Sukses');
+
+                    // update Waktu Proses cell (cari cell dengan text '-' yang ada di baris Waktu Proses)
+                    $('td').filter(function () {
+                        return $(this).text().trim() === '-';
+                    }).first().text(new Date().toLocaleString('id-ID', {
+                        day: '2-digit', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                    }));
+
+                    // Show response modal (simulasi)
+                    $('#responseDataModal').modal('show');
+
+                    showAlert('success', 'Proses Selesai', 'Antrean telah diproses dan respon tersimpan.');
+                }, 1200);
+            });
+
+            // -- Open "Delete" modal --
+            $(document).on('click', '.delete', function () {
+                $('#delete-dialog').modal('show');
+            });
+
+            // -- Confirm delete submit --
+            $('#btn-delete-submit').on('click', function () {
+                const $btn = $(this);
+                setBtnLoading($btn, true);
+
+                // Simulasi hapus
+                setTimeout(function () {
+                    setBtnLoading($btn, false);
+                    $('#delete-dialog').modal('hide');
+
+                    // Option: redirect kembali ke list setelah penghapusan
+                    // Karena ini contoh statis, kita hanya tampilkan alert & sembunyikan konten
+                    $('.card').fadeOut(300);
+                    showAlert('success', 'Terhapus', 'Data antrean berhasil dihapus. Mengarahkan ke halaman daftar...');
+
+                    // jika ingin redirect: window.location.href = 'MonitoringAntrian.html';
+                }, 900);
+            });
+
+            // -- Tampilkan isi payload (modal sudah dipicu via data-toggle di HTML) --
+            // Tidak perlu JS khusus karena HTML menggunakan data-toggle="modal"
+
+            // -- Tutup alert ketika tombol close diklik (sudah ada inline onclick pada HTML) --
+        });
+    </script>
+
 
 </body>
 

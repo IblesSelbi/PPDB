@@ -24,7 +24,7 @@
 
 <body class="bg-light">
 
-     <!-- NAVBAR -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg navbar-dark"
         style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);">
         <div class="container-fluid">
@@ -1777,4 +1777,450 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- JavaScript will be added later -->
+    <script>
+        $(document).ready(function () {
+            // ===========================
+            // TAB NAVIGATION
+            // ===========================
+            $('.nav-tabs .nav-link').on('click', function () {
+                $('.nav-tabs .nav-link').removeClass('active').css('border-bottom', 'none').addClass('text-muted');
+                $(this).addClass('active').css('border-bottom', '3px solid #3d5ce6').removeClass('text-muted');
+            });
+
+            // ===========================
+            // FORM VALIDATION
+            // ===========================
+            function validateField(fieldId, feedbackId, message) {
+                const field = $(fieldId);
+                const feedback = $(feedbackId);
+
+                if (!field.val() || field.val().trim() === '') {
+                    field.addClass('is-invalid');
+                    feedback.text(message).show();
+                    return false;
+                } else {
+                    field.removeClass('is-invalid');
+                    feedback.hide();
+                    return true;
+                }
+            }
+
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+
+            function validatePhone(phone) {
+                const re = /^[0-9]{10,15}$/;
+                return re.test(phone);
+            }
+
+            function validateNIK(nik) {
+                const re = /^[0-9]{16}$/;
+                return re.test(nik);
+            }
+
+            // ===========================
+            // CHECKBOX CREATE ACCOUNT
+            // ===========================
+            $('#create-account').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#input-account').slideDown(300);
+                } else {
+                    $('#input-account').slideUp(300);
+                }
+            });
+
+            // ===========================
+            // IMAGE UPLOAD
+            // ===========================
+            let selectedImage = null;
+
+            $('#load-photo').on('change', function (e) {
+                const file = e.target.files[0];
+
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        showAlert('error', 'Error', 'File yang dipilih harus berupa gambar');
+                        $(this).val('');
+                        return;
+                    }
+
+                    if (file.size > 2 * 1024 * 1024) {
+                        showAlert('warning', 'Peringatan', 'Ukuran file maksimal 2MB');
+                        $(this).val('');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        selectedImage = e.target.result;
+                        $('#preview-image').attr('src', e.target.result);
+                        $('#account-photo').val(e.target.result);
+                        $('#btn-remove-image').removeAttr('hidden');
+                    };
+                    reader.readAsDataURL(file);
+
+                    $('.custom-file-label').text(file.name);
+                }
+            });
+
+            $('#btn-remove-image').on('click', function () {
+                selectedImage = null;
+                $('#preview-image').attr('src', 'https://demo.schoolpay.co.id/media/images/student/photo.png');
+                $('#account-photo').val('');
+                $('#load-photo').val('');
+                $('.custom-file-label').text('Pilih Foto...');
+                $(this).attr('hidden', 'hidden');
+            });
+
+            // ===========================
+            // FORM SUBMIT
+            // ===========================
+            $('#studentForm').on('submit', function (e) {
+                e.preventDefault();
+
+                let isValid = true;
+
+                // Validate required fields in student tab
+                if (!validateField('#student-name', '#student-name-feedback', 'Nama lengkap harus diisi')) isValid = false;
+                if (!validateField('#student-pob', '#student-pob-feedback', 'Tempat lahir harus diisi')) isValid = false;
+                if (!validateField('#student-religion', '#student-religion-feedback', 'Agama harus dipilih')) isValid = false;
+                if (!validateField('#student-class', '#student-class-feedback', 'Kelas harus dipilih')) isValid = false;
+                if (!validateField('#student-number', '#student-number-feedback', 'Nomor induk harus diisi')) isValid = false;
+
+                // Validate date of birth
+                const dob = $('#student-dob').val();
+                const mob = $('#student-mob').val();
+                const yob = $('#student-yob').val();
+
+                if (!dob || !mob || !yob) {
+                    $('#student-dob-feedback').text('Tanggal lahir harus diisi lengkap').show();
+                    isValid = false;
+                } else {
+                    $('#student-dob-feedback').hide();
+                }
+
+                // Validate NIK if filled
+                const nik = $('#student-nik').val();
+                if (nik && !validateNIK(nik)) {
+                    $('#student-nik').addClass('is-invalid');
+                    $('#student-nik-feedback').text('NIK harus 16 digit angka').show();
+                    isValid = false;
+                } else {
+                    $('#student-nik').removeClass('is-invalid');
+                    $('#student-nik-feedback').hide();
+                }
+
+                // Validate NKK if filled
+                const nkk = $('#student-nkk').val();
+                if (nkk && !validateNIK(nkk)) {
+                    $('#student-nkk').addClass('is-invalid');
+                    $('#student-nkk-feedback').text('Nomor KK harus 16 digit angka').show();
+                    isValid = false;
+                } else {
+                    $('#student-nkk').removeClass('is-invalid');
+                    $('#student-nkk-feedback').hide();
+                }
+
+                // Validate NISN if filled
+                const nisn = $('#student-nisn').val();
+                if (nisn && nisn.length < 10) {
+                    $('#student-nisn').addClass('is-invalid');
+                    $('#student-nisn-feedback').text('NISN minimal 10 digit').show();
+                    isValid = false;
+                } else {
+                    $('#student-nisn').removeClass('is-invalid');
+                    $('#student-nisn-feedback').hide();
+                }
+
+                // Validate phone if filled
+                const phone = $('#student-phone').val();
+                if (phone && !validatePhone(phone)) {
+                    $('#student-phone').addClass('is-invalid');
+                    $('#student-phone-feedback').text('Nomor telepon tidak valid').show();
+                    isValid = false;
+                } else {
+                    $('#student-phone').removeClass('is-invalid');
+                    $('#student-phone-feedback').hide();
+                }
+
+                // Validate email if filled
+                const email = $('#student-email').val();
+                if (email && !validateEmail(email)) {
+                    $('#student-email').addClass('is-invalid');
+                    $('#student-email-feedback').text('Format email tidak valid').show();
+                    isValid = false;
+                } else {
+                    $('#student-email').removeClass('is-invalid');
+                    $('#student-email-feedback').hide();
+                }
+
+                // Validate parent NIK if filled
+                const fatherNik = $('#father-nik').val();
+                if (fatherNik && !validateNIK(fatherNik)) {
+                    showAlert('warning', 'Peringatan', 'NIK Ayah harus 16 digit angka');
+                    isValid = false;
+                }
+
+                const motherNik = $('#mother-nik').val();
+                if (motherNik && !validateNIK(motherNik)) {
+                    showAlert('warning', 'Peringatan', 'NIK Ibu harus 16 digit angka');
+                    isValid = false;
+                }
+
+                const guardianNik = $('#guardian-nik').val();
+                if (guardianNik && !validateNIK(guardianNik)) {
+                    showAlert('warning', 'Peringatan', 'NIK Wali harus 16 digit angka');
+                    isValid = false;
+                }
+
+                // Validate parent phone if filled
+                const fatherPhone = $('#father-phone').val();
+                if (fatherPhone && !validatePhone(fatherPhone)) {
+                    showAlert('warning', 'Peringatan', 'Nomor telepon Ayah tidak valid');
+                    isValid = false;
+                }
+
+                const motherPhone = $('#mother-phone').val();
+                if (motherPhone && !validatePhone(motherPhone)) {
+                    showAlert('warning', 'Peringatan', 'Nomor telepon Ibu tidak valid');
+                    isValid = false;
+                }
+
+                const guardianPhone = $('#guardian-phone').val();
+                if (guardianPhone && !validatePhone(guardianPhone)) {
+                    showAlert('warning', 'Peringatan', 'Nomor telepon Wali tidak valid');
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    showAlert('error', 'Validasi Gagal', 'Mohon lengkapi semua field yang wajib diisi dengan benar');
+                    // Scroll to first error
+                    $('html, body').animate({
+                        scrollTop: $('.is-invalid:first').offset().top - 100
+                    }, 500);
+                    return;
+                }
+
+                // Submit form
+                submitForm();
+            });
+
+            function submitForm() {
+                const btn = $('#btn-submit');
+                const btnText = $('#btn-text');
+
+                btn.prop('disabled', true);
+                btnText.text('Menyimpan...');
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                    btnText.text('Simpan Data');
+
+                    showAlert('success', 'Berhasil!', 'Data siswa berhasil diperbarui');
+
+                    // Redirect after 2 seconds
+                    setTimeout(function () {
+                        window.location.href = 'DataSiswa.html';
+                    }, 2000);
+                }, 1500);
+            }
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                alertDiv.fadeIn(300).addClass('show');
+
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 500);
+
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+                submenu.toggleClass('show');
+
+                const submenuWidth = submenu.outerWidth();
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // LOAD EXISTING DATA
+            // ===========================
+            function loadStudentData() {
+                // Simulate loading existing student data
+                // In real application, this would fetch data from server
+
+                $('#student-name').val('Ahmad Fauzi');
+                $('input[name="student_gender"][value="L"]').prop('checked', true);
+                $('#student-pob').val('Bandung');
+                $('#student-dob').val('15');
+                $('#student-mob').val('05');
+                $('#student-yob').val('2010');
+                $('#student-religion').val('Islam');
+                $('#student-civil-status').val('WNI');
+                $('#student-class').val('7A');
+                $('#student-number').val('2024001');
+                $('#student-nisn').val('0012345678');
+                $('input[name="student_status"][value="A"]').prop('checked', true);
+
+                showAlert('info', 'Data Dimuat', 'Data siswa berhasil dimuat untuk diedit');
+            }
+
+            // Load data on page load
+            setTimeout(function () {
+                loadStudentData();
+            }, 500);
+
+            // ===========================
+            // REAL-TIME VALIDATION
+            // ===========================
+            $('#student-name').on('blur', function () {
+                if ($(this).val().trim() === '') {
+                    $(this).addClass('is-invalid');
+                    $('#student-name-feedback').text('Nama lengkap harus diisi').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-name-feedback').hide();
+                }
+            });
+
+            $('#student-nik').on('blur', function () {
+                const nik = $(this).val();
+                if (nik && !validateNIK(nik)) {
+                    $(this).addClass('is-invalid');
+                    $('#student-nik-feedback').text('NIK harus 16 digit angka').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-nik-feedback').hide();
+                }
+            });
+
+            $('#student-nkk').on('blur', function () {
+                const nkk = $(this).val();
+                if (nkk && !validateNIK(nkk)) {
+                    $(this).addClass('is-invalid');
+                    $('#student-nkk-feedback').text('Nomor KK harus 16 digit angka').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-nkk-feedback').hide();
+                }
+            });
+
+            $('#student-nisn').on('blur', function () {
+                const nisn = $(this).val();
+                if (nisn && nisn.length < 10) {
+                    $(this).addClass('is-invalid');
+                    $('#student-nisn-feedback').text('NISN minimal 10 digit').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-nisn-feedback').hide();
+                }
+            });
+
+            $('#student-phone').on('blur', function () {
+                const phone = $(this).val();
+                if (phone && !validatePhone(phone)) {
+                    $(this).addClass('is-invalid');
+                    $('#student-phone-feedback').text('Nomor telepon tidak valid').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-phone-feedback').hide();
+                }
+            });
+
+            $('#student-email').on('blur', function () {
+                const email = $(this).val();
+                if (email && !validateEmail(email)) {
+                    $(this).addClass('is-invalid');
+                    $('#student-email-feedback').text('Format email tidak valid').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#student-email-feedback').hide();
+                }
+            });
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            console.log('EditSiswa.js initialized successfully');
+        });
+    </script>
+
+</body>
+
+</html>

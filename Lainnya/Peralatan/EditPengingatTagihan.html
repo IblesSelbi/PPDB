@@ -732,7 +732,113 @@ Anda menerima pesan otomatis ini karena nomor anda terdaftar pada Sistem Informa
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- Custom JavaScript akan ditambahkan kemudian -->
+    <script>
+        /* ===========================================================
+           UTILITY: ALERT (Sukses / Error / Info)
+           =========================================================== */
+        function showAlert(type, title, message, autoHide = true, duration = 3500) {
+            const $alert = $('#alert');
+            const $icon = $('#alert-icon');
+            const $title = $('#alert-title');
+            const $content = $('#alert-content');
+
+            $alert.removeClass('alert-success alert-danger alert-warning alert-info show');
+
+            let iconClass = '';
+            if (type === 'success') {
+                $alert.addClass('alert-success');
+                iconClass = 'fas fa-check-circle text-success';
+            } else if (type === 'danger') {
+                $alert.addClass('alert-danger');
+                iconClass = 'fas fa-times-circle text-danger';
+            } else if (type === 'warning') {
+                $alert.addClass('alert-warning');
+                iconClass = 'fas fa-exclamation-triangle text-warning';
+            } else {
+                $alert.addClass('alert-info');
+                iconClass = 'fas fa-info-circle text-info';
+            }
+
+            $icon.attr('class', iconClass + ' fa-2x');
+            $title.text(title);
+            $content.html(message);
+
+            $alert.show().addClass('show');
+
+            if (autoHide) {
+                setTimeout(() => $alert.removeClass('show').hide(), duration);
+            }
+        }
+
+        /* ===========================================================
+           UTILITY: BUTTON LOADING
+           =========================================================== */
+        function btnLoading($btn, isLoading) {
+            const $spinner = $btn.find('.spinner-border');
+            const $icon = $btn.find('i.fas');
+
+            if (isLoading) {
+                $icon.hide();
+                $spinner.show();
+                $btn.prop('disabled', true);
+            } else {
+                $spinner.hide();
+                $icon.show();
+                $btn.prop('disabled', false);
+            }
+        }
+
+        /* ===========================================================
+           START SCRIPT INTERAKSI FORM
+           =========================================================== */
+
+        $(document).ready(function () {
+
+            /* -------------------------------------------------------
+               1. Submit Form Edit Pengingat
+               ------------------------------------------------------- */
+            $('#form-edit-pengingat').on('submit', function (e) {
+                e.preventDefault();
+
+                const $btn = $('#btn-submit-edit');
+
+                // Validasi minimal
+                const judul = $('#judul').val().trim();
+                const jam = $('#jam').val().trim();
+                const tanggal = $('#tanggal').val().trim();
+                const status = $('#status').val();
+
+                if (!judul || !jam || !tanggal || !status) {
+                    showAlert('warning', 'Form Belum Lengkap', 'Semua field wajib diisi.');
+                    return;
+                }
+
+                btnLoading($btn, true);
+
+                // Simulasi proses (AJAX bisa dimasukkan di sini)
+                setTimeout(function () {
+                    btnLoading($btn, false);
+
+                    showAlert('success', 'Berhasil', 'Pengingat tagihan berhasil diperbarui.');
+
+                    // Simulasi redirect ke halaman detail
+                    setTimeout(() => {
+                        window.location.href = 'DetailPengingatTagihan.html';
+                    }, 1200);
+
+                }, 1200);
+            });
+
+            /* -------------------------------------------------------
+               2. Tombol Batal → kembali ke detail
+               ------------------------------------------------------- */
+            $('#btn-cancel').on('click', function () {
+                window.location.href = 'DetailPengingatTagihan.html';
+            });
+
+        });
+    </script>
+
 
 </body>
 

@@ -888,7 +888,120 @@ Terima kasih.
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
-    <!-- Custom JavaScript akan ditambahkan kemudian -->
+    <script>
+        /* ===========================================================
+           Utility: Show Alert
+           =========================================================== */
+        function showAlert(type, title, message, autoHide = true, duration = 4000) {
+            const $alert = $('#alert');
+            const $icon = $('#alert-icon');
+            const $title = $('#alert-title');
+            const $content = $('#alert-content');
+
+            $alert.removeClass('alert-success alert-danger alert-warning alert-info show');
+
+            let iconClass = '';
+            if (type === 'success') {
+                $alert.addClass('alert-success');
+                iconClass = 'fas fa-check-circle text-success';
+            } else if (type === 'danger') {
+                $alert.addClass('alert-danger');
+                iconClass = 'fas fa-times-circle text-danger';
+            } else if (type === 'warning') {
+                $alert.addClass('alert-warning');
+                iconClass = 'fas fa-exclamation-triangle text-warning';
+            } else {
+                $alert.addClass('alert-info');
+                iconClass = 'fas fa-info-circle text-info';
+            }
+
+            $icon.attr('class', iconClass + ' fa-2x');
+            $title.text(title);
+            $content.html(message);
+
+            $alert.show().addClass('show');
+
+            if (autoHide) {
+                setTimeout(hideAlert, duration);
+            }
+        }
+
+        function hideAlert() {
+            $('#alert').removeClass('show').hide();
+        }
+
+        /* ===========================================================
+           Utility: Button Loading
+           =========================================================== */
+        function btnLoading($btn, isLoading) {
+            const $spinner = $btn.find('.spinner-border');
+            const $svg = $btn.find('i.fas');
+
+            if (isLoading) {
+                $svg.hide();
+                $spinner.show();
+                $btn.prop('disabled', true);
+            } else {
+                $spinner.hide();
+                $svg.show();
+                $btn.prop('disabled', false);
+            }
+        }
+
+        /* ===========================================================
+           START INTERAKSI
+           =========================================================== */
+
+        $(document).ready(function () {
+
+            /* ---------------------------------------------------
+               1. Jalankan Pengingat (btn-run-submit)
+               --------------------------------------------------- */
+            $('#btn-run-submit').on('click', function () {
+                const $btn = $(this);
+                btnLoading($btn, true);
+
+                setTimeout(function () {
+                    btnLoading($btn, false);
+                    $('#runModal').modal('hide');
+
+                    showAlert(
+                        'success',
+                        'Pengingat Diproses',
+                        'Proses pengingat tagihan berhasil dijalankan.'
+                    );
+                }, 1200);
+            });
+
+            /* ---------------------------------------------------
+               2. Hapus Pengingat (btn-delete-submit)
+               --------------------------------------------------- */
+            $('#btn-delete-submit').on('click', function () {
+                const $btn = $(this);
+                btnLoading($btn, true);
+
+                setTimeout(function () {
+                    btnLoading($btn, false);
+                    $('#deleteModal').modal('hide');
+
+                    showAlert(
+                        'danger',
+                        'Data Terhapus',
+                        'Pengingat tagihan berhasil dihapus.'
+                    );
+
+                    // Sembunyikan card konten
+                    $('.card').fadeOut(400);
+                }, 1000);
+            });
+
+            /* ---------------------------------------------------
+               3. Modal lihat pesan → tidak perlu JS tambahan
+               --------------------------------------------------- */
+
+        });
+    </script>
+
 
     <!-- Footer -->
     <footer class="bg-white py-3 mt-5">

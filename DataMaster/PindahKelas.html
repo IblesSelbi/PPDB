@@ -645,8 +645,375 @@
 
     <!-- Custom JavaScript akan ditambahkan -->
     <script>
-        // JavaScript code akan ditambahkan di sini
-        console.log('PindahKelas.html loaded');
+        $(document).ready(function () {
+            let selectedStudents = [];
+            let classData = [];
+
+            // ===========================
+            // LOAD INITIAL DATA
+            // ===========================
+            function loadClassrooms() {
+                $('#load-dialog').modal('show');
+
+                setTimeout(function () {
+                    classData = [
+                        { id: 1, name: 'Kelas 1 A', year: '2024/2025', unit: 'SD' },
+                        { id: 2, name: 'Kelas 1 B', year: '2024/2025', unit: 'SD' },
+                        { id: 3, name: 'Kelas 7 A', year: '2024/2025', unit: 'SMP' },
+                        { id: 4, name: 'Kelas 7 B', year: '2024/2025', unit: 'SMP' },
+                        { id: 5, name: 'Kelas 10 A', year: '2024/2025', unit: 'SMA' },
+                        { id: 6, name: 'Kelas 10 B', year: '2024/2025', unit: 'SMA' }
+                    ];
+
+                    populateClassrooms();
+                    $('#load-dialog').modal('hide');
+                }, 1000);
+            }
+
+            function populateClassrooms() {
+                const selectFrom = $('#classroom-move-from');
+                const selectTo = $('#classroom-move-to');
+
+                selectFrom.empty().append('<option value="">-- Pilih Kelas --</option>');
+                selectTo.empty().append('<option value="">-- Pilih Kelas Tujuan --</option>');
+
+                classData.forEach(function (cls) {
+                    const option = `<option value="${cls.id}">${cls.year} | ${cls.name}</option>`;
+                    selectFrom.append(option);
+                    selectTo.append(option);
+                });
+            }
+
+            // Load classrooms on page load
+            loadClassrooms();
+
+            // ===========================
+            // CLASSROOM CHANGE EVENT
+            // ===========================
+            $('#classroom-move-from').on('change', function () {
+                const classId = $(this).val();
+
+                if (classId) {
+                    loadStudents(classId);
+                    $('#select-student').slideDown(300);
+                } else {
+                    $('#select-student').slideUp(300);
+                    $('#select-passed').slideUp(300);
+                    $('#select-classroom-move-to').slideUp(300);
+                    selectedStudents = [];
+                }
+            });
+
+            function loadStudents(classId) {
+                $('#load-dialog').modal('show');
+
+                setTimeout(function () {
+                    const students = generateStudentData(classId);
+                    displayStudents(students);
+                    $('#load-dialog').modal('hide');
+                }, 1000);
+            }
+
+            function generateStudentData(classId) {
+                const students = [
+                    { id: 1, number: '2024001', name: 'Ahmad Fauzi', gender: 'L', status: 'Aktif' },
+                    { id: 2, number: '2024002', name: 'Siti Nurhaliza', gender: 'P', status: 'Aktif' },
+                    { id: 3, number: '2024003', name: 'Budi Santoso', gender: 'L', status: 'Aktif' },
+                    { id: 4, number: '2024004', name: 'Dewi Lestari', gender: 'P', status: 'Aktif' },
+                    { id: 5, number: '2024005', name: 'Rudi Hartono', gender: 'L', status: 'Aktif' }
+                ];
+
+                return students;
+            }
+
+            function displayStudents(students) {
+                const tbody = $('#student-list');
+                tbody.empty();
+
+                if (students.length === 0) {
+                    tbody.html(`
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        <i class="fas fa-users fa-2x mb-2 d-block" style="opacity: 0.3;"></i>
+                        <p class="mb-0">Tidak ada siswa di kelas ini</p>
+                    </td>
+                </tr>
+            `);
+                    return;
+                }
+
+                students.forEach(function (student, index) {
+                    const genderBadge = student.gender === 'L'
+                        ? '<span class="badge badge-primary"><i class="fas fa-mars mr-1"></i>Laki-laki</span>'
+                        : '<span class="badge badge-danger"><i class="fas fa-venus mr-1"></i>Perempuan</span>';
+
+                    const statusBadge = '<span class="badge badge-success">Aktif</span>';
+
+                    const row = `
+                <tr>
+                    <td class="text-center align-middle p-2">
+                        <input type="checkbox" class="form-check-input student-check" 
+                               data-id="${student.id}" 
+                               data-name="${student.name}"
+                               id="student-${student.id}">
+                    </td>
+                    <td class="text-center align-middle p-2">${index + 1}</td>
+                    <td class="align-middle p-2">${student.number}</td>
+                    <td class="align-middle p-2 font-weight-bold">${student.name}</td>
+                    <td class="align-middle p-2">${genderBadge}</td>
+                    <td class="align-middle p-2">${statusBadge}</td>
+                </tr>
+            `;
+
+                    tbody.append(row);
+                });
+            }
+
+            // ===========================
+            // CHECKBOX FUNCTIONALITY
+            // ===========================
+            $('#checks').on('change', function () {
+                const isChecked = $(this).prop('checked');
+                $('.student-check').prop('checked', isChecked);
+                updateSelectedStudents();
+            });
+
+            $(document).on('change', '.student-check', function () {
+                const totalCheckbox = $('.student-check').length;
+                const checkedCheckbox = $('.student-check:checked').length;
+                $('#checks').prop('checked', totalCheckbox === checkedCheckbox);
+                updateSelectedStudents();
+            });
+
+            function updateSelectedStudents() {
+                selectedStudents = [];
+
+                $('.student-check:checked').each(function () {
+                    selectedStudents.push({
+                        id: $(this).data('id'),
+                        name: $(this).data('name')
+                    });
+                });
+
+                if (selectedStudents.length > 0) {
+                    $('#select-passed').slideDown(300);
+                    showAlert('info', 'Siswa Dipilih', `${selectedStudents.length} siswa dipilih untuk dipindahkan`);
+                } else {
+                    $('#select-passed').slideUp(300);
+                    $('#select-classroom-move-to').slideUp(300);
+                    $('#marked-passed').prop('checked', false);
+                }
+            }
+
+            // ===========================
+            // MARKED AS PASSED CHECKBOX
+            // ===========================
+            $('#marked-passed').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('#select-classroom-move-to').slideUp(300);
+                    $('#classroom-move-to').val('');
+                } else {
+                    if (selectedStudents.length > 0) {
+                        $('#select-classroom-move-to').slideDown(300);
+                    }
+                }
+            });
+
+            // Show classroom selector when marked-passed is unchecked
+            $(document).on('change', '.student-check', function () {
+                if (selectedStudents.length > 0 && !$('#marked-passed').is(':checked')) {
+                    $('#select-classroom-move-to').slideDown(300);
+                }
+            });
+
+            // ===========================
+            // FORM SUBMIT
+            // ===========================
+            $('#form').on('submit', function (e) {
+                e.preventDefault();
+
+                const classFrom = $('#classroom-move-from').val();
+                const classTo = $('#classroom-move-to').val();
+                const markedPassed = $('#marked-passed').is(':checked');
+
+                // Validation
+                if (!classFrom) {
+                    showAlert('warning', 'Peringatan', 'Silakan pilih kelas asal terlebih dahulu');
+                    return;
+                }
+
+                if (selectedStudents.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Silakan pilih minimal 1 siswa untuk dipindahkan');
+                    return;
+                }
+
+                if (!markedPassed && !classTo) {
+                    showAlert('warning', 'Peringatan', 'Silakan pilih kelas tujuan atau tandai sebagai siswa lulus');
+                    return;
+                }
+
+                processMove(classFrom, classTo, markedPassed);
+            });
+
+            function processMove(classFrom, classTo, markedPassed) {
+                const btn = $('#btn-submit');
+                const btnText = $('#btn-text');
+                const btnSvg = $('#btn-svg');
+                const btnSpinner = $('#btn-spinner');
+
+                btn.prop('disabled', true);
+                btnText.text('Memproses...');
+                btnSvg.hide();
+                btnSpinner.show();
+
+                // Simulate processing
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                    btnText.text('Proses Perpindahan');
+                    btnSvg.show();
+                    btnSpinner.hide();
+
+                    // Show success dialog
+                    $('#success-dialog').modal('show');
+
+                    // Build success message
+                    let message = '';
+                    if (markedPassed) {
+                        message = `${selectedStudents.length} siswa berhasil ditandai sebagai lulus`;
+                    } else {
+                        const classToName = $('#classroom-move-to option:selected').text();
+                        message = `${selectedStudents.length} siswa berhasil dipindahkan ke ${classToName}`;
+                    }
+
+                    $('.modal-body p').text(message);
+                }, 2000);
+            }
+
+            // ===========================
+            // SUCCESS DIALOG CLOSE
+            // ===========================
+            $('#success-dialog').on('hidden.bs.modal', function () {
+                // Reset form
+                $('#classroom-move-from').val('');
+                $('#classroom-move-to').val('');
+                $('#marked-passed').prop('checked', false);
+                $('#checks').prop('checked', false);
+
+                $('#select-student').slideUp(300);
+                $('#select-passed').slideUp(300);
+                $('#select-classroom-move-to').slideUp(300);
+
+                $('#student-list').html(`
+            <tr>
+                <td colspan="6" class="text-center text-muted py-4">
+                    <i class="fas fa-users fa-2x mb-2 d-block" style="opacity: 0.3;"></i>
+                    <p class="mb-0">Pilih kelas untuk melihat daftar siswa</p>
+                </td>
+            </tr>
+        `);
+
+                selectedStudents = [];
+
+                showAlert('success', 'Berhasil!', 'Perpindahan kelas telah berhasil diproses');
+            });
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+                let borderColor = '#216fcb';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        borderColor = '#28a745';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        borderColor = '#dc3545';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        borderColor = '#ffc107';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        borderColor = '#17a2b8';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertDiv.css('border-left-color', borderColor);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                alertDiv.fadeIn(300).addClass('show');
+
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+                submenu.toggleClass('show');
+
+                const submenuWidth = submenu.outerWidth();
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            console.log('PindahKelas.js initialized successfully');
+        });
     </script>
 
 </body>

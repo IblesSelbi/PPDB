@@ -642,8 +642,333 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // JavaScript code akan ditambahkan di sini
-        console.log('TambahRekening.html loaded');
+        $(document).ready(function () {
+            let selectedLogo = null;
+
+            // ===========================
+            // FORM VALIDATION
+            // ===========================
+            function validateField(fieldId, feedbackId, message) {
+                const field = $(fieldId);
+                const feedback = $(feedbackId);
+
+                if (!field.val() || field.val().trim() === '') {
+                    field.addClass('is-invalid');
+                    feedback.text(message).show();
+                    return false;
+                } else {
+                    field.removeClass('is-invalid');
+                    feedback.hide();
+                    return true;
+                }
+            }
+
+            // ===========================
+            // LOGO UPLOAD
+            // ===========================
+            $('#load-logo').on('change', function (e) {
+                const file = e.target.files[0];
+
+                if (file) {
+                    if (!file.type.match('image.*')) {
+                        showAlert('error', 'Error', 'File yang dipilih harus berupa gambar');
+                        $(this).val('');
+                        $('.custom-file-label').text('Pilih Logo...');
+                        return;
+                    }
+
+                    if (file.size > 2 * 1024 * 1024) {
+                        showAlert('warning', 'Peringatan', 'Ukuran file maksimal 2MB');
+                        $(this).val('');
+                        $('.custom-file-label').text('Pilih Logo...');
+                        return;
+                    }
+
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        selectedLogo = e.target.result;
+                        $('#preview-logo').attr('src', e.target.result);
+                        $('#bank-logo-hidden').val(e.target.result);
+                        $('#btn-remove-logo').show();
+                    };
+                    reader.readAsDataURL(file);
+
+                    $('.custom-file-label').text(file.name);
+                }
+            });
+
+            $('#btn-remove-logo').on('click', function () {
+                selectedLogo = null;
+                $('#preview-logo').attr('src', 'https://via.placeholder.com/120x120/e3e6f0/6c757d?text=Logo+Bank');
+                $('#bank-logo-hidden').val('');
+                $('#load-logo').val('');
+                $('.custom-file-label').text('Pilih Logo...');
+                $(this).hide();
+            });
+
+            // ===========================
+            // STATUS TOGGLE
+            // ===========================
+            $('#bank-status').on('change', function () {
+                const label = $(this).next('.custom-control-label').find('span');
+
+                if ($(this).is(':checked')) {
+                    label.removeClass('badge-danger').addClass('badge-success');
+                    label.css({
+                        'background': '#dfffe8',
+                        'color': '#1a7f37'
+                    });
+                    label.html('<i class="fas fa-check mr-1"></i>Aktif');
+                } else {
+                    label.removeClass('badge-success').addClass('badge-danger');
+                    label.css({
+                        'background': '#fff1f1',
+                        'color': '#c92a2a'
+                    });
+                    label.html('<i class="fas fa-times mr-1"></i>Non-Aktif');
+                }
+            });
+
+            // ===========================
+            // BANK NUMBER FORMATTING
+            // ===========================
+            $('#bank-number').on('input', function () {
+                // Only allow numbers
+                let value = $(this).val().replace(/\D/g, '');
+                $(this).val(value);
+            });
+
+            // ===========================
+            // BANK CODE FORMATTING
+            // ===========================
+            $('#bank-code').on('input', function () {
+                // Convert to uppercase
+                let value = $(this).val().toUpperCase();
+                $(this).val(value);
+            });
+
+            // ===========================
+            // REAL-TIME VALIDATION
+            // ===========================
+            $('#bank-name').on('blur', function () {
+                if ($(this).val().trim() === '') {
+                    $(this).addClass('is-invalid');
+                    $('#bank-name-feedback').text('Nama rekening harus diisi').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#bank-name-feedback').hide();
+                }
+            });
+
+            $('#bank-owner').on('blur', function () {
+                if ($(this).val().trim() === '') {
+                    $(this).addClass('is-invalid');
+                    $('#bank-owner-feedback').text('Nama pemilik rekening harus diisi').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#bank-owner-feedback').hide();
+                }
+            });
+
+            $('#bank-number').on('blur', function () {
+                const number = $(this).val();
+                if (!number) {
+                    $(this).addClass('is-invalid');
+                    $('#bank-number-feedback').text('Nomor rekening harus diisi').show();
+                } else if (number.length < 8) {
+                    $(this).addClass('is-invalid');
+                    $('#bank-number-feedback').text('Nomor rekening minimal 8 digit').show();
+                } else {
+                    $(this).removeClass('is-invalid');
+                    $('#bank-number-feedback').hide();
+                }
+            });
+
+            // ===========================
+            // FORM SUBMIT
+            // ===========================
+            $('#form').on('submit', function (e) {
+                e.preventDefault();
+
+                let isValid = true;
+
+                // Validate required fields
+                if (!validateField('#bank-unit', '#bank-unit-feedback', 'Unit harus dipilih')) isValid = false;
+                if (!validateField('#used-for', '#used-for-feedback', 'Peruntukan rekening harus dipilih')) isValid = false;
+                if (!validateField('#bank-name', '#bank-name-feedback', 'Nama rekening harus diisi')) isValid = false;
+                if (!validateField('#bank-owner', '#bank-owner-feedback', 'Nama pemilik rekening harus diisi')) isValid = false;
+
+                // Validate bank number
+                const bankNumber = $('#bank-number').val();
+                if (!bankNumber) {
+                    $('#bank-number').addClass('is-invalid');
+                    $('#bank-number-feedback').text('Nomor rekening harus diisi').show();
+                    isValid = false;
+                } else if (bankNumber.length < 8) {
+                    $('#bank-number').addClass('is-invalid');
+                    $('#bank-number-feedback').text('Nomor rekening minimal 8 digit').show();
+                    isValid = false;
+                } else {
+                    $('#bank-number').removeClass('is-invalid');
+                    $('#bank-number-feedback').hide();
+                }
+
+                if (!isValid) {
+                    showAlert('error', 'Validasi Gagal', 'Mohon lengkapi semua field yang wajib diisi dengan benar');
+
+                    // Scroll to first error
+                    $('html, body').animate({
+                        scrollTop: $('.is-invalid:first').offset().top - 100
+                    }, 500);
+
+                    return;
+                }
+
+                // Submit form
+                submitForm();
+            });
+
+            function submitForm() {
+                const btn = $('#btn-submit');
+                const btnText = $('#btn-text');
+                const btnSvg = $('#btn-svg');
+                const btnSpinner = $('#btn-spinner');
+
+                btn.prop('disabled', true);
+                btnText.text('Menyimpan...');
+                btnSvg.hide();
+                btnSpinner.show();
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    btn.prop('disabled', false);
+                    btnText.text('Simpan Data');
+                    btnSvg.show();
+                    btnSpinner.hide();
+
+                    showAlert('success', 'Berhasil!', 'Data rekening pembayaran berhasil ditambahkan');
+
+                    // Reset form after 2 seconds
+                    setTimeout(function () {
+                        resetForm();
+                        window.location.href = 'DataRekening.html';
+                    }, 2000);
+                }, 1500);
+            }
+
+            function resetForm() {
+                $('#form')[0].reset();
+                $('#bank-status').prop('checked', true).trigger('change');
+                $('#preview-logo').attr('src', 'https://via.placeholder.com/120x120/e3e6f0/6c757d?text=Logo+Bank');
+                $('#btn-remove-logo').hide();
+                $('.custom-file-label').text('Pilih Logo...');
+                $('.is-invalid').removeClass('is-invalid');
+                $('.text-danger').hide();
+                selectedLogo = null;
+            }
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                alertDiv.fadeIn(300).addClass('show');
+
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 500);
+
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+                submenu.toggleClass('show');
+
+                const submenuWidth = submenu.outerWidth();
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // AUTO-FOCUS FIRST INPUT
+            // ===========================
+            setTimeout(function () {
+                $('#bank-unit').focus();
+            }, 300);
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            console.log('TambahRekening.js initialized successfully');
+        });
     </script>
 
 </body>

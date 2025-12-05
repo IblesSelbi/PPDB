@@ -89,7 +89,7 @@
                         </a>
                         <div class="dropdown-menu">
 
-                             <a class="dropdown-item" href="DataPetugas.html">
+                            <a class="dropdown-item" href="DataPetugas.html">
                                 <i class="fas fa-users text-primary mr-2"></i>Data Petugas
                             </a>
 
@@ -451,7 +451,8 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
                 <h2 class="font-weight-bold mb-1">Data Dihapus</h2>
-                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data unit pendidikan yang dihapus</p>
+                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data unit pendidikan yang
+                    dihapus</p>
             </div>
             <div>
                 <a href="DataUnit.html" class="btn btn-primary px-3">
@@ -588,11 +589,12 @@
                                 </td>
                                 <td class="align-middle text-center"><strong>1</strong></td>
                                 <td class="align-middle text-center">
-                                   <span class="badge px-3 py-2">
+                                    <span class="badge px-3 py-2">
                                         5
                                     </span>
                                 </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">TK</span></td>
+                                <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">TK</span>
+                                </td>
                                 <td class="align-middle">
                                     <div class="font-weight-bold text-muted">Taman Kanak-Kanak</div>
                                 </td>
@@ -648,11 +650,12 @@
                                 </td>
                                 <td class="align-middle text-center"><strong>2</strong></td>
                                 <td class="align-middle text-center">
-                                     <span class="badge px-3 py-2">
+                                    <span class="badge px-3 py-2">
                                         10
                                     </span>
                                 </td>
-                               <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">KB</span></td>
+                                <td class="align-middle"><span class="badge badge-light badge-pill px-3 py-2">KB</span>
+                                </td>
                                 <td class="align-middle">
                                     <div class="font-weight-bold text-muted">Kelompok Bermain</div>
                                 </td>
@@ -670,7 +673,7 @@
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                   <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
+                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
                                         <i class="fas fa-times-circle mr-1"></i>Dihapus
                                     </span>
                                 </td>
@@ -716,7 +719,8 @@
                         <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
                         <h5 class="mb-3">Pulihkan Data Unit?</h5>
                         <p class="text-muted mb-0">
-                            Apakah yakin akan memulihkan data unit yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.
+                            Apakah yakin akan memulihkan data unit yang dipilih? Data yang dipulihkan akan dikembalikan
+                            ke daftar unit aktif.
                         </p>
                     </div>
                     <div class="modal-footer border-0">
@@ -748,12 +752,14 @@
                         <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
                         <h5 class="mb-3">Hapus Data Secara Permanen?</h5>
                         <p class="text-muted mb-2">
-                            Apakah yakin akan menghapus data unit yang dipilih secara permanen? Data yang telah dihapus tidak dapat dikembalikan.
+                            Apakah yakin akan menghapus data unit yang dipilih secara permanen? Data yang telah dihapus
+                            tidak dapat dikembalikan.
                         </p>
                         <div class="alert alert-warning text-left mt-3" role="alert">
                             <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
                             <p class="mb-0 mt-2 small">
-                                Seluruh data yang mereferensikan ke data unit seperti data kelas, tagihan, transaksi pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai unit.
+                                Seluruh data yang mereferensikan ke data unit seperti data kelas, tagihan, transaksi
+                                pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai unit.
                             </p>
                         </div>
                     </div>
@@ -795,8 +801,388 @@
     <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
-        // JavaScript will be added in next iteration
-        console.log('DihapusUnit.html loaded successfully');
+        $(document).ready(function () {
+            // ===========================
+            // INITIALIZE DATATABLES
+            // ===========================
+            const table = $('#datatable').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json',
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari data unit...",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    zeroRecords: "Tidak ada data yang cocok",
+                    emptyTable: "Tidak ada data unit yang dihapus"
+                },
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                order: [[9, 'desc']], // Sort by waktu dihapus
+                columnDefs: [
+                    { orderable: false, targets: [0, 10] },
+                    { className: 'text-center', targets: [0, 1, 2, 6, 7, 8, 9, 10] }
+                ],
+                drawCallback: function () {
+                    const api = this.api();
+                    api.column(1, { page: 'current' }).nodes().each(function (cell, i) {
+                        const pageInfo = api.page.info();
+                        $(cell).html('<strong>' + (pageInfo.start + i + 1) + '</strong>');
+                    });
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }
+            });
+
+            // ===========================
+            // FILTER COLLAPSE ICON TOGGLE
+            // ===========================
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            }).on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // ===========================
+            // CHECKBOX FUNCTIONALITY
+            // ===========================
+            $('#checks').on('change', function () {
+                const isChecked = $(this).prop('checked');
+                $('.row-check').prop('checked', isChecked);
+                updateBulkActions();
+            });
+
+            $(document).on('change', '.row-check', function () {
+                const totalCheckbox = $('.row-check').length;
+                const checkedCheckbox = $('.row-check:checked').length;
+                $('#checks').prop('checked', totalCheckbox === checkedCheckbox);
+                updateBulkActions();
+            });
+
+            function updateBulkActions() {
+                const checkedCount = $('.row-check:checked').length;
+                if (checkedCount > 0) {
+                    $('.bulk-delete').fadeIn(200);
+                } else {
+                    $('.bulk-delete').fadeOut(200);
+                }
+            }
+
+            // ===========================
+            // FILTER FUNCTIONALITY
+            // ===========================
+            $('#btn-apply-filter').on('click', function () {
+                applyFilter();
+            });
+
+            $('#btn-reset-filter').on('click', function () {
+                resetFilter();
+            });
+
+            $('#filter-form input').on('keypress', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    applyFilter();
+                }
+            });
+
+            function applyFilter() {
+                const keyword = $('#keyword').val().toLowerCase();
+
+                $.fn.dataTable.ext.search.push(function (settings, data) {
+                    const rowKodeUnit = data[3].toLowerCase();
+                    const rowNamaUnit = data[4].toLowerCase();
+
+                    if (keyword) {
+                        if (!rowKodeUnit.includes(keyword) && !rowNamaUnit.includes(keyword)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+
+                table.draw();
+                $.fn.dataTable.ext.search.pop();
+                showAlert('success', 'Filter Diterapkan', 'Filter berhasil diterapkan pada data unit');
+                $('#filterCollapse').collapse('hide');
+            }
+
+            function resetFilter() {
+                $('#filter-form')[0].reset();
+                table.search('').draw();
+                showAlert('info', 'Filter Direset', 'Semua filter telah direset');
+            }
+
+            // ===========================
+            // RESTORE FUNCTIONALITY
+            // ===========================
+            let restoreRows = [];
+
+            $(document).on('click', '.restore', function (e) {
+                e.preventDefault();
+                const row = $(this).closest('tr');
+                restoreRows = [row];
+
+                const namaUnit = row.find('td:eq(4)').text().trim();
+                const kodeUnit = row.find('td:eq(3)').text().trim();
+
+                $('#restore-dialog .modal-body p').html(
+                    `Apakah yakin akan memulihkan data unit <strong>${namaUnit}</strong> (${kodeUnit})? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.`
+                );
+
+                $('#restore-dialog').modal('show');
+            });
+
+            $('#bulk-restore').on('click', function (e) {
+                e.preventDefault();
+                restoreRows = [];
+
+                $('.row-check:checked').each(function () {
+                    restoreRows.push($(this).closest('tr'));
+                });
+
+                if (restoreRows.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dipulihkan');
+                    return;
+                }
+
+                $('#restore-dialog .modal-body p').html(
+                    `Apakah yakin akan memulihkan <strong>${restoreRows.length} data unit</strong> yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar unit aktif.`
+                );
+
+                $('#restore-dialog').modal('show');
+            });
+
+            $('#btn-restore-submit').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#btn-restore-svg').hide();
+                $('#btn-restore-icon').show();
+                btn.contents().filter(function () {
+                    return this.nodeType === 3;
+                }).last().replaceWith(' Memulihkan...');
+                $('#btn-restore-abort').prop('disabled', true);
+
+                setTimeout(function () {
+                    restoreRows.forEach(function (row) {
+                        table.row(row).remove();
+                    });
+                    table.draw();
+
+                    btn.prop('disabled', false);
+                    $('#btn-restore-svg').show();
+                    $('#btn-restore-icon').hide();
+                    btn.contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).last().replaceWith(' Konfirmasi');
+                    $('#btn-restore-abort').prop('disabled', false);
+                    $('#restore-dialog').modal('hide');
+
+                    const message = restoreRows.length === 1
+                        ? 'Data unit berhasil dipulihkan'
+                        : `${restoreRows.length} data unit berhasil dipulihkan`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    restoreRows = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // DELETE PERMANENT FUNCTIONALITY
+            // ===========================
+            let deleteRows = [];
+
+            $(document).on('click', '.delete', function (e) {
+                e.preventDefault();
+                const row = $(this).closest('tr');
+                deleteRows = [row];
+
+                const namaUnit = row.find('td:eq(4)').text().trim();
+
+                $('#delete-dialog .modal-body h5').html(
+                    `Hapus Data Unit <strong>${namaUnit}</strong> Secara Permanen?`
+                );
+
+                $('#delete-dialog').modal('show');
+            });
+
+            $('#bulk-delete').on('click', function (e) {
+                e.preventDefault();
+                deleteRows = [];
+
+                $('.row-check:checked').each(function () {
+                    deleteRows.push($(this).closest('tr'));
+                });
+
+                if (deleteRows.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dihapus');
+                    return;
+                }
+
+                $('#delete-dialog .modal-body h5').html(
+                    `Hapus <strong>${deleteRows.length} Data Unit</strong> Secara Permanen?`
+                );
+
+                $('#delete-dialog').modal('show');
+            });
+
+            $('#btn-delete-submit').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#btn-delete-svg').hide();
+                $('#btn-delete-icon').show();
+                btn.contents().filter(function () {
+                    return this.nodeType === 3;
+                }).last().replaceWith(' Menghapus...');
+                $('.btn-secondary').prop('disabled', true);
+
+                setTimeout(function () {
+                    deleteRows.forEach(function (row) {
+                        table.row(row).remove();
+                    });
+                    table.draw();
+
+                    btn.prop('disabled', false);
+                    $('#btn-delete-svg').show();
+                    $('#btn-delete-icon').hide();
+                    btn.contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).last().replaceWith(' Hapus Permanen');
+                    $('.btn-secondary').prop('disabled', false);
+                    $('#delete-dialog').modal('hide');
+
+                    const message = deleteRows.length === 1
+                        ? 'Data unit berhasil dihapus secara permanen'
+                        : `${deleteRows.length} data unit berhasil dihapus secara permanen`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    deleteRows = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+                let borderColor = '#216fcb';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        borderColor = '#28a745';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        borderColor = '#dc3545';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        borderColor = '#ffc107';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        borderColor = '#17a2b8';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertDiv.css('border-left-color', borderColor);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                alertDiv.fadeIn(300).addClass('show');
+
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+                submenu.toggleClass('show');
+
+                const parentOffset = $(this).offset();
+                const submenuWidth = submenu.outerWidth();
+
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // PREVENT MODAL CLOSE ON PROCESSING
+            // ===========================
+            $('#restore-dialog, #delete-dialog').on('hide.bs.modal', function (e) {
+                if ($(this).find('.spinner-border').is(':visible')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // ===========================
+            // INITIALIZATION
+            // ===========================
+            console.log('DihapusUnit.js initialized successfully');
+
+            setTimeout(function () {
+                const rowCount = table.rows().count();
+                if (rowCount > 0) {
+                    showAlert('info', 'Data Unit Dihapus', `Menampilkan ${rowCount} data unit yang telah dihapus`);
+                }
+            }, 500);
+        });
     </script>
 
 </body>

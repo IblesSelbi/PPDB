@@ -706,7 +706,9 @@
     </footer>
 
     <script>
-        // Dropdown menu handler
+        /* ===========================================================
+           1. Multi-Level Dropdown Bootstrap 4 Fix
+           =========================================================== */
         $('.dropdown-menu a.dropdown-toggle').on('click', function (e) {
             if (!$(this).next().hasClass('show')) {
                 $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
@@ -721,8 +723,81 @@
 
             return false;
         });
+
+
+        /* ===========================================================
+           2. Update Waktu Server secara real-time
+           =========================================================== */
+        function updateServerClock() {
+            let now = new Date();
+
+            let tgl = now.toLocaleDateString('id-ID', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+
+            let jam = now.toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+
+            $("[data-server-time]").text(`${tgl} ${jam}`);
+        }
+
+        setInterval(updateServerClock, 1000); // Update setiap 1 detik
+
+
+        /* ===========================================================
+           3. Refresh Info Server (Simulasi)
+           =========================================================== */
+        $(document).on('click', '#btn-refresh-server', function () {
+            let $btn = $(this);
+
+            // Ganti icon menjadi spinner
+            $btn.find('i').removeClass('fa-sync').addClass('fa-spinner fa-spin');
+
+            setTimeout(function () {
+                $btn.find('i').removeClass('fa-spinner fa-spin').addClass('fa-sync');
+
+                // Simulasi update data
+                $("#server-ip").text("192.168.1." + Math.floor(Math.random() * 100));
+                $("#server-arch").text("x86_64");
+                $("#server-web").text("Apache 2.4");
+                $("#server-db").text("MariaDB 10.6");
+
+            }, 1000);
+        });
+
+
+        /* ===========================================================
+           4. Highlight animasi saat data berubah
+           =========================================================== */
+        function animateCell(selector) {
+            $(selector)
+                .css({ backgroundColor: '#fff3cd' })
+                .animate({ backgroundColor: '#ffffff' }, 1500);
+        }
+
+        // Contoh pemakaian otomatis saat refresh
+        $(document).on('click', '#btn-refresh-server', function () {
+            animateCell('#server-ip');
+            animateCell('#server-arch');
+            animateCell('#server-web');
+            animateCell('#server-db');
+        });
+
+
+        /* ===========================================================
+           5. Atur waktu server awal saat page load
+           =========================================================== */
+        $(document).ready(function () {
+            updateServerClock();
+        });
     </script>
-    
+
+
 </body>
 
 </html>
