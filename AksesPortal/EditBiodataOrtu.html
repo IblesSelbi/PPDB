@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Edit Biodata Orang Tua :: PPDB</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);
+            box-shadow: 0 8px 35px rgba(0, 0, 4, 0.5);
+            position: relative;
+            z-index: 3;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap text-primary"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">School Payment App</span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Sistem Penerimaan Peserta
+                        Didik Baru</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="HalamanUtama.html">
+                            <i class="fas fa-home mr-1"></i>Halaman Utama
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="PusatInformasi.html">
+                            <i class="fas fa-info-circle mr-1"></i>Pusat Informasi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="Pendaftaran.html">
+                            <i class="fas fa-edit mr-1"></i>Menu Pendaftaran
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white font-weight-bold" href="Login.html">
+                            <i class="fas fa-sign-in-alt mr-1"></i>Masuk Akun
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="KontakPanitia.html">
+                            <i class="fas fa-address-book mr-1"></i>Kontak
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white shadow-sm rounded">
+                <li class="breadcrumb-item"><a href="#"
+                        class="text-decoration-none text-primary font-weight-medium">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="DataPendaftar.html"
+                        class="text-decoration-none text-primary font-weight-medium">Data Pendaftar</a></li>
+                <li class="breadcrumb-item active text-decoration-none font-weight-medium">Edit Biodata Orang Tua</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="bg-white shadow-sm rounded p-4 mb-4 border-left border-primary"
+            style="border-left-width: 4px !important;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mb-3 mb-md-0">
+                    <h2 class="font-weight-bold text-primary mb-2">Edit Biodata Orang Tua</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1 text-info"></i>Ubah informasi biodata
+                        orang tua/wali siswa</p>
+                </div>
+                <a href="DetailOrangTua.html" class="btn btn-outline-primary font-weight-bold">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade border-0 shadow-sm" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="form" method="POST" action="javascript:void(0)">
+
+            <!-- Biodata Ayah -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-primary text-black">
+                    <h5 class="mb-0 font-weight-bold"><i class="fas fa-male mr-2 text-primary"></i>DATA AYAH KANDUNG
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Lengkap <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="father_name" id="father-name"
+                                class="form-control border-primary text-uppercase" maxlength="64">
+                            <small id="father-name-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tempat Lahir <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="father_pob" id="father-pob"
+                                class="form-control border-primary text-uppercase" maxlength="32">
+                            <small id="father-pob-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tanggal Lahir <span
+                                    class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <select name="father_dob" id="father-dob" class="custom-select border-primary">
+                                        <option value="">Tgl</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                                <div class="col-5">
+                                    <select name="father_mob" id="father-mob" class="custom-select border-primary">
+                                        <option value="">Bln</option>
+                                        <option value="01">Januari</option>
+                                        <option value="02">Februari</option>
+                                        <option value="03">Maret</option>
+                                        <option value="04">April</option>
+                                        <option value="05">Mei</option>
+                                        <option value="06">Juni</option>
+                                        <option value="07">Juli</option>
+                                        <option value="08">Agustus</option>
+                                        <option value="09">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select name="father_yob" id="father-yob" class="custom-select border-primary">
+                                        <option value="">Thn</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <small id="father-dob-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Agama <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_religion" id="father-religion" class="custom-select border-primary">
+                                <option value="">-- Pilih Agama --</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Konghucu">Konghucu</option>
+                                <option value="Kristen Katolik">Kristen Katolik</option>
+                                <option value="Kristen Protestan">Kristen Protestan</option>
+                            </select>
+                            <small id="father-religion-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Kewarganegaraan <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_civil_status" id="father-civil-status"
+                                class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="WNI">WNI</option>
+                                <option value="WNA">WNA</option>
+                            </select>
+                            <small id="father-civil-status-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Induk Kependudukan <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="father_nik" id="father-nik" class="form-control border-primary"
+                                maxlength="16" placeholder="3201012005XXXXXX">
+                            <small id="father-nik-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pekerjaan <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_job" id="father-job" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                <option value="TNI/POLRI">TNI/POLRI</option>
+                                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                <option value="Pengajar (Guru/Dosen)">Pengajar (Guru/Dosen)</option>
+                                <option value="Wiraswasta">Wiraswasta</option>
+                                <option value="Mengurus Rumah Tangga">Mengurus Rumah Tangga</option>
+                                <option value="Dokter/Perawat">Dokter/Perawat</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <small id="father-job-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Penghasilan Perbulan <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_income" id="father-income" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                                <option value="< Rp 1.500.000">
+                                    < Rp 1.500.000</option>
+                                <option value="Rp 1.500.000 - Rp 3.000.000">Rp 1.500.000 - Rp 3.000.000</option>
+                                <option value="Rp 3.000.000 - Rp 5.000.000">Rp 3.000.000 - Rp 5.000.000</option>
+                                <option value="Rp 5.000.000 - Rp 8.000.000">Rp 5.000.000 - Rp 8.000.000</option>
+                                <option value="Rp 8.000.000 - Rp 15.000.000">Rp 8.000.000 - Rp 15.000.000</option>
+                                <option value="> Rp 15.000.000">> Rp 15.000.000</option>
+                            </select>
+                            <small id="father-income-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pendidikan Terakhir <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_education" id="father-education" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="SD Sederajat">SD Sederajat</option>
+                                <option value="SMP Sederajat">SMP Sederajat</option>
+                                <option value="SMA Sederajat">SMA Sederajat</option>
+                                <option value="Diploma (D1, D2, D3)">Diploma (D1, D2, D3)</option>
+                                <option value="Strata (S1, S2)">Strata (S1, S2)</option>
+                                <option value="Lainnya">Lainnya</option>
+                                <option value="PAUD">PAUD</option>
+                            </select>
+                            <small id="father-education-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Keadaan Orang Tua <span
+                                    class="text-danger">*</span></label>
+                            <select name="father_condition" id="father-condition" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Masih Hidup">Masih Hidup</option>
+                                <option value="Meninggal Dunia">Meninggal Dunia</option>
+                            </select>
+                            <small id="father-condition-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Tempat Tinggal <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="father_address" id="father-address"
+                                class="form-control border-primary text-uppercase" maxlength="255">
+                            <small id="father-address-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Telepon</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span
+                                        class="input-group-text bg-success text-white font-weight-bold border-0">+62</span>
+                                </div>
+                                <input type="text" name="father_phone" id="father-phone"
+                                    class="form-control border-success" maxlength="16" placeholder="8123456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Email</label>
+                            <input type="email" name="father_email" id="father-email"
+                                class="form-control border-primary" maxlength="64" placeholder="xxx@email.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biodata Ibu -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-danger text-black">
+                    <h5 class="mb-0 font-weight-bold"><i class="fas fa-female mr-2 text-danger"></i>DATA IBU KANDUNG
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Lengkap <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="mother_name" id="mother-name"
+                                class="form-control border-primary text-uppercase" maxlength="64">
+                            <small id="mother-name-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tempat Lahir <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="mother_pob" id="mother-pob"
+                                class="form-control border-primary text-uppercase" maxlength="32">
+                            <small id="mother-pob-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tanggal Lahir <span
+                                    class="text-danger">*</span></label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <select name="mother_dob" id="mother-dob" class="custom-select border-primary">
+                                        <option value="">Tgl</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                                <div class="col-5">
+                                    <select name="mother_mob" id="mother-mob" class="custom-select border-primary">
+                                        <option value="">Bln</option>
+                                        <option value="01">Januari</option>
+                                        <option value="02">Februari</option>
+                                        <option value="03">Maret</option>
+                                        <option value="04">April</option>
+                                        <option value="05">Mei</option>
+                                        <option value="06">Juni</option>
+                                        <option value="07">Juli</option>
+                                        <option value="08">Agustus</option>
+                                        <option value="09">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select name="mother_yob" id="mother-yob" class="custom-select border-primary">
+                                        <option value="">Thn</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <small id="mother-dob-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Agama <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_religion" id="mother-religion" class="custom-select border-primary">
+                                <option value="">-- Pilih Agama --</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Konghucu">Konghucu</option>
+                                <option value="Kristen Katolik">Kristen Katolik</option>
+                                <option value="Kristen Protestan">Kristen Protestan</option>
+                            </select>
+                            <small id="mother-religion-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Kewarganegaraan <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_civil_status" id="mother-civil-status"
+                                class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="WNI">WNI</option>
+                                <option value="WNA">WNA</option>
+                            </select>
+                            <small id="mother-civil-status-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Induk Kependudukan <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="mother_nik" id="mother-nik" class="form-control border-primary"
+                                maxlength="16" placeholder="3201012005XXXXXX">
+                            <small id="mother-nik-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pekerjaan <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_job" id="mother-job" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                <option value="TNI/POLRI">TNI/POLRI</option>
+                                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                <option value="Pengajar (Guru/Dosen)">Pengajar (Guru/Dosen)</option>
+                                <option value="Wiraswasta">Wiraswasta</option>
+                                <option value="Mengurus Rumah Tangga">Mengurus Rumah Tangga</option>
+                                <option value="Dokter/Perawat">Dokter/Perawat</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                            <small id="mother-job-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Penghasilan Perbulan <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_income" id="mother-income" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                                <option value="< Rp 1.500.000">
+                                    < Rp 1.500.000</option>
+                                <option value="Rp 1.500.000 - Rp 3.000.000">Rp 1.500.000 - Rp 3.000.000</option>
+                                <option value="Rp 3.000.000 - Rp 5.000.000">Rp 3.000.000 - Rp 5.000.000</option>
+                                <option value="Rp 5.000.000 - Rp 8.000.000">Rp 5.000.000 - Rp 8.000.000</option>
+                                <option value="Rp 8.000.000 - Rp 15.000.000">Rp 8.000.000 - Rp 15.000.000</option>
+                                <option value="> Rp 15.000.000">> Rp 15.000.000</option>
+                            </select>
+                            <small id="mother-income-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pendidikan Terakhir <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_education" id="mother-education" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="SD Sederajat">SD Sederajat</option>
+                                <option value="SMP Sederajat">SMP Sederajat</option>
+                                <option value="SMA Sederajat">SMA Sederajat</option>
+                                <option value="Diploma (D1, D2, D3)">Diploma (D1, D2, D3)</option>
+                                <option value="Strata (S1, S2)">Strata (S1, S2)</option>
+                                <option value="Lainnya">Lainnya</option>
+                                <option value="PAUD">PAUD</option>
+                            </select>
+                            <small id="mother-education-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Keadaan Orang Tua <span
+                                    class="text-danger">*</span></label>
+                            <select name="mother_condition" id="mother-condition" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Masih Hidup">Masih Hidup</option>
+                                <option value="Meninggal Dunia">Meninggal Dunia</option>
+                            </select>
+                            <small id="mother-condition-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Tempat Tinggal <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="mother_address" id="mother-address"
+                                class="form-control border-primary text-uppercase" maxlength="255">
+                            <small id="mother-address-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Telepon</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span
+                                        class="input-group-text bg-success text-white font-weight-bold border-0">+62</span>
+                                </div>
+                                <input type="text" name="mother_phone" id="mother-phone"
+                                    class="form-control border-success" maxlength="16" placeholder="8123456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Email</label>
+                            <input type="email" name="mother_email" id="mother-email"
+                                class="form-control border-primary" maxlength="64" placeholder="xxx@email.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biodata Wali -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-warning text-black">
+                    <h5 class="mb-0 font-weight-bold"><i class="fas fa-user-shield mr-2 text-warning"></i>DATA WALI
+                        (BILA ADA)</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info border-0 shadow-sm" role="alert">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Informasi:</strong> Isi data wali jika siswa tidak tinggal bersama orang tua atau
+                        memiliki wali resmi.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Lengkap</label>
+                            <input type="text" name="guardian_name" id="guardian-name"
+                                class="form-control border-primary text-uppercase" maxlength="64">
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tempat Lahir</label>
+                            <input type="text" name="guardian_pob" id="guardian-pob"
+                                class="form-control border-primary text-uppercase" maxlength="32">
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Tanggal Lahir</label>
+                            <div class="row">
+                                <div class="col-3">
+                                    <select name="guardian_dob" id="guardian-dob" class="custom-select border-primary">
+                                        <option value="">Tgl</option>
+                                        <option value="01">01</option>
+                                        <option value="02">02</option>
+                                        <option value="03">03</option>
+                                        <option value="04">04</option>
+                                        <option value="05">05</option>
+                                        <option value="06">06</option>
+                                        <option value="07">07</option>
+                                        <option value="08">08</option>
+                                        <option value="09">09</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+                                <div class="col-5">
+                                    <select name="guardian_mob" id="guardian-mob" class="custom-select border-primary">
+                                        <option value="">Bln</option>
+                                        <option value="01">Januari</option>
+                                        <option value="02">Februari</option>
+                                        <option value="03">Maret</option>
+                                        <option value="04">April</option>
+                                        <option value="05">Mei</option>
+                                        <option value="06">Juni</option>
+                                        <option value="07">Juli</option>
+                                        <option value="08">Agustus</option>
+                                        <option value="09">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="11">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <select name="guardian_yob" id="guardian-yob" class="custom-select border-primary">
+                                        <option value="">Thn</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Agama</label>
+                            <select name="guardian_religion" id="guardian-religion"
+                                class="custom-select border-primary">
+                                <option value="">-- Pilih Agama --</option>
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Budha">Budha</option>
+                                <option value="Konghucu">Konghucu</option>
+                                <option value="Kristen Katolik">Kristen Katolik</option>
+                                <option value="Kristen Protestan">Kristen Protestan</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Kewarganegaraan</label>
+                            <select name="guardian_civil_status" id="guardian-civil-status"
+                                class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="WNI">WNI</option>
+                                <option value="WNA">WNA</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Induk Kependudukan</label>
+                            <input type="text" name="guardian_nik" id="guardian-nik" class="form-control border-primary"
+                                maxlength="16" placeholder="3201012005XXXXXX">
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Status Wali</label>
+                            <input type="text" name="guardian_status" id="guardian-status"
+                                class="form-control border-primary text-uppercase" maxlength="32"
+                                placeholder="Paman/Bibi/Kakek/Nenek">
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pekerjaan</label>
+                            <select name="guardian_job" id="guardian-job" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
+                                <option value="TNI/POLRI">TNI/POLRI</option>
+                                <option value="Karyawan BUMN/BUMD">Karyawan BUMN/BUMD</option>
+                                <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                <option value="Pengajar (Guru/Dosen)">Pengajar (Guru/Dosen)</option>
+                                <option value="Wiraswasta">Wiraswasta</option>
+                                <option value="Mengurus Rumah Tangga">Mengurus Rumah Tangga</option>
+                                <option value="Dokter/Perawat">Dokter/Perawat</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Penghasilan Perbulan</label>
+                            <select name="guardian_income" id="guardian-income" class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="Tidak Berpenghasilan">Tidak Berpenghasilan</option>
+                                <option value="< Rp 1.500.000">
+                                    < Rp 1.500.000</option>
+                                <option value="Rp 1.500.000 - Rp 3.000.000">Rp 1.500.000 - Rp 3.000.000</option>
+                                <option value="Rp 3.000.000 - Rp 5.000.000">Rp 3.000.000 - Rp 5.000.000</option>
+                                <option value="Rp 5.000.000 - Rp 8.000.000">Rp 5.000.000 - Rp 8.000.000</option>
+                                <option value="Rp 8.000.000 - Rp 15.000.000">Rp 8.000.000 - Rp 15.000.000</option>
+                                <option value="> Rp 15.000.000">> Rp 15.000.000</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pendidikan Terakhir</label>
+                            <select name="guardian_education" id="guardian-education"
+                                class="custom-select border-primary">
+                                <option value="">-- Pilih --</option>
+                                <option value="SD Sederajat">SD Sederajat</option>
+                                <option value="SMP Sederajat">SMP Sederajat</option>
+                                <option value="SMA Sederajat">SMA Sederajat</option>
+                                <option value="Diploma (D1, D2, D3)">Diploma (D1, D2, D3)</option>
+                                <option value="Strata (S1, S2)">Strata (S1, S2)</option>
+                                <option value="Lainnya">Lainnya</option>
+                                <option value="PAUD">PAUD</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Tempat Tinggal</label>
+                            <input type="text" name="guardian_address" id="guardian-address"
+                                class="form-control border-primary text-uppercase" maxlength="255">
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Telepon</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span
+                                        class="input-group-text bg-success text-white font-weight-bold border-0">+62</span>
+                                </div>
+                                <input type="text" name="father_phone" id="father-phone"
+                                    class="form-control border-success" maxlength="16" placeholder="8123456789">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Email</label>
+                            <input type="email" name="father_email" id="father-email"
+                                class="form-control border-primary" maxlength="64" placeholder="xxx@email.com">
+                        </div>
+                    </div>
+                    <div class="row my-4">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="d-grid">
+                                <button type="submit" id="btn-submit"
+                                    class="btn btn-primary btn-block font-weight-bold shadow-sm d-flex align-items-center justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-2" width="22" height="22"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M9 12l2 2l4 -4"></path>
+                                    </svg>
+                                    <span>Simpan Data</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Footer -->
+            <footer class="bg-white border-top py-3 mt-5">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <small class="text-muted">Powered By PPDB &copy; 2022-2025</small>
+                        </div>
+                    </div>
+                </div>
+            </footer>

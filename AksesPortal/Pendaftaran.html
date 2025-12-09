@@ -98,34 +98,47 @@
                 </div>
 
                 <!-- Progress Steps -->
-<div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; overflow: hidden;">
-  <div class="card-body p-4">
-    <div class="row text-center align-items-center">
-      
-      <!-- Step 1 -->
-      <div class="col-6 position-relative">
-        <div id="step-indicator-1" class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center font-weight-bold mb-2" 
-             style="width: 60px; height: 60px; font-size: 24px;">1</div>
-        
-        <!-- Progress Line -->
-        <div style="position: absolute; top: 50%; left: 50%; width: 100%; height: 4px; background: #007bff; z-index: -1;"></div>
-        
-        <h6 class="font-weight-bold mt-2">Biodata Peserta</h6>
-        <small class="text-muted">Isi data diri lengkap</small>
-      </div>
+                <div class="card border-0 shadow-lg mb-4" style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-body p-4">
+                        <div class="row text-center align-items-center">
 
-      <!-- Step 2 -->
-      <div class="col-6 position-relative">
-        <div id="step-indicator-2" class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center font-weight-bold mb-2" 
-             style="width: 60px; height: 60px; font-size: 24px;">2</div>
-        <h6 class="font-weight-bold text-muted mt-2">Konfirmasi</h6>
-        <small class="text-muted">Verifikasi data</small>
-      </div>
+                            <!-- Step 1 -->
+                            <div class="col-4 position-relative">
+                                <div id="step-indicator-1"
+                                    class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center font-weight-bold mb-2"
+                                    style="width: 50px; height: 50px; font-size: 20px;">1</div>
 
-    </div>
-  </div>
-</div>
+                                <div
+                                    style="position: absolute; top: 50%; left: 50%; width: 100%; height: 4px; background: #007bff; z-index: -1;">
+                                </div>
 
+                                <h6 class="font-weight-bold mt-2 small">Biodata</h6>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="col-4 position-relative">
+                                <div id="step-indicator-2"
+                                    class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center font-weight-bold mb-2"
+                                    style="width: 50px; height: 50px; font-size: 20px;">2</div>
+
+                                <div
+                                    style="position: absolute; top: 50%; left: 50%; width: 100%; height: 4px; background: #6c757d; z-index: -1;">
+                                </div>
+
+                                <h6 class="font-weight-bold text-muted mt-2 small">Konfirmasi</h6>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="col-4 position-relative">
+                                <div id="step-indicator-3"
+                                    class="rounded-circle bg-secondary text-white d-inline-flex align-items-center justify-content-center font-weight-bold mb-2"
+                                    style="width: 50px; height: 50px; font-size: 20px;">3</div>
+                                <h6 class="font-weight-bold text-muted mt-2 small">Selesai</h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
 
                 <!-- Form Card - Step 1 -->
                 <div id="card-registrar" class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
@@ -404,6 +417,8 @@
                 <!-- Confirmation Card - Step 2 -->
                 <div id="card-confirmation" class="card border-0 shadow-lg d-none"
                     style="border-radius: 15px; overflow: hidden;">
+
+                    <!-- Header -->
                     <div class="card-header bg-white border-0 p-4">
                         <h3 class="font-weight-bold mb-2">
                             <i class="fas fa-check-circle text-success mr-2"></i>Konfirmasi Pendaftaran
@@ -412,6 +427,7 @@
                             pendaftaran</p>
                     </div>
 
+                    <!-- Body -->
                     <div class="card-body p-4">
                         <form id="form-confirmation">
                             <input type="hidden" name="admission_token" id="admission-token" value="">
@@ -425,42 +441,52 @@
                                             <small class="text-muted d-block">Unit Pendidikan</small>
                                             <h6 id="preview-unit" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Jenis Pendaftaran</small>
                                             <h6 id="preview-type" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-12 mb-3">
                                             <small class="text-muted d-block">Nama Lengkap</small>
                                             <h6 id="preview-fullname" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Jenis Kelamin</small>
                                             <h6 id="preview-gender" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Agama</small>
                                             <h6 id="preview-religion" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Tempat Lahir</small>
                                             <h6 id="preview-place-ob" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Tanggal Lahir</small>
                                             <h6 id="preview-date-ob" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Nama Sekolah Asal</small>
                                             <h6 id="preview-school-name" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Jenjang Sekolah</small>
                                             <h6 id="preview-school-level" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Alamat</small>
                                             <h6 id="preview-address" class="font-weight-bold">-</h6>
                                         </div>
+
                                         <div class="col-md-6 mb-3">
                                             <small class="text-muted d-block">Nomor Telepon</small>
                                             <h6 id="preview-phone" class="font-weight-bold">-</h6>
@@ -468,30 +494,203 @@
                                     </div>
                                 </div>
                             </div>
+                        </form>
+                    </div>
 
-                            <div class="d-flex justify-content-between mt-4">
-                                <button type="button" class="btn btn-outline-secondary px-4 py-2" id="btn-back"
-                                    style="border-width: 2px;">
-                                    <i class="fas fa-arrow-left mr-2"></i>Kembali
-                                </button>
-                                <a href="Login.html">
-                                    <button type="button" id="btn-submit-confirm"
-                                        class="btn btn-outline-success px-5 py-2"
-                                        style="border-width: 2px; background-color: #fff;">
-                                        <span id="btn-icon-confirm"
-                                            class="spinner-border spinner-border-sm mr-2 d-none"></span>
-                                        <i id="btn-svg-confirm" class="fas fa-check-circle mr-2 text-success"></i>
-                                        <span id="btn-text-confirm" class="text-success font-weight-semibold">Proses
-                                            Pendaftaran</span>
-                                    </button>
+                    <!-- Footer Buttons (dipindah ke bawah card-body) -->
+                    <div class="p-4 border-top bg-white d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary px-4 py-2" id="btn-back"
+                            style="border-width: 2px;">
+                            <i class="fas fa-arrow-left mr-2"></i>Kembali
+                        </button>
+
+                        <a href="Login.html">
+                            <button type="button" id="btn-submit-confirm" class="btn btn-outline-success px-5 py-2"
+                                style="border-width: 2px; background-color: #fff;">
+                                <span id="btn-icon-confirm" class="spinner-border spinner-border-sm mr-2 d-none"></span>
+                                <i id="btn-svg-confirm" class="fas fa-check-circle mr-2 text-success"></i>
+                                <span id="btn-text-confirm" class="text-success font-weight-semibold">Proses
+                                    Pendaftaran</span>
+                            </button>
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Detail Pendaftaran Card - Step 3 -->
+                <div id="card-detail" class="card border-0 shadow-lg d-none"
+                    style="border-radius: 15px; overflow: hidden;">
+                    <div class="card-body p-4" style="min-height: 562px">
+                        <div class="mb-4 p-3" style="background-color: #f8f9fa;">
+                            <h1 class="h3 m-0 p-0 text-uppercase font-weight-bold">
+                                Detail Pendaftaran
+                            </h1>
+                            <h2 class="h5 font-weight-normal text-muted">
+                                PPDB School Payment App Tahun 2025/2026
+                            </h2>
+                        </div>
+
+                        <div class="alert alert-success" role="alert">
+                            <i class="fas fa-check-circle mr-2"></i>Sukses melakukan pendaftaran
+                        </div>
+
+                        <div class="mb-4">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-3 align-middle">Nama Lengkap</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle" id="detail-fullname">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">Nomor Pendaftaran</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle">
+                                            <span id="detail-registration-number">2526-0013</span>
+                                            &nbsp;
+                                            <button class="btn btn-outline-secondary btn-sm"
+                                                title="Cetak Kartu Pendaftaran">
+                                                <i class="fas fa-print"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">Biaya Pendaftaran</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle">Rp 180,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">Status Saat Ini</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle">
+                                            <span class="badge px-3 py-2"
+                                                style="background: #fff3cd; color:#856404; border:1px solid #ffeeba; border-radius: 10px;">
+                                                <i class="fas fa-clock mr-1"></i>Menunggu Pembayaran
+                                            </span>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">Tanggal Pendaftaran</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle" id="detail-date">08 Desember 2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="align-middle">Waktu Pendaftaran</td>
+                                        <td class="col-1 font-weight-bold text-right align-middle">:</td>
+                                        <td class="font-weight-bold align-middle" id="detail-time">09:03:27</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="mt-3 lead">
+                            Anda telah berhasil melakukan pendaftaran akun peserta PPDB, selanjutnya silahkan masuk
+                            akun dan akses halaman menu pendaftar untuk memproses pembayaran serta melengkapi data
+                            pendaftaran PPDB.
+                        </p>
+
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <a href="Login.html" class="btn btn-outline-secondary btn-block">
+                                    <i class="fas fa-sign-in-alt mr-2"></i>Masuk Akun Pendaftar
                                 </a>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
+
             </div>
+
+            <!-- Modal Detail Pendaftaran -->
+            <div class="modal fade" id="modalDetailPendaftaran" tabindex="-1" role="dialog"
+                aria-labelledby="modalDetailLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title font-weight-bold" id="modalDetailLabel">
+                                <i class="fas fa-check-circle mr-2"></i>Detail Pendaftaran
+                            </h5>
+                            <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-success" role="alert">
+                                <i class="fas fa-check-circle mr-2"></i>Sukses melakukan pendaftaran
+                            </div>
+
+                            <div class="mb-4">
+                                <h5 class="font-weight-bold text-uppercase mb-3">PPDB School Payment App Tahun
+                                    2025/2026</h5>
+
+                                <table class="table table-borderless">
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-4">Nama Lengkap</td>
+                                            <td class="col-1 font-weight-bold text-right">:</td>
+                                            <td class="font-weight-bold" id="modal-fullname">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nomor Pendaftaran</td>
+                                            <td class="font-weight-bold text-right">:</td>
+                                            <td class="font-weight-bold">
+                                                <span id="modal-registration-number">2526-0013</span>
+                                                <button class="btn btn-sm btn-outline-secondary ml-2"
+                                                    title="Cetak Kartu Pendaftaran">
+                                                    <i class="fas fa-print"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Biaya Pendaftaran</td>
+                                            <td class="font-weight-bold text-right">:</td>
+                                            <td class="font-weight-bold text-danger" id="modal-fee">Rp 180,000</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status Saat Ini</td>
+                                            <td class="font-weight-bold text-right">:</td>
+                                            <td>
+                                                <span class="badge badge-warning badge-pill">Menunggu
+                                                    Pembayaran</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tanggal Pendaftaran</td>
+                                            <td class="font-weight-bold text-right">:</td>
+                                            <td class="font-weight-bold" id="modal-date">08 Desember 2025</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Waktu Pendaftaran</td>
+                                            <td class="font-weight-bold text-right">:</td>
+                                            <td class="font-weight-bold" id="modal-time">09:03:27</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="alert alert-info" role="alert">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                Anda telah berhasil melakukan pendaftaran akun peserta PPDB, selanjutnya silahkan
+                                masuk akun dan akses halaman menu pendaftar untuk memproses pembayaran serta
+                                melengkapi data pendaftaran PPDB.
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                <i class="fas fa-times mr-2"></i>Tutup
+                            </button>
+                            <a href="Login.html" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt mr-2"></i>Masuk Akun Pendaftar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
     </div>
 
     <!-- Scripts -->
@@ -741,21 +940,40 @@
                 $('html, body').animate({ scrollTop: 0 }, 500);
             });
 
-            // Final submission
-            $('#btn-submit-confirm').click(function () {
+            // Final submission - Step 3
+            $('#btn-submit-confirm').click(function (e) {
+                e.preventDefault();
                 submitButtonHandler('confirm');
 
                 // Simulate final API call
                 setTimeout(function () {
                     submitButtonHandler('confirm');
 
-                    // Show success message
-                    showAlert('Pendaftaran berhasil diproses! Silakan cek email untuk informasi lebih lanjut.', 'success');
+                    // Generate registration number
+                    const regNumber = '2526-' + String(Math.floor(Math.random() * 9999) + 1).padStart(4, '0');
 
-                    // Reset form after 2 seconds
-                    setTimeout(function () {
-                        location.reload();
-                    }, 3000);
+                    // Get current date and time
+                    const now = new Date();
+                    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                    const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+                    const timeStr = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0') + ':' + String(now.getSeconds()).padStart(2, '0');
+
+                    // Update detail content
+                    $('#detail-fullname').text($('#preview-fullname').text());
+                    $('#detail-registration-number').text(regNumber);
+                    $('#detail-date').text(dateStr);
+                    $('#detail-time').text(timeStr);
+
+                    // Hide confirmation card and show detail card
+                    $('#card-confirmation').addClass('d-none');
+                    $('#card-detail').removeClass('d-none');
+
+                    // Update step indicators
+                    $('#step-indicator-2').removeClass('bg-primary').addClass('bg-success');
+                    $('#step-indicator-3').removeClass('bg-secondary').addClass('bg-success');
+
+                    // Scroll to top
+                    $('html, body').animate({ scrollTop: 0 }, 500);
 
                 }, 2000);
             });

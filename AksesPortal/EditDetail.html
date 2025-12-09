@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Edit Akses Portal :: PPDB</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(135deg, #3d5ce6 0%, #3f8cf0 100%);
+            box-shadow: 0 8px 35px rgba(0, 0, 4, 0.5);
+            position: relative;
+            z-index: 3;">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <div class="bg-white rounded-circle d-flex align-items-center justify-content-center mr-2"
+                    style="width: 40px; height: 40px;">
+                    <i class="fas fa-graduation-cap text-primary"></i>
+                </div>
+                <div>
+                    <span class="font-weight-bold d-block">School Payment App</span>
+                    <small class="d-none d-md-block" style="font-size: 0.7rem; opacity: 0.9;">Sistem Penerimaan Peserta
+                        Didik Baru</small>
+                </div>
+            </a>
+
+            <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="HalamanUtama.html">
+                            <i class="fas fa-home mr-1"></i>Halaman Utama
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="PusatInformasi.html">
+                            <i class="fas fa-info-circle mr-1"></i>Pusat Informasi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="Pendaftaran.html">
+                            <i class="fas fa-edit mr-1"></i>Menu Pendaftaran
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link text-white font-weight-bold" href="Login.html">
+                            <i class="fas fa-sign-in-alt mr-1"></i>Masuk Akun
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="KontakPanitia.html">
+                            <i class="fas fa-address-book mr-1"></i>Kontak
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white shadow-sm rounded">
+                <li class="breadcrumb-item"><a href="#"
+                        class="text-decoration-none text-primary font-weight-medium">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="../AksesPortal/HalamanUtama.html"
+                        class="text-decoration-none text-primary font-weight-medium">Akses Portal</a></li>
+                <li class="breadcrumb-item active text-decoration-none font-weight-medium">Edit Akses Portal</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="bg-white shadow-sm rounded p-4 mb-4 border-left border-primary"
+            style="border-left-width: 4px !important;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mb-3 mb-md-0">
+                    <h2 class="font-weight-bold text-primary mb-2">Edit Akses Portal</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1 text-info"></i>Ubah informasi akses
+                        portal pendaftar</p>
+                </div>
+                <a href="../AksesPortal/DetailSiswa.html" class="btn btn-outline-primary font-weight-bold">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade border-0 shadow-sm" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="accessForm">
+
+            <!-- Detail Akses Portal -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-primary text-black">
+                    <h5 class="mb-0 font-weight-bold"><i class="fas fa-user-lock mr-2 text-primary"></i>DETAIL AKSES
+                        PORTAL</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+
+                        <div class="col-md-6 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Unit Pendidikan <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="registrar_unit" id="registrar-unit"
+                                class="form-control border-primary" disabled>
+                            <small class="form-text text-muted">Unit pendidikan (tidak dapat diubah)</small>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="registrar-type" class="font-weight-bold text-dark mb-2">
+                                Jenis Pendaftaran <span class="text-danger">*</span>
+                            </label>
+
+                            <select name="registrar_type" id="registrar-type" class="custom-select border-primary">
+                                <option value="">-- Pilih Jenis --</option>
+                                <option value="DAFTAR BARU" selected>DAFTAR BARU</option>
+                                <option value="PINDAHAN">PINDAHAN</option>
+                            </select>
+
+                            <small class="form-text text-muted">Pilih jenis pendaftaran sesuai kebutuhan</small>
+                            <small id="registrar-type-feedback" class="text-danger font-weight-medium"
+                                style="display:none;"></small>
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+                            <label for="registrar-period" class="font-weight-bold text-dark mb-2">
+                                Periode Pendaftaran <span class="text-danger">*</span>
+                            </label>
+
+                            <select name="registrar_period" id="registrar-period" class="custom-select border-primary">
+                                <option value="">-- Pilih Periode --</option>
+                                <option value="ZCtDQ0JKazM3RXVnVDU0SVZSTlUvdz09" selected>Reguler</option>
+                            </select>
+
+                            <small class="form-text text-muted">Periode aktif pendaftaran</small>
+                            <small id="registrar-period-feedback" class="text-danger font-weight-medium"
+                                style="display:none;"></small>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <label for="registrar-path" class="font-weight-bold text-dark mb-2">
+                                Jalur Pendaftaran <span class="text-danger">*</span>
+                            </label>
+
+                            <select name="registrar_path" id="registrar-path" class="custom-select border-primary">
+                                <option value="">-- Pilih Jalur --</option>
+                                <option value="AFIRMASI">AFIRMASI</option>
+                                <option value="BEASISWA AKADEMIK">BEASISWA AKADEMIK</option>
+                                <option value="BEASISWA TAHFIDZ">BEASISWA TAHFIDZ</option>
+                                <option value="PERPINDAHAN ORANG TUA">PERPINDAHAN ORANG TUA</option>
+                                <option value="PRESTASI">PRESTASI</option>
+                                <option value="REGULER">REGULER</option>
+                            </select>
+
+                            <small class="form-text text-muted">Pilih jalur pendaftaran yang sesuai</small>
+                            <small id="registrar-path-feedback" class="text-danger font-weight-medium"
+                                style="display:none;"></small>
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">
+                                Pilihan Jurusan I
+                            </label>
+
+                            <select name="registrar_major" class="custom-select border-primary">
+                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                                <option value="IPS (Kelals Olah Raga)">IPS (Kelas Olahraga)</option>
+                                <option value="Keagamaan/Tahfidz">Keagamaan/Tahfidz</option>
+                            </select>
+
+                            <small class="form-text text-muted">Pilih jurusan utama</small>
+                            <small id="registrar-major-feedback" class="text-danger font-weight-medium"
+                                style="display:none;"></small>
+                        </div>
+
+
+                        <div class="col-md-6 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">
+                                Pilihan Jurusan II
+                            </label>
+
+                            <select name="registrar_major_second" class="custom-select border-primary">
+                                <option value="">-- Pilih Jurusan --</option>
+                                <option value="IPA">IPA</option>
+                                <option value="IPS">IPS</option>
+                                <option value="IPS (Kelals Olah Raga)">IPS (Kelas Olahraga)</option>
+                                <option value="Keagamaan/Tahfidz">Keagamaan/Tahfidz</option>
+                            </select>
+
+                            <small class="form-text text-muted">Pilih jurusan alternatif</small>
+                            <small id="registrar-major-second-feedback" class="text-danger font-weight-medium"
+                                style="display:none;"></small>
+                        </div>
+
+                    </div>
+
+                    <div class="row my-4">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="d-grid">
+                                <button type="submit" id="btn-submit"
+                                    class="btn btn-primary btn-block font-weight-bold shadow-sm d-flex align-items-center justify-content-center"
+                                    style="gap:6px;">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Simpan Perubahan</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- Footer -->
+        <footer class="bg-white border-top py-3 mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <small class="text-muted">Powered By PPDB &copy; 2022-2025</small>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Bootstrap 4 dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Alert Function
+        function hideAlert() {
+            $('#alert').fadeOut(300);
+        }
+
+        function showAlert(type, title, message) {
+            const alertDiv = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            // Reset classes
+            alertDiv.removeClass('alert-success alert-warning alert-danger alert-info');
+            alertIcon.removeClass('fa-check-circle fa-exclamation-triangle fa-times-circle fa-info-circle text-success text-warning text-danger text-info');
+
+            // Set alert type
+            if (type === 'success') {
+                alertDiv.addClass('alert-success');
+                alertIcon.addClass('fa-check-circle text-success');
+            } else if (type === 'warning') {
+                alertDiv.addClass('alert-warning');
+                alertIcon.addClass('fa-exclamation-triangle text-warning');
+            } else if (type === 'danger') {
+                alertDiv.addClass('alert-danger');
+                alertIcon.addClass('fa-times-circle text-danger');
+            } else {
+                alertDiv.addClass('alert-info');
+                alertIcon.addClass('fa-info-circle text-info');
+            }
+
+            alertTitle.text(title);
+            alertContent.html(message);
+            alertDiv.fadeIn(300).addClass('show');
+
+            // Auto hide after 5 seconds
+            setTimeout(function () {
+                hideAlert();
+            }, 5000);
+        }
+
+        // Configuration
+        const myConfig = {
+            url: 'update-akses-portal.php', // Sesuaikan dengan URL endpoint Anda
+            fields: {
+                'registrar-username': 'Username / NIK',
+                'registrar-email': 'Email',
+                'registrar-status': 'Status Akses',
+            },
+        };
+
+        // Form Validation
+        function validateForm(fieldId, fieldName) {
+            const field = $('#' + fieldId);
+            const feedback = $('#' + fieldId + '-feedback');
+
+            if (field.val() === '' || field.val() === null) {
+                field.addClass('border-danger');
+                feedback.text(fieldName + ' diperlukan').show();
+                return false;
+            } else {
+                field.removeClass('border-danger');
+                feedback.hide();
+                return true;
+            }
+        }
+
+        // Email Validation
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        // Submit Button Handler
+        function submitButtonHandler() {
+            const btnSubmit = $('#btn-submit');
+            const btnText = btnSubmit.find('span');
+            const btnSvg = btnSubmit.find('svg');
+
+            if (btnSubmit.is(':disabled')) {
+                btnSubmit.prop('disabled', false);
+                btnText.text('Simpan Perubahan');
+                btnSvg.show();
+            } else {
+                btnSubmit.prop('disabled', true);
+                btnText.text('Menyimpan...');
+                btnSvg.hide();
+            }
+        }
+
+        // Form Submit Handler
+        $('body').on('submit', '#accessForm', function (e) {
+            e.preventDefault();
+
+            let errors = [];
+
+            if (myConfig && typeof myConfig !== 'undefined') {
+                submitButtonHandler();
+
+                // Validate required fields
+                $.each(myConfig.fields, function (fieldId, fieldName) {
+                    errors.push(validateForm(fieldId, fieldName));
+                });
+
+                // Validate email format
+                const emailField = $('#registrar-email');
+                if (emailField.val() !== '' && !validateEmail(emailField.val())) {
+                    emailField.addClass('border-danger');
+                    $('#registrar-email-feedback').text('Format email tidak valid').show();
+                    errors.push(false);
+                } else if (emailField.val() !== '') {
+                    emailField.removeClass('border-danger');
+                    $('#registrar-email-feedback').hide();
+                }
+
+                // Validate password confirmation
+                const password = $('#registrar-password').val();
+                const passwordConfirm = $('#registrar-password-confirm').val();
+
+                if (password !== '' || passwordConfirm !== '') {
+                    if (password !== passwordConfirm) {
+                        $('#registrar-password-confirm').addClass('border-danger');
+                        $('#registrar-password-confirm-feedback').text('Password tidak cocok').show();
+                        errors.push(false);
+                    } else if (password.length < 6) {
+                        $('#registrar-password').addClass('border-danger');
+                        $('#registrar-password-feedback').text('Password minimal 6 karakter').show();
+                        errors.push(false);
+                    } else {
+                        $('#registrar-password').removeClass('border-danger');
+                        $('#registrar-password-confirm').removeClass('border-danger');
+                        $('#registrar-password-feedback').hide();
+                        $('#registrar-password-confirm-feedback').hide();
+                    }
+                }
+
+                // Check if there are any validation errors
+                if ($.inArray(false, errors) !== -1) {
+                    submitButtonHandler();
+                    showAlert('warning', 'Validasi Gagal', 'Mohon periksa kembali form yang Anda isi');
+                    return false;
+                } else {
+                    // Submit form via AJAX
+                    let formData = new FormData(document.getElementById('accessForm'));
+
+                    $.ajax({
+                        url: myConfig.url,
+                        method: 'POST',
+                        headers: {
+                            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                        },
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res.success) {
+                                showAlert('success', 'Berhasil', res.message || 'Data berhasil disimpan');
+
+                                // Optional: Redirect after success
+                                setTimeout(function () {
+                                    // window.location.href = '../AksesPortal/HalamanUtama.html';
+                                }, 2000);
+                            } else {
+                                showAlert('warning', 'Peringatan', res.message || 'Terjadi kesalahan saat menyimpan data');
+                            }
+                            submitButtonHandler();
+                        },
+                        error: function (xhr, status, error) {
+                            submitButtonHandler();
+                            const errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan pada server';
+                            showAlert('danger', 'Error', errorMessage);
+                        }
+                    });
+                }
+            }
+        });
+
+        // Input Event Handlers - Remove error state on input
+        $('#registrar-username, #registrar-email, #registrar-status').on('input change', function () {
+            $(this).removeClass('border-danger');
+            $('#' + $(this).attr('id') + '-feedback').hide();
+        });
+
+        $('#registrar-password, #registrar-password-confirm').on('input', function () {
+            $(this).removeClass('border-danger');
+            $('#' + $(this).attr('id') + '-feedback').hide();
+        });
+
+        // Phone number input - only numbers
+        $('#registrar-phone').on('input', function () {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+        });
+
+        // Document Ready
+        $(document).ready(function () {
+            // Load existing data (simulate - replace with actual AJAX call)
+            // Example:
+            /*
+            $.ajax({
+                url: 'get-akses-detail.php',
+                method: 'GET',
+                success: function(data) {
+                    $('#registrar-name').val(data.name);
+                    $('#registrar-unit').val(data.unit);
+                    $('#registrar-username').val(data.username);
+                    $('#registrar-email').val(data.email);
+                    $('#registrar-status').val(data.status);
+                    $('#registrar-phone').val(data.phone);
+                }
+            });
+            */
+
+            // Demo data (remove this in production)
+            $('#registrar-name').val('Ahmad Fauzi');
+            $('#registrar-unit').val('SMA');
+            $('#registrar-username').val('1234567890');
+            $('#registrar-email').val('ahmad.fauzi@email.com');
+            $('#registrar-status').val('1');
+            $('#registrar-phone').val('081234567890');
+        });
+    </script>
+
+</body>
+
+</html>

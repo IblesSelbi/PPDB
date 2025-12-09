@@ -545,11 +545,24 @@
 
     <script>
         fetch("../Navbar/navbar.html")
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById("navbar").innerHTML = data;
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src; // script eksternal
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML; // inline script
+                    }
+                    document.body.appendChild(newScript);
+                });
             });
-            
+
+
         // =============== PREVIEW PESAN ===============
         $("#pesan").on("keyup", function () {
             $("#preview-pesan").text($(this).val());

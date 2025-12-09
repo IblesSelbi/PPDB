@@ -166,7 +166,7 @@
                                     </a>
                                 </div>
 
-                                <!-- Tombol Login -->
+                                <!-- Tombol Login - YANG BENAR -->
                                 <button type="submit" id="btn-login-submit"
                                     class="btn btn-outline-primary btn-lg btn-block py-2"
                                     style="border-width: 1px; border-radius: 10px;">
@@ -175,7 +175,7 @@
                                     <i id="btn-login-svg" class="fas fa-sign-in-alt mr-2"></i>
                                     <span id="btn-login-text">Masuk Sekarang</span>
                                 </button>
-
+                                
                                 <!-- Link Daftar -->
                                 <div class="text-center mt-4">
                                     <p class="text-muted mb-0">
@@ -373,15 +373,16 @@
 
                 // Simulate API call
                 setTimeout(function () {
-                    // Simulate success or error
-                    const isSuccess = Math.random() > 0.5;
+                    const loginNumber = $('#login-number').val();
+                    const loginPassword = $('#login-password').val();
 
-                    if (isSuccess) {
+                    // Check credentials
+                    if (loginNumber === '123' && loginPassword === '123') {
                         showAlert('Login berhasil! Anda akan diarahkan ke dashboard...', 'success');
                         setTimeout(function () {
-                            // Redirect to dashboard (simulated)
-                            window.location.href = '#dashboard';
-                        }, 2000);
+                            // Redirect to dashboard
+                            window.location.href = 'MenuPendaftar.html';
+                        }, 1500);
                     } else {
                         showAlert('Nomor pendaftaran atau kata sandi salah. Silakan coba lagi.', 'danger');
                         submitButtonHandler();
