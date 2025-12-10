@@ -381,7 +381,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
 
     <script>
-       fetch("../Navbar/navbar.html")
+        fetch("../Navbar/navbar.html")
             .then(res => res.text())
             .then(html => {
                 const navbar = document.getElementById("navbar");
@@ -391,12 +391,18 @@
                 navbar.querySelectorAll("script").forEach(oldScript => {
                     const newScript = document.createElement("script");
                     if (oldScript.src) {
-                        newScript.src = oldScript.src; // script eksternal
+                        newScript.src = oldScript.src;
                     } else {
-                        newScript.innerHTML = oldScript.innerHTML; // inline script
+                        newScript.innerHTML = oldScript.innerHTML;
                     }
                     document.body.appendChild(newScript);
                 });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
             });
 
         $(document).ready(function () {

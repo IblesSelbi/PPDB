@@ -32,7 +32,7 @@
     <div class="container-fluid py-3">
 
         <!-- Welcome -->
-        <div class="alert alert-primary mb-4 shadow mt-2">
+        <div class="alert alert-primary mb-4 shadow-sm mt-2">
             <h5 class="mb-1"><i class="fas fa-hand-paper mr-2"></i>Selamat Datang, Admin Operator!</h5>
             <p class="mb-0">Anda masuk sebagai petugas admin. Kelola sistem pembayaran sekolah dengan mudah.</p>
         </div>
@@ -325,14 +325,20 @@
                 navbar.querySelectorAll("script").forEach(oldScript => {
                     const newScript = document.createElement("script");
                     if (oldScript.src) {
-                        newScript.src = oldScript.src; // script eksternal
+                        newScript.src = oldScript.src;
                     } else {
-                        newScript.innerHTML = oldScript.innerHTML; // inline script
+                        newScript.innerHTML = oldScript.innerHTML;
                     }
                     document.body.appendChild(newScript);
                 });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
             });
-            
+
         // Chart - Diagram Batang
         const ctx = document.getElementById('activityChart').getContext('2d');
         new Chart(ctx, {

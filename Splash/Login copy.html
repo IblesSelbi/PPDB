@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - School Payment App</title>
+    <link rel="shortcut icon" href="">
+    
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <style>
+        body { 
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .left-panel {
+            background: #0093dd;
+            position: relative;
+            overflow: hidden;
+        }
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            top: -200px;
+            left: -150px;
+        }
+        .left-panel::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            bottom: -100px;
+            right: -100px;
+        }
+        .form-control:focus {
+            border-color: #0093dd;
+            box-shadow: 0 0 0 0.2rem rgba(0,147,221,0.15);
+        }
+        .btn-login {
+            background: #0093dd;
+            border: none;
+            padding: 12px;
+            transition: all 0.3s;
+        }
+        .btn-login:hover {
+            background: #007ab8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,147,221,0.3);
+        }
+        .role-card {
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid #e9ecef;
+        }
+        .role-card:hover {
+            border-color: #0093dd;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,147,221,0.2);
+        }
+        .floating-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .card-login {
+            border: none;
+            border-radius: 15px;
+        }
+        .input-group-text {
+            background: transparent;
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row min-vh-100 align-items-center">
+            <!-- Left Panel -->
+            <div class="col-lg-5 left-panel d-none d-lg-flex flex-column justify-content-center align-items-center text-white p-5 min-vh-100">
+                <div class="position-relative" style="z-index: 1;">
+                    <div class="text-center mb-5 floating-icon">
+                        <img src="https://demo.schoolpay.co.id/media/images/logo-school-payment-app-13804.png" alt="Logo" class="img-fluid mb-4" style="max-width: 150px; filter: brightness(0) invert(1);">
+                    </div>
+                    
+                    <h1 class="font-weight-bold mb-3 display-4">School Payment App</h1>
+                    <h5 class="mb-5 font-weight-light">Solusi Sistem Keuangan Sekolah Modern</h5>
+                    
+                    <div class="border-top border-white pt-4 mt-5">
+                        <div class="row text-center">
+                            <div class="col-4 mb-3">
+                                <i class="fas fa-users fa-2x mb-2"></i>
+                                <p class="small mb-0">Multi User</p>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <i class="fas fa-shield-alt fa-2x mb-2"></i>
+                                <p class="small mb-0">Aman</p>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <i class="fas fa-bolt fa-2x mb-2"></i>
+                                <p class="small mb-0">Cepat</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 pt-4">
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i>Kota Bandung, Jawa Barat</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2"></i>085157991825</p>
+                        <p class="mb-3"><i class="fas fa-envelope mr-2"></i>admin@schoolpay.co.id</p>
+                        <a href="https://www.instagram.com/schoolpay.id/" target="_blank" class="btn btn-outline-light btn-sm rounded-pill px-4">
+                            <i class="fab fa-instagram mr-2"></i>Follow Us
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="col-lg-7 p-5">
+                <div class="mx-auto" style="max-width: 430px;">
+                    <!-- Mobile Logo -->
+                    <div class="text-center d-lg-none mb-5">
+                        <img src="https://demo.schoolpay.co.id/media/images/logo-school-payment-app-13804.png" alt="Logo" class="img-fluid mb-3" style="max-width: 100px;">
+                        <h4 class="font-weight-bold" style="color: #0093dd;">School Payment App</h4>
+                    </div>
+
+                    <!-- Role Selection Cards -->
+                    <div class="mb-4">
+                        <h6 class="text-muted text-center mb-4">PILIH ROLE ANDA</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="role-card card py-3 px-3 text-center bg-white">
+                                    <a href="https://demo.schoolpay.co.id/spa/admin/login" class="text-decoration-none text-dark">
+                                        <div class="mb-2" style="color: #0093dd;">
+                                            <i class="fas fa-user-tie fa-2x"></i>
+                                        </div>
+                                        <h6 class="font-weight-bold mb-0">PETUGAS</h6>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="role-card card py-3 px-3 text-center bg-white">
+                                    <a href="https://demo.schoolpay.co.id/spa/student/login" class="text-decoration-none text-dark">
+                                        <div class="mb-2" style="color: #28a745;">
+                                            <i class="fas fa-user-graduate fa-2x"></i>
+                                        </div>
+                                        <h6 class="font-weight-bold mb-0">SISWA</h6>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div class="card card-login shadow-lg">
+                        <div class="card-body p-5">
+                            <h3 class="font-weight-bold mb-2">Masuk Akun</h3>
+                            <p class="text-muted mb-4">Gunakan kredensial Anda untuk masuk</p>
+
+                            <form method="POST" action="#">
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold small text-uppercase mb-3">Username atau Email</label>
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text border">
+                                                <i class="fas fa-user" style="color: #0093dd;"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-lg" placeholder="Masukkan username / email" required autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label class="font-weight-bold small text-uppercase mb-3">Password</label>
+                                    <div class="input-group input-group-lg">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text border">
+                                                <i class="fas fa-lock" style="color: #0093dd;"></i>
+                                            </span>
+                                        </div>
+                                        <input type="password" class="form-control form-control-lg" placeholder="Masukkan Password" required>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mb-5">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="remember">
+                                        <label class="custom-control-label text-muted" for="remember">Ingat saya</label>
+                                    </div>
+                                    <a href="#" class="text-muted small">Lupa password?</a>
+                                </div>
+
+                                <button type="submit" class="btn btn-login btn-primary btn-block btn-lg font-weight-bold text-white mb-3">
+                                    <i class="fas fa-sign-in-alt mr-2"></i>MASUK SEKARANG
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-muted mt-4 small">
+                        © 2022-2025 School Payment App. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

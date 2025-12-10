@@ -280,7 +280,7 @@
 
                 <!-- MENU LAINNYA -->
                 <li class="nav-item dropdown">
-                    <a class="dropdown-toggle nav-link bg-white text-primary font-weight-bold rounded" href="#"
+                    <a class="dropdown-toggle nav-link text-white" href="#"
                         data-toggle="dropdown">
                         <i class="fas fa-cog mr-1"></i>Lainnya
                     </a>
@@ -341,15 +341,14 @@
                             </a>
 
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="/PPDB/Lainnya/Peralatan/PusatInformasi.html">Pusat Informasi</a>
-                                <a class="dropdown-item"
-                                    href="/PPDB/Lainnya/Peralatan/PengingatTagihan.html">Pengingat
+                                <a class="dropdown-item" href="/PPDB/Lainnya/Peralatan/PusatInformasi.html">Pusat
+                                    Informasi</a>
+                                <a class="dropdown-item" href="/PPDB/Lainnya/Peralatan/PengingatTagihan.html">Pengingat
                                     Tagihan</a>
                                 <a class="dropdown-item"
                                     href="/PPDB/Lainnya/Peralatan/MonitoringAntrian.html">Monitoring
                                     Antrean</a>
-                                <a class="dropdown-item"
-                                    href="/PPDB/Lainnya/Peralatan/PencadanganData.html">Pencadangan
+                                <a class="dropdown-item" href="/PPDB/Lainnya/Peralatan/PencadanganData.html">Pencadangan
                                     Data</a>
                                 <a class="dropdown-item" href="/PPDB/Lainnya/Peralatan/InformasiServer.html">Informasi
                                     Server</a>
@@ -392,6 +391,7 @@
 
 
 <script>
+
     // Toggle level 1 (Presensi)
     $('#presensiDropdown').on('click', function (e) {
         e.preventDefault();
@@ -431,29 +431,133 @@
         }
     });
 
-    // ================================
-    // 1. GENERIC MULTI-LEVEL HANDLER
-    // ================================
-    $('.dropdown-menu .dropdown-toggle').on('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
+    function setActiveNavbar() {
+        const currentPath = window.location.pathname;
 
-        let $subMenu = $(this).next('.dropdown-menu');
-        let $parentMenu = $(this).closest('.dropdown-menu');
+        console.log('🔍 Current path:', currentPath);
 
-        // Tutup submenu lain pada level yang sama
-        $parentMenu.find('.dropdown-menu.show').not($subMenu).removeClass('show');
+        // Reset semua menu ke state default (text-white)
+        $('.navbar-nav > .nav-item > .nav-link').each(function () {
+            $(this).removeClass('bg-white text-primary font-weight-bold rounded');
+            $(this).addClass('text-white');
+        });
 
-        // Toggle submenu yang diklik
-        $subMenu.toggleClass('show');
-    });
+        // Ekstrak folder dari current path
+        // Contoh: /PPDB/DataPendaftar/DetailPendaftar.html → folder = DataPendaftar
+        function getCurrentFolder(path) {
+            const parts = path.split('/').filter(p => p && p !== 'PPDB');
+            return parts.length > 0 ? parts[0] : '';
+        }
 
+        // Ekstrak folder dari href
+        function getHrefFolder(href) {
+            if (!href || href === '#') return '';
+            const parts = href.split('/').filter(p => p && p !== 'PPDB');
+            return parts.length > 0 ? parts[0] : '';
+        }
 
-    // ==============================================
-    // 4. KLIK DI LUAR NAVBAR → TUTUP SEMUA DROPDOWN
-    // ==============================================
-    $(document).on('click', function () {
-        $('.dropdown-menu.show').removeClass('show');
-    });
+        // Fungsi untuk normalize dan compare path
+        function isPathMatch(href, path) {
+            if (!href || href === '#') return false;
 
+            // Hilangkan /PPDB dari kedua path untuk compare
+            const normalizedHref = href.replace(/^\/PPDB/, '').toLowerCase();
+            const normalizedPath = path.replace(/^\/PPDB/, '').toLowerCase();
+
+            // 1. Exact match (paling prioritas)
+            if (normalizedPath === normalizedHref) {
+                console.log('  ✓ Exact match:', href);
+                return true;
+            }
+
+            // 2. Folder match - cek apakah file ada di folder yang sama
+            const currentFolder = getCurrentFolder(path);
+            const hrefFolder = getHrefFolder(href);
+
+            if (currentFolder && hrefFolder && currentFolder === hrefFolder) {
+                console.log('  ✓ Folder match:', currentFolder, '=', hrefFolder);
+                return true;
+            }
+
+            // 3. Partial match untuk file di subfolder
+            // Contoh: /DataPendaftar/DetailPendaftar.html matches /DataPendaftar/
+            if (normalizedPath.includes('/' + hrefFolder + '/') && hrefFolder.length > 3) {
+                console.log('  ✓ Subfolder match:', href);
+                return true;
+            }
+
+            return false;
+        }
+
+        let menuFound = false;
+        const currentFolder = getCurrentFolder(currentPath);
+
+        // Loop semua menu navbar
+        $('.navbar-nav > .nav-item').each(function () {
+            const $navItem = $(this);
+            const $navLink = $navItem.find('> .nav-link');
+            const mainHref = $navLink.attr('href');
+
+            // Cek apakah ini dropdown menu
+            if ($navItem.hasClass('dropdown')) {
+                let hasActiveChild = false;
+
+                // Cek semua sub-menu di dalam dropdown
+                $navItem.find('.dropdown-item').each(function () {
+                    const dropdownHref = $(this).attr('href');
+
+                    if (isPathMatch(dropdownHref, currentPath)) {
+                        hasActiveChild = true;
+                        console.log('  ✅ Active menu found:', $navLink.text().trim());
+                        return false; // break loop
+                    }
+                });
+
+                // Jika ada child yang match, highlight parent dropdown
+                if (hasActiveChild) {
+                    $navLink.removeClass('text-white');
+                    $navLink.addClass('bg-white text-primary font-weight-bold rounded');
+                    menuFound = true;
+                }
+            } else {
+                // Menu biasa (bukan dropdown)
+                if (isPathMatch(mainHref, currentPath)) {
+                    $navLink.removeClass('text-white');
+                    $navLink.addClass('bg-white text-primary font-weight-bold rounded');
+                    console.log('  ✅ Active menu found:', $navLink.text().trim());
+                    menuFound = true;
+                }
+            }
+        });
+
+        // Special case: Beranda/Home page
+        if (currentPath.includes('Beranda.html') ||
+            currentPath.includes('index.html') ||
+            currentPath.endsWith('/PPDB/') ||
+            currentPath.endsWith('/PPDB')) {
+
+            // Reset semua dulu
+            $('.navbar-nav > .nav-item > .nav-link').each(function () {
+                $(this).removeClass('bg-white text-primary font-weight-bold rounded');
+                $(this).addClass('text-white');
+            });
+
+            // Set Beranda sebagai aktif
+            $('a.nav-link[href*="Beranda"]').each(function () {
+                $(this).removeClass('text-white');
+                $(this).addClass('bg-white text-primary font-weight-bold rounded');
+            });
+
+            console.log('  ✅ Beranda active');
+            menuFound = true;
+        }
+
+        if (menuFound) {
+            console.log('✅ Active navbar set successfully for folder:', currentFolder);
+        } else {
+            console.log('⚠️ No matching menu found');
+            console.log('   Current folder:', currentFolder);
+            console.log('   Tip: Make sure navbar menu has a link with folder name:', currentFolder);
+        }
+    }
 </script>
