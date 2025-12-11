@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Daftar Siswa Pendidikan Dihapus :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Master</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Siswa</a></li>
+                <li class="breadcrumb-item active">Data Dihapus</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="font-weight-bold mb-1">Data Dihapus</h2>
+                <p class="text-muted mb-0"><i class="fas fa-trash-restore mr-1"></i>Kelola data Siswa pendidikan yang
+                    dihapus</p>
+            </div>
+            <div>
+                <a href="DataSiswa.html" class="btn btn-primary px-3">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #216fcb;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form" action="javascript:void(0)">
+                        <div class="row">
+
+                            <!-- Kata Kunci -->
+                            <div class="col-lg-6 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" name="keyword" id="keyword" class="form-control"
+                                        placeholder="Cari kode Siswa, nama Siswa..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <!-- Tombol -->
+                            <div class="col-12 mt-2">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i> Terapkan Filter
+                                </button>
+
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i> Reset Filter
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card shadow-sm border">
+            <div class="card-header bg-white py-3 border-bottom">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-trash-restore text-danger mr-2"></i>Data Siswa Pendidikan Dihapus
+                    </h5>
+
+                    <!-- Bulk Actions -->
+                    <div class="dropdown bulk-delete" style="display: none;">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3" type="button"
+                            data-toggle="dropdown">
+                            <i class="fas fa-tasks mr-1"></i>Aksi Masal
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item text-info" href="#" id="bulk-restore">
+                                <i class="fas fa-undo mr-2"></i>Pulihkan
+                            </a>
+                            <a class="dropdown-item text-danger" href="#" id="bulk-delete">
+                                <i class="fas fa-times mr-2"></i>Hapus Permanen
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered mb-0" id="datatable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th width="40" class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checks">
+                                        <label class="custom-control-label" for="checks"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle text-center" width="50">#</th>
+                                <th class="align-middle text-center">Nama Unit</th>
+                                <th class="align-middle text-center">Nomor Induk</th>
+                                <th class="align-middle">Nama Lengkap</th>
+                                <th class="align-middle text-center">Nama Kelas</th>
+                                <th class="align-middle text-center">Tahun Ajaran</th>
+                                <th class="align-middle text-center">Jenis Kelamin</th>
+                                <th class="align-middle text-center">Status</th>
+                                <th class="align-middle text-center">Waktu Dihapus</th>
+                                <th width="70" class="align-middle text-center">Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <!-- ROW 1 -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1">
+                                        <label class="custom-control-label" for="check1"></label>
+                                    </div>
+                                </td>
+
+                                <td class="align-middle text-center"><strong>1</strong></td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle text-center">123456</td>
+
+                                <td class="align-middle font-weight-bold text-muted">Farhan</td>
+
+                                <td class="align-middle text-center">Kelas 7</td>
+
+                                <td class="align-middle text-center">2025/2026</td>
+
+                                <td class="align-middle text-center">
+                                    <span
+                                        class="badge badge-light px-3 py-2 d-inline-flex align-items-center border text-primary">
+                                        <i class="fas fa-mars mr-1"></i> Laki-laki
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
+                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <small class="text-muted">
+                                        <i class="far fa-clock mr-1"></i>30/11/2024 14:15
+                                    </small>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-info" href="#"><i
+                                                    class="fas fa-undo mr-2"></i>Pulihkan</a>
+                                            <a class="dropdown-item text-danger" href="#"><i
+                                                    class="fas fa-times mr-2"></i>Hapus Permanen</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- ROW 2 -->
+                            <tr>
+                                <td class="align-middle text-center">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2">
+                                        <label class="custom-control-label" for="check2"></label>
+                                    </div>
+                                </td>
+
+                                <td class="align-middle text-center"><strong>2</strong></td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle font-weight-bold text-muted">ARGYA ABYAN</td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle text-center">-</td>
+
+                                <td class="align-middle text-center">
+                                    <span
+                                        class="badge badge-light px-3 py-2 d-inline-flex align-items-center border text-primary">
+                                        <i class="fas fa-mars mr-1"></i> Laki-laki
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <span class="badge badge-light px-3 py-2 shadow-sm" style="border-radius:25px;">
+                                        <i class="fas fa-times-circle mr-1"></i>Dihapus
+                                    </span>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <small class="text-muted">
+                                        <i class="far fa-clock mr-1"></i>27/02/2024 13:17
+                                    </small>
+                                </td>
+
+                                <td class="align-middle text-center">
+                                    <div class="btn-group">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item text-info" href="#"><i
+                                                    class="fas fa-undo mr-2"></i>Pulihkan</a>
+                                            <a class="dropdown-item text-danger" href="#"><i
+                                                    class="fas fa-times mr-2"></i>Hapus Permanen</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Restore -->
+        <div class="modal fade" id="restore-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Konfirmasi Pulihkan Data</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center py-4">
+                        <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
+                        <h5 class="mb-3">Pulihkan Data Siswa?</h5>
+                        <p class="text-muted mb-0">
+                            Apakah yakin akan memulihkan data Siswa yang dipilih? Data yang dipulihkan akan dikembalikan
+                            ke daftar Siswa aktif.
+                        </p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" id="btn-restore-abort" class="btn btn-secondary" data-dismiss="modal">
+                            Batalkan
+                        </button>
+                        <button type="button" id="btn-restore-submit" class="btn btn-info">
+                            <i id="btn-restore-svg" class="fas fa-undo mr-1"></i>
+                            <span id="btn-restore-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            Konfirmasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Delete Permanent -->
+        <div class="modal fade" id="delete-dialog" tabindex="-1" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title">Konfirmasi Hapus Permanen</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-center py-4">
+                        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                        <h5 class="mb-3">Hapus Data Secara Permanen?</h5>
+                        <p class="text-muted mb-2">
+                            Apakah yakin akan menghapus data Siswa yang dipilih secara permanen? Data yang telah dihapus
+                            tidak dapat dikembalikan.
+                        </p>
+                        <div class="alert alert-warning text-left mt-3" role="alert">
+                            <strong><i class="fas fa-exclamation-circle mr-1"></i>PENTING!</strong>
+                            <p class="mb-0 mt-2 small">
+                                Seluruh data yang mereferensikan ke data Siswa seperti data kelas, tagihan, transaksi
+                                pembayaran, arus kas dan tabungan akan menjadi tidak memiliki nilai Siswa.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Batalkan
+                        </button>
+                        <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                            <i id="btn-delete-svg" class="fas fa-times mr-1"></i>
+                            <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
+                                style="display: none;"></span>
+                            Hapus Permanen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-white py-3 mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+            // ===========================
+            // INITIALIZE DATATABLES
+            // ===========================
+            const table = $('#datatable').DataTable({
+                responsive: true,
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json',
+                    search: "_INPUT_",
+                    searchPlaceholder: "Cari data siswa...",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Tidak ada data yang tersedia",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    zeroRecords: "Tidak ada data yang cocok",
+                    emptyTable: "Tidak ada data siswa yang dihapus"
+                },
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                order: [[9, 'desc']], // Sort by waktu dihapus (descending)
+                columnDefs: [
+                    { orderable: false, targets: [0, 10] }, // Checkbox dan action tidak bisa di-sort
+                    { className: 'text-center', targets: [0, 1, 2, 3, 5, 6, 7, 8, 9, 10] }
+                ],
+                drawCallback: function () {
+                    // Update row numbers
+                    const api = this.api();
+                    api.column(1, { page: 'current' }).nodes().each(function (cell, i) {
+                        const pageInfo = api.page.info();
+                        $(cell).html('<strong>' + (pageInfo.start + i + 1) + '</strong>');
+                    });
+
+                    // Reset checkbox
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }
+            });
+
+            // ===========================
+            // FILTER COLLAPSE ICON TOGGLE
+            // ===========================
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            }).on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // ===========================
+            // CHECKBOX FUNCTIONALITY
+            // ===========================
+            // Check all checkbox
+            $('#checks').on('change', function () {
+                const isChecked = $(this).prop('checked');
+                $('.row-check').prop('checked', isChecked);
+                updateBulkActions();
+            });
+
+            // Individual checkbox
+            $(document).on('change', '.row-check', function () {
+                const totalCheckbox = $('.row-check').length;
+                const checkedCheckbox = $('.row-check:checked').length;
+                $('#checks').prop('checked', totalCheckbox === checkedCheckbox);
+                updateBulkActions();
+            });
+
+            // Update bulk actions visibility
+            function updateBulkActions() {
+                const checkedCount = $('.row-check:checked').length;
+                if (checkedCount > 0) {
+                    $('.bulk-delete').fadeIn(200);
+                } else {
+                    $('.bulk-delete').fadeOut(200);
+                }
+            }
+
+            // ===========================
+            // FILTER FUNCTIONALITY
+            // ===========================
+            $('#btn-apply-filter').on('click', function () {
+                applyFilter();
+            });
+
+            $('#btn-reset-filter').on('click', function () {
+                resetFilter();
+            });
+
+            // Enter key to apply filter
+            $('#filter-form input').on('keypress', function (e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    applyFilter();
+                }
+            });
+
+            function applyFilter() {
+                const keyword = $('#keyword').val().toLowerCase();
+
+                $.fn.dataTable.ext.search.push(function (settings, data) {
+                    const rowNomorInduk = data[3].toLowerCase(); // Nomor Induk
+                    const rowNamaLengkap = data[4].toLowerCase(); // Nama Lengkap
+                    const rowNamaKelas = data[5].toLowerCase(); // Nama Kelas
+
+                    // Keyword filter - cari di nomor induk, nama lengkap, atau nama kelas
+                    if (keyword) {
+                        if (!rowNomorInduk.includes(keyword) &&
+                            !rowNamaLengkap.includes(keyword) &&
+                            !rowNamaKelas.includes(keyword)) {
+                            return false;
+                        }
+                    }
+
+                    return true;
+                });
+
+                table.draw();
+                $.fn.dataTable.ext.search.pop();
+
+                showAlert('success', 'Filter Diterapkan', 'Filter berhasil diterapkan pada data siswa');
+                $('#filterCollapse').collapse('hide');
+            }
+
+            function resetFilter() {
+                $('#filter-form')[0].reset();
+                table.search('').draw();
+                showAlert('info', 'Filter Direset', 'Semua filter telah direset');
+            }
+
+            // ===========================
+            // RESTORE FUNCTIONALITY
+            // ===========================
+            let restoreRows = [];
+
+            // Single restore from dropdown
+            $(document).on('click', '.dropdown-item.text-info', function (e) {
+                e.preventDefault();
+
+                // Check if this is the restore button (not bulk action)
+                if ($(this).closest('.dropdown-menu').hasClass('dropdown-menu-right') &&
+                    !$(this).hasClass('bulk-action')) {
+                    const row = $(this).closest('tr');
+                    restoreRows = [row];
+
+                    const namaLengkap = row.find('td:eq(4)').text().trim();
+                    const nomorInduk = row.find('td:eq(3)').text().trim();
+
+                    $('#restore-dialog .modal-body p').html(
+                        `Apakah yakin akan memulihkan data siswa <strong>${namaLengkap}</strong> ${nomorInduk !== '-' ? '(NIS: ' + nomorInduk + ')' : ''}?`
+                    );
+
+                    $('#restore-dialog').modal('show');
+                }
+            });
+
+            // Bulk restore
+            $('#bulk-restore').on('click', function (e) {
+                e.preventDefault();
+                restoreRows = [];
+
+                $('.row-check:checked').each(function () {
+                    restoreRows.push($(this).closest('tr'));
+                });
+
+                if (restoreRows.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dipulihkan');
+                    return;
+                }
+
+                $('#restore-dialog .modal-body p').html(
+                    `Apakah yakin akan memulihkan <strong>${restoreRows.length} data siswa</strong> yang dipilih? Data yang dipulihkan akan dikembalikan ke daftar siswa aktif.`
+                );
+
+                $('#restore-dialog').modal('show');
+            });
+
+            // Submit restore
+            $('#btn-restore-submit').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#btn-restore-svg').hide();
+                $('#btn-restore-icon').show();
+                btn.contents().filter(function () {
+                    return this.nodeType === 3;
+                }).last().replaceWith(' Memulihkan...');
+                $('#btn-restore-abort').prop('disabled', true);
+
+                // Simulasi AJAX request
+                setTimeout(function () {
+                    // Remove rows from table
+                    restoreRows.forEach(function (row) {
+                        table.row(row).remove();
+                    });
+                    table.draw();
+
+                    // Reset modal
+                    btn.prop('disabled', false);
+                    $('#btn-restore-svg').show();
+                    $('#btn-restore-icon').hide();
+                    btn.contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).last().replaceWith(' Konfirmasi');
+                    $('#btn-restore-abort').prop('disabled', false);
+                    $('#restore-dialog').modal('hide');
+
+                    // Show success message
+                    const message = restoreRows.length === 1
+                        ? 'Data siswa berhasil dipulihkan'
+                        : `${restoreRows.length} data siswa berhasil dipulihkan`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    // Reset selection
+                    restoreRows = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // DELETE PERMANENT FUNCTIONALITY
+            // ===========================
+            let deleteRows = [];
+
+            // Single delete from dropdown
+            $(document).on('click', '.dropdown-item.text-danger', function (e) {
+                e.preventDefault();
+
+                // Check if this is the delete button (not bulk action)
+                if ($(this).closest('.dropdown-menu').hasClass('dropdown-menu-right') &&
+                    !$(this).hasClass('bulk-action')) {
+                    const row = $(this).closest('tr');
+                    deleteRows = [row];
+
+                    const namaLengkap = row.find('td:eq(4)').text().trim();
+                    const nomorInduk = row.find('td:eq(3)').text().trim();
+
+                    $('#delete-dialog .modal-body h5').html(
+                        `Hapus Data Siswa <strong>${namaLengkap}</strong> Secara Permanen?`
+                    );
+
+                    $('#delete-dialog').modal('show');
+                }
+            });
+
+            // Bulk delete
+            $('#bulk-delete').on('click', function (e) {
+                e.preventDefault();
+                deleteRows = [];
+
+                $('.row-check:checked').each(function () {
+                    deleteRows.push($(this).closest('tr'));
+                });
+
+                if (deleteRows.length === 0) {
+                    showAlert('warning', 'Peringatan', 'Tidak ada data yang dipilih untuk dihapus');
+                    return;
+                }
+
+                $('#delete-dialog .modal-body h5').html(
+                    `Hapus <strong>${deleteRows.length} Data Siswa</strong> Secara Permanen?`
+                );
+
+                $('#delete-dialog').modal('show');
+            });
+
+            // Submit delete permanent
+            $('#btn-delete-submit').on('click', function () {
+                const btn = $(this);
+                btn.prop('disabled', true);
+                $('#btn-delete-svg').hide();
+                $('#btn-delete-icon').show();
+                btn.contents().filter(function () {
+                    return this.nodeType === 3;
+                }).last().replaceWith(' Menghapus...');
+                $('.btn-secondary').prop('disabled', true);
+
+                // Simulasi AJAX request
+                setTimeout(function () {
+                    // Remove rows from table
+                    deleteRows.forEach(function (row) {
+                        table.row(row).remove();
+                    });
+                    table.draw();
+
+                    // Reset modal
+                    btn.prop('disabled', false);
+                    $('#btn-delete-svg').show();
+                    $('#btn-delete-icon').hide();
+                    btn.contents().filter(function () {
+                        return this.nodeType === 3;
+                    }).last().replaceWith(' Hapus Permanen');
+                    $('.btn-secondary').prop('disabled', false);
+                    $('#delete-dialog').modal('hide');
+
+                    // Show success message
+                    const message = deleteRows.length === 1
+                        ? 'Data siswa berhasil dihapus secara permanen'
+                        : `${deleteRows.length} data siswa berhasil dihapus secara permanen`;
+                    showAlert('success', 'Berhasil!', message);
+
+                    // Reset selection
+                    deleteRows = [];
+                    $('#checks').prop('checked', false);
+                    updateBulkActions();
+                }, 1500);
+            });
+
+            // ===========================
+            // ALERT FUNCTIONALITY
+            // ===========================
+            function showAlert(type, title, message) {
+                const alertDiv = $('#alert');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                // Reset classes
+                alertDiv.removeClass('alert-success alert-danger alert-warning alert-info alert-primary');
+
+                // Set icon and style based on type
+                let iconClass = 'fa-info-circle';
+                let alertClass = 'alert-info';
+                let borderColor = '#216fcb';
+
+                switch (type) {
+                    case 'success':
+                        iconClass = 'fa-check-circle';
+                        alertClass = 'alert-success';
+                        borderColor = '#28a745';
+                        break;
+                    case 'danger':
+                    case 'error':
+                        iconClass = 'fa-exclamation-circle';
+                        alertClass = 'alert-danger';
+                        borderColor = '#dc3545';
+                        break;
+                    case 'warning':
+                        iconClass = 'fa-exclamation-triangle';
+                        alertClass = 'alert-warning';
+                        borderColor = '#ffc107';
+                        break;
+                    case 'info':
+                        iconClass = 'fa-info-circle';
+                        alertClass = 'alert-info';
+                        borderColor = '#17a2b8';
+                        break;
+                }
+
+                alertDiv.addClass(alertClass);
+                alertDiv.css('border-left-color', borderColor);
+                alertIcon.removeClass().addClass(`fas ${iconClass} fa-2x text-${type === 'error' ? 'danger' : type}`);
+                alertTitle.text(title);
+                alertContent.html(message);
+
+                // Show alert with fade in
+                alertDiv.fadeIn(300).addClass('show');
+
+                // Auto hide after 5 seconds
+                setTimeout(function () {
+                    hideAlert();
+                }, 5000);
+            }
+
+            function hideAlert() {
+                $('#alert').fadeOut(300, function () {
+                    $(this).removeClass('show');
+                });
+            }
+
+            // Make hideAlert global
+            window.hideAlert = hideAlert;
+
+            // ===========================
+            // NESTED DROPDOWN FUNCTIONALITY
+            // ===========================
+            // Handle nested dropdown for "Lainnya" menu
+            $('.dropstart-js .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+
+                // Close other submenus
+                $('.dropstart-js .dropdown-menu').not(submenu).removeClass('show');
+
+                // Toggle current submenu
+                submenu.toggleClass('show');
+
+                // Position submenu
+                const parentOffset = $(this).offset();
+                const submenuWidth = submenu.outerWidth();
+
+                submenu.css({
+                    'left': -submenuWidth + 'px',
+                    'top': '0'
+                });
+            });
+
+            // Close submenu when clicking outside
+            $(document).on('click', function (e) {
+                if (!$(e.target).closest('.dropstart-js').length) {
+                    $('.dropstart-js .dropdown-menu').removeClass('show');
+                }
+            });
+
+            // Handle multi-level dropdown for Presensi menu
+            $('.dropright .dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const submenu = $(this).next('.dropdown-menu');
+
+                // Toggle submenu
+                submenu.toggleClass('show');
+            });
+
+            // ===========================
+            // INITIALIZATION MESSAGE
+            // ===========================
+            console.log('DihapusSiswa.js initialized successfully');
+
+            // Show welcome message after page load
+            setTimeout(function () {
+                const rowCount = table.rows().count();
+                if (rowCount > 0) {
+                    showAlert('info', 'Data Siswa Dihapus', `Menampilkan ${rowCount} data siswa yang telah dihapus`);
+                }
+            }, 500);
+
+            // ===========================
+            // PREVENT MODAL CLOSE ON PROCESSING
+            // ===========================
+            $('#restore-dialog, #delete-dialog').on('hide.bs.modal', function (e) {
+                if ($(this).find('.spinner-border').is(':visible')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

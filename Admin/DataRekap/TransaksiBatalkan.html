@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Daftar Transaksi Dibatalkan :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Beranda</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Rekap</a></li>
+                <li class="breadcrumb-item active">Transaksi Dibatalkan</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="font-weight-bold mb-1">Transaksi Dibatalkan</h2>
+                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Daftar transaksi yang telah dibatalkan
+                </p>
+            </div>
+            <div>
+                <a href="Transaksi.html" class="btn btn-outline-primary mr-3">
+                    <i class="fas fa-arrow-left mr-1"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #216fcb;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="keyword" name="keyword" class="form-control"
+                                        placeholder="Cari transaksi..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Unit</label>
+                                <select name="unit" id="filter-unit" class="custom-select">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Tanggal</label>
+                                <input type="text" name="date_period" id="date-period" class="form-control"
+                                    placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Jenis Transaksi</label>
+                                <select name="payment_type" id="payment-type" class="custom-select">
+                                    <option value="">Semua Jenis</option>
+                                    <option value="SB">Tagihan</option>
+                                    <option value="DP">Tabungan</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Metode Pembayaran</label>
+                                <select name="category" id="category" class="custom-select">
+                                    <option value="">Semua Metode</option>
+                                    <option value="TN">Tunai</option>
+                                    <option value="NT">Non-Tunai</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i>Terapkan Filter
+                                </button>
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i>Reset Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-list text-danger mr-2"></i>Daftar Transaksi Dibatalkan
+                    </h5>
+
+                    <!-- Bulk Actions -->
+                    <div class="dropdown" id="bulkActions" style="display: none;">
+                        <button class="btn btn-sm btn-outline-danger dropdown-toggle px-3" type="button"
+                            data-toggle="dropdown">
+                            <i class="fas fa-tasks mr-1"></i>Aksi Masal
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item text-danger" href="#" id="bulk-delete">
+                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" id="dataTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="align-middle" width="30">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkAll">
+                                        <label class="custom-control-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle" width="50">#</th>
+                                <th class="align-middle">Nama Unit</th>
+                                <th class="align-middle">Nomor Induk</th>
+                                <th class="align-middle">Nama Lengkap</th>
+                                <th class="align-middle">Total Transaksi</th>
+                                <th class="align-middle">Jenis Transaksi</th>
+                                <th class="align-middle">Metode Pembayaran</th>
+                                <th class="align-middle">Waktu Dibatalkan</th>
+                                <th class="align-middle">Oleh Petugas</th>
+                                <th class="align-middle text-center" width="100">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
+                                            data-id="1">
+                                        <label class="custom-control-label" for="check1"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>1</strong></td>
+                                <td class="align-middle">
+                                    <span class="badge badge-info badge-pill px-3 py-2">SMA</span>
+                                </td>
+                                <td class="align-middle text-primary font-weight-bold">2025001</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">SB</div>
+                                        <div>
+                                            <strong>Santri Baru</strong>
+                                            <small class="d-block text-muted">08928427711</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong class="text-danger">Rp 1.200.000</strong></td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-file-invoice text-success mr-2"></i>Tagihan
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-university text-info mr-2"></i>Transfer Bank
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>18/11/2025
+                                    <small class="d-block">10:30 WIB</small>
+                                </td>
+                                <td class="align-middle">
+                                    <small class="font-weight-bold">Admin Keuangan</small><br>
+                                    <small class="text-muted">NIP 20250602001</small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        <a href="DetailTransaksi.html">
+                                            <button type="button" class="btn btn-sm btn-outline-info mr-2"
+                                                title="Detail">
+                                                <i class="fas fa-eye"></i> Detail
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger action-delete"
+                                            data-id="1" title="Hapus">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 2 -->
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
+                                            data-id="2">
+                                        <label class="custom-control-label" for="check2"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>2</strong></td>
+                                <td class="align-middle">
+                                    <span class="badge badge-primary badge-pill px-3 py-2">SMP</span>
+                                </td>
+                                <td class="align-middle text-primary font-weight-bold">2025002</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">AS</div>
+                                        <div>
+                                            <strong>Septian</strong>
+                                            <small class="d-block text-muted">08928234711</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong class="text-danger">Rp 800.000</strong></td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-file-invoice text-success mr-2"></i>Tagihan
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-money-bill-wave text-success mr-2"></i>Tunai
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>18/11/2025
+                                    <small class="d-block">10:30 WIB</small>
+                                </td>
+                                <td class="align-middle">
+                                    <small class="font-weight-bold">Admin Operator</small><br>
+                                    <small class="text-muted">NIP 20250601001</small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        <a href="DetailTransaksi.html">
+                                            <button type="button" class="btn btn-sm btn-outline-info mr-2"
+                                                title="Detail">
+                                                <i class="fas fa-eye"></i> Detail
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger action-delete"
+                                            data-id="2" title="Hapus">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Row 3 -->
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check3"
+                                            data-id="3">
+                                        <label class="custom-control-label" for="check3"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>3</strong></td>
+                                <td class="align-middle">
+                                    <span class="badge badge-warning badge-pill px-3 py-2">SD</span>
+                                </td>
+                                <td class="align-middle text-primary font-weight-bold">2025003</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">ES</div>
+                                        <div>
+                                            <strong>Eko Saputra</strong>
+                                            <small class="d-block text-muted">08224427711</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong class="text-danger">Rp 600.000</strong></td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-piggy-bank text-secondary mr-2"></i>Tabungan
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-money-bill-wave text-success mr-2"></i>Tunai
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>18/11/2025
+                                    <small class="d-block">10:30 WIB</small>
+                                </td>
+                                <td class="align-middle">
+                                    <small class="font-weight-bold">Admin Keuangan</small><br>
+                                    <small class="text-muted">NIP 20250602001</small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        <a href="DetailTransaksi.html">
+                                            <button type="button" class="btn btn-sm btn-outline-info mr-2"
+                                                title="Detail">
+                                                <i class="fas fa-eye"></i> Detail
+                                            </button>
+                                        </a>
+                                        <button type="button" class="btn btn-sm btn-outline-danger action-delete"
+                                            data-id="3" title="Hapus">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Penghapusan</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p class="mb-2">Apakah yakin akan menghapus data yang dipilih?</p>
+                    <p class="text-muted mb-0">Data yang telah dihapus tidak dapat dikembalikan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                        <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
+                            style="display: none;"></span>
+                        <i id="btn-delete-svg" class="fas fa-trash-alt mr-1"></i>
+                        Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json"
+                },
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+                "order": [[1, 'asc']]
+            });
+
+            // Check All Checkbox
+            $('#checkAll').on('click', function () {
+                var isChecked = $(this).is(':checked');
+                $('.row-check').prop('checked', isChecked);
+                toggleBulkActions();
+            });
+
+            // Individual Checkbox
+            $(document).on('change', '.row-check', function () {
+                var allChecked = $('.row-check:checked').length === $('.row-check').length;
+                $('#checkAll').prop('checked', allChecked);
+                toggleBulkActions();
+            });
+
+            // Toggle Bulk Actions
+            function toggleBulkActions() {
+                if ($('.row-check:checked').length > 0) {
+                    $('#bulkActions').show();
+                } else {
+                    $('#bulkActions').hide();
+                }
+            }
+
+            // Filter Collapse Icon
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+
+            $('#filterCollapse').on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // Apply Filter
+            $('#btn-apply-filter').on('click', function () {
+                table.ajax.reload();
+                showAlert('Filter berhasil diterapkan', 'success');
+            });
+
+            // Reset Filter
+            $('#btn-reset-filter').on('click', function () {
+                $('#filter-form')[0].reset();
+                table.ajax.reload();
+                showAlert('Filter berhasil direset', 'info');
+            });
+
+            // Action Delete
+            var currentActionId = null;
+
+            $(document).on('click', '.action-delete', function (e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                $('#deleteModal').modal('show');
+            });
+
+            // Bulk Delete
+            $('#bulk-delete').on('click', function (e) {
+                e.preventDefault();
+                if ($('.row-check:checked').length > 0) {
+                    var ids = [];
+                    $('.row-check:checked').each(function () {
+                        ids.push($(this).data('id'));
+                    });
+                    currentActionId = ids.join(',');
+                    $('#deleteModal').modal('show');
+                }
+            });
+
+            // Submit Delete
+            $('#btn-delete-submit').on('click', function () {
+                buttonActionHandler('delete', true);
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    buttonActionHandler('delete', false);
+                    $('#deleteModal').modal('hide');
+                    showAlert('Data transaksi dibatalkan berhasil dihapus', 'success');
+                    $('#checkAll').prop('checked', false);
+                    $('.row-check').prop('checked', false);
+                    toggleBulkActions();
+
+                    // Remove row from table (simulate)
+                    if (currentActionId && currentActionId.indexOf(',') === -1) {
+                        $('input[data-id="' + currentActionId + '"]').closest('tr').fadeOut(400, function () {
+                            $(this).remove();
+                        });
+                    }
+                }, 1000);
+            });
+
+            // Button Action Handler
+            function buttonActionHandler(action, isLoading) {
+                var btnSubmit = $('#btn-' + action + '-submit');
+                var btnIcon = $('#btn-' + action + '-icon');
+                var btnSvg = $('#btn-' + action + '-svg');
+
+                if (isLoading) {
+                    btnSubmit.prop('disabled', true);
+                    btnSvg.hide();
+                    btnIcon.show();
+                } else {
+                    btnSubmit.prop('disabled', false);
+                    btnIcon.hide();
+                    btnSvg.show();
+                }
+            }
+        });
+
+        // Show Alert Function
+        function showAlert(message, type) {
+            const alert = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            alertContent.html(message);
+
+            // Remove all alert classes
+            alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+            if (type === 'success') {
+                alert.addClass('alert-success');
+                alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                alertTitle.text('Berhasil');
+            } else if (type === 'warning') {
+                alert.addClass('alert-warning');
+                alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                alertTitle.text('Peringatan');
+            } else if (type === 'info') {
+                alert.addClass('alert-info');
+                alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                alertTitle.text('Informasi');
+            } else if (type === 'danger') {
+                alert.addClass('alert-danger');
+                alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                alertTitle.text('Error');
+            }
+
+            alert.show().addClass('show');
+
+            setTimeout(function () {
+                alert.removeClass('show');
+                setTimeout(function () {
+                    alert.hide();
+                }, 150);
+            }, 4000);
+        }
+
+        // Hide Alert Function
+        function hideAlert() {
+            $('#alert').removeClass('show');
+            setTimeout(function () {
+                $('#alert').hide();
+            }, 150);
+        }
+    </script>
+
+</body>
+
+</html>

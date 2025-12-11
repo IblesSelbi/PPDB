@@ -231,8 +231,7 @@
      color: #007bb7;
      transform: translateX(-3px);
  }
-
- /* Hilangin border/outline saat klik */
+ 
  .back-btn:focus,
  .back-btn:active {
      outline: none !important;
@@ -248,3 +247,68 @@
          width: 100vw;
      }
  }
+
+.card-login {
+    border: none;
+    border-radius: 15px;
+    transition: opacity 0.3s ease, transform 0.3s ease, border-top 0.3s ease;
+    border-top: 4px solid transparent;
+}
+
+#roleIcon {
+    transition: transform 0.3s ease;
+}
+
+#roleIcon:has(.fa-user-tie),
+#roleIcon:has(.fa-user-graduate) {
+    animation: iconBounce 0.5s ease;
+}
+
+@keyframes iconBounce {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#roleText {
+    transition: color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #0093dd;
+    box-shadow: 0 0 0 0.2rem rgba(0, 147, 221, 0.15);
+    transition: all 0.3s ease;
+}
+
+[data-role="student"] .form-control:focus {
+    border-color: #31bfd8;
+    box-shadow: 0 0 0 0.2rem rgba(49, 191, 216, 0.15);
+}
+
+[data-role="student"] .input-group-text i {
+    color: #31bfd8 !important;
+}
+
+[data-role="admin"] .btn-login {
+    background: #0093dd;
+}
+
+[data-role="admin"] .btn-login:hover {
+    background: #007ab8;
+}
+
+[data-role="student"] .btn-login {
+    background: #31bfd8;
+}
+
+[data-role="student"] .btn-login:hover {
+    background: #28a0b8;
+}

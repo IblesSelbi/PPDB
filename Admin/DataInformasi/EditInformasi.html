@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Edit Informasi PPDB :: PPDB</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Informasi</a></li>
+                <li class="breadcrumb-item active">Edit Informasi</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h2 class="font-weight-bold mb-1">Edit Informasi</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Perbarui informasi untuk calon
+                        siswa</p>
+                </div>
+                <div class="mt-2 mt-md-0">
+                    <a href="DataInformasi.html" class="btn btn-outline-secondary px-4">
+                        <i class="fas fa-arrow-left mr-1"></i>Kembali
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Form Card -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 font-weight-bold">
+                            <i class="fas fa-edit text-primary mr-2"></i>Form Edit Informasi PPDB
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <form id="form-information">
+                            <input type="hidden" id="info-id" value="1">
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Judul Informasi <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" id="info-title" class="form-control"
+                                    placeholder="Masukan judul informasi" maxlength="120"
+                                    value="Informasi Jadwal Pendaftaran Siswa Baru 2025/2026">
+                                <small id="info-title-feedback" class="form-text text-danger"
+                                    style="display: none;"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Isi Konten <span class="text-danger">*</span></label>
+                                <textarea id="info-content" class="form-control" rows="10"
+                                    placeholder="Masukan isi konten informasi...">Pengumuman tentang jadwal pendaftaran gelombang 1 untuk tahun ajaran 2025/2026. Pendaftaran dibuka mulai tanggal 1 Juni 2025 sampai dengan 30 Juni 2025. Calon siswa dapat mendaftar secara online melalui portal PPDB kami.</textarea>
+                                <small id="info-content-feedback" class="form-text text-danger"
+                                    style="display: none;"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Gambar Sampul Saat Ini</label>
+                                <div class="border rounded p-3 text-center bg-light mb-2">
+                                    <img id="current-image"
+                                        src="https://via.placeholder.com/300x200/667eea/ffffff?text=Gambar+Saat+Ini"
+                                        class="img-fluid rounded" style="max-height: 200px;">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Ganti Gambar Sampul</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="info-thumbnail" accept="image/*">
+                                    <label class="custom-file-label" for="info-thumbnail">Pilih gambar baru...</label>
+                                </div>
+                                <small class="form-text text-muted">Format: JPG, PNG, WEBP. Maksimal 2MB. Kosongkan jika
+                                    tidak ingin mengganti gambar.</small>
+                                <small id="info-thumbnail-feedback" class="form-text text-danger"
+                                    style="display: none;"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Preview Gambar Baru</label>
+                                <div id="image-preview" class="border rounded p-3 text-center bg-light"
+                                    style="display: none;">
+                                    <img id="preview-img" src="" class="img-fluid rounded" style="max-height: 300px;">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Status Publikasi <span
+                                        class="text-danger">*</span></label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="status-publish" name="status"
+                                                class="custom-control-input" value="PUBLISH" checked>
+                                            <label class="custom-control-label" for="status-publish">
+                                                <i class="fas fa-check-circle text-success mr-1"></i>
+                                                <strong>Diterbitkan</strong>
+                                                <small class="d-block text-muted">Informasi akan tampil di
+                                                    portal</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="status-draft" name="status"
+                                                class="custom-control-input" value="DRAFT">
+                                            <label class="custom-control-label" for="status-draft">
+                                                <i class="fas fa-file-alt text-warning mr-1"></i>
+                                                <strong>Draf</strong>
+                                                <small class="d-block text-muted">Simpan sebagai draf</small>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Slug URL</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-link"></i></span>
+                                    </div>
+                                    <input type="text" id="info-slug" class="form-control"
+                                        placeholder="slug-url-informasi"
+                                        value="informasi-jadwal-pendaftaran-siswa-baru-2025-2026" readonly>
+                                </div>
+                                <small class="form-text text-muted">Slug URL dibuat otomatis dari judul</small>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="border-top pt-3"></div>
+                            </div>
+
+                            <!-- <div class="form-group">
+                                <div class="border-top pt-4 mb-4"></div>
+                                <h5 class="font-weight-bold mb-3">
+                                    <i class="fas fa-bullhorn text-primary mr-2"></i>Pengumuman Informasi (Opsional)
+                                </h5>
+                                <p class="text-muted small">Update pengumuman hanya jika ada perubahan signifikan</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Channel Notifikasi</label>
+                                <div class="row">
+                                    <div class="col-md-6 mb-2">
+                                        <div class="custom-control custom-checkbox border rounded p-3">
+                                            <input type="checkbox" class="custom-control-input" id="channel-wa" name="channels[]" value="whatsapp">
+                                            <label class="custom-control-label" for="channel-wa">
+                                                <i class="fab fa-whatsapp text-success mr-2" style="font-size: 1.2rem;"></i>
+                                                <strong>WhatsApp</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-2">
+                                        <div class="custom-control custom-checkbox border rounded p-3">
+                                            <input type="checkbox" class="custom-control-input" id="channel-email" name="channels[]" value="email">
+                                            <label class="custom-control-label" for="channel-email">
+                                                <i class="fas fa-envelope text-danger mr-2" style="font-size: 1.2rem;"></i>
+                                                <strong>Email</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="border-top pt-3 mb-3"></div>
+                                <h5 class="font-weight-bold mb-3">
+                                    <i class="fas fa-users text-primary mr-2"></i>Penerima Pengumuman
+                                </h5>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Unit Pendidikan</label>
+                                <select name="unit" id="unit" class="custom-select">
+                                    <option value="">Pilih Unit</option>
+                                    <option value="ALL">-- SEMUA --</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">Periode Pendaftaran</label>
+                                <div class="border rounded p-3">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover mb-0">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th width="30">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="period-checks">
+                                                            <label class="custom-control-label" for="period-checks"></label>
+                                                        </div>
+                                                    </th>
+                                                    <th width="30">#</th>
+                                                    <th>Nama Periode</th>
+                                                    <th>Awal Pendaftaran</th>
+                                                    <th>Akhir Pendaftaran</th>
+                                                    <th>Jumlah Pendaftar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input period-check" id="period1" name="periods[]" value="10">
+                                                            <label class="custom-control-label" for="period1"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>1</td>
+                                                    <td><strong>Reguler</strong></td>
+                                                    <td>01 Mei 2025</td>
+                                                    <td>30 Juni 2025</td>
+                                                    <td><span class="badge badge-primary">8</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="border-top pt-4"></div>
+                            </div>-->
+
+                            <div class="form-group">
+                                <button type="submit" id="btn-submit"
+                                    class="btn btn-primary px-4 py-2 font-weight-semibold">
+                                    <i class="fas fa-check-circle mr-2" id="btn-icon"></i>
+                                    <span id="btn-text">Simpan Perubahan</span>
+                                </button>
+                                <a href="#" class="btn btn-outline-secondary px-4 py-2 font-weight-semibold ml-2">
+                                    <i class="fas fa-times mr-2"></i>Batalkan
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white py-3">
+                        <h6 class="mb-0 font-weight-bold">
+                            <i class="fas fa-info-circle mr-2"></i>Informasi Data
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">Dibuat Oleh</small>
+                            <div class="d-flex align-items-center">
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                    style="width: 35px; height: 35px;">AO</div>
+                                <div>
+                                    <strong class="d-block">Admin Operator</strong>
+                                    <small class="text-muted">NIP 20250601001</small>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">Tanggal Dibuat</small>
+                            <strong><i class="far fa-calendar mr-1"></i>10 November 2025</strong>
+                            <small class="d-block text-muted">14:30 WIB</small>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <small class="text-muted d-block mb-1">Terakhir Diupdate</small>
+                            <strong><i class="far fa-clock mr-1"></i>11 November 2025</strong>
+                            <small class="d-block text-muted">09:15 WIB</small>
+                        </div>
+                        <hr>
+                        <div class="mb-0">
+                            <small class="text-muted d-block mb-1">Status Saat Ini</small>
+                            <span class="badge badge-success px-3 py-2">
+                                <i class="fas fa-check-circle mr-1"></i>Diterbitkan
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header bg-info text-white py-3">
+                        <h6 class="mb-0 font-weight-bold">
+                            <i class="fas fa-lightbulb mr-2"></i>Tips Edit
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <ul class="pl-3 mb-0">
+                            <li class="text-muted small mb-2">Periksa kembali informasi sebelum menyimpan</li>
+                            <li class="text-muted small mb-2">Jika tidak mengganti gambar, biarkan field gambar kosong
+                            </li>
+                            <li class="text-muted small mb-2">Perubahan status akan langsung mempengaruhi tampilan di
+                                portal</li>
+                            <li class="text-muted small mb-0">Pastikan konten sudah sesuai sebelum diterbitkan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-header bg-danger text-white py-3">
+                        <h6 class="mb-0 font-weight-bold">
+                            <i class="fas fa-trash-alt mr-2"></i>Zona Bahaya
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted small mb-3">Hapus informasi ini secara permanen. Tindakan ini tidak dapat
+                            dibatalkan.</p>
+                        <button type="button" class="btn btn-danger btn-block" data-toggle="modal"
+                            data-target="#deleteModal">
+                            <i class="fas fa-trash-alt mr-2"></i>Hapus Informasi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete Confirmation -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>Konfirmasi Penghapusan
+                    </h5>
+                    <button type="button" class="close text-white" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-exclamation-circle text-danger" style="font-size: 3rem;"></i>
+                    <h5 class="mt-3 font-weight-bold">Yakin Hapus Informasi Ini?</h5>
+                    <p class="text-muted mb-0">
+                        Data yang telah dihapus tidak dapat dikembalikan. Pastikan Anda sudah yakin dengan tindakan ini.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Batalkan
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btn-delete-confirm">
+                        <i class="fas fa-check-circle mr-1" id="btn-delete-icon"></i>
+                        <span class="spinner-border spinner-border-sm mr-1" id="btn-delete-spinner"
+                            style="display: none;"></span>
+                        Ya, Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5 border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+
+            /* ==============================
+               1️⃣ Upload File Label & Preview
+            ============================== */
+            $('#info-thumbnail').on('change', function () {
+                const fileName = $(this).val().split('\\').pop();
+                $(this).next('.custom-file-label').html(fileName);
+
+                // Preview Image
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#preview-img').attr('src', e.target.result);
+                        $('#image-preview').fadeIn();
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            /* ==============================
+               2️⃣ Generate Slug dari Judul
+            ============================== */
+            $('#info-title').on('input', function () {
+                const title = $(this).val();
+                const slug = title.toLowerCase()
+                    .replace(/[^a-z0-9\s-]/g, '')
+                    .replace(/\s+/g, '-')
+                    .replace(/-+/g, '-')
+                    .trim();
+                $('#info-slug').val(slug);
+            });
+
+            /* ==============================
+               3️⃣ Simpan Perubahan (Validasi Form)
+            ============================== */
+            $('#form-information').on('submit', function (e) {
+                e.preventDefault();
+
+                const title = $('#info-title').val().trim();
+                const content = $('#info-content').val().trim();
+                const status = $('input[name="status"]:checked').val();
+
+                let valid = true;
+
+                // Validasi Judul
+                if (title === '') {
+                    $('#info-title-feedback').text('Judul informasi wajib diisi').show();
+                    $('#info-title').addClass('is-invalid');
+                    valid = false;
+                } else {
+                    $('#info-title-feedback').hide();
+                    $('#info-title').removeClass('is-invalid');
+                }
+
+                // Validasi Konten
+                if (content === '') {
+                    $('#info-content-feedback').text('Isi konten wajib diisi').show();
+                    $('#info-content').addClass('is-invalid');
+                    valid = false;
+                } else {
+                    $('#info-content-feedback').hide();
+                    $('#info-content').removeClass('is-invalid');
+                }
+
+                if (!valid) return;
+
+                // Simulasi Loading
+                $('#btn-text').text('Menyimpan...');
+                $('#btn-icon').removeClass('fa-save').addClass('fa-spinner fa-spin');
+                $('#btn-submit').prop('disabled', true);
+
+                // Simulasi simpan sukses
+                setTimeout(() => {
+                    $('#btn-text').text('Simpan Perubahan');
+                    $('#btn-icon').removeClass('fa-spinner fa-spin').addClass('fa-save');
+                    $('#btn-submit').prop('disabled', false);
+
+                    showAlert('success', 'Perubahan tersimpan!', 'Informasi PPDB berhasil diperbarui.');
+
+                    // Scroll to top
+                    $('html, body').animate({ scrollTop: 0 }, 300);
+                }, 1500);
+            });
+
+            /* ==============================
+               4️⃣ Select All Periods
+            ============================== */
+            $('#period-checks').on('change', function () {
+                const checked = $(this).is(':checked');
+                $('.period-check').prop('checked', checked);
+            });
+
+            /* ==============================
+               5️⃣ Konfirmasi Hapus
+            ============================== */
+            $('#btn-delete-confirm').on('click', function () {
+                $('#btn-delete-icon').hide();
+                $('#btn-delete-spinner').show();
+                $(this).prop('disabled', true);
+
+                setTimeout(() => {
+                    $('#deleteModal').modal('hide');
+                    $('#btn-delete-icon').show();
+                    $('#btn-delete-spinner').hide();
+                    $('#btn-delete-confirm').prop('disabled', false);
+
+                    showAlert('danger', 'Data dihapus!', 'Informasi PPDB berhasil dihapus dari sistem.');
+
+                    // Redirect setelah 2 detik
+                    setTimeout(() => {
+                        // window.location.href = 'DataInformasi.html';
+                    }, 2000);
+                }, 1500);
+            });
+
+            /* ==============================
+               6️⃣ Fungsi Alert Global
+            ============================== */
+            function showAlert(type, title, message) {
+                const alert = $('#alert');
+                const icon = $('#alert-icon');
+                const titleEl = $('#alert-title');
+                const contentEl = $('#alert-content');
+
+                const iconMap = {
+                    success: 'fas fa-check-circle text-success',
+                    danger: 'fas fa-times-circle text-danger',
+                    info: 'fas fa-info-circle text-info',
+                    warning: 'fas fa-exclamation-circle text-warning'
+                };
+
+                icon.attr('class', iconMap[type]);
+                titleEl.text(title);
+                contentEl.html(message);
+
+                alert.removeClass('alert-success alert-danger alert-info alert-warning fade show');
+                alert.addClass(`alert-${type} show`).fadeIn();
+
+                setTimeout(hideAlert, 5000);
+            }
+
+            window.hideAlert = function () {
+                $('#alert').fadeOut();
+            };
+
+        });
+    </script>
+
+</body>
+
+</html>

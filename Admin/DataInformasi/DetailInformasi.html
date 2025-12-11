@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Detail Informasi PPDB :: PPDB</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/brands.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Informasi</a></li>
+                <li class="breadcrumb-item active">Detail Informasi</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <h2 class="font-weight-bold mb-1">Detail Informasi</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Informasi lengkap data informasi
+                        PPDB</p>
+                </div>
+                <div class="mt-2 mt-md-0">
+                    <a href="DataInformasi.html" class="btn btn-outline-primary px-3 mr-1">
+                        <i class="fas fa-arrow-left mr-1"></i>Kembali
+                    </a>
+                    <a href="EditInformasi.html" class="btn btn-primary px-3 mr-1">
+                        <i class="fas fa-edit mr-1"></i>Edit
+                    </a>
+                    <button type="button" class="btn btn-danger px-3" id="btn-delete">
+                        <i class="fas fa-trash-alt mr-1"></i>Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Detail Card -->
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 font-weight-bold">
+                            <i class="fas fa-file-alt text-primary mr-2"></i>Informasi Detail
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Kolom Kiri -->
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Judul Informasi</p>
+                                    <h5 class="font-weight-bold mb-0">PPDB 2025/2026</h5>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Konten Singkat</p>
+                                    <div class="border rounded p-3 bg-light">
+                                        <p class="mb-0">PPDB 2025/2026</p>
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Gambar Sampul</p>
+                                    <div class="text-center">
+                                        <img src="https://via.placeholder.com/300x200?text=No+Image"
+                                            class="img-fluid rounded border" alt="Cover Image"
+                                            style="max-width: 300px; cursor: pointer;" id="cover-image">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Waktu Dibuat</p>
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-clock text-muted mr-1"></i>
+                                        29 Oktober 2024, 11:30
+                                    </h6>
+                                </div>
+                            </div>
+
+                            <!-- Kolom Kanan -->
+                            <div class="col-md-6">
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Status</p>
+                                    <h5 class="mb-0">
+                                        <span
+                                            class="badge d-inline-flex align-items-center px-3 py-2 border border-success text-success rounded-pill shadow-sm"
+                                            style="font-weight:600;">
+                                            <i class="fas fa-check-circle mr-2 text-success"></i>Terbit
+                                        </span>
+                                    </h5>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Waktu Diterbitkan</p>
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-calendar-check text-muted mr-1"></i>
+                                        29 Oktober 2024, 11:30
+                                    </h6>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Diumumkan</p>
+                                    <h6 class="mb-0 text-muted">
+                                        <i class="fas fa-minus-circle mr-1"></i>
+                                        Tidak ada pengumuman
+                                    </h6>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Penerima Pengumuman</p>
+                                    <h6 class="mb-0 text-muted">
+                                        <i class="fas fa-minus-circle mr-1"></i>
+                                        Tidak ada penerima
+                                    </h6>
+                                </div>
+
+                                <div class="mb-4">
+                                    <p class="mb-1 text-muted small">Oleh Petugas</p>
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-user text-muted mr-1"></i>
+                                        Admin Operator
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Log Card -->
+                <div class="card mt-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 font-weight-bold">
+                            <i class="fas fa-history text-primary mr-2"></i>Riwayat Aktivitas
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="d-flex mb-3">
+                                <div class="mr-3">
+                                    <div class="bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 font-weight-bold">Informasi Diterbitkan</h6>
+                                    <p class="mb-1 text-muted small">Oleh Admin Operator</p>
+                                    <p class="mb-0 text-muted small">
+                                        <i class="fas fa-clock mr-1"></i>29 Oktober 2024, 11:30
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="d-flex">
+                                <div class="mr-3">
+                                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+                                        style="width: 40px; height: 40px;">
+                                        <i class="fas fa-plus"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h6 class="mb-1 font-weight-bold">Informasi Dibuat</h6>
+                                    <p class="mb-1 text-muted small">Oleh Admin Operator</p>
+                                    <p class="mb-0 text-muted small">
+                                        <i class="fas fa-clock mr-1"></i>29 Oktober 2024, 11:30
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Sidebar -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white py-3">
+                        <h6 class="mb-0 font-weight-bold">
+                            <i class="fas fa-info-circle mr-2"></i>Informasi Tambahan
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <h6 class="font-weight-bold">
+                                <i class="fas fa-eye text-primary mr-2"></i>Total Pembaca
+                            </h6>
+                            <h3 class="mb-0 text-primary">0 <small class="text-muted">pembaca</small></h3>
+                        </div>
+                        <hr>
+                        <div class="mb-3">
+                            <h6 class="font-weight-bold">
+                                <i class="fas fa-calendar text-primary mr-2"></i>Terakhir Diubah
+                            </h6>
+                            <p class="mb-0 text-muted small">Belum pernah diubah</p>
+                        </div>
+                        <hr>
+                        <div class="mb-0">
+                            <h6 class="font-weight-bold">
+                                <i class="fas fa-link text-primary mr-2"></i>Link Informasi
+                            </h6>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" id="info-link"
+                                    value="https://demo.schoolpay.co.id/ppdb/info/2" readonly>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyLink()">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-exclamation-triangle text-danger fa-3x mb-3"></i>
+                    <h5 class="font-weight-bold mb-2">Konfirmasi Penghapusan</h5>
+                    <p class="text-muted mb-4">Apakah Anda yakin ingin menghapus informasi ini? Data yang telah dihapus
+                        tidak dapat dikembalikan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Batalkan
+                    </button>
+                    <button type="button" class="btn btn-danger" id="btn-confirm-delete">
+                        <i class="fas fa-check mr-1" id="delete-icon"></i>
+                        <span id="delete-text">Konfirmasi</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-0">
+                    <img id="modal-image" src="" class="img-fluid" alt="Preview">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5 border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB © 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, dan Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+
+            /* ==============================
+               1️⃣ Copy Link Function
+            ============================== */
+            window.copyLink = function () {
+                const linkInput = $('#info-link');
+                linkInput.select();
+                document.execCommand('copy');
+
+                showAlert('success', 'Link Disalin!', 'Link informasi berhasil disalin ke clipboard.');
+            };
+
+            /* ==============================
+               2️⃣ Image Preview
+            ============================== */
+            $('#cover-image').on('click', function () {
+                const imgSrc = $(this).attr('src');
+                $('#modal-image').attr('src', imgSrc);
+                $('#imageModal').modal('show');
+            });
+
+            /* ==============================
+               3️⃣ Delete Actions
+            ============================== */
+            $('#btn-delete, #btn-delete-quick').on('click', function () {
+                $('#deleteModal').modal('show');
+            });
+
+            $('#btn-confirm-delete').on('click', function () {
+                // Simulasi Loading
+                $('#delete-text').text('Menghapus...');
+                $('#delete-icon').removeClass('fa-check').addClass('fa-spinner fa-spin');
+                $('#btn-confirm-delete').prop('disabled', true);
+
+                // Simulasi proses hapus
+                setTimeout(() => {
+                    $('#deleteModal').modal('hide');
+
+                    showAlert('success', 'Data Terhapus!', 'Informasi PPDB berhasil dihapus dari sistem.');
+
+                    // Reset button
+                    setTimeout(() => {
+                        $('#delete-text').text('Konfirmasi');
+                        $('#delete-icon').removeClass('fa-spinner fa-spin').addClass('fa-check');
+                        $('#btn-confirm-delete').prop('disabled', false);
+
+                        // Redirect ke halaman daftar (simulasi)
+                        // window.location.href = 'DataInformasi.html';
+                    }, 2000);
+                }, 1500);
+            });
+
+            /* ==============================
+               4️⃣ Publish Action
+            ============================== */
+            $('#btn-publish').on('click', function () {
+                showAlert('info', 'Mengirim Pengumuman...', 'Sedang memproses pengiriman pengumuman ke penerima.');
+
+                setTimeout(() => {
+                    showAlert('success', 'Pengumuman Terkirim!', 'Pengumuman informasi berhasil dikirim ke semua penerima.');
+                }, 2000);
+            });
+
+            /* ==============================
+               5️⃣ Draft Action
+            ============================== */
+            $('#btn-draft').on('click', function () {
+                showAlert('info', 'Menyimpan sebagai Draf...', 'Sedang mengubah status informasi menjadi draf.');
+
+                setTimeout(() => {
+                    showAlert('success', 'Status Diubah!', 'Informasi berhasil diubah menjadi draf.');
+
+                    // Update status badge
+                    $('.badge-success').removeClass('badge-success').addClass('badge-warning').html('<i class="fas fa-file-alt mr-1"></i>Draf');
+                }, 1500);
+            });
+
+            /* ==============================
+               6️⃣ Alert Function
+            ============================== */
+            function showAlert(type, title, message) {
+                const alert = $('#alert');
+                const icon = $('#alert-icon');
+                const titleEl = $('#alert-title');
+                const contentEl = $('#alert-content');
+
+                const iconMap = {
+                    success: 'fas fa-check-circle text-success',
+                    danger: 'fas fa-times-circle text-danger',
+                    info: 'fas fa-info-circle text-info',
+                    warning: 'fas fa-exclamation-circle text-warning'
+                };
+
+                icon.attr('class', iconMap[type] + ' fa-2x');
+                titleEl.text(title);
+                contentEl.html(message);
+
+                alert.removeClass('alert-success alert-danger alert-info alert-warning fade show');
+                alert.addClass(`alert-${type} show`).fadeIn();
+
+                // Scroll to alert
+                $('html, body').animate({ scrollTop: 0 }, 300);
+
+                setTimeout(hideAlert, 5000);
+            }
+
+            window.hideAlert = function () {
+                $('#alert').fadeOut();
+            };
+
+        });
+    </script>
+
+</body>
+
+</html>

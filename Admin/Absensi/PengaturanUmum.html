@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Pengaturan Umum Absensi :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light" style="font-family: 'Inter', sans-serif; background-color: #f5f5f5;">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Presensi</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Absensi</a></li>
+                <li class="breadcrumb-item active">Pengaturan Umum</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold mb-1">Pengaturan Absensi</h2>
+            <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Konfigurasi pengaturan umum absensi
+                petugas dan siswa</p>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert" style="display: none;">
+            <div class="d-flex align-items-start">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm border-0 rounded shadow-sm">
+                    <div class="card-header bg-white border-bottom">
+                        <h5 class="mb-0 text-secondary">
+                            <i class="fas fa-cogs text-primary mr-2"></i>Pengaturan Umum
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 pb-4 py-4 shadow">
+                                <form id="form" action="javascript:void(0)" enctype="multipart/form-data">
+
+                                    <!-- Rekam Mandiri Absensi Petugas -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-user-tie text-primary mr-2"></i>Rekam Mandiri Absensi
+                                            Petugas
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input"
+                                                id="attendance_operator_record" name="attendance_operator_record"
+                                                checked>
+                                            <label class="custom-control-label"
+                                                for="attendance_operator_record">Aktif</label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Memungkinkan petugas merekam absensi
+                                            secara mandiri
+                                        </small>
+                                    </div>
+
+                                    <!-- Jadwal Hari Masuk Petugas -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-calendar-alt text-success mr-2"></i>Jadwal Hari Masuk
+                                            Petugas
+                                        </label>
+                                        <div class="d-flex flex-wrap">
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Mon"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Senin</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Tue"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Selasa</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Wed"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Rabu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Thu"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Kamis</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Fri"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Jumat</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Sat"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Sabtu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_operator_days[]" value="Sun"
+                                                    class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Minggu</span>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Pilih hari kerja untuk petugas
+                                        </small>
+                                    </div>
+
+                                    <!-- Jadwal Hari Masuk Siswa -->
+                                    <div class="mb-4 pb-3 border-bottom">
+                                        <label class="form-label font-weight-bold mb-3">
+                                            <i class="fas fa-user-graduate text-warning mr-2"></i>Jadwal Hari Masuk
+                                            Siswa
+                                        </label>
+                                        <div class="d-flex flex-wrap">
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Mon"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Senin</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Tue"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Selasa</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Wed"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Rabu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Thu"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Kamis</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Fri"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Jumat</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Sat"
+                                                    checked class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Sabtu</span>
+                                            </label>
+                                            <label class="btn btn-outline-secondary rounded-pill m-1">
+                                                <input type="checkbox" name="attendance_student_days[]" value="Sun"
+                                                    class="d-none"
+                                                    onchange="this.parentElement.classList.toggle('active', this.checked); this.parentElement.classList.toggle('btn-primary', this.checked); this.parentElement.classList.toggle('btn-outline-secondary', !this.checked); this.parentElement.classList.toggle('text-white', this.checked);">
+                                                <span>Minggu</span>
+                                            </label>
+                                        </div>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Pilih hari belajar untuk siswa
+                                        </small>
+                                    </div>
+
+                                    <!-- Konfirmasi Kata Sandi -->
+                                    <div class="mb-4">
+                                        <label class="form-label font-weight-bold">
+                                            <i class="fas fa-key text-danger mr-2"></i>Konfirmasi Kata Sandi
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="password" name="password" id="password" class="form-control"
+                                            maxlength="16" placeholder="Masukkan kata sandi untuk konfirmasi"
+                                            autocomplete="off" required>
+                                        <small class="text-muted d-block mt-2">
+                                            <i class="fas fa-info-circle mr-1"></i>Diperlukan untuk menyimpan perubahan
+                                        </small>
+                                        <p id="password-feedback" class="mt-2 mb-0" style="display: none"></p>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="mt-4">
+                                        <button type="submit" id="btn-submit"
+                                            class="btn btn-outline-primary btn btn-block">
+                                            <i id="btn-svg" class="fas fa-check-circle mr-2"></i>
+                                            <span id="btn-icon"
+                                                class="spinner-border spinner-border-sm mr-2 d-none"></span>
+                                            <span id="btn-text =">Simpan Pengaturan</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Info Panel -->
+                            <div class="col-sm-12 col-md-6 mt-4 mt-md-0">
+                                <div class="card bg-light border-0  shadow">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-3">
+                                            <i class="fas fa-lightbulb text-warning mr-2"></i>Informasi Pengaturan
+                                        </h5>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-primary mr-2"
+                                                    style="font-size: 0.5rem;"></i>Rekam Mandiri
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Fitur ini memungkinkan petugas untuk mencatat kehadiran mereka secara
+                                                mandiri melalui sistem tanpa memerlukan admin.
+                                            </p>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-success mr-2"
+                                                    style="font-size: 0.5rem;"></i>Jadwal Hari Masuk
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Tentukan hari-hari aktif untuk petugas dan siswa. Pengaturan ini akan
+                                                mempengaruhi sistem absensi dan laporan kehadiran.
+                                            </p>
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <h6 class="font-weight-bold mb-2">
+                                                <i class="fas fa-circle text-danger mr-2"
+                                                    style="font-size: 0.5rem;"></i>Keamanan
+                                            </h6>
+                                            <p class="text-muted mb-0 pl-4">
+                                                Untuk keamanan, setiap perubahan pengaturan memerlukan konfirmasi kata
+                                                sandi dari akun Anda.
+                                            </p>
+                                        </div>
+
+                                        <div class="alert alert-info mb-0" role="alert">
+                                            <h6 class="alert-heading mb-2">
+                                                <i class="fas fa-exclamation-circle mr-1"></i>Catatan Penting
+                                            </h6>
+                                            <ul class="mb-0 pl-3">
+                                                <li>Pastikan minimal ada 1 hari yang dipilih</li>
+                                                <li>Perubahan akan berlaku segera setelah disimpan</li>
+                                                <li>Hubungi administrator jika mengalami kendala</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-5 py-3 bg-white border-top">
+        <div class="container-fluid">
+            <div class="row text-center align-items-center">
+                <div class="col-12">
+                    <p class="text-muted mb-0">Powered By Akeno PPDB System</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        // Initialize checkbox states on load
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set initial active state for checked checkboxes
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (checkbox) {
+                if (checkbox.parentElement.classList.contains('btn')) {
+                    checkbox.parentElement.classList.add('active', 'btn-primary', 'text-white');
+                    checkbox.parentElement.classList.remove('btn-outline-secondary');
+                }
+            });
+        });
+
+        // Hide alert function
+        function hideAlert() {
+            document.getElementById('alert').style.display = 'none';
+            document.getElementById('alert').classList.remove('show');
+        }
+
+        // Show alert function
+        function showAlert(type, title, content) {
+            const alert = document.getElementById('alert');
+            const alertIcon = document.getElementById('alert-icon');
+            const alertTitle = document.getElementById('alert-title');
+            const alertContent = document.getElementById('alert-content');
+
+            // Reset classes
+            alert.className = 'alert alert-dismissible fade show';
+
+            // Set type-specific classes and icons
+            if (type === 'success') {
+                alert.classList.add('alert-success');
+                alertIcon.className = 'fas fa-check-circle fa-2x text-success';
+            } else if (type === 'warning') {
+                alert.classList.add('alert-warning');
+                alertIcon.className = 'fas fa-exclamation-triangle fa-2x text-warning';
+            } else if (type === 'danger') {
+                alert.classList.add('alert-danger');
+                alertIcon.className = 'fas fa-times-circle fa-2x text-danger';
+            } else {
+                alert.classList.add('alert-info');
+                alertIcon.className = 'fas fa-info-circle fa-2x text-info';
+            }
+
+            alertTitle.textContent = title;
+            alertContent.textContent = content;
+            alert.style.display = 'block';
+        }
+
+        // Form submit handler
+        document.getElementById('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const btnSubmit = document.getElementById('btn-submit');
+            const btnText = document.getElementById('btn-text');
+            const btnIcon = document.getElementById('btn-icon');
+            const btnSvg = document.getElementById('btn-svg');
+
+            // Validate password
+            if (!password) {
+                showAlert('danger', 'Error', 'Kata sandi harus diisi untuk konfirmasi');
+                return;
+            }
+
+            // Show loading state
+            btnSubmit.disabled = true;
+            btnText.textContent = 'Menyimpan...';
+            btnIcon.classList.remove('d-none');
+            btnSvg.classList.add('d-none');
+
+            // Simulate AJAX request
+            setTimeout(function () {
+                // Reset button state
+                btnSubmit.disabled = false;
+                btnText.textContent = 'Simpan Pengaturan';
+                btnIcon.classList.add('d-none');
+                btnSvg.classList.remove('d-none');
+
+                // Show success message
+                showAlert('success', 'Berhasil', 'Pengaturan absensi berhasil disimpan');
+
+                // Clear password field
+                document.getElementById('password').value = '';
+
+                // Scroll to alert
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 1500);
+        });
+    </script>
+
+</body>
+
+</html>

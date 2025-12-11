@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Verifikasi Pembayaran :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pembayaran</a></li>
+                <li class="breadcrumb-item active">Verifikasi Pembayaran</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="mb-4">
+            <h2 class="font-weight-bold mb-1">Verifikasi Pembayaran</h2>
+            <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Kelola dan verifikasi pembayaran tagihan
+                siswa</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #667eea;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <small class="text-muted d-block mb-1">Total Nominal</small>
+                                <h3 class="font-weight-bold mb-0 text-primary" id="preview-total">Rp 0</h3>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center bg-primary rounded-circle"
+                                style="width:50px; height:50px;">
+                                <i class="fas fa-dollar-sign fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #17a2b8;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <small class="text-muted d-block mb-1">Menunggu Konfirmasi</small>
+                                <h3 class="font-weight-bold mb-0 text-info" id="preview-pending">Rp 0</h3>
+                            </div>
+                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center"
+                                style="width:50px; height:50px;">
+                                <i class="fas fa-clock fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #e83e8c;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <small class="text-muted d-block mb-1">Menunggu Pembayaran</small>
+                                <h3 class="font-weight-bold mb-0 text-danger" id="preview-unpaid">Rp 0</h3>
+                            </div>
+                            <div class="rounded-circle bg-danger d-flex align-items-center justify-content-center"
+                                style="width:50px; height:50px;">
+                                <i class="fas fa-exclamation-circle fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="card h-100" style="border-left: 4px solid #6c757d;">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div>
+                                <small class="text-muted d-block mb-1">Dibatalkan</small>
+                                <h3 class="font-weight-bold mb-0 text-muted" id="preview-abort">Rp 0</h3>
+                            </div>
+                            <div class="rounded-circle bg-secondary d-flex align-items-center justify-content-center"
+                                style="width:50px; height:50px;">
+                                <i class="fas fa-times-circle fa-lg text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #667eea;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Filter Card -->
+        <div class="card mb-4">
+            <div class="card-header bg-white py-3">
+                <button
+                    class="btn btn-link text-decoration-none text-dark p-0 w-100 text-left d-flex align-items-center justify-content-between"
+                    type="button" data-toggle="collapse" data-target="#filterCollapse">
+                    <div>
+                        <i class="fas fa-filter text-primary mr-2"></i>
+                        <strong>Filter Data</strong>
+                    </div>
+                    <i id="filterIcon" class="fas fa-chevron-down text-muted"></i>
+                </button>
+            </div>
+            <div id="filterCollapse" class="collapse">
+                <div class="card-body bg-light">
+                    <form id="filter-form">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Kata Kunci</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text bg-white">
+                                            <i class="fas fa-search text-muted"></i>
+                                        </span>
+                                    </div>
+                                    <input type="text" id="keyword" name="keyword" class="form-control"
+                                        placeholder="Cari nomor invoice, nama..." maxlength="64">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Unit</label>
+                                <select name="unit" id="filter-unit" class="custom-select">
+                                    <option value="">Semua Unit</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Pilih Tanggal</label>
+                                <input type="text" name="date_period" id="date-period" class="form-control"
+                                    placeholder="YYYY-MM-DD - YYYY-MM-DD">
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Jenis Transaksi</label>
+                                <select name="payment_type" id="payment-type" class="custom-select">
+                                    <option value="">Semua Jenis</option>
+                                    <option value="SB">Tagihan</option>
+                                    <option value="DP">Tabungan</option>
+                                    <option value="AM">PPDB</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 mb-3">
+                                <label class="font-weight-bold small mb-2">Status Pembayaran</label>
+                                <select name="status" id="status" class="custom-select">
+                                    <option value="">Semua Status</option>
+                                    <option value="MP">Menunggu Pembayaran</option>
+                                    <option value="MK">Menunggu Konfirmasi</option>
+                                    <option value="DB">Dibatalkan</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12">
+                                <button type="button" id="btn-apply-filter" class="btn btn-primary px-4">
+                                    <i class="fas fa-search mr-2"></i>Terapkan Filter
+                                </button>
+                                <button type="button" id="btn-reset-filter" class="btn btn-outline-secondary px-4 ml-2">
+                                    <i class="fas fa-redo mr-2"></i>Reset
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Card -->
+        <div class="card">
+            <div class="card-header bg-white py-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-list text-primary mr-2"></i>Daftar Pembayaran
+                    </h5>
+
+                    <!-- Bulk Actions -->
+                    <div class="dropdown" id="bulkActions" style="display: none;">
+                        <button class="btn btn-sm btn-outline-primary dropdown-toggle px-3" type="button"
+                            data-toggle="dropdown">
+                            <i class="fas fa-tasks mr-1"></i>Aksi Masal
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="#" id="action-status">
+                                <i class="fas fa-edit text-warning mr-2"></i>Ubah Status
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" href="#" id="bulk-delete">
+                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0" id="dataTable">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="align-middle" width="30">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="checkAll">
+                                        <label class="custom-control-label" for="checkAll"></label>
+                                    </div>
+                                </th>
+                                <th class="align-middle" width="50">#</th>
+                                <th class="align-middle">Nama Unit</th>
+                                <th class="align-middle">Nomor Induk</th>
+                                <th class="align-middle">Nama Lengkap</th>
+                                <th class="align-middle">Nomor Invoice</th>
+                                <th class="align-middle">Total Pembayaran</th>
+                                <th class="align-middle">Jenis Transaksi</th>
+                                <th class="align-middle">Status Pembayaran</th>
+                                <th class="align-middle">Waktu Invoice</th>
+                                <th class="align-middle text-center" width="120">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check1"
+                                            data-id="1">
+                                        <label class="custom-control-label" for="check1"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>1</strong></td>
+                                <td class="align-middle"><span class="badge badge-info badge-pill px-3 py-2">SMP</span>
+                                </td>
+                                <td class="align-middle">2025001</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">SP</div>
+                                        <div>
+                                            <strong>Septian</strong>
+                                            <small class="d-block text-muted">081234567890</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong class="text-primary">INV-2025-11-001</strong></td>
+                                <td class="align-middle"><strong class="text-success">Rp 500.000</strong></td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-file-invoice text-primary mr-2"></i>
+                                        Tagihan
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-clock text-warning mr-2"></i>Menunggu Konfirmasi
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>18/11/2025
+                                    <small class="d-block">10:30 WIB</small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="DetailPembayaran.html"
+                                                onclick="showAlert('Detail pembayaran', 'info')">
+                                                <i class="fas fa-eye text-info mr-2"></i>Detail
+                                            </a>
+                                            <a class="dropdown-item action-confirm" href="#" data-id="1">
+                                                <i class="fas fa-check-circle text-success mr-2"></i>Konfirmasi
+                                            </a>
+                                            <a class="dropdown-item action-status-single" href="#" data-id="1">
+                                                <i class="fas fa-edit text-warning mr-2"></i>Ubah Status
+                                            </a>
+                                            <a class="dropdown-item action-notif" href="#" data-id="1">
+                                                <i class="fas fa-bell text-primary mr-2"></i>Kirim Notifikasi
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item text-danger action-delete" href="#" data-id="1">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="align-middle">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input row-check" id="check2"
+                                            data-id="2">
+                                        <label class="custom-control-label" for="check2"></label>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong>2</strong></td>
+                                <td class="align-middle"><span
+                                        class="badge badge-primary badge-pill px-3 py-2">SMA</span></td>
+                                <td class="align-middle">2025002</td>
+                                <td class="align-middle">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center mr-2 font-weight-bold"
+                                            style="width: 35px; height: 35px;">SB</div>
+                                        <div>
+                                            <strong>Santri Baru</strong>
+                                            <small class="d-block text-muted">08928427711</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle"><strong class="text-primary">INV-2025-11-002</strong></td>
+                                <td class="align-middle"><strong class="text-success">Rp 750.000</strong></td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-piggy-bank text-warning mr-2"></i>Tabungan
+                                    </span>
+                                </td>
+                                <td class="align-middle">
+                                    <span
+                                        class="badge badge-light d-inline-flex align-items-center px-3 py-2 rounded shadow-sm">
+                                        <i class="fas fa-exclamation-circle text-danger mr-2"></i>Menunggu Pembayaran
+                                    </span>
+                                </td>
+                                <td class="align-middle text-muted">
+                                    <i class="far fa-calendar-alt mr-1"></i>18/11/2025
+                                    <small class="d-block">11:15 WIB</small>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-light dropdown-toggle" type="button"
+                                            data-toggle="dropdown">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="DetailPembayaran.html"
+                                                onclick="showAlert('Detail pembayaran', 'info')">
+                                                <i class="fas fa-eye text-info mr-2"></i>Detail
+                                            </a>
+                                            <a class="dropdown-item action-confirm" href="#" data-id="2">
+                                                <i class="fas fa-check-circle text-success mr-2"></i>Konfirmasi
+                                            </a>
+                                            <a class="dropdown-item action-status-single" href="#" data-id="2">
+                                                <i class="fas fa-edit text-warning mr-2"></i>Ubah Status
+                                            </a>
+                                            <a class="dropdown-item action-notif" href="#" data-id="2">
+                                                <i class="fas fa-bell text-primary mr-2"></i>Kirim Notifikasi
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item text-danger action-delete" href="#" data-id="2">
+                                                <i class="fas fa-trash-alt mr-2"></i>Hapus
+                                            </a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ubah Status -->
+    <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Perbarui Status Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="font-weight-bold">Pilih Status <span class="text-danger">*</span></label>
+                        <select id="payment-status" class="form-control">
+                            <option value="">-- PILIH STATUS --</option>
+                            <option value="MP">Menunggu Pembayaran</option>
+                            <option value="MK">Menunggu Konfirmasi</option>
+                            <option value="DB">Dibatalkan</option>
+                        </select>
+                        <small id="payment-status-feedback" class="text-danger" style="display: none;">Status pembayaran
+                            diperlukan</small>
+                    </div>
+
+                    <div id="input-payment-time" class="row" style="display: none;">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold">Tanggal Pembayaran</label>
+                                <input type="date" id="payment-date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold">Waktu Pembayaran</label>
+                                <input type="time" id="payment-time" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="input-payment-note" class="form-group" style="display: none;">
+                        <label class="font-weight-bold">Alasan Pembatalan</label>
+                        <textarea id="payment-note" class="form-control" rows="3" maxlength="128"
+                            placeholder="Masukan alasan dibatalkan"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-action-status-submit" class="btn btn-primary">
+                        <span id="btn-action-status-icon" class="spinner-border spinner-border-sm mr-2"
+                            style="display: none;"></span>
+                        <i id="btn-action-status-svg" class="fas fa-check-circle mr-1"></i>
+                        Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Pembayaran -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Pembayaran</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
+                    <h5 class="mb-3">Konfirmasi Pembayaran</h5>
+                    <p class="mb-2">Apakah yakin akan melakukan konfirmasi pembayaran ini?</p>
+                    <p class="text-muted mb-0">Pastikan bahwa detail pembayaran telah sesuai.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-action-confirm-submit" class="btn btn-primary">
+                        <span id="btn-action-confirm-icon" class="spinner-border spinner-border-sm mr-2"
+                            style="display: none;"></span>
+                        <i id="btn-action-confirm-svg" class="fas fa-check-circle mr-1"></i>
+                        Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Kirim Notifikasi -->
+    <div class="modal fade" id="notifModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pengiriman Notifikasi Tagihan</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-info-circle fa-3x text-info mb-3"></i>
+                    <p class="mb-0">Apakah yakin akan mengirimkan pesan notifikasi tagihan ke nomor WhatsApp atau
+                        alamat email siswa dari pembayaran ini?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-action-notif-submit" class="btn btn-primary">
+                        <span id="btn-action-notif-icon" class="spinner-border spinner-border-sm mr-2"
+                            style="display: none;"></span>
+                        <i id="btn-action-notif-svg" class="fas fa-check-circle mr-1"></i>
+                        Konfirmasi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Delete -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Konfirmasi Penghapusan</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p class="mb-2">Apakah yakin akan menghapus data yang dipilih?</p>
+                    <p class="text-muted mb-0">Data yang telah dihapus tidak dapat dikembalikan.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+                    <button type="button" id="btn-delete-submit" class="btn btn-danger">
+                        <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
+                            style="display: none;"></span>
+                        <i id="btn-delete-svg" class="fas fa-trash-alt mr-1"></i>
+                        Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('#dataTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/id.json"
+                },
+                "pageLength": 10,
+                "ordering": true,
+                "searching": true,
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]]
+            });
+
+            // Update stats (dummy data)
+            $('#preview-total').text('Rp 25.750.000');
+            $('#preview-pending').text('Rp 8.500.000');
+            $('#preview-unpaid').text('Rp 12.250.000');
+            $('#preview-abort').text('Rp 5.000.000');
+
+            // Check All Checkbox
+            $('#checkAll').on('click', function () {
+                var isChecked = $(this).is(':checked');
+                $('.row-check').prop('checked', isChecked);
+                toggleBulkActions();
+            });
+
+            // Individual Checkbox
+            $(document).on('change', '.row-check', function () {
+                var allChecked = $('.row-check:checked').length === $('.row-check').length;
+                $('#checkAll').prop('checked', allChecked);
+                toggleBulkActions();
+            });
+
+            // Toggle Bulk Actions
+            function toggleBulkActions() {
+                if ($('.row-check:checked').length > 0) {
+                    $('#bulkActions').show();
+                } else {
+                    $('#bulkActions').hide();
+                }
+            }
+
+            // Filter Collapse Icon
+            $('#filterCollapse').on('show.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+            });
+
+            $('#filterCollapse').on('hide.bs.collapse', function () {
+                $('#filterIcon').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+            });
+
+            // Apply Filter
+            $('#btn-apply-filter').on('click', function () {
+                table.ajax.reload();
+                showAlert('Filter berhasil diterapkan', 'success');
+            });
+
+            // Reset Filter
+            $('#btn-reset-filter').on('click', function () {
+                $('#filter-form')[0].reset();
+                table.ajax.reload();
+                showAlert('Filter berhasil direset', 'info');
+            });
+
+            // Payment Status Change
+            $('#payment-status').on('change', function () {
+                var value = $(this).val();
+                if (value == '' || value == 'MP') {
+                    $('#input-payment-note').hide();
+                    $('#input-payment-time').hide();
+                } else if (value == 'MK') {
+                    $('#input-payment-note').hide();
+                    $('#input-payment-time').show();
+                } else if (value == 'DB') {
+                    $('#input-payment-time').hide();
+                    $('#input-payment-note').show();
+                }
+            });
+
+            // Action Status Single
+            var currentActionId = null;
+
+            $(document).on('click', '.action-status-single', function (e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                $('#payment-status').val('');
+                $('#payment-date').val('');
+                $('#payment-time').val('');
+                $('#payment-note').val('');
+                $('#input-payment-time').hide();
+                $('#input-payment-note').hide();
+                $('#payment-status-feedback').hide();
+                $('#statusModal').modal('show');
+            });
+
+            // Action Status Bulk
+            $('#action-status').on('click', function (e) {
+                e.preventDefault();
+                if ($('.row-check:checked').length > 0) {
+                    var ids = [];
+                    $('.row-check:checked').each(function () {
+                        ids.push($(this).data('id'));
+                    });
+                    currentActionId = ids.join(',');
+                    $('#payment-status').val('');
+                    $('#payment-date').val('');
+                    $('#payment-time').val('');
+                    $('#payment-note').val('');
+                    $('#input-payment-time').hide();
+                    $('#input-payment-note').hide();
+                    $('#payment-status-feedback').hide();
+                    $('#statusModal').modal('show');
+                }
+            });
+
+            // Submit Status
+            $('#btn-action-status-submit').on('click', function () {
+                if (!$('#payment-status').val()) {
+                    $('#payment-status-feedback').show();
+                    return false;
+                }
+
+                buttonActionHandler('action-status', true);
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    buttonActionHandler('action-status', false);
+                    $('#statusModal').modal('hide');
+                    showAlert('Status pembayaran berhasil diperbarui', 'success');
+                    $('#checkAll').prop('checked', false);
+                    $('.row-check').prop('checked', false);
+                    toggleBulkActions();
+                }, 1000);
+            });
+
+            // Action Confirm
+            $(document).on('click', '.action-confirm', function (e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                $('#confirmModal').modal('show');
+            });
+
+            // Submit Confirm
+            $('#btn-action-confirm-submit').on('click', function () {
+                buttonActionHandler('action-confirm', true);
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    buttonActionHandler('action-confirm', false);
+                    $('#confirmModal').modal('hide');
+                    showAlert('Pembayaran berhasil dikonfirmasi', 'success');
+                }, 1000);
+            });
+
+            // Action Notif
+            $(document).on('click', '.action-notif', function (e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                $('#notifModal').modal('show');
+            });
+
+            // Submit Notif
+            $('#btn-action-notif-submit').on('click', function () {
+                buttonActionHandler('action-notif', true);
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    buttonActionHandler('action-notif', false);
+                    $('#notifModal').modal('hide');
+                    showAlert('Notifikasi berhasil dikirim', 'success');
+                }, 1000);
+            });
+
+            // Action Delete
+            $(document).on('click', '.action-delete', function (e) {
+                e.preventDefault();
+                currentActionId = $(this).data('id');
+                $('#deleteModal').modal('show');
+            });
+
+            // Bulk Delete
+            $('#bulk-delete').on('click', function (e) {
+                e.preventDefault();
+                if ($('.row-check:checked').length > 0) {
+                    var ids = [];
+                    $('.row-check:checked').each(function () {
+                        ids.push($(this).data('id'));
+                    });
+                    currentActionId = ids.join(',');
+                    $('#deleteModal').modal('show');
+                }
+            });
+
+            // Submit Delete
+            $('#btn-delete-submit').on('click', function () {
+                buttonActionHandler('delete', true);
+
+                // Simulate AJAX request
+                setTimeout(function () {
+                    buttonActionHandler('delete', false);
+                    $('#deleteModal').modal('hide');
+                    showAlert('Data pembayaran berhasil dihapus', 'success');
+                    $('#checkAll').prop('checked', false);
+                    $('.row-check').prop('checked', false);
+                    toggleBulkActions();
+                }, 1000);
+            });
+
+            // Button Action Handler
+            function buttonActionHandler(action, isLoading) {
+                var btnSubmit = $('#btn-' + action + '-submit');
+                var btnIcon = $('#btn-' + action + '-icon');
+                var btnSvg = $('#btn-' + action + '-svg');
+
+                if (isLoading) {
+                    btnSubmit.prop('disabled', true);
+                    btnSvg.hide();
+                    btnIcon.show();
+                } else {
+                    btnSubmit.prop('disabled', false);
+                    btnIcon.hide();
+                    btnSvg.show();
+                }
+            }
+        });
+
+        // Show Alert Function
+        function showAlert(message, type) {
+            const alert = $('#alert');
+            const alertIcon = $('#alert-icon');
+            const alertTitle = $('#alert-title');
+            const alertContent = $('#alert-content');
+
+            alertContent.html(message);
+
+            // Remove all alert classes
+            alert.removeClass('alert-success alert-warning alert-info alert-danger');
+
+            if (type === 'success') {
+                alert.addClass('alert-success');
+                alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success');
+                alertTitle.text('Berhasil');
+            } else if (type === 'warning') {
+                alert.addClass('alert-warning');
+                alertIcon.removeClass().addClass('fas fa-exclamation-circle fa-2x text-warning');
+                alertTitle.text('Peringatan');
+            } else if (type === 'info') {
+                alert.addClass('alert-info');
+                alertIcon.removeClass().addClass('fas fa-info-circle fa-2x text-info');
+                alertTitle.text('Informasi');
+            } else if (type === 'danger') {
+                alert.addClass('alert-danger');
+                alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger');
+                alertTitle.text('Error');
+            }
+
+            alert.show().addClass('show');
+
+            setTimeout(function () {
+                alert.removeClass('show');
+                setTimeout(function () {
+                    alert.hide();
+                }, 150);
+            }, 4000);
+        }
+
+        // Hide Alert Function
+        function hideAlert() {
+            $('#alert').removeClass('show');
+            setTimeout(function () {
+                $('#alert').hide();
+            }, 150);
+        }
+    </script>
+
+</body>
+
+</html>

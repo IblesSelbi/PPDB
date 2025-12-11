@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Pendaftaran :: PPDB</title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- DataTables Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white px-3 mb-2">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">PPDB</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Data Pendaftar</a></li>
+                <li class="breadcrumb-item active">Detail Pendaftar</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="font-weight-bold mb-1">Detail Pendaftar</h2>
+                <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1"></i>Informasi lengkap data pendaftar siswa
+                    baru</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mt-2 mt-md-0 d-flex">
+                    <a href="DataSiswa.html" class="btn btn-outline-primary mr-2">
+                        <i class="fas fa-arrow-left mr-1"></i>Kembali
+                    </a>
+                    <div class="btn-group mr-2">
+                        <a href="EditSiswa.html"></a>
+                        <button type="button" class="btn btn-warning" data-toggle="dropdown">
+                            <i class="fas fa-edit mr-1"></i>Edit
+                        </button>
+                    </div>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
+                        <i class="fas fa-trash mr-1"></i>Hapus
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade" role="alert"
+            style="display: none; border-left: 4px solid #667eea;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x text-primary"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1">Informasi</h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Detail Card -->
+        <div class="card shadow-lg border-0" style="border-radius: 12px;">
+            <div class="card-header bg-white border-bottom"
+                style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                <h5 class="mb-0 text-secondary">
+                    <i class="fas fa-clipboard-list text-primary mr-2"></i>Detail Siswa
+                </h5>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <ul class="nav nav-tabs" role="tablist" style="margin-bottom:-1px; border-bottom:1px solid #dee2e6;">
+                <li class="nav-item flex-fill">
+                    <a class="nav-link active text-center font-weight-bold" data-toggle="tab" href="#student">
+                        <i class="fas fa-user-graduate mr-2"></i>Biodata Siswa
+                    </a>
+                </li>
+                <li class="nav-item flex-fill">
+                    <a class="nav-link text-center font-weight-bold" data-toggle="tab" href="#parents">
+                        <i class="fas fa-users mr-2"></i>Biodata Orang Tua
+                    </a>
+                </li>
+                <li class="nav-item flex-fill">
+                    <a class="nav-link text-center font-weight-bold" data-toggle="tab" href="#guardian">
+                        <i class="fas fa-user-shield mr-2"></i>Biodata Wali
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane fade show active" id="student">
+                    <div class="card-body p-3">
+                        <div class="card-body p-4">
+                            <div class="border rounded mb-4" style="border-radius: 10px !important;">
+                                <div class="p-3">
+                                    <div class="row">
+                                        <div class="col-md-12 mb-4 text-center">
+                                            <p class="text-muted small mb-2">Foto Profil</p>
+                                            <img src="https://demo.schoolpay.co.id/media/images/student/photo.png"
+                                                class="rounded-circle border shadow-sm"
+                                                style="width: 120px; height: 120px; object-fit: cover;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border rounded p-0 mt-4" style="border-radius: 10px !important;">
+
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bg-light text-muted" style="width: 25%;">Nama Lengkap</td>
+                                            <td style="width: 25%;"><strong>SEPTIAN</strong></td>
+                                            <td class="bg-light text-muted" style="width: 25%;">Jenis Kelamin</td>
+                                            <td style="width: 25%;"><strong>Laki-Laki</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Tempat Lahir</td>
+                                            <td><strong>BANDUNG</strong></td>
+                                            <td class="bg-light text-muted">Tanggal Lahir</td>
+                                            <td><strong>01 Januari 2010</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Agama</td>
+                                            <td><strong>Islam</strong></td>
+                                            <td class="bg-light text-muted">Kewarganegaraan</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Nomor Induk Kependudukan</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Nomor Kartu Keluarga</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Nomor Registrasi Akta Lahir</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Anak Ke</td>
+                                            <td><strong>1</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Jumlah Saudara</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Berat Badan</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Tinggi Badan</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Golongan Darah</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Riwayat Penyakit</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Status Yatim</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Status Tinggal</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Jarak Tempat Tinggal</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Penggunaan Bahasa</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Hobi/Kegemaran</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Cita-Cita</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Berkebutuhan Khusus</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Kode Referral PPDB</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Dapat Info PMB dari mana?</td>
+                                            <td>-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detail Akademik -->
+                    <div class="card-header bg-light border-bottom border-top">
+                        <h6 class="mb-0 text-secondary">
+                            <i class="fas fa-graduation-cap text-dark mr-2"></i>Detail Akademik
+                        </h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="border rounded" style="border-radius: 10px !important;">
+                            <div class="p-0">
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bg-light text-muted" style="width: 25%;">Nomor Induk Siswa
+                                                Nasional</td>
+                                            <td style="width: 25%;">-</td>
+                                            <td class="bg-light text-muted" style="width: 25%;">Nomor Seri Ijazah</td>
+                                            <td style="width: 25%;">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Nama Sekolah Asal</td>
+                                            <td><strong>SMP BANDUNG</strong></td>
+                                            <td class="bg-light text-muted">Jenjang Sekolah Asal</td>
+                                            <td><strong>SMP</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">NPSN Sekolah Asal</td>
+                                            <td colspan="3">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detail Alamat & Kontak -->
+                    <div class="card-header bg-light border-bottom border-top">
+                        <h6 class="mb-0 text-secondary">
+                            <i class="fas fa-map-marker-alt text-danger mr-2"></i>Detail Alamat & Kontak
+                        </h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="border rounded" style="border-radius: 10px !important;">
+                            <div class="p-0">
+                                <table class="table table-bordered mb-0">
+                                    <tbody>
+                                        <tr>
+                                            <td class="bg-light text-muted" style="width: 25%;">Provinsi</td>
+                                            <td style="width: 25%;">-</td>
+                                            <td class="bg-light text-muted" style="width: 25%;">Kota/Kabupaten</td>
+                                            <td style="width: 25%;">-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Kecamatan</td>
+                                            <td>-</td>
+                                            <td class="bg-light text-muted">Kelurahan/Desa</td>
+                                            <td>-</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Alamat Tempat Tinggal</td>
+                                            <td><strong>JL. BANDUNG NO. 17</strong></td>
+                                            <td class="bg-light text-muted">Nomor Telepon</td>
+                                            <td><strong>6289670051825</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="bg-light text-muted">Alamat Email</td>
+                                            <td colspan="3">-</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Tab Biodata Orang Tua -->
+                <div class="tab-pane fade" id="parents" role="tabpanel">
+                    <div class="card shadow-lg border-0 mt-3" style="border-radius: 12px;">
+
+                        <!-- Biodata Ayah -->
+                        <div class="card-header bg-white border-bottom"
+                            style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                            <h6 class="mb-0 text-secondary">
+                                <i class="fas fa-male text-primary mr-2"></i>Biodata Ayah Kandung
+                            </h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="border rounded" style="border-radius: 10px !important;">
+                                <div class="p-0">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="bg-light text-muted" style="width: 25%;">Nama Lengkap</td>
+                                                <td style="width: 25%;">-</td>
+                                                <td class="bg-light text-muted" style="width: 25%;">Tempat Lahir</td>
+                                                <td style="width: 25%;">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Tanggal Lahir</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Agama</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Kewarganegaraan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Induk Kependudukan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Pekerjaan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Penghasilan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Pendidikan Terakhir</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Keadaan Ayah</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Tempat Tinggal</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Telepon</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Email</td>
+                                                <td colspan="3">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Biodata Ibu -->
+                        <div class="card-header bg-light border-bottom border-top">
+                            <h6 class="mb-0 text-secondary">
+                                <i class="fas fa-female text-danger mr-2"></i>Biodata Ibu Kandung
+                            </h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="border rounded" style="border-radius: 10px !important;">
+                                <div class="p-0">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="bg-light text-muted" style="width: 25%;">Nama Lengkap</td>
+                                                <td style="width: 25%;">-</td>
+                                                <td class="bg-light text-muted" style="width: 25%;">Tempat Lahir</td>
+                                                <td style="width: 25%;">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Tanggal Lahir</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Agama</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Kewarganegaraan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Induk Kependudukan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Pekerjaan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Penghasilan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Pendidikan Terakhir</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Keadaan Ibu</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Tempat Tinggal</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Telepon</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Email</td>
+                                                <td colspan="3">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tab Biodata Wali -->
+                <div class="tab-pane fade" id="guardian" role="tabpanel">
+                    <div class="card shadow-lg border-0 mt-3" style="border-radius: 12px;">
+
+                        <div class="card-header bg-white border-bottom"
+                            style="border-top-left-radius: 12px; border-top-right-radius: 12px;">
+                            <h6 class="mb-0 text-secondary">
+                                <i class="fas fa-user-shield text-warning mr-2"></i>Biodata Wali
+                            </h6>
+                        </div>
+                        <div class="card-body p-4">
+                            <div class="border rounded" style="border-radius: 10px !important;">
+                                <div class="p-0">
+                                    <table class="table table-bordered mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td class="bg-light text-muted" style="width: 25%;">Nama Lengkap</td>
+                                                <td style="width: 25%;">-</td>
+                                                <td class="bg-light text-muted" style="width: 25%;">Tempat Lahir</td>
+                                                <td style="width: 25%;">-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Tanggal Lahir</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Agama</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Kewarganegaraan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Induk Kependudukan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Status Wali</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Pekerjaan</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Penghasilan</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Pendidikan Terakhir</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Tempat Tinggal</td>
+                                                <td>-</td>
+                                                <td class="bg-light text-muted">Nomor Telepon</td>
+                                                <td>-</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="bg-light text-muted">Alamat Email</td>
+                                                <td colspan="3">-</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" data-backdrop="static">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center pt-4 pb-2 px-3">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <h5 class="font-weight-bold">Konfirmasi Penghapusan</h5>
+                    <p class="text-muted mb-4">
+                        Apakah yakin akan menghapus data yang dipilih? Data yang telah dihapus tidak dapat
+                        dikembalikan.
+                    </p>
+                </div>
+                <div class="modal-footer border-0">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col-6">
+                                <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">
+                                    Batalkan
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button type="button" class="btn btn-danger w-100" id="btnDeleteConfirm">
+                                    <span id="btn-delete-icon" class="spinner-border spinner-border-sm mr-2"
+                                        style="display: none;"></span>
+                                    <i id="btn-delete-svg" class="fas fa-check-circle mr-1"></i>Konfirmasi
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By PPDB &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery (Wajib Ada) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Popper (Wajib untuk Bootstrap 4) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        // ============================
+        //  FIX NAV-TABS BOOTSTRAP 4
+        // ============================
+        $(document).ready(function () {
+
+            // Aktifkan tab jika diklik
+            $('a[data-toggle="tab"]').on('click', function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+
+            // Hindari tab tidak pindah saat reload halaman
+            $('.nav-tabs a.active').tab('show');
+        });
+
+
+        // ============================
+        //  DELETE MODAL SYSTEM
+        // ============================
+        var deleteTargetID = null;
+
+        // Fungsi memanggil modal, dipakai saat klik tombol hapus
+        function openDeleteModal(id) {
+            deleteTargetID = id;
+            $('#deleteModal').modal('show');
+        }
+
+        // Tombol konfirmasi delete
+        $('#btnDeleteConfirm').on('click', function () {
+
+            // Icon loading
+            $('#btn-delete-icon').show();
+            $('#btn-delete-svg').hide();
+
+            // Simulasi proses hapus
+            setTimeout(function () {
+
+                console.log("Deleted ID:", deleteTargetID);
+
+                // Reset style tombol
+                $('#btn-delete-icon').hide();
+                $('#btn-delete-svg').show();
+
+                // Tutup modal
+                $('#deleteModal').modal('hide');
+
+            }, 1000);
+        });
+    </script>
+
+
+</body>
+
+</html>

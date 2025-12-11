@@ -1,0 +1,543 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Edit Akun Siswa :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Croppie CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white shadow-sm rounded">
+                <li class="breadcrumb-item"><a href="#"
+                        class="text-decoration-none text-primary font-weight-medium">Data Master</a></li>
+                <li class="breadcrumb-item"><a href="DataAkun.html"
+                        class="text-decoration-none text-primary font-weight-medium">Data Akun</a></li>
+                <li class="breadcrumb-item active text-decoration-none font-weight-medium">Edit Akun</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="bg-white shadow-sm rounded p-4 mb-4 border-left border-primary"
+            style="border-left-width: 4px !important;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mb-3 mb-md-0">
+                    <h2 class="font-weight-bold text-primary mb-2">Edit Akun Siswa</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1 text-info"></i>Formulir perubahan
+                        data akun siswa sistem pembayaran sekolah</p>
+                </div>
+                <a href="DataAkun.html" class="btn btn-outline-primary font-weight-bold">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade border-0 shadow-sm" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <!-- Form -->
+        <form id="form" action="javascript:void(0)">
+
+            <!-- Hidden Fields -->
+            <input type="hidden" name="account_id" id="account-id" value="RHdZM1R2R0ZCenFFeE9TVmhma09sQT09">
+            <input type="hidden" name="account_name_old" id="account-name-old" value="MFFwbHRuRTIxVW9uUjdLRklZTUlDUT09">
+            <input type="hidden" name="old_photo" id="old-photo"
+                value="student/photo-b7c61f0793de3e5ba8231dced52b0996.png">
+
+            <!-- Data Akun Siswa -->
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-primary text-black">
+                    <h5 class="mb-0 font-weight-bold"><i class="fas fa-user-graduate mr-2 text-primary"></i>DATA AKUN
+                        SISWA</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row">
+
+                        <!-- Nama Akun -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Akun <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="account_name" id="account-name" class="form-control border-primary"
+                                maxlength="32" autocomplete="off" placeholder="Masukkan nama akun/username"
+                                value="34195299">
+                            <small class="form-text text-muted">Username untuk login (maksimal 32 karakter)</small>
+                            <small id="account-name-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <!-- Nama Lengkap -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Lengkap <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="account_fullname" id="account-fullname"
+                                class="form-control border-primary" maxlength="64" autocomplete="off"
+                                placeholder="Masukkan nama lengkap" value="Almira Pertiwi">
+                            <small class="form-text text-muted">Nama lengkap siswa</small>
+                            <small id="account-fullname-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <!-- Nomor Telepon -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Telepon/WhatsApp</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-primary text-white border-primary">+62</span>
+                                </div>
+                                <input type="text" name="account_phone" id="account-phone"
+                                    class="form-control border-primary" maxlength="16" autocomplete="off"
+                                    placeholder="8123456789" value="">
+                            </div>
+                            <small class="form-text text-muted">Opsional, contoh: 8123456789</small>
+                        </div>
+
+                        <!-- Foto Profil -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Foto Profil</label>
+                            <input type="hidden" name="account_photo" id="account-photo">
+                            <div class="mb-3">
+                                <img src="#" id="preview-image" class="rounded border border-primary img-thumbnail"
+                                    style="width: 120px; height: 120px; object-fit: cover; cursor: pointer;"
+                                    draggable="false" data-toggle="modal" data-target="#imagePreviewModal">
+                            </div>
+                            <button type="button" id="btn-remove-image" class="btn btn-outline-danger btn-sm mb-2"
+                                data-remove="true">
+                                <i class="fas fa-trash mr-1"></i>Hapus Foto
+                            </button>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="load-photo" accept=".png, .jpg, .jpeg">
+                                <label class="custom-file-label" for="load-photo">Pilih Foto...</label>
+                            </div>
+                            <small class="form-text text-muted">Format: PNG, JPG, JPEG (Max 2MB)</small>
+                        </div>
+
+                        <!-- Alamat Email -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Alamat Email</label>
+                            <input type="email" name="account_email" id="account-email"
+                                class="form-control border-primary" maxlength="64" autocomplete="off"
+                                placeholder="contoh@email.com" value="">
+                            <small class="form-text text-muted">Opsional, untuk notifikasi via email</small>
+                        </div>
+
+                        <!-- Kata Sandi Baru -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Kata Sandi Baru</label>
+                            <div class="input-group">
+                                <input type="password" name="account_password" id="account-password"
+                                    class="form-control border-primary" maxlength="16" autocomplete="off"
+                                    placeholder="Kosongkan jika tidak ingin mengubah">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" id="toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <small class="form-text text-muted">Kosongkan jika tidak ingin mengubah password</small>
+                            <small id="account-password-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Status Akun</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="account_status" id="account-status"
+                                    class="custom-control-input" checked>
+                                <label class="custom-control-label font-weight-medium" for="account-status">
+                                    <span id="status-badge" class="badge px-3 py-2"
+                                        style="background:#dfffe8; color:#1a7f37; border-radius:20px; font-weight:600;">
+                                        <i class="fas fa-check mr-1"></i>Aktif
+                                    </span>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Aktifkan untuk memberikan akses login</small>
+                            <small id="account-status-feedback" class="text-danger font-weight-medium"
+                                style="display: none;"></small>
+                        </div>
+
+                    </div>
+
+                    <!-- Tombol Submit -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <button type="submit" id="btn-submit"
+                                class="btn btn-primary btn-block font-weight-bold shadow-sm">
+                                <i class="fas fa-save mr-2" id="btn-icon"></i>
+                                <span id="btn-spinner" class="spinner-border spinner-border-sm mr-2"
+                                    style="display: none;"></span>
+                                <span id="btn-text">Simpan Perubahan</span>
+                            </button>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="reset" class="btn btn-outline-secondary btn-block font-weight-bold">
+                                <i class="fas fa-redo mr-2"></i>Reset Form
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Modal Preview Image -->
+    <div class="modal fade" id="imagePreviewModal" tabindex="-1" role="dialog" aria-labelledby="imagePreviewModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title font-weight-bold" id="imagePreviewModalLabel">Preview Foto Profil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center pt-2 pb-4">
+                    <img id="image-zoom-preview" src="" class="img-fluid rounded" style="max-height: 500px;">
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crop Image -->
+    <div class="modal fade" id="cropImageModal" tabindex="-1" role="dialog" aria-labelledby="cropImageModalLabel"
+        aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title font-weight-bold" id="cropImageModalLabel">Crop Foto Profil</h5>
+                </div>
+                <div class="modal-body text-center pb-0">
+                    <div id="load-image-preview" style="max-height: 400px;"></div>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" id="btn-image-abort" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Batalkan
+                    </button>
+                    <button type="button" id="btn-image-crop" class="btn btn-primary">
+                        <i class="fas fa-check mr-1"></i>Pilih
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title font-weight-bold">Konfirmasi Perubahan</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-question-circle fa-4x text-warning mb-3"></i>
+                    <h5 class="font-weight-bold mb-2">Simpan Perubahan Data?</h5>
+                    <p class="text-muted mb-0">Apakah Anda yakin ingin menyimpan perubahan data akun siswa ini?</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Batal
+                    </button>
+                    <button type="button" id="btn-confirm-save" class="btn btn-primary">
+                        <i class="fas fa-check mr-1"></i>Ya, Simpan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5 border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 4 dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Croppie for image cropping -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        // JavaScript akan ditambahkan pada tahap berikutnya
+        console.log('EditAkun.html loaded successfully');
+
+        const defaultSrc = 'https://demo.schoolpay.co.id/media/images/account/photo.png';
+        let croppie;
+
+        // Preview image on modal
+        $('#preview-image').on('click', function () {
+            $('#image-zoom-preview').attr('src', $(this).attr('src'));
+        });
+
+        // Toggle password visibility
+        $('#toggle-password').on('click', function () {
+            const passwordInput = $('#account-password');
+            const icon = $(this).find('i');
+
+            if (passwordInput.attr('type') === 'password') {
+                passwordInput.attr('type', 'text');
+                icon.removeClass('fa-eye').addClass('fa-eye-slash');
+            } else {
+                passwordInput.attr('type', 'password');
+                icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        });
+
+        // Update status badge
+        $('#account-status').on('change', function () {
+            const badge = $('#status-badge');
+            if ($(this).is(':checked')) {
+                badge.html('<i class="fas fa-check mr-1"></i>Aktif')
+                    .css({
+                        'background': '#dfffe8',
+                        'color': '#1a7f37'
+                    });
+            } else {
+                badge.html('<i class="fas fa-times mr-1"></i>Tidak Aktif')
+                    .css({
+                        'background': '#ffe0e0',
+                        'color': '#d32f2f'
+                    });
+            }
+        });
+
+        // Update file input label
+        $('#load-photo').on('change', function (e) {
+            const fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').html(fileName || 'Pilih Foto...');
+
+            // Show crop modal
+            $('#cropImageModal').modal('show');
+
+            let preview = document.getElementById('load-image-preview');
+            let boundaryWidth = $('.modal-body').width();
+            let boundaryHeight = boundaryWidth;
+            let viewportWidth = boundaryWidth - (boundaryWidth / 100 * 25);
+            let viewportHeight = boundaryHeight - (boundaryHeight / 100 * 25);
+
+            croppie = new Croppie(preview, {
+                viewport: {
+                    width: viewportWidth,
+                    height: viewportHeight
+                },
+                boundary: {
+                    height: boundaryHeight
+                },
+                enableOrientation: true,
+            });
+
+            if (e.target.files && e.target.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    croppie.bind({
+                        url: e.target.result,
+                    });
+                }
+                reader.readAsDataURL(e.target.files[0]);
+            }
+        });
+
+        // Crop image
+        $('#btn-image-crop').on('click', function () {
+            croppie.result({
+                type: 'base64',
+                size: 'viewport',
+            }).then(function (result) {
+                $('#account-photo').val(result);
+                $('#preview-image').attr('src', result);
+                $('#btn-remove-image').show().data('remove', false);
+                $('#cropImageModal').modal('hide');
+                $('#load-image-preview').empty();
+                $('#load-photo').val('');
+                if (croppie) {
+                    croppie.destroy();
+                }
+            });
+        });
+
+        // Abort crop
+        $('#btn-image-abort').on('click', function () {
+            $('#load-photo').val('');
+            $('#load-image-preview').empty();
+            if (croppie) {
+                croppie.destroy();
+            }
+        });
+
+        // Remove image
+        $('#btn-remove-image').on('click', function () {
+            if ($(this).data('remove')) {
+                // Hapus foto yang sudah ada
+                $('#account-photo').val('reset');
+                $('#preview-image').attr('src', defaultSrc);
+                $(this).hide().data('remove', false);
+            } else {
+                // Hapus foto yang baru diupload
+                $('#account-photo').val('');
+                $('#preview-image').attr('src', $('#old-photo').val() ?
+                    'https://demo.schoolpay.co.id/media/images/' + $('#old-photo').val() : defaultSrc);
+                $(this).hide();
+            }
+        });
+
+        // No spaces in phone, email
+        $('#account-phone, #account-email').on({
+            keydown: function (e) {
+                if (e.which == 32) {
+                    return false;
+                }
+            },
+            change: function () {
+                this.value = this.value.replace(/\s/g, '');
+            }
+        });
+
+        // Form reset
+        $('button[type="reset"]').on('click', function () {
+            // Reset to original values
+            $('#preview-image').attr('src', 'https://demo.schoolpay.co.id/media/images/student/photo-b7c61f0793de3e5ba8231dced52b0996.png');
+            $('#btn-remove-image').show().data('remove', true);
+            $('#account-photo').val('');
+
+            // Reset status badge
+            $('#account-status').prop('checked', true).trigger('change');
+
+            // Hide all feedback messages
+            $('[id$="-feedback"]').hide();
+        });
+
+        // Alert functions
+        function showAlert(message, type) {
+            const alertTypes = {
+                'success': { icon: 'fa-check-circle', color: 'text-success', bg: 'alert-success' },
+                'warning': { icon: 'fa-exclamation-triangle', color: 'text-warning', bg: 'alert-warning' },
+                'danger': { icon: 'fa-times-circle', color: 'text-danger', bg: 'alert-danger' },
+                'info': { icon: 'fa-info-circle', color: 'text-info', bg: 'alert-info' }
+            };
+
+            const alertType = alertTypes[type] || alertTypes['info'];
+
+            $('#alert').removeClass('alert-success alert-warning alert-danger alert-info')
+                .addClass(alertType.bg + ' show')
+                .css('display', 'block');
+            $('#alert-icon').removeClass().addClass('fas ' + alertType.icon + ' fa-2x ' + alertType.color);
+            $('#alert-title').text(type.charAt(0).toUpperCase() + type.slice(1));
+            $('#alert-content').html(message);
+        }
+
+        function hideAlert() {
+            $('#alert').removeClass('show').fadeOut();
+        }
+
+        // Form submission (preview)
+        $('#form').on('submit', function (e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                account_id: $('#account-id').val(),
+                account_name_old: $('#account-name-old').val(),
+                old_photo: $('#old-photo').val(),
+                account_name: $('#account-name').val(),
+                account_fullname: $('#account-fullname').val(),
+                account_phone: $('#account-phone').val(),
+                account_photo: $('#account-photo').val(),
+                account_email: $('#account-email').val(),
+                account_password: $('#account-password').val(),
+                account_status: $('#account-status').is(':checked') ? '1' : '0'
+            };
+
+            console.log('Form Data:', formData);
+
+            // Show success message
+            showAlert('Data akun berhasil diperbarui!', 'success');
+
+            // Scroll to top
+            $('html, body').animate({ scrollTop: 0 }, 'slow');
+        });
+    </script>
+
+</body>
+
+</html>

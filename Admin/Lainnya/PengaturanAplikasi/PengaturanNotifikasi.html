@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Notifikasi :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- BREADCRUMB -->
+    <div class="container-fluid mt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white rounded shadow-sm">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Lainnya</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Aplikasi</a></li>
+                <li class="breadcrumb-item active">Pengaturan Notifikasi</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="container-fluid">
+        <div class="row mb-4 ml-2">
+            <div class="col">
+                <h2 class="font-weight-bold mb-1">
+                    <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
+                </h2>
+                <p class="text-muted mb-0">Kelola pengaturan notifikasi aplikasi</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid mb-5">
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Alert Section -->
+                <div id="alert-box" class="alert alert-dismissible fade" role="alert" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <i id="alert-icon" class="fas fa-info-circle fa-2x mr-3"></i>
+                        <div class="flex-grow-1">
+                            <h6 id="alert-title" class="font-weight-bold mb-1"></h6>
+                            <div id="alert-content"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="close" onclick="hideAlert()">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <!-- Settings Card -->
+                <div class="card border-0 rounded">
+                    <div class="row no-gutters">
+
+                        <!-- Sidebar Menu -->
+                        <div class="col-3 d-none d-md-block bg-light border-right">
+                            <div class="p-4 shadow">
+                                <h6 class="font-weight-bold text-muted mb-3 text-uppercase small">Menu Pengaturan</h6>
+                                <div class="list-group list-group-flush">
+                                    <a href="PengaturanUmumLainnya.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                                    </a>
+
+                                    <a href="PengaturanTampilan.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
+                                    </a>
+
+                                    <a href="PengaturanSistem.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                    </a>
+
+                                    <a href="PengaturanFitur.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
+                                    </a>
+
+                                    <a href="PengaturanPembayaran.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
+                                    </a>
+
+                                    <a href="PengaturanServerAPI.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
+                                    </a>
+
+                                    <a href="PengaturanNotifikasi.html"
+                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
+                                        <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
+                                    </a>
+
+                                    <a href="PengaturanLisensi.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
+                                    </a>
+
+                                    <a href="PencadanganData.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
+                                    </a>
+
+                                    <a href="ModePemeliharaan.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Content -->
+                        <div class="col-12 col-md-9 shadow">
+                            <div class="p-4 bg-white border rounded">
+
+                                <!-- Mobile Menu Dropdown (Only visible on mobile) -->
+                                <div class="d-md-none mb-4">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-block shadow-sm dropdown-toggle"
+                                            type="button" id="mobileMenuDropdown" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-bars mr-2"></i>Menu Pengaturan
+                                        </button>
+                                        <div class="dropdown-menu w-100 shadow" aria-labelledby="mobileMenuDropdown">
+                                            <a class="dropdown-item" href="PengaturanUmumLainnya.html">
+                                                <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanTampilan.html">
+                                                <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanSistem.html">
+                                                <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanFitur.html">
+                                                <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanPembayaran.html">
+                                                <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanServerAPI.html">
+                                                <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
+                                            </a>
+                                            <a class="dropdown-item active font-weight-bold"
+                                                href="PengaturanNotifikasi.html">
+                                                <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
+                                            </a>
+                                            <a class="dropdown-item" href="PengaturanLisensi.html">
+                                                <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
+                                            </a>
+                                            <a class="dropdown-item" href="PencadanganData.html">
+                                                <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
+                                            </a>
+                                            <a class="dropdown-item" href="ModePemeliharaan.html">
+                                                <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form Header -->
+                                <div class="border-bottom pb-3 mb-4">
+                                    <h4 class="font-weight-bold mb-1">Form Pengaturan Notifikasi</h4>
+                                    <p class="text-muted mb-0 small">
+                                        Konfigurasi pengaturan notifikasi sistem pembayaran
+                                    </p>
+                                </div>
+
+                                <form id="form-notification">
+
+                                    <!-- Kirim Notifikasi Bawaan Aplikasi -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold d-block">
+                                            <i class="fas fa-desktop text-primary mr-1"></i>
+                                            Kirim Notifikasi Bawaan Aplikasi
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="notif_default" id="notif-default"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="notif-default">Aktif</label>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Notifikasi akan ditampilkan di dalam aplikasi
+                                        </small>
+                                    </div>
+
+                                    <!-- Kirim Notifikasi WhatsApp -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold d-block">
+                                            <i class="fab fa-whatsapp text-success mr-1"></i>
+                                            Kirim Notifikasi WhatsApp
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="notif_whatsapp" id="notif-whatsapp"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="notif-whatsapp">Aktif</label>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Pastikan server API WhatsApp sudah dikonfigurasi
+                                        </small>
+                                    </div>
+
+                                    <!-- Kirim Notifikasi Email -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold d-block">
+                                            <i class="fas fa-envelope text-info mr-1"></i>
+                                            Kirim Notifikasi Email
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="notif_email" id="notif-email"
+                                                class="custom-control-input">
+                                            <label class="custom-control-label" for="notif-email">Aktif</label>
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-info-circle mr-1"></i>
+                                            Pastikan server Email (SMTP) sudah dikonfigurasi
+                                        </small>
+                                    </div>
+
+                                    <hr class="my-5">
+
+                                    <!-- SECTION: Notifikasi Pembayaran Tunai -->
+                                    <h5 class="font-weight-bold mb-3">
+                                        <i class="fas fa-money-bill-wave text-success mr-2"></i>Notifikasi Pembayaran
+                                        Tunai
+                                    </h5>
+
+                                    <!-- Aktifkan Notifikasi Pembayaran Tunai -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold d-block">
+                                            <i class="fas fa-toggle-on text-primary mr-1"></i>
+                                            Aktifkan Notifikasi Pembayaran Tunai
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="notif_payment_cash" id="notif-payment-cash"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="notif-payment-cash">Aktif</label>
+                                        </div>
+                                        <small id="notif-payment-cash-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Pesan Notifikasi Konfirmasi Pembayaran Tunai -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-comment-alt text-primary mr-1"></i>
+                                            Pesan Notifikasi Konfirmasi Pembayaran Tunai
+                                        </label>
+                                        <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal"
+                                            data-target="#modal-variable-cash">
+                                            <i class="fas fa-code mr-1"></i>Lihat Variabel
+                                        </button>
+                                        <textarea name="notif_payment_cash_message" id="notif-payment-cash-message"
+                                            class="form-control" rows="10">&lt;p&gt;Kepada&lt;br&gt;&lt;strong&gt;[NAMA_SISWA]&lt;/strong&gt;,&lt;/p&gt;
+&lt;p&gt;Pembayaran anda untuk tagihan periode &lt;strong&gt;[PERIODE_TAGIHAN]&lt;/strong&gt;&amp;nbsp;telah berhasil dilakukan, dan berikut adalah detail pembayaran anda :&lt;/p&gt;
+&lt;p&gt;Nomor Induk&lt;br&gt;&lt;strong&gt;[NOMOR_INDUK]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Kelas Sekarang&lt;br&gt;&lt;strong&gt;[NAMA_KELAS]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Rincian Tagihan&lt;br&gt;&lt;strong&gt;[RINCIAN_TAGIHAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Jumlah Tagihan&lt;br&gt;&lt;strong&gt;[NOMINAL_TAGIHAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Total Pembayaran&lt;br&gt;&lt;strong&gt;[NOMINAL_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Waktu Pembayaran&lt;br&gt;&lt;strong&gt;[WAKTU_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Terima kasih.&lt;/p&gt;</textarea>
+                                        <small id="notif-payment-cash-message-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <hr class="my-5">
+
+                                    <!-- SECTION: Notifikasi Pembayaran Online -->
+                                    <h5 class="font-weight-bold mb-3">
+                                        <i class="fas fa-credit-card text-primary mr-2"></i>Notifikasi Pembayaran Online
+                                    </h5>
+
+                                    <!-- Aktifkan Notifikasi Pembayaran Online -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold d-block">
+                                            <i class="fas fa-toggle-on text-primary mr-1"></i>
+                                            Aktifkan Notifikasi Pembayaran Online
+                                        </label>
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" name="notif_payment_online" id="notif-payment-online"
+                                                class="custom-control-input" checked>
+                                            <label class="custom-control-label" for="notif-payment-online">Aktif</label>
+                                        </div>
+                                        <small id="notif-payment-online-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Pesan Notifikasi Pembayaran Online Tagihan Diterbitkan -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-file-invoice text-primary mr-1"></i>
+                                            Pesan Notifikasi Pembayaran Online Tagihan Diterbitkan
+                                        </label>
+                                        <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal"
+                                            data-target="#modal-variable-bill-published">
+                                            <i class="fas fa-code mr-1"></i>Lihat Variabel
+                                        </button>
+                                        <textarea name="notif_payment_online_bill_published_message"
+                                            id="notif-payment-online-bill-published-message" class="form-control"
+                                            rows="10">&lt;p&gt;Kepada&lt;br&gt;&lt;strong&gt;[NAMA_SISWA]&lt;/strong&gt;,&lt;/p&gt;
+&lt;p&gt;Saat ini anda memiliki invoice baru dengan nomor &lt;strong&gt;[NOMOR_INVOICE]&lt;/strong&gt; untuk pembayaran tagihan periode &lt;strong&gt;[PERIODE_TAGIHAN]&lt;/strong&gt; dan dengan detail sebagai berikut :&lt;/p&gt;
+&lt;p&gt;Nomor Induk&lt;br&gt;&lt;strong&gt;[NOMOR_INDUK]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Kelas Sekarang&lt;br&gt;&lt;strong&gt;[NAMA_KELAS]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Rincian Tagihan&lt;br&gt;&lt;strong&gt;[RINCIAN_TAGIHAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Jumlah Tagihan&lt;br&gt;&lt;strong&gt;[NOMINAL_TAGIHAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Total Pembayaran&lt;br&gt;&lt;strong&gt;[NOMINAL_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[INSTRUKSI_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Terima kasih.&lt;/p&gt;</textarea>
+                                        <small id="notif-payment-online-bill-published-message-feedback"
+                                            class="form-text text-danger" style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Pesan Notifikasi Pembayaran Online Lainnya Diterbitkan -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-file-alt text-primary mr-1"></i>
+                                            Pesan Notifikasi Pembayaran Online Lainnya Diterbitkan
+                                        </label>
+                                        <textarea name="notif_payment_online_other_published_message"
+                                            id="notif-payment-online-other-published-message" class="form-control"
+                                            rows="10">&lt;p&gt;Kepada&lt;br&gt;&lt;strong&gt;[NAMA_SISWA]&lt;/strong&gt;,&lt;/p&gt;
+&lt;p&gt;Saat ini anda memiliki invoice baru dengan nomor &lt;strong&gt;[NOMOR_INVOICE]&lt;/strong&gt; dengan detail sebagai berikut :&lt;/p&gt;
+&lt;p&gt;Nomor Induk&lt;br&gt;&lt;strong&gt;[NOMOR_INDUK]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Kelas Sekarang&lt;br&gt;&lt;strong&gt;[NAMA_KELAS]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Rincian Pembayaran&lt;br&gt;&lt;strong&gt;[RINCIAN_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Total Pembayaran&lt;br&gt;&lt;strong&gt;[NOMINAL_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;[INSTRUKSI_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Terima kasih.&lt;/p&gt;</textarea>
+                                        <small id="notif-payment-online-other-published-message-feedback"
+                                            class="form-text text-danger" style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Pesan Notifikasi Pembayaran Online Terkonfirmasi -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-check-circle text-success mr-1"></i>
+                                            Pesan Notifikasi Pembayaran Online Terkonfirmasi
+                                        </label>
+                                        <button type="button" class="btn btn-sm btn-info mb-2" data-toggle="modal"
+                                            data-target="#modal-variable-confirmed">
+                                            <i class="fas fa-code mr-1"></i>Lihat Variabel
+                                        </button>
+                                        <textarea name="notif_payment_online_confirmed_message"
+                                            id="notif-payment-online-confirmed-message" class="form-control" rows="10">&lt;p&gt;Kepada&lt;br&gt;&lt;strong&gt;[NAMA_SISWA]&lt;/strong&gt;,&lt;/p&gt;
+&lt;p&gt;Saat ini pembayaran anda telah terkonfirmasi dan telah berstatus lunas, berikut adalah detail pembayaran anda :&lt;/p&gt;
+&lt;p&gt;Nomor Induk&lt;br&gt;&lt;strong&gt;[NOMOR_INDUK]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Kelas Sekarang&lt;br&gt;&lt;strong&gt;[NAMA_KELAS]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Nomor Invoice&lt;br&gt;&lt;strong&gt;[NOMOR_INVOICE]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Total Pembayaran&lt;br&gt;&lt;strong&gt;[NOMINAL_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Metode Pembayaran&lt;br&gt;&lt;strong&gt;[METODE_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Waktu Pembayaran&lt;br&gt;&lt;strong&gt;[WAKTU_PEMBAYARAN]&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Terima kasih.&lt;/p&gt;</textarea>
+                                        <small id="notif-payment-online-confirmed-message-feedback"
+                                            class="form-text text-danger" style="display: none;"></small>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Konfirmasi Kata Sandi -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-lock text-primary mr-1"></i>
+                                            Konfirmasi Kata Sandi
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fas fa-key text-warning"></i>
+                                                </span>
+                                            </div>
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                maxlength="16" autocomplete="off"
+                                                placeholder="Masukkan kata sandi untuk konfirmasi">
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-shield-alt mr-1"></i>
+                                            Diperlukan untuk menyimpan perubahan
+                                        </small>
+                                        <small id="password-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="form-group mt-4">
+                                        <div class="border rounded py-3 px-3 bg-white shadow-sm"
+                                            style="width: 100%; box-shadow: 0 5px 25px rgba(0,0,0,0.2);">
+
+                                            <div class="text-center">
+                                                <button type="submit" id="btn-submit"
+                                                    class="btn btn-primary btn-block py-2 font-weight-semibold shadow-sm">
+                                                    <span id="btn-icon"
+                                                        class="spinner-border spinner-border-sm mr-2 d-none"></span>
+                                                    <i id="btn-svg" class="fas fa-save mr-2"></i>
+                                                    <span id="btn-text" class="font-weight-bold">SIMPAN
+                                                        PENGATURAN</span>
+                                                </button>
+                                            </div>
+
+                                            <small class="form-text text-center text-muted mt-3">
+                                                <i class="fas fa-info-circle mr-1 text-secondary"></i>
+                                                Pastikan semua data sudah benar sebelum menyimpan
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Variable Pembayaran Tunai -->
+    <div class="modal fade" id="modal-variable-cash" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">
+                        <i class="fas fa-info-circle text-info mr-2"></i>Variabel Pesan
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Fungsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_SISWA]</code></td>
+                                    <td>Mendapatkan detail nama lengkap siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMOR_INDUK]</code></td>
+                                    <td>Mendapatkan detail nomor induk siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_KELAS]</code></td>
+                                    <td>Mendapatkan detail nama kelas sekarang</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[PERIODE_TAGIHAN]</code
+                                        </tr>
+                            <tr>
+                                <td><code class="text-danger">[RINCIAN_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail rincian kategori & biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail nominal biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail nominal pembayaran</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[WAKTU_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail waktu pembayaran</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Variable Tagihan Diterbitkan -->
+    <div class="modal fade" id="modal-variable-bill-published" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">
+                        <i class="fas fa-info-circle text-info mr-2"></i>Variabel Pesan
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Fungsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_SISWA]</code></td>
+                                    <td>Mendapatkan detail nama lengkap siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMOR_INDUK]</code></td>
+                                    <td>Mendapatkan detail nomor induk siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_KELAS]</code></td>
+                                    <td>Mendapatkan detail nama kelas sekarang</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMOR_INVOICE]</code></td>
+                                    <td>Mendapatkan detail nomor invoice pembayaran online</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[PERIODE_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail periode tagihan (bulan & tahun)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[RINCIAN_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail rincian kategori & biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail nominal biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[RINCIAN_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail rincian pembayaran</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail nominal pembayaran</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[INSTRUKSI_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail instruksi melakukan pembayaran</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Variable Pembayaran Terkonfirmasi -->
+    <div class="modal fade" id="modal-variable-confirmed" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold">
+                        <i class="fas fa-info-circle text-info mr-2"></i>Variabel Pesan
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Fungsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_SISWA]</code></td>
+                                    <td>Mendapatkan detail nama lengkap siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMOR_INDUK]</code></td>
+                                    <td>Mendapatkan detail nomor induk siswa</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NAMA_KELAS]</code></td>
+                                    <td>Mendapatkan detail nama kelas sekarang</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMOR_INVOICE]</code></td>
+                                    <td>Mendapatkan detail nomor invoice</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[PERIODE_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail periode tagihan (bulan & tahun)</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[RINCIAN_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail rincian kategori & biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_TAGIHAN]</code></td>
+                                    <td>Mendapatkan detail nominal biaya tagihan</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[NOMINAL_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail nominal pembayaran</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[METODE_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail metode atau channel pembayaran</td>
+                                </tr>
+                                <tr>
+                                    <td><code class="text-danger">[WAKTU_PEMBAYARAN]</code></td>
+                                    <td>Mendapatkan detail waktu pembayaran</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        <i class="fas fa-times mr-1"></i>Tutup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Alert Dialog -->
+    <div class="modal fade" id="modal-alert" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center pt-4 pb-2">
+                    <i class="fas fa-info-circle text-info" style="font-size: 3rem;"></i>
+                    <h5 id="modal-alert-title" class="mt-3 font-weight-bold">Informasi</h5>
+                    <p id="modal-alert-message" class="text-muted mb-4"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">
+                        <i class="fas fa-check mr-1"></i>Mengerti
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        fetch("../../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+
+            // ============================
+            // Fungsi Menampilkan Alert Box
+            // ============================
+            function showAlert(type = "info", title = "Informasi", message = "") {
+                const alertBox = $("#alert-box");
+                const icon = $("#alert-icon");
+
+                let iconClass = "fa-info-circle text-info";
+                let alertClass = "alert-info";
+
+                if (type === "success") {
+                    iconClass = "fa-check-circle text-success";
+                    alertClass = "alert-success";
+                } else if (type === "error") {
+                    iconClass = "fa-times-circle text-danger";
+                    alertClass = "alert-danger";
+                } else if (type === "warning") {
+                    iconClass = "fa-exclamation-circle text-warning";
+                    alertClass = "alert-warning";
+                }
+
+                icon.removeClass().addClass("fas fa-2x mr-3 " + iconClass);
+                alertBox.removeClass().addClass("alert alert-dismissible fade show " + alertClass);
+                $("#alert-title").text(title);
+                $("#alert-content").html(message);
+                alertBox.show();
+            }
+
+            function hideAlert() {
+                $("#alert-box").hide().removeClass("show");
+            }
+
+            window.hideAlert = hideAlert;
+
+            // ============================
+            // Validasi Minimal
+            // ============================
+            function validateForm(data) {
+                let valid = true;
+
+                $("#password-feedback, #notif-payment-cash-message-feedback").hide();
+
+                if (!data.password || data.password.length < 4) {
+                    $("#password-feedback").text("Kata sandi wajib diisi & minimal 4 karakter.").show();
+                    valid = false;
+                }
+
+                if (data.notif_payment_cash && data.notif_payment_cash_message.trim() === "") {
+                    $("#notif-payment-cash-message-feedback").text("Pesan notifikasi pembayaran tunai wajib diisi!").show();
+                    valid = false;
+                }
+
+                return valid;
+            }
+
+            // ============================
+            // Fungsi Loading Tombol Simpan
+            // ============================
+            function btnLoading(state = true) {
+                if (state) {
+                    $("#btn-icon").removeClass("d-none");
+                    $("#btn-svg").addClass("d-none");
+                    $("#btn-text").text("Menyimpan...");
+                    $("#btn-submit").attr("disabled", true);
+                } else {
+                    $("#btn-icon").addClass("d-none");
+                    $("#btn-svg").removeClass("d-none");
+                    $("#btn-text").text("SIMPAN PENGATURAN");
+                    $("#btn-submit").attr("disabled", false);
+                }
+            }
+
+            // ============================
+            // SUBMIT FORM
+            // ============================
+            $("#form-notification").on("submit", function (e) {
+                e.preventDefault();
+
+                const data = {
+                    notif_default: $("#notif-default").is(":checked"),
+                    notif_whatsapp: $("#notif-whatsapp").is(":checked"),
+                    notif_email: $("#notif-email").is(":checked"),
+
+                    notif_payment_cash: $("#notif-payment-cash").is(":checked"),
+                    notif_payment_cash_message: $("#notif-payment-cash-message").val(),
+
+                    notif_payment_online: $("#notif-payment-online").is(":checked"),
+                    notif_payment_online_bill_published_message: $("#notif-payment-online-bill-published-message").val(),
+                    notif_payment_online_other_published_message: $("#notif-payment-online-other-published-message").val(),
+                    notif_payment_online_confirmed_message: $("#notif-payment-online-confirmed-message").val(),
+
+                    password: $("#password").val()
+                };
+
+                // Validate
+                if (!validateForm(data)) {
+                    showAlert("error", "Kesalahan", "Periksa kembali data yang wajib diisi.");
+                    return;
+                }
+
+                // Simulasi proses simpan
+                btnLoading(true);
+
+                setTimeout(() => {
+                    btnLoading(false);
+                    $("#modal-alert-title").text("Pengaturan Tersimpan");
+                    $("#modal-alert-message").html("Semua pengaturan notifikasi berhasil disimpan.");
+
+                    $("#modal-alert").modal("show");
+                }, 1200);
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

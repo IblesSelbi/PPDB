@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Umum Aplikasi :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Croppie CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- BREADCRUMB -->
+    <div class="container-fluid mt-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-white rounded shadow-sm">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Lainnya</a></li>
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Pengaturan Aplikasi</a></li>
+                <li class="breadcrumb-item active">Pengaturan Umum</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="container-fluid">
+        <div class="row mb-4 ml-2">
+            <div class="col">
+                <h2 class="font-weight-bold mb-1">
+                    <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                </h2>
+                <p class="text-muted mb-0">Kelola pengaturan umum aplikasi</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid mb-5">
+        <div class="row">
+            <div class="col-12">
+
+                <!-- Alert Section -->
+                <div id="alert-box" class="alert alert-dismissible fade" role="alert" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <i id="alert-icon" class="fas fa-info-circle fa-2x mr-3"></i>
+                        <div class="flex-grow-1">
+                            <h6 id="alert-title" class="font-weight-bold mb-1"></h6>
+                            <div id="alert-content"></div>
+                        </div>
+                    </div>
+                    <button type="button" class="close" onclick="hideAlert()">
+                        <span>&times;</span>
+                    </button>
+                </div>
+
+                <!-- Settings Card -->
+                <div class="card border-0 rounded">
+                    <div class="row no-gutters">
+
+                        <!-- Sidebar Menu -->
+                        <div class="col-3 d-none d-md-block bg-light border-right">
+                            <div class="p-4 shadow">
+                                <h6 class="font-weight-bold text-muted mb-3 text-uppercase small">Menu Pengaturan</h6>
+                                <div class="list-group list-group-flush">
+                                    <a href="PengaturanUmum.html"
+                                        class="list-group-item list-group-item-action border-top-0 border-left-0 border-right-0 rounded mb-2 shadow-sm border-bottom border-primary">
+                                        <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                                    </a>
+
+                                    <a href="PengaturanTampilan.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
+                                    </a>
+
+                                    <a href="PengaturanSistem.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                    </a>
+
+                                    <a href="PengaturanFitur.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
+                                    </a>
+
+                                    <a href="PengaturanPembayaran.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
+                                    </a>
+
+                                    <a href="PengaturanServerAPI.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
+                                    </a>
+
+                                    <a href="PengaturanNotifikasi.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
+                                    </a>
+
+                                    <a href="PengaturanLisensi.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
+                                    </a>
+
+                                    <a href="PencadanganData.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
+                                    </a>
+
+                                    <a href="ModePemeliharaan.html"
+                                        class="list-group-item list-group-item-action border-0 rounded mb-2 shadow-sm">
+                                        <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Form Content -->
+                        <div class="col-12 col-md-9 shadow">
+                            <div class="p-4 bg-white border rounded">
+
+                                <!-- Mobile Menu Dropdown (Only visible on mobile) -->
+                                <div class="d-md-none mb-4">
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary btn-block shadow-sm dropdown-toggle"
+                                            type="button" id="mobileMenuDropdown" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-bars mr-2"></i>Menu Pengaturan
+                                        </button>
+                                        <div class="dropdown-menu w-100 shadow" aria-labelledby="mobileMenuDropdown">
+                                            <a class="dropdown-item active font-weight-bold" href="#">
+                                                <i class="fas fa-cog text-primary mr-2"></i>Pengaturan Umum
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-palette text-success mr-2"></i>Pengaturan Tampilan
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-server text-secondary mr-2"></i>Pengaturan Sistem
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-box text-warning mr-2"></i>Pengaturan Fitur
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-shield-alt text-success mr-2"></i>Pengaturan Pembayaran
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-plug text-info mr-2"></i>Pengaturan Server API
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-bell text-primary mr-2"></i>Pengaturan Notifikasi
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-certificate text-warning mr-2"></i>Pengaturan Lisensi
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-database text-danger mr-2"></i>Pencadangan Data
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <i class="fas fa-wrench text-secondary mr-2"></i>Mode Pemeliharaan
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Form Header -->
+                                <div class="border-bottom pb-3 mb-4">
+                                    <h4 class="font-weight-bold mb-1">Form Pengaturan Umum</h4>
+                                    <p class="text-muted mb-0 small">
+                                        Isi formulir di bawah ini dengan data yang benar dan lengkap
+                                    </p>
+                                </div>
+
+                                <form id="form-settings">
+
+                                    <!-- Nama Profil -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-tag text-primary mr-1"></i>
+                                            Nama Profil
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" name="identity_name" id="identity-name" class="form-control"
+                                            value="Akeno PPDB System" autocomplete="off">
+                                        <small id="identity-name-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Jenis Profil -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-building text-primary mr-1"></i>
+                                            Jenis Profil
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <select name="identity_type" id="identity-type" class="custom-select">
+                                            <option value="Sekolah" selected>Sekolah</option>
+                                            <option value="Pondok Pesantren">Pondok Pesantren</option>
+                                            <option value="Lembaga Kursus">Lembaga Kursus</option>
+                                            <option value="Universitas">Universitas</option>
+                                            <option value="Lainnya">Lainnya</option>
+                                        </select>
+                                        <small id="identity-type-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Logo -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-image text-primary mr-1"></i>
+                                            Logo
+                                        </label>
+                                        <input type="hidden" name="identity_logo" id="identity-logo">
+                                        <div class="mb-2">
+                                            <img src="https://demo.schoolpay.co.id/media/images/logo-school-payment-app-13804.png"
+                                                id="preview-image"
+                                                style="width: 150px; height: 150px; padding: 4px; border: 1px solid #eee"
+                                                draggable="false">
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <button type="button" id="btn-remove-image"
+                                                    class="btn btn-danger btn-sm" data-remove="true">
+                                                    <i class="fas fa-trash mr-1"></i>Hapus
+                                                </button>
+                                            </div>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="load-photo"
+                                                    accept=".png, .jpg, .jpeg, .webp">
+                                                <label class="custom-file-label" for="load-photo">Pilih file...</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Alamat -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-map-marker-alt text-primary mr-1"></i>
+                                            Alamat
+                                        </label>
+                                        <input type="text" name="identity_address" id="identity-address"
+                                            class="form-control" value="Kota Bandung, Jawa Barat, Indonesia"
+                                            autocomplete="off">
+                                        <small id="identity-address-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Nomor Telepon -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-phone text-primary mr-1"></i>
+                                            Nomor Telepon
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fas fa-phone"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" name="identity_phone" id="identity-phone"
+                                                class="form-control" value="085157991825" autocomplete="off">
+                                        </div>
+                                        <small id="identity-phone-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Alamat Email -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-envelope text-primary mr-1"></i>
+                                            Alamat Email
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fas fa-envelope"></i>
+                                                </span>
+                                            </div>
+                                            <input type="email" name="identity_email" id="identity-email"
+                                                class="form-control" value="info@aplikasi-spa.com" autocomplete="off">
+                                        </div>
+                                        <small id="identity-email-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- URL Facebook -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fab fa-facebook text-primary mr-1"></i>
+                                            URL Sosial Media Facebook
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fab fa-facebook"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" name="identity_facebook" id="identity-facebook"
+                                                class="form-control" value="" autocomplete="off">
+                                        </div>
+                                        <small id="identity-facebook-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- URL Instagram -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fab fa-instagram text-primary mr-1"></i>
+                                            URL Sosial Media Instagram
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fab fa-instagram"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" name="identity_instagram" id="identity-instagram"
+                                                class="form-control" value="https://www.instagram.com/schoolpay.id/"
+                                                autocomplete="off">
+                                        </div>
+                                        <small id="identity-instagram-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- URL YouTube -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fab fa-youtube text-primary mr-1"></i>
+                                            URL Saluran YouTube
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fab fa-youtube"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" name="identity_youtube" id="identity-youtube"
+                                                class="form-control" value="" autocomplete="off">
+                                        </div>
+                                        <small id="identity-youtube-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <hr class="my-4">
+
+                                    <!-- Konfirmasi Kata Sandi -->
+                                    <div class="form-group mb-4">
+                                        <label class="font-weight-bold">
+                                            <i class="fas fa-lock text-primary mr-1"></i>
+                                            Konfirmasi Kata Sandi
+                                            <span class="text-danger">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text bg-light">
+                                                    <i class="fas fa-key text-warning"></i>
+                                                </span>
+                                            </div>
+                                            <input type="password" name="password" id="password" class="form-control"
+                                                maxlength="16" autocomplete="off"
+                                                placeholder="Masukkan kata sandi untuk konfirmasi">
+                                        </div>
+                                        <small class="form-text text-muted">
+                                            <i class="fas fa-shield-alt mr-1"></i>
+                                            Diperlukan untuk menyimpan perubahan
+                                        </small>
+                                        <small id="password-feedback" class="form-text text-danger"
+                                            style="display: none;"></small>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="form-group mt-4">
+                                        <div class="border rounded py-3 px-3 bg-white shadow-sm"
+                                            style="width: 100%; box-shadow: 0 5px 25px rgba(0,0,0,0.2);">
+
+                                            <div class="text-center">
+                                                <button type="submit" id="btn-submit"
+                                                    class="btn btn-primary btn-block py-2 font-weight-semibold shadow-sm">
+                                                    <span id="btn-icon"
+                                                        class="spinner-border spinner-border-sm mr-2 d-none"></span>
+                                                    <i id="btn-svg" class="fas fa-save mr-2"></i>
+                                                    <span id="btn-text" class="font-weight-bold">SIMPAN
+                                                        PENGATURAN</span>
+                                                </button>
+                                            </div>
+
+                                            <small class="form-text text-center text-muted mt-3">
+                                                <i class="fas fa-info-circle mr-1 text-secondary"></i>
+                                                Pastikan semua data sudah benar sebelum menyimpan
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Croppie Modal -->
+    <div id="croppie-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body text-center pb-0">
+                    <div id="load-image-preview"></div>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-grid gap-2 col-4 mx-auto">
+                        <button type="button" id="btn-image-abort" class="btn btn-secondary w-100" data-dismiss="modal">
+                            Batalkan
+                        </button>
+                    </div>
+                    <div class="d-grid gap-2 col-4 mx-auto">
+                        <button type="button" id="btn-image-crop" class="btn btn-primary w-100">
+                            Pilih
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+
+    <script>
+        // Dropdown menu handler
+        fetch("../../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        $(document).ready(function () {
+
+            // Default image source
+            const defaultSrc = 'https://demo.schoolpay.co.id/media/images/logo.png';
+
+            // Configuration
+            const myConfig = {
+                url: 'https://demo.schoolpay.co.id/spa/admin/settings/general/save',
+                field: {
+                    'identity-name': 'Nama Profil',
+                    'password': 'Konfirmasi kata sandi'
+                },
+                emptyPassword: true,
+                loadingText: ['Simpan', 'Menyimpan']
+            };
+
+            // Show alert function
+            function showAlert(message, type = 'success') {
+                const alertBox = $('#alert-box');
+                const alertIcon = $('#alert-icon');
+                const alertTitle = $('#alert-title');
+                const alertContent = $('#alert-content');
+
+                alertBox.removeClass('alert-success alert-warning alert-danger alert-info');
+
+                if (type === 'success') {
+                    alertBox.addClass('alert-success show');
+                    alertIcon.removeClass().addClass('fas fa-check-circle fa-2x text-success mr-3');
+                    alertTitle.text('Berhasil!');
+                } else if (type === 'warning') {
+                    alertBox.addClass('alert-warning show');
+                    alertIcon.removeClass().addClass('fas fa-exclamation-triangle fa-2x text-warning mr-3');
+                    alertTitle.text('Perhatian!');
+                } else if (type === 'danger') {
+                    alertBox.addClass('alert-danger show');
+                    alertIcon.removeClass().addClass('fas fa-times-circle fa-2x text-danger mr-3');
+                    alertTitle.text('Error!');
+                }
+
+                alertContent.text(message);
+                alertBox.show();
+
+                // Scroll to top
+                $('html, body').animate({ scrollTop: 0 }, 300);
+
+                // Auto hide after 5 seconds
+                setTimeout(function () {
+                    alertBox.removeClass('show').fadeOut();
+                }, 5000);
+            }
+
+            // Hide alert function
+            window.hideAlert = function () {
+                $('#alert-box').removeClass('show').fadeOut();
+            };
+
+            // Validate form function
+            function validateForm(fieldId, fieldName) {
+                const field = $('#' + fieldId);
+
+                if (!field.val() || field.val() === '') {
+                    field.addClass('is-invalid border-danger');
+                    $('#' + fieldId + '-feedback').show().text(fieldName + ' wajib diisi');
+                    return false;
+                } else {
+                    field.removeClass('is-invalid border-danger');
+                    $('#' + fieldId + '-feedback').hide();
+                    return true;
+                }
+            }
+
+            // Toggle button loading state
+            function toggleButtonLoading(isLoading) {
+                const btn = $('#btn-submit');
+                const icon = $('#btn-icon');
+                const svg = $('#btn-svg');
+                const text = $('#btn-text');
+
+                if (isLoading) {
+                    btn.prop('disabled', true);
+                    icon.removeClass('d-none');
+                    svg.addClass('d-none');
+                    text.text(myConfig.loadingText[1].toUpperCase() + '...');
+                } else {
+                    btn.prop('disabled', false);
+                    icon.addClass('d-none');
+                    svg.removeClass('d-none');
+                    text.text(myConfig.loadingText[0].toUpperCase() + ' PENGATURAN');
+                }
+            }
+
+            // Croppie instance
+            let croppie;
+
+            // Load photo handler
+            $('#load-photo').on('change', function (e) {
+                $('#croppie-modal').modal('show');
+
+                let preview = document.getElementById('load-image-preview');
+
+                let boundaryWidth = $('.modal-body').width(),
+                    boundaryHeight = boundaryWidth,
+                    viewportWidth = boundaryWidth - (boundaryWidth / 100 * 25),
+                    viewportHeight = boundaryHeight - (boundaryHeight / 100 * 25);
+
+                croppie = new Croppie(preview, {
+                    viewport: {
+                        width: viewportWidth,
+                        height: viewportHeight
+                    },
+                    boundary: {
+                        height: boundaryHeight
+                    },
+                    enableOrientation: true,
+                });
+
+                getImage(e.target, croppie);
+            });
+
+            // Crop image button
+            $('#btn-image-crop').click(function (e) {
+                croppie.result({
+                    type: 'base64',
+                    size: 'viewport',
+                }).then(function (result) {
+                    $('#identity-logo').val(result);
+                    $('#preview-image').attr('src', result);
+                    $('#btn-remove-image').show();
+                    $('#croppie-modal').modal('hide');
+                    $('#load-image-preview').empty();
+                });
+
+                $('#load-photo').val('');
+                croppie.destroy();
+            });
+
+            // Abort image button
+            $('#btn-image-abort').click(function () {
+                $('#load-photo').val('');
+                croppie.destroy();
+            });
+
+            // Remove image button
+            $('#btn-remove-image').click(function () {
+                if ($('#btn-remove-image').data('remove')) {
+                    $('#btn-remove-image').hide();
+                    $('#identity-logo').val('reset');
+                    $('#preview-image').attr('src', defaultSrc);
+                    $('#btn-remove-image').data('remove', false);
+                } else {
+                    $('#btn-remove-image').hide();
+                    $('#identity-logo').val('');
+                    $('#preview-image').attr('src', defaultSrc);
+                }
+            });
+
+            // Get image function
+            function getImage(input, croppieInstance) {
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        croppieInstance.bind({
+                            url: e.target.result,
+                        }).then(function () {
+                            console.log('Croppie bind complete');
+                        });
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            // Form submit handler
+            $('#form-settings').on('submit', function (e) {
+                e.preventDefault();
+
+                let errors = [];
+
+                // Reset all feedback
+                $('.is-invalid').removeClass('is-invalid border-danger');
+                $('.text-danger').hide();
+
+                // Validate all required fields
+                $.each(myConfig.field, function (fieldId, fieldName) {
+                    errors.push(validateForm(fieldId, fieldName));
+                });
+
+                // Check if there are errors
+                if ($.inArray(false, errors) !== -1) {
+                    showAlert('Mohon lengkapi form yang diperlukan', 'warning');
+                    return false;
+                }
+
+                // Show loading state
+                toggleButtonLoading(true);
+
+                // Prepare form data
+                const formData = {
+                    identity_name: $('#identity-name').val(),
+                    identity_type: $('#identity-type').val(),
+                    identity_logo: $('#identity-logo').val(),
+                    identity_address: $('#identity-address').val(),
+                    identity_phone: $('#identity-phone').val(),
+                    identity_email: $('#identity-email').val(),
+                    identity_facebook: $('#identity-facebook').val(),
+                    identity_instagram: $('#identity-instagram').val(),
+                    identity_youtube: $('#identity-youtube').val(),
+                    password: $('#password').val()
+                };
+
+                // Send AJAX request
+                $.ajax({
+                    url: myConfig.url,
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: function (response) {
+                        toggleButtonLoading(false);
+
+                        if (response.status === 'success') {
+                            showAlert(response.message || 'Pengaturan berhasil disimpan', 'success');
+                            $('#password').val(''); // Clear password field
+                        } else {
+                            showAlert(response.message || 'Terjadi kesalahan saat menyimpan', 'danger');
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        toggleButtonLoading(false);
+
+                        let errorMessage = 'Terjadi kesalahan pada server';
+
+                        if (xhr.responseJSON && xhr.responseJSON.message) {
+                            errorMessage = xhr.responseJSON.message;
+                        } else if (xhr.status === 401) {
+                            errorMessage = 'Kata sandi salah atau sesi telah berakhir';
+                        } else if (xhr.status === 422) {
+                            errorMessage = 'Data yang dimasukkan tidak valid';
+                        }
+
+                        showAlert(errorMessage, 'danger');
+                    }
+                });
+            });
+
+            // Clear validation on input
+            $('#password').on('input', function () {
+                if ($(this).val()) {
+                    $(this).removeClass('is-invalid border-danger');
+                    $('#password-feedback').hide();
+                }
+            });
+
+            $('#identity-name').on('input', function () {
+                if ($(this).val()) {
+                    $(this).removeClass('is-invalid border-danger');
+                    $('#identity-name-feedback').hide();
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

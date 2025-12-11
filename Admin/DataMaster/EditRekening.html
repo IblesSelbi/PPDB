@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Edit Rekening Pembayaran :: Akeno PPDB System</title>
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <div id="navbar"></div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container-fluid py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-3">
+            <ol class="breadcrumb bg-white shadow-sm rounded">
+                <li class="breadcrumb-item"><a href="#"
+                        class="text-decoration-none text-primary font-weight-medium">Data Master</a></li>
+                <li class="breadcrumb-item"><a href="#"
+                        class="text-decoration-none text-primary font-weight-medium">Data Rekening</a></li>
+                <li class="breadcrumb-item active text-decoration-none font-weight-medium">Edit Rekening</li>
+            </ol>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="bg-white shadow-sm rounded p-4 mb-4 border-left border-primary"
+            style="border-left-width: 4px !important;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <div class="mb-3 mb-md-0">
+                    <h2 class="font-weight-bold text-primary mb-2">Edit Rekening</h2>
+                    <p class="text-muted mb-0"><i class="fas fa-info-circle mr-1 text-info"></i>Formulir perubahan data
+                        rekening pembayaran</p>
+                </div>
+                <a href="DataRekening.html" class="btn btn-outline-primary font-weight-bold">
+                    <i class="fas fa-arrow-left mr-2"></i>Kembali
+                </a>
+            </div>
+        </div>
+
+        <!-- Alert -->
+        <div id="alert" class="alert alert-dismissible fade border-0 shadow-sm" role="alert" style="display: none;">
+            <div class="d-flex align-items-center">
+                <div class="mr-3">
+                    <i id="alert-icon" class="fas fa-info-circle fa-2x"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 id="alert-title" class="alert-heading font-weight-bold mb-1"></h6>
+                    <div id="alert-content" class="mb-0"></div>
+                </div>
+            </div>
+            <button type="button" class="close" onclick="hideAlert()">
+                <span>&times;</span>
+            </button>
+        </div>
+
+        <form id="form" action="javascript:void(0)">
+            <input type="hidden" name="bank_id" id="bank-id" value="VlpCSmdZYUsybFR4b0ZPQTJid0R2Zz09">
+            <input type="hidden" name="old_bank_logo" id="old-bank-logo"
+                value="bank/bca-fafe1c743905d94927255a264be3e034.webp">
+
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-header bg-gradient-primary text-black">
+                    <h5 class="mb-0 font-weight-bold">
+                        <i class="fas fa-university mr-2 text-primary"></i>DATA REKENING PEMBAYARAN
+                    </h5>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="row">
+
+                        <!-- Pilihan Unit -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Pilihan Unit <span
+                                    class="text-danger">*</span></label>
+                            <select name="bank_unit" id="bank-unit" class="form-control border-primary">
+                                <option value="">-- Pilih Unit --</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="ALL" selected>SEMUA</option>
+                            </select>
+                            <small id="bank-unit-feedback" class="text-danger font-weight-medium"
+                                style="display:none"></small>
+                        </div>
+
+                        <!-- Peruntukan Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Peruntukan Rekening <span
+                                    class="text-danger">*</span></label>
+                            <select name="used_for" id="used-for" class="form-control border-primary">
+                                <option value="">-- Pilih Peruntukan --</option>
+                                <option value="ALL" selected>Semua Pembayaran</option>
+                                <option value="PB">Pembayaran Tagihan</option>
+                                <option value="PS">Pembayaran Tabungan</option>
+                                <option value="PA">Pembayaran PPDB</option>
+                                <option value="PD">Pembayaran Donasi</option>
+                            </select>
+                            <small id="used-for-feedback" class="text-danger font-weight-medium"
+                                style="display:none"></small>
+                        </div>
+
+                        <!-- Nama Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Rekening <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="bank_name" id="bank-name" class="form-control border-primary"
+                                maxlength="32" autocomplete="off" placeholder="Contoh: Bank BCA" value="Bank BCA">
+                            <small id="bank-name-feedback" class="text-danger font-weight-medium"
+                                style="display:none"></small>
+                        </div>
+
+                        <!-- Nama Pemilik Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nama Pemilik Rekening <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="bank_owner" id="bank-owner" class="form-control border-primary"
+                                maxlength="64" autocomplete="off" placeholder="Nama sesuai rekening"
+                                value="Akeno PPDB System">
+                            <small id="bank-owner-feedback" class="text-danger font-weight-medium"
+                                style="display:none"></small>
+                        </div>
+
+                        <!-- Nomor Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Nomor Rekening <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" name="bank_number" id="bank-number" class="form-control border-primary"
+                                autocomplete="off" placeholder="Contoh: 1234567890" value="01412390">
+                            <small id="bank-number-feedback" class="text-danger font-weight-medium"
+                                style="display:none"></small>
+                        </div>
+
+                        <!-- Kode Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Kode Rekening</label>
+                            <input type="text" name="bank_code" id="bank-code" class="form-control border-primary"
+                                maxlength="6" autocomplete="off" placeholder="Contoh: BCA001" value="014">
+                            <small class="form-text text-muted">Kode unik untuk identifikasi rekening (opsional)</small>
+                        </div>
+
+                        <!-- Gambar Rekening -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Logo Bank</label>
+                            <input type="hidden" name="bank_logo" id="bank-logo-hidden">
+
+                            <div class="mb-3">
+                                <img src="https://demo.schoolpay.co.id/media/images/bank/bca-fafe1c743905d94927255a264be3e034.webp"
+                                    id="preview-logo" class="rounded border border-primary"
+                                    style="width:150px;height:auto;object-fit:cover" draggable="false">
+                            </div>
+
+                            <button type="button" id="btn-remove-logo" class="btn btn-outline-danger btn-sm mb-2">
+                                <i class="fas fa-trash mr-1"></i>Hapus Logo
+                            </button>
+
+                            <div class="custom-file">
+                                <input type="file" name="bank_logo" class="custom-file-input" id="load-logo"
+                                    accept=".png,.jpg,.jpeg,.webp">
+                                <label class="custom-file-label" for="load-logo">Pilih Logo Baru...</label>
+                            </div>
+
+                            <small class="form-text text-muted">Format: PNG, JPG, JPEG, WEBP – Max 2MB</small>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-4 mb-4">
+                            <label class="font-weight-bold text-dark mb-2">Status Rekening</label>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" name="bank_status" id="bank-status" class="custom-control-input"
+                                    checked>
+                                <label class="custom-control-label font-weight-medium" for="bank-status">
+                                    <span id="status-badge" class="badge px-3 py-2"
+                                        style="background:#dfffe8;color:#1a7f37;border-radius:20px;font-weight:600;">
+                                        <i class="fas fa-check mr-1"></i>Aktif
+                                    </span>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Aktifkan untuk menampilkan rekening</small>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Submit -->
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="d-grid">
+                                <button type="submit" id="btn-submit"
+                                    class="btn btn-primary btn-block font-weight-bold shadow-sm d-flex align-items-center justify-content-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="btn-svg" class="mr-2" width="22"
+                                        height="22" viewBox="0 0 24 24" stroke-width="2" fill="none"
+                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="9"></circle>
+                                        <path d="M9 12l2 2l4-4"></path>
+                                    </svg>
+                                    <span id="btn-spinner" class="spinner-border spinner-border-sm mr-2"
+                                        style="display: none;"></span>
+                                    <span id="btn-text">Simpan Perubahan</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white py-3 mt-5 border-top">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0 text-muted">Powered By Akeno PPDB System &copy; 2022-2025</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 4 dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        fetch("../../Navbar/navbar.html")
+            .then(res => res.text())
+            .then(html => {
+                const navbar = document.getElementById("navbar");
+                navbar.innerHTML = html;
+
+                // Menjalankan ulang semua script yang ada di navbar.html
+                navbar.querySelectorAll("script").forEach(oldScript => {
+                    const newScript = document.createElement("script");
+                    if (oldScript.src) {
+                        newScript.src = oldScript.src;
+                    } else {
+                        newScript.innerHTML = oldScript.innerHTML;
+                    }
+                    document.body.appendChild(newScript);
+                });
+
+                // PANGGIL FUNGSI ACTIVE STATE SETELAH NAVBAR LOADED
+                // Tunggu 200ms untuk memastikan semua script navbar selesai
+                setTimeout(function () {
+                    setActiveNavbar();
+                }, 200);
+            });
+
+        // JavaScript code akan ditambahkan di sini
+        console.log('EditRekening.html loaded');
+
+        // Update custom file input label
+        $('#load-logo').on('change', function () {
+            var fileName = $(this).val().split('\\').pop();
+            $(this).next('.custom-file-label').html(fileName);
+        });
+
+        // Update status badge on toggle
+        $('#bank-status').on('change', function () {
+            const statusBadge = $('#status-badge');
+            if ($(this).is(':checked')) {
+                statusBadge.html('<i class="fas fa-check mr-1"></i>Aktif');
+                statusBadge.css({
+                    'background': '#dfffe8',
+                    'color': '#1a7f37'
+                });
+            } else {
+                statusBadge.html('<i class="fas fa-times mr-1"></i>Tidak Aktif');
+                statusBadge.css({
+                    'background': '#ffe8e8',
+                    'color': '#d32f2f'
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
